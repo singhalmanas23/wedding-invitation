@@ -1,9 +1,9 @@
 import { WeddingEvent } from "@/types";
 
 export const COUPLE = {
-  partner1: "Tanvi",
-  partner2: "Sahil",
-  hashtag: "#TanviAndSahil",
+  partner1: "Tarush",
+  partner2: "Sanjana",
+  hashtag: "#TarushAndSanjana",
   weddingDate: "2026-04-21",
   location: "Jaipur, Rajasthan",
   venue: "The Leela Palace, Jaipur",

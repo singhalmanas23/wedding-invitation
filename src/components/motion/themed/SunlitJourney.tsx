@@ -8,8 +8,9 @@ import { motion, useReducedMotion } from "framer-motion";
  * "Sun-drenched courtyard" atmosphere:
  * - Warm dust motes floating in sunlight
  * - Drifting olive/eucalyptus leaves
+ * - Sunflower-yellow petal accents
+ * - Floating paper/stamp shapes
  * - Soft golden light rays from top-right
- * - Gentle warmth particles
  */
 
 export default function SunlitJourney() {
@@ -17,7 +18,7 @@ export default function SunlitJourney() {
 
   const dustMotes = useMemo(
     () =>
-      Array.from({ length: 40 }, (_, i) => ({
+      Array.from({ length: 45 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
@@ -33,13 +34,37 @@ export default function SunlitJourney() {
 
   const leaves = useMemo(
     () =>
-      Array.from({ length: 6 }, (_, i) => ({
+      Array.from({ length: 8 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
-        delay: i * 3 + Math.random() * 2,
+        delay: i * 2.5 + Math.random() * 2,
         duration: 10 + Math.random() * 8,
         rotation: Math.random() * 360,
         sway: -40 + Math.random() * 80,
+      })),
+    []
+  );
+
+  const sunflowerPetals = useMemo(
+    () =>
+      Array.from({ length: 6 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        delay: i * 4 + Math.random() * 3,
+        duration: 12 + Math.random() * 6,
+        sway: -20 + Math.random() * 40,
+      })),
+    []
+  );
+
+  const stampShapes = useMemo(
+    () =>
+      Array.from({ length: 4 }, (_, i) => ({
+        id: i,
+        x: 15 + Math.random() * 70,
+        y: 20 + Math.random() * 60,
+        delay: i * 5 + Math.random() * 3,
+        duration: 8 + Math.random() * 4,
       })),
     []
   );
@@ -130,6 +155,67 @@ export default function SunlitJourney() {
             <path d="M8 2 L8 22" stroke="#6b5a42" strokeWidth="0.5" />
           </motion.svg>
         </motion.div>
+      ))}
+
+      {/* Sunflower-yellow petal accents */}
+      {sunflowerPetals.map((p) => (
+        <motion.div
+          key={`sunpetal-${p.id}`}
+          className="absolute"
+          style={{
+            left: `${p.x}%`,
+            top: -15,
+          }}
+        >
+          <motion.svg
+            width="10"
+            height="16"
+            viewBox="0 0 10 16"
+            fill="none"
+            className="opacity-[0.20]"
+            animate={{
+              y: [0, 1100],
+              x: [0, p.sway, -p.sway * 0.3],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: p.duration,
+              delay: p.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <ellipse cx="5" cy="8" rx="4" ry="7" fill="rgba(220,180,60,0.5)" />
+            <ellipse cx="5" cy="8" rx="2" ry="4" fill="rgba(196,168,130,0.4)" />
+          </motion.svg>
+        </motion.div>
+      ))}
+
+      {/* Floating paper/stamp shapes */}
+      {stampShapes.map((s) => (
+        <motion.div
+          key={`stamp-${s.id}`}
+          className="absolute"
+          style={{
+            left: `${s.x}%`,
+            top: `${s.y}%`,
+            width: 18,
+            height: 18,
+            border: "1px solid rgba(139,115,85,0.12)",
+            borderRadius: "50%",
+          }}
+          animate={{
+            opacity: [0, 0.3, 0.2, 0],
+            scale: [0.8, 1.1, 1, 0.8],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: s.duration,
+            delay: s.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
       ))}
     </div>
   );

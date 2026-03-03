@@ -8,6 +8,7 @@ import { motion, useReducedMotion } from "framer-motion";
  * "From Dusk Till Dawn" atmosphere:
  * - Warm candlelight flickers (amber/gold glowing dots)
  * - Drifting embers rising slowly
+ * - Golden feather shapes drifting down
  * - Soft pulsing warm light pools
  */
 export default function DuskParticles() {
@@ -15,7 +16,7 @@ export default function DuskParticles() {
 
   const embers = useMemo(
     () =>
-      Array.from({ length: 30 }, (_, i) => ({
+      Array.from({ length: 35 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: 60 + Math.random() * 40,
@@ -30,13 +31,27 @@ export default function DuskParticles() {
 
   const candles = useMemo(
     () =>
-      Array.from({ length: 8 }, (_, i) => ({
+      Array.from({ length: 12 }, (_, i) => ({
         id: i,
-        x: 10 + Math.random() * 80,
-        y: 75 + Math.random() * 20,
+        x: 8 + Math.random() * 84,
+        y: 70 + Math.random() * 25,
         size: 30 + Math.random() * 50,
         delay: Math.random() * 3,
         duration: 2 + Math.random() * 3,
+      })),
+    []
+  );
+
+  const feathers = useMemo(
+    () =>
+      Array.from({ length: 8 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        delay: i * 2 + Math.random() * 3,
+        duration: 10 + Math.random() * 8,
+        rotation: Math.random() * 60 - 30,
+        rotEnd: Math.random() * 120 + 60,
+        sway: -30 + Math.random() * 60,
       })),
     []
   );
@@ -96,6 +111,43 @@ export default function DuskParticles() {
             ease: "easeOut",
           }}
         />
+      ))}
+
+      {/* Golden feathers drifting down */}
+      {feathers.map((f) => (
+        <motion.div
+          key={`feather-${f.id}`}
+          className="absolute"
+          style={{
+            left: `${f.x}%`,
+            top: -30,
+          }}
+        >
+          <motion.svg
+            width="12"
+            height="32"
+            viewBox="0 0 12 32"
+            fill="none"
+            className="opacity-[0.18]"
+            animate={{
+              y: [0, 1200],
+              x: [0, f.sway, -f.sway * 0.5, f.sway * 0.3],
+              rotate: [f.rotation, f.rotEnd],
+            }}
+            transition={{
+              duration: f.duration,
+              delay: f.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <ellipse cx="6" cy="16" rx="3" ry="15" stroke="rgba(232,201,122,0.6)" strokeWidth="0.5" />
+            <line x1="6" y1="1" x2="6" y2="31" stroke="rgba(232,201,122,0.4)" strokeWidth="0.3" />
+            <line x1="6" y1="8" x2="2" y2="12" stroke="rgba(232,201,122,0.3)" strokeWidth="0.2" />
+            <line x1="6" y1="14" x2="10" y2="18" stroke="rgba(232,201,122,0.3)" strokeWidth="0.2" />
+            <line x1="6" y1="20" x2="2" y2="24" stroke="rgba(232,201,122,0.3)" strokeWidth="0.2" />
+          </motion.svg>
+        </motion.div>
       ))}
 
       {/* Ambient warm wash */}

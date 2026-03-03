@@ -68,6 +68,111 @@ function MandalaOrnament({ className = "" }: { className?: string }) {
   );
 }
 
+/* ─────────────────────────────────────────────────────────────── */
+/*  Section Transitions — animated connectors between sections    */
+/* ─────────────────────────────────────────────────────────────── */
+
+function SectionTransition({ variant = "arch", label }: { variant?: "arch" | "mandala" | "lotus" | "scroll"; label?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      ref.current!.querySelectorAll(".st-line"),
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1.2, ease: "power2.inOut", stagger: 0.15,
+        scrollTrigger: { trigger: ref.current, start: "top 80%", toggleActions: "play none none none" } }
+    );
+    gsap.fromTo(
+      ref.current!.querySelectorAll(".st-fade"),
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 75%", toggleActions: "play none none none" } }
+    );
+    gsap.fromTo(
+      ref.current!.querySelectorAll(".st-scale"),
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, stagger: 0.08, ease: "back.out(2)",
+        scrollTrigger: { trigger: ref.current, start: "top 78%", toggleActions: "play none none none" } }
+    );
+  }, { scope: ref });
+
+  return (
+    <div ref={ref} className="relative py-8 md:py-12 overflow-hidden" style={{ backgroundColor: P.bg }} aria-hidden="true">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 50% at 50% 50%, rgba(139,26,26,0.04), transparent 70%)` }} />
+
+      <div className="relative z-10 flex flex-col items-center">
+        {/* Top line */}
+        <div className="st-line h-px w-16 md:w-28 origin-center mb-6" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
+
+        {variant === "arch" && (
+          <div className="st-fade relative w-20 h-28 md:w-24 md:h-32 mb-4">
+            <svg viewBox="0 0 200 280" className="w-full h-full opacity-[0.08]" fill="none">
+              <path d="M20 280 V120 Q20 20 100 8 Q180 20 180 120 V280" stroke={P.gold} strokeWidth="0.8" />
+              <path d="M35 280 V125 Q35 35 100 22 Q165 35 165 125 V280" stroke={P.gold} strokeWidth="0.4" />
+            </svg>
+            <div className="absolute top-[18%] left-1/2 -translate-x-1/2">
+              <div className="st-scale w-1.5 h-1.5 rounded-full" style={{ backgroundColor: `${P.gold}30` }} />
+            </div>
+          </div>
+        )}
+
+        {variant === "mandala" && (
+          <div className="st-fade relative mb-4">
+            <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+              <div className="st-scale absolute inset-0 rotate-45 border" style={{ borderColor: `${P.gold}12` }} />
+              <div className="st-scale absolute inset-2.5 rotate-45 border" style={{ borderColor: `${P.gold}08` }} />
+              <div className="st-scale absolute inset-5 rotate-0 border rounded-full" style={{ borderColor: `${P.gold}10` }} />
+              <div className="st-scale w-2 h-2 rounded-full" style={{ backgroundColor: `${P.gold}30` }} />
+            </div>
+          </div>
+        )}
+
+        {variant === "lotus" && (
+          <div className="st-fade mb-4">
+            <svg viewBox="0 0 100 50" className="w-16 md:w-20 h-auto opacity-[0.12]" fill="none">
+              <path d="M50 45 Q35 30 30 15 Q35 5 50 2 Q65 5 70 15 Q65 30 50 45Z" stroke={P.gold} strokeWidth="0.6" />
+              <path d="M50 45 Q20 35 15 20 Q25 10 50 5" stroke={P.gold} strokeWidth="0.4" />
+              <path d="M50 45 Q80 35 85 20 Q75 10 50 5" stroke={P.gold} strokeWidth="0.4" />
+              <circle cx="50" cy="20" r="2" fill={`${P.gold}15`} />
+            </svg>
+          </div>
+        )}
+
+        {variant === "scroll" && (
+          <div className="st-fade flex items-center gap-4 mb-4">
+            <div className="st-scale flex flex-col items-center gap-1">
+              <div className="w-3 h-3 rounded-full border" style={{ borderColor: `${P.gold}15` }} />
+              <div className="w-px h-6" style={{ backgroundColor: `${P.gold}10` }} />
+            </div>
+            <div className="st-scale w-2 h-2 rotate-45" style={{ border: `1px solid ${P.gold}20` }} />
+            <div className="st-scale flex flex-col items-center gap-1">
+              <div className="w-px h-6" style={{ backgroundColor: `${P.gold}10` }} />
+              <div className="w-3 h-3 rounded-full border" style={{ borderColor: `${P.gold}15` }} />
+            </div>
+          </div>
+        )}
+
+        {label && (
+          <p className="st-fade text-[9px] uppercase tracking-[0.4em] font-body mt-2 mb-4" style={{ color: `${P.gold}35` }}>
+            {label}
+          </p>
+        )}
+
+        {/* Decorative dots */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="st-scale w-0.5 h-0.5 rounded-full" style={{ backgroundColor: `${P.gold}25` }} />
+          <div className="st-scale w-1 h-1 rotate-45" style={{ border: `1px solid ${P.gold}20` }} />
+          <div className="st-scale w-0.5 h-0.5 rounded-full" style={{ backgroundColor: `${P.gold}25` }} />
+        </div>
+
+        {/* Bottom line */}
+        <div className="st-line h-px w-16 md:w-28 origin-center" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
+      </div>
+    </div>
+  );
+}
+
 function MughalArch({ className = "", children }: { className?: string; children?: React.ReactNode }) {
   return (
     <div className={`relative ${className}`} aria-hidden="true">
@@ -112,6 +217,90 @@ function WeddingMandala({ className = "" }: { className?: string }) {
       ))}
       <circle cx="200" cy="200" r="8" fill={`${P.gold}0d`} />
     </svg>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────── */
+/*  Jaimala (Garland Exchange) Animation                           */
+/* ─────────────────────────────────────────────────────────────── */
+
+function JaimalaAnimation({ className = "" }: { className?: string }) {
+  const reduced = useReducedMotion();
+
+  const garlandFlowers = useMemo(() => {
+    const brideFlowers = Array.from({ length: 5 }, (_, i) => {
+      const t = i / 4;
+      return { cx: 238 + t * 48, cy: 112 - Math.sin(t * Math.PI) * 12 };
+    });
+    const groomFlowers = Array.from({ length: 5 }, (_, i) => {
+      const t = i / 4;
+      return { cx: 162 - t * 48, cy: 112 - Math.sin(t * Math.PI) * 12 };
+    });
+    return { brideFlowers, groomFlowers };
+  }, []);
+
+  return (
+    <div className={`relative mx-auto ${className}`} style={{ width: "clamp(160px, 32vw, 260px)" }}>
+      <svg viewBox="0 0 400 310" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" aria-hidden="true">
+        {/* Groom — left figure */}
+        <circle cx="138" cy="78" r="20" stroke={P.gold} strokeWidth="1" opacity="0.55" />
+        <path d="M118 72 Q124 50 142 46 Q158 50 156 72" stroke={P.gold} strokeWidth="0.7" opacity="0.35" />
+        <path d="M150 54 L155 46 L153 60" stroke={P.gold} strokeWidth="0.5" opacity="0.28" />
+        <line x1="138" y1="98" x2="138" y2="114" stroke={P.gold} strokeWidth="0.8" opacity="0.4" />
+        <path d="M118 120 L138 112 L158 120 L155 222 L121 222Z" stroke={P.gold} strokeWidth="0.7" opacity="0.22" fill={`${P.gold}06`} />
+        <motion.path d="M158 126 Q182 108 206 100 Q224 96 244 106" stroke={P.gold} strokeWidth="0.8" opacity="0.45" fill="none" strokeLinecap="round"
+          initial={reduced ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 0.4, ease: "easeOut" }} />
+        <path d="M118 126 Q105 154 110 186" stroke={P.gold} strokeWidth="0.6" opacity="0.28" strokeLinecap="round" />
+        <line x1="121" y1="222" x2="114" y2="280" stroke={P.gold} strokeWidth="0.5" opacity="0.15" />
+        <line x1="155" y1="222" x2="162" y2="280" stroke={P.gold} strokeWidth="0.5" opacity="0.15" />
+
+        {/* Bride — right figure */}
+        <circle cx="262" cy="78" r="20" stroke={P.gold} strokeWidth="1" opacity="0.55" />
+        <path d="M242 72 Q248 53 266 50 Q282 53 282 72 Q290 78 294 96 Q290 114 286 126" stroke={P.gold} strokeWidth="0.7" opacity="0.3" fill="none" />
+        <circle cx="262" cy="60" r="2.5" fill={P.maroon} opacity="0.55" />
+        <line x1="262" y1="98" x2="262" y2="114" stroke={P.gold} strokeWidth="0.8" opacity="0.4" />
+        <path d="M242 120 L262 112 L282 120 L298 222 L226 222Z" stroke={P.gold} strokeWidth="0.7" opacity="0.22" fill={`${P.gold}06`} />
+        <motion.path d="M242 126 Q218 108 194 100 Q176 96 156 106" stroke={P.gold} strokeWidth="0.8" opacity="0.45" fill="none" strokeLinecap="round"
+          initial={reduced ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 0.6, ease: "easeOut" }} />
+        <path d="M282 126 Q295 154 290 186" stroke={P.gold} strokeWidth="0.6" opacity="0.28" strokeLinecap="round" />
+        <line x1="226" y1="222" x2="216" y2="280" stroke={P.gold} strokeWidth="0.5" opacity="0.15" />
+        <line x1="298" y1="222" x2="308" y2="280" stroke={P.gold} strokeWidth="0.5" opacity="0.15" />
+
+        {/* Garland draped on bride (from groom) */}
+        <motion.path d="M238 112 Q250 96 262 106 Q274 116 286 108" stroke={P.maroon} strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.55"
+          initial={reduced ? false : { pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 0.55 }} transition={{ duration: 1.4, delay: 2.4, ease: "easeOut" }} />
+
+        {/* Garland draped on groom (from bride) */}
+        <motion.path d="M162 112 Q150 96 138 106 Q126 116 114 108" stroke={P.bronze} strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.55"
+          initial={reduced ? false : { pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 0.55 }} transition={{ duration: 1.4, delay: 2.9, ease: "easeOut" }} />
+
+        {/* Flower dots — bride garland */}
+        {garlandFlowers.brideFlowers.map((f, i) => (
+          <motion.circle key={`fb-${i}`} cx={f.cx} cy={f.cy} r="3" fill={P.maroon}
+            initial={reduced ? false : { scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.45 }}
+            transition={{ duration: 0.35, delay: 2.8 + i * 0.14, ease: "backOut" }} />
+        ))}
+
+        {/* Flower dots — groom garland */}
+        {garlandFlowers.groomFlowers.map((f, i) => (
+          <motion.circle key={`fg-${i}`} cx={f.cx} cy={f.cy} r="3" fill={P.bronze}
+            initial={reduced ? false : { scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.45 }}
+            transition={{ duration: 0.35, delay: 3.3 + i * 0.14, ease: "backOut" }} />
+        ))}
+
+        {/* Falling petals */}
+        {!reduced && Array.from({ length: 7 }, (_, i) => (
+          <motion.ellipse key={`jp-${i}`}
+            cx={155 + rand(i, 80) * 90} cy={20 + rand(i, 81) * 30}
+            rx="2.2" ry="3.5"
+            fill={i % 3 === 0 ? P.maroon : i % 3 === 1 ? P.gold : P.bronze}
+            initial={{ opacity: 0 }}
+            animate={{ y: [0, 160 + rand(i, 82) * 80], x: [-8 + rand(i, 83) * 16, 8 - rand(i, 84) * 16], opacity: [0, 0.35, 0], rotate: [0, 200 + rand(i, 85) * 160] }}
+            transition={{ duration: 5 + rand(i, 86) * 3, delay: 3 + rand(i, 87) * 2.5, repeat: Infinity, ease: "easeOut" }}
+          />
+        ))}
+      </svg>
+    </div>
   );
 }
 
@@ -201,7 +390,7 @@ function CinematicLoader({ onComplete }: { onComplete: () => void }) {
     revealedRef.current = true;
 
     try {
-      const audio = new Audio("/audio/shehnai.mp3");
+      const audio = new Audio("/audio/test.mp3");
       audio.volume = 0.35;
       audio.play().catch(() => {});
       setTimeout(() => {
@@ -278,10 +467,10 @@ function CinematicLoader({ onComplete }: { onComplete: () => void }) {
           <span className="ld-char font-serif text-6xl md:text-8xl lg:text-9xl" style={{ color: P.cream }}>{COUPLE.partner2.charAt(0)}</span>
         </div>
 
-        <p className="ld-sub mt-8 text-[10px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}4d` }}>
+        <p className="ld-sub mt-8 text-[10px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}80` }}>
           April 2026 · Jaipur, Rajasthan
         </p>
-        <p className="ld-tagline mt-3 font-serif italic text-xs md:text-sm" style={{ color: `${P.gold}33` }}>
+        <p className="ld-tagline mt-3 font-serif italic text-xs md:text-sm" style={{ color: `${P.gold}66` }}>
           A Royal Celebration
         </p>
       </div>
@@ -295,7 +484,7 @@ function CinematicLoader({ onComplete }: { onComplete: () => void }) {
               <path d="M1 1L11 7L1 13V1Z" fill={`${P.gold}70`} />
             </svg>
           </div>
-          <span className="text-[9px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}35` }}>
+          <span className="text-[9px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}70` }}>
             Begin the Journey
           </span>
         </div>
@@ -369,7 +558,7 @@ function Hero({ loaded }: { loaded: boolean }) {
   }, { scope: ref, dependencies: [loaded] });
 
   return (
-    <section ref={ref} className="relative h-[110vh] flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="hero-bg-layer absolute inset-[-10%]">
         <Image src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80" alt="" fill priority className="object-cover" sizes="100vw" />
@@ -403,7 +592,7 @@ function Hero({ loaded }: { loaded: boolean }) {
       {/* ── Content ── */}
       <div className="hero-content relative z-10 text-center px-6 max-w-5xl mx-auto invisible">
         {/* Devanagari cultural text */}
-        <p className="hero-sanskrit text-xs md:text-sm tracking-[0.5em] mb-6" style={{ color: `${P.gold}40` }}>
+        <p className="hero-sanskrit text-xs md:text-sm tracking-[0.5em] mb-6" style={{ color: `${P.gold}80` }}>
           शुभ विवाह
         </p>
 
@@ -450,25 +639,30 @@ function Hero({ loaded }: { loaded: boolean }) {
           </div>
         </div>
 
+        {/* Jaimala animation */}
+        <div className="hero-fade mt-6">
+          <JaimalaAnimation />
+        </div>
+
         {/* Subtitle */}
-        <p className="hero-fade font-serif italic text-lg md:text-xl mt-8 tracking-wide" style={{ color: `${P.cream}80` }}>
+        <p className="hero-fade font-serif italic text-lg md:text-xl mt-4 tracking-wide" style={{ color: `${P.cream}cc` }}>
           A Royal Celebration, Six Chapters
         </p>
 
         {/* Divider */}
-        <div className="hero-fade flex flex-col items-center gap-1 my-8">
+        <div className="hero-fade flex flex-col items-center gap-1 my-5">
           <div className="h-px w-16 md:w-28" style={{ background: `linear-gradient(to right, transparent, ${P.gold}40, transparent)` }} />
           <div className="h-px w-10 md:w-20" style={{ background: `linear-gradient(to right, transparent, ${P.maroon}40, transparent)` }} />
         </div>
 
         {/* Date + venue */}
         <div className="hero-fade space-y-2">
-          <p className="text-sm md:text-base uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}bf` }}>{formattedDate}</p>
-          <p className="text-xs uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}59` }}>The Leela Palace · {COUPLE.location}</p>
+          <p className="text-sm md:text-base uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}e6` }}>{formattedDate}</p>
+          <p className="text-xs uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}99` }}>The Leela Palace · {COUPLE.location}</p>
         </div>
 
         {/* CTAs */}
-        <div className="hero-fade flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+        <div className="hero-fade flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
           <Link href="/itinerary" className="group relative px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body transition-all duration-700 overflow-hidden" style={{ color: `${P.gold}e6`, border: `1px solid ${P.gold}40` }}>
             <span className="relative z-10">View Itinerary</span>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundColor: `${P.gold}12` }} />
@@ -479,7 +673,7 @@ function Hero({ loaded }: { loaded: boolean }) {
         </div>
 
         {/* Countdown */}
-        <div className="hero-fade mt-14">
+        <div className="hero-fade mt-8">
           <CountdownTimer targetDate={COUPLE.weddingDate} />
         </div>
       </div>
@@ -514,7 +708,7 @@ function RoyalPrologue() {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-32 md:py-44 overflow-hidden" style={{ backgroundColor: P.bg }}>
+    <section ref={ref} className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0">
         <Image src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1920&q=80" alt="" fill className="object-cover opacity-[0.05]" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}e6, ${P.bg})` }} />
@@ -523,7 +717,7 @@ function RoyalPrologue() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <MandalaOrnament className="rp-fade mb-10" />
-        <span className="rp-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-10" style={{ color: `${P.gold}59` }}>
+        <span className="rp-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-10" style={{ color: `${P.gold}80` }}>
           The Setting
         </span>
 
@@ -537,20 +731,20 @@ function RoyalPrologue() {
           In the Heart of the Pink City
         </h2>
 
-        <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}66` }}>
+        <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}99` }}>
           Where sandstone palaces rise like poems carved in stone. Where Maharajas once held
           court beneath hand-painted ceilings and the desert wind carried the fragrance of
           jasmine and rose. Here, in this land where every arch frames a story, two souls
           chose to write their own.
         </p>
 
-        <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}4d` }}>
+        <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}80` }}>
           Jaipur has always been a city of grand gestures — built by Maharaja Sawai Jai Singh II
           in 1727, its geometry is celestial, its colors divine. It is a city that understands
           ceremony, that knows how to hold space for moments that transcend the ordinary.
         </p>
 
-        <p className="rp-fade font-serif italic text-base md:text-lg max-w-xl mx-auto" style={{ color: `${P.gold}4d` }}>
+        <p className="rp-fade font-serif italic text-base md:text-lg max-w-xl mx-auto" style={{ color: `${P.gold}80` }}>
           This wedding unfolds across three days and six chapters — each one a distinct world,
           a different mood, a new verse in a love story written against the grandeur of Rajasthan.
         </p>
@@ -582,7 +776,7 @@ function StoryQuote() {
   const words = COUPLE.tagline.split(" ");
 
   return (
-    <section ref={ref} className="relative py-44 md:py-60 overflow-hidden" style={{ backgroundColor: P.bg }}>
+    <section ref={ref} className="relative py-24 md:py-36 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0">
         <Image src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=1920&q=80" alt="" fill className="object-cover opacity-[0.06]" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}cc, ${P.bg})` }} />
@@ -592,7 +786,7 @@ function StoryQuote() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="sq-fade mb-14">
           <Flourish className="mb-6" />
-          <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}66` }}>Their Story</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}99` }}>Their Story</span>
         </div>
 
         <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15]" style={{ color: `${P.cream}e6` }}>
@@ -606,7 +800,7 @@ function StoryQuote() {
           <div className="h-px w-12 md:w-20" style={{ background: `linear-gradient(to right, transparent, ${P.maroon}40, transparent)` }} />
         </div>
 
-        <p className="sq-fade font-body text-sm md:text-base leading-loose max-w-2xl mx-auto" style={{ color: `${P.cream}73` }}>
+        <p className="sq-fade font-body text-sm md:text-base leading-loose max-w-2xl mx-auto" style={{ color: `${P.cream}99` }}>
           They grew up in Bombay, studied and travelled across London. He proposed in
           Cappadocia. Different cities, different journeys — but every chapter led to the
           same page. Now, against the backdrop of Jaipur&apos;s timeless beauty, their story
@@ -649,7 +843,7 @@ function VenueShowcase() {
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
         <Flourish className="vs-fade mb-8" />
-        <span className="vs-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-6" style={{ color: `${P.gold}66` }}>
+        <span className="vs-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-6" style={{ color: `${P.gold}99` }}>
           The Palace
         </span>
         <h2 className="vs-fade font-serif text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight" style={{ color: P.cream, textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}>
@@ -658,7 +852,7 @@ function VenueShowcase() {
         <p className="vs-fade font-serif italic text-lg md:text-xl mb-2" style={{ color: `${P.gold}cc` }}>
           Jaipur, Rajasthan
         </p>
-        <p className="vs-fade font-body text-xs md:text-sm mt-6 max-w-xl mx-auto leading-loose" style={{ color: `${P.cream}66` }}>
+        <p className="vs-fade font-body text-xs md:text-sm mt-6 max-w-xl mx-auto leading-loose" style={{ color: `${P.cream}99` }}>
           Built in tribute to Rajasthan&apos;s royal legacy, the palace grounds become the
           stage for six unforgettable chapters. From sunlit courtyards draped in jasmine to
           gilded durbar halls lit by a thousand diyas — each space transforms to tell its
@@ -861,7 +1055,7 @@ function RoyalTimeline() {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-32 md:py-44" style={{ backgroundColor: P.bg, borderTop: `1px solid ${P.cream}08` }}>
+    <section ref={ref} className="relative py-20 md:py-28" style={{ backgroundColor: P.bg, borderTop: `1px solid ${P.cream}08` }}>
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.03), transparent 70%)` }} />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
@@ -940,7 +1134,7 @@ function FinalCTA() {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-36 md:py-48 overflow-hidden" style={{ backgroundColor: P.bg }}>
+    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(139,26,26,0.05), transparent 70%)` }} />
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 40% 30% at 50% 60%, rgba(212,175,55,0.03), transparent 60%)` }} />
 
@@ -961,11 +1155,11 @@ function FinalCTA() {
           Royal Chapter
         </h2>
 
-        <p className="cta-el font-body text-sm md:text-base max-w-lg mx-auto mb-6 leading-loose" style={{ color: `${P.cream}59` }}>
+        <p className="cta-el font-body text-sm md:text-base max-w-lg mx-auto mb-6 leading-loose" style={{ color: `${P.cream}8c` }}>
           Three days in the Pink City. Six chapters of celebration — from intimate courtyards
           to gilded ceremonies, from sun-drenched afternoons to midnight revelry.
         </p>
-        <p className="cta-el font-serif italic text-sm max-w-md mx-auto mb-14" style={{ color: `${P.gold}40` }}>
+        <p className="cta-el font-serif italic text-sm max-w-md mx-auto mb-14" style={{ color: `${P.gold}73` }}>
           Every moment means more with you there.
         </p>
 
@@ -995,11 +1189,17 @@ export default function LandingExperience() {
     <>
       <CinematicLoader onComplete={() => setLoaded(true)} />
       <Hero loaded={loaded} />
+      <SectionTransition variant="arch" label="The Setting" />
       <RoyalPrologue />
+      <SectionTransition variant="lotus" label="Their Story" />
       <StoryQuote />
+      <SectionTransition variant="mandala" label="The Palace" />
       <VenueShowcase />
+      <SectionTransition variant="scroll" label="The Chapters" />
       <ChapterGallery />
+      <SectionTransition variant="mandala" label="The Journey" />
       <RoyalTimeline />
+      <SectionTransition variant="lotus" label="अतिथि देवो भव" />
       <FinalCTA />
     </>
   );

@@ -50,7 +50,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfairDisplay.variable} ${dmSans.variable} font-body antialiased bg-stone-950 text-stone-100 overflow-x-hidden`}
+        className={`${playfairDisplay.variable} ${dmSans.variable} font-body antialiased overflow-x-hidden`}
+        style={{ backgroundColor: "#1a0a0a", color: "#f5efe6" }}
       >
         {children}
       </body>

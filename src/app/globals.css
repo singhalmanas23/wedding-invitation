@@ -141,27 +141,27 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #1a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #3d1a1a;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #5a2a2a;
 }
 
 /* Selection styling */
 ::selection {
-  background-color: rgba(180, 130, 60, 0.35);
-  color: #fef3c7;
+  background-color: rgba(139, 26, 26, 0.4);
+  color: #f5efe6;
 }
 
 ::-moz-selection {
-  background-color: rgba(180, 130, 60, 0.35);
-  color: #fef3c7;
+  background-color: rgba(139, 26, 26, 0.4);
+  color: #f5efe6;
 }
 
 /* Grain overlay */

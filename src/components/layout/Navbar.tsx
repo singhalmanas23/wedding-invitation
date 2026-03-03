@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { COUPLE } from "@/content/events";
+import { P } from "@/components/shared/RoyalPageLayout";
 
 const NAV_LINKS = [
   { href: "/itinerary", label: "Itinerary" },
@@ -35,36 +36,60 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        style={
           scrolled
-            ? "bg-stone-950/90 backdrop-blur-md border-b border-white/5 shadow-lg shadow-black/10"
-            : "bg-transparent"
-        }`}
+            ? {
+                backgroundColor: `${P.bg}e6`,
+                backdropFilter: "blur(12px)",
+                borderBottom: `1px solid ${P.gold}08`,
+                boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+              }
+            : { backgroundColor: "transparent" }
+        }
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
           <Link
             href="/"
-            className="font-serif text-lg md:text-xl tracking-tight text-stone-100 hover:text-amber-300 transition-colors duration-300"
+            className="font-serif text-lg md:text-xl tracking-tight transition-colors duration-300 hover:opacity-80"
+            style={{ color: P.cream }}
           >
             {COUPLE.partner1}{" "}
-            <span className="text-amber-400/70">&</span>{" "}
+            <span style={{ color: `${P.gold}b3` }}>&amp;</span>{" "}
             {COUPLE.partner2}
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[11px] uppercase tracking-[0.2em] text-stone-400 hover:text-amber-300 transition-colors duration-300 font-body"
-              >
-                {link.label}
-              </Link>
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-2">
+            {NAV_LINKS.map((link, i) => (
+              <span key={link.href} className="flex items-center">
+                <Link
+                  href={link.href}
+                  className="text-[11px] uppercase tracking-[0.2em] font-body transition-colors duration-300 px-4 py-2"
+                  style={{ color: `${P.cream}73` }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = `${P.gold}cc`)
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = `${P.cream}73`)
+                  }
+                >
+                  {link.label}
+                </Link>
+                {i < NAV_LINKS.length - 1 && (
+                  <span
+                    className="w-0.5 h-0.5 rounded-full"
+                    style={{ backgroundColor: `${P.gold}30` }}
+                  />
+                )}
+              </span>
             ))}
           </div>
 
+          {/* Mobile toggle */}
           <button
-            className="md:hidden relative z-50 w-8 h-8 flex items-center justify-center text-stone-400 hover:text-stone-100 transition-colors"
+            className="md:hidden relative z-50 w-8 h-8 flex items-center justify-center transition-colors"
+            style={{ color: `${P.cream}99` }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
@@ -93,6 +118,7 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -100,33 +126,82 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-stone-950/98 backdrop-blur-xl flex flex-col items-center justify-center gap-10"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10"
+            style={{
+              backgroundColor: `${P.bg}fa`,
+              backdropFilter: "blur(20px)",
+            }}
           >
+            {/* Decorative arch in background */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <svg
+                viewBox="0 0 400 500"
+                className="w-64 h-auto opacity-[0.03]"
+                fill="none"
+              >
+                <path
+                  d="M60 500 V220 Q60 80 200 30 Q340 80 340 220 V500"
+                  stroke={P.gold}
+                  strokeWidth="1"
+                />
+              </svg>
+            </div>
+
             {NAV_LINKS.map((link, i) => (
               <motion.div
                 key={link.href}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ delay: i * 0.08 + 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  delay: i * 0.08 + 0.1,
+                  duration: 0.4,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
                 <Link
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-serif text-3xl text-stone-200 hover:text-amber-300 transition-colors duration-300"
+                  className="font-serif text-3xl transition-colors duration-300"
+                  style={{ color: `${P.cream}cc` }}
                 >
                   {link.label}
                 </Link>
               </motion.div>
             ))}
-            <motion.p
+
+            {/* Decorative bottom text */}
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute bottom-12 text-[10px] uppercase tracking-[0.3em] text-stone-700 font-body"
+              className="absolute bottom-12 flex flex-col items-center gap-2"
             >
-              {COUPLE.hashtag}
-            </motion.p>
+              <div className="flex items-center gap-2">
+                <div
+                  className="h-px w-8"
+                  style={{
+                    background: `linear-gradient(to right, transparent, ${P.gold}20)`,
+                  }}
+                />
+                <div
+                  className="w-1 h-1 rotate-45"
+                  style={{ backgroundColor: `${P.gold}30` }}
+                />
+                <div
+                  className="h-px w-8"
+                  style={{
+                    background: `linear-gradient(to left, transparent, ${P.gold}20)`,
+                  }}
+                />
+              </div>
+              <span
+                className="text-[10px] uppercase tracking-[0.3em] font-body"
+                style={{ color: `${P.gold}30` }}
+              >
+                {COUPLE.hashtag}
+              </span>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

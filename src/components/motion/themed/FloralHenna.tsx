@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
  * Chapter 2 — The Courtyard Edit (Lunch)
  * "Victorian Hi-Tea / Jaipur Haveli" atmosphere:
  * - Falling flower petals (pastel blush, lavender, sage)
+ * - Wisteria-like cascading petal chains
  * - Henna/mehndi line-art patterns tracing at screen edges
  * - Soft jasmine-scented light drifts
  */
@@ -28,7 +29,7 @@ export default function FloralHenna() {
 
   const petals = useMemo(
     () =>
-      Array.from({ length: 24 }, (_, i) => ({
+      Array.from({ length: 28 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         delay: Math.random() * 10,
@@ -38,6 +39,18 @@ export default function FloralHenna() {
         rotEnd: Math.random() * 360 + 180,
         sway: -30 + Math.random() * 60,
         color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
+      })),
+    []
+  );
+
+  const wisteriaChains = useMemo(
+    () =>
+      Array.from({ length: 6 }, (_, i) => ({
+        id: i,
+        x: 10 + Math.random() * 80,
+        delay: i * 3 + Math.random() * 2,
+        duration: 12 + Math.random() * 6,
+        count: 4 + Math.floor(Math.random() * 4),
       })),
     []
   );
@@ -72,6 +85,39 @@ export default function FloralHenna() {
             ease: "easeInOut",
           }}
         />
+      ))}
+
+      {/* Wisteria cascading petal chains */}
+      {wisteriaChains.map((chain) => (
+        <motion.div
+          key={`wist-${chain.id}`}
+          className="absolute"
+          style={{ left: `${chain.x}%`, top: -10 }}
+          animate={{
+            y: [0, 1400],
+            x: [0, 15, -10, 5],
+            opacity: [0, 0.7, 0.7, 0],
+          }}
+          transition={{
+            duration: chain.duration,
+            delay: chain.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {Array.from({ length: chain.count }, (_, j) => (
+            <div
+              key={j}
+              className="rounded-full mb-1"
+              style={{
+                width: 5 - j * 0.4,
+                height: 5 - j * 0.4,
+                backgroundColor: `rgba(212,165,165,${0.5 - j * 0.08})`,
+                marginLeft: (j % 2) * 3,
+              }}
+            />
+          ))}
+        </motion.div>
       ))}
 
       {/* Henna line-art tracing — left edge */}
