@@ -303,7 +303,7 @@ function ThrillIntro({
   );
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 4500);
+    const t = setTimeout(onComplete, 5000);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -359,9 +359,9 @@ function ThrillIntro({
             <span key={i} className="it-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
           ))}
         </p>
-        <p className="text-sm md:text-base uppercase tracking-[0.35em] font-medium whitespace-nowrap" style={{ color: "#00f5d4" }}>
-          {"उन्मुक्त रात्रि".split("").map((c, i) => (
-            <span key={i} className="is-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+        <p className="font-hindi text-sm md:text-base uppercase font-medium whitespace-nowrap" style={{ color: "#00f5d4" }}>
+          {"उन्मुक्त रात्रि".split(" ").map((word, i) => (
+            <span key={i} className="is-c inline-block opacity-0 mr-[0.3em]">{word}</span>
           ))}
         </p>
         <p className="sub-tag mt-5 text-xs uppercase tracking-[0.8em] font-bold opacity-0" style={{ color: "#ffbe0b" }}>
@@ -421,7 +421,7 @@ function ThrillHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=350%",
+          end: "+=180%",
           pin: pin,
           scrub: 1,
           anticipatePin: 1,
@@ -500,7 +500,7 @@ function ThrillHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "450vh" }}>
+    <section ref={wrapRef} style={{ height: "280vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         <div
           className="thrill-bg absolute inset-0"
@@ -615,8 +615,8 @@ function ThrillHero({ event }: { event: WeddingEvent }) {
           </div>
         </div>
 
-        {/* ── BEAT 4: Stage + final drop ── */}
-        <div className="b4-content absolute bottom-20 left-1/2 -translate-x-1/2 z-10 opacity-0 text-center">
+        {/* ── BEAT 4: Stage + final drop (hidden on mobile to prevent overlap) ── */}
+        <div className="b4-content absolute bottom-20 left-1/2 -translate-x-1/2 z-10 opacity-0 text-center hidden md:block">
           <StageSilhouette accent={palette.accent} primary={palette.primary} />
           <p className="mt-3 text-[10px] uppercase tracking-[0.3em] font-bold" style={{ color: "#ffbe0b88" }}>
             Step Inside. Get Lost.

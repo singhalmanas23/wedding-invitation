@@ -317,7 +317,7 @@ function RoyalProclamationIntro({
   );
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 6500);
+    const t = setTimeout(onComplete, 5000);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -337,16 +337,12 @@ function RoyalProclamationIntro({
         <JharokhaArchOutline accent={palette.accent} />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <p
-            className="font-serif text-2xl md:text-4xl mb-3 tracking-[0.08em] whitespace-nowrap"
+            className="font-hindi font-serif text-2xl md:text-4xl mb-3 whitespace-nowrap"
             style={{ color: palette.accent }}
           >
-            {hi.split("").map((c, i) => (
-              <span
-                key={i}
-                className="ih-char inline-block opacity-0"
-                style={c === " " ? { whiteSpace: "pre" } : undefined}
-              >
-                {c}
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="ih-char inline-block opacity-0 mr-[0.3em]">
+                {word}
               </span>
             ))}
           </p>
@@ -557,7 +553,7 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
         {/* ── Staged content reveal ── */}
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
           <h1
-            className="h-hindi font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.08em] mb-4"
+            className="h-hindi font-hindi font-serif text-4xl md:text-6xl lg:text-7xl mb-4"
             style={{
               color: palette.accent,
               textShadow: `0 0 40px ${palette.accent}35`,

@@ -300,7 +300,7 @@ function MidnightCathedralIntro({
   );
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 7000);
+    const t = setTimeout(onComplete, 5000);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -323,9 +323,9 @@ function MidnightCathedralIntro({
             <ChandelierCluster accent={palette.accent} id="l" />
             <ChandelierCluster accent={palette.accent} id="r" />
           </div>
-          <p className="font-serif text-2xl md:text-4xl mb-2 tracking-[0.06em] whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split("").map((c, i) => (
-              <span key={i} className="it-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+          <p className="font-serif font-hindi text-2xl md:text-4xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
           <p className="font-serif text-sm md:text-lg uppercase tracking-[0.35em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}bb` }}>
@@ -402,7 +402,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=350%",
+          end: "+=180%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -471,7 +471,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "450vh" }}>
+    <section ref={wrapRef} style={{ height: "280vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         {/* Background — transitions through indigo → amethyst → midnight wine */}
         <div
@@ -608,8 +608,8 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
           </div>
         </div>
 
-        {/* ── BEAT 4: Stage canopy reveal ── */}
-        <div className="b4-content absolute bottom-20 left-1/2 -translate-x-1/2 z-10 opacity-0 text-center">
+        {/* ── BEAT 4: Stage canopy reveal (hidden on mobile to prevent overlap) ── */}
+        <div className="b4-content absolute bottom-20 left-1/2 -translate-x-1/2 z-10 opacity-0 text-center hidden md:block">
           <StageCanopy accent={palette.accent} />
           <p className="mt-4 text-[11px] uppercase tracking-[0.3em] font-medium" style={{ color: `${palette.accent}66` }}>
             The Stage Awaits
@@ -648,7 +648,7 @@ function CathedralQuote({ event }: { event: WeddingEvent }) {
         <p className="font-serif italic text-xl md:text-2xl mt-8 leading-relaxed" style={{ color: `${palette.foreground}77` }}>
           &ldquo;{quote.split(" ").map((w, i) => (<span key={i} className="aq-w inline-block mr-[0.3em]">{w}</span>))}&rdquo;
         </p>
-        <p className="font-serif text-3xl md:text-5xl mt-6 tracking-[0.15em]" style={{ color: `${palette.accent}12` }}>महोत्सव</p>
+        <p className="font-serif text-3xl md:text-5xl mt-6" style={{ color: `${palette.accent}12` }}>महोत्सव</p>
       </div>
     </section>
   );
@@ -929,7 +929,7 @@ export default function FourthChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,${palette.background})` }} />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
           <GoldDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6 tracking-[0.3em]" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
+          <p className="font-serif text-sm mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>
             Tarush <span style={{ color: `${palette.accent}77` }}>&amp;</span> Sanjana
           </p>

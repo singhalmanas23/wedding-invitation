@@ -38,7 +38,7 @@ export default function Footer() {
 
         {/* Devanagari accent */}
         <p
-          className="font-serif text-sm mb-4 tracking-[0.3em]"
+          className="font-serif text-sm mb-4"
           style={{ color: `${P.gold}25` }}
         >
           शुभ विवाह

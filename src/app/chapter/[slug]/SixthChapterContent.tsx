@@ -330,7 +330,7 @@ function RoyalCourtIntro({
   );
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 7000);
+    const t = setTimeout(onComplete, 5000);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -352,9 +352,9 @@ function RoyalCourtIntro({
           <div className="mb-4 opacity-0">
             <MandapCanopy accent={palette.accent} />
           </div>
-          <p className="font-serif text-3xl md:text-5xl mb-2 tracking-[0.06em] whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split("").map((c, i) => (
-              <span key={i} className="it-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+          <p className="font-serif font-hindi text-3xl md:text-5xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
           <p className="font-serif text-sm md:text-lg uppercase tracking-[0.35em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}cc` }}>
@@ -437,7 +437,7 @@ function CourtHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=380%",
+          end: "+=180%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -511,7 +511,7 @@ function CourtHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "480vh" }}>
+    <section ref={wrapRef} style={{ height: "280vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         <div
           className="court-bg absolute inset-0"
@@ -601,8 +601,8 @@ function CourtHero({ event }: { event: WeddingEvent }) {
           </div>
         </div>
 
-        {/* ── BEAT 4: Couture cards + crest ── */}
-        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10 text-center">
+        {/* ── BEAT 4: Couture cards + crest (hidden on mobile to prevent overlap) ── */}
+        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10 text-center hidden md:block">
           <div className="mb-4 opacity-0">
             <MonogramCrest accent={palette.accent} />
           </div>
@@ -652,7 +652,7 @@ function CourtQuote({ event }: { event: WeddingEvent }) {
         <p className="font-serif italic text-xl md:text-2xl mt-8 leading-relaxed" style={{ color: `${palette.foreground}77` }}>
           &ldquo;{quote.split(" ").map((w, i) => (<span key={i} className="aq-w inline-block mr-[0.3em]">{w}</span>))}&rdquo;
         </p>
-        <p className="font-serif text-3xl md:text-5xl mt-6 tracking-[0.15em]" style={{ color: `${palette.accent}12` }}>दरबार</p>
+        <p className="font-serif text-3xl md:text-5xl mt-6" style={{ color: `${palette.accent}12` }}>दरबार</p>
       </div>
     </section>
   );
@@ -936,7 +936,7 @@ export default function SixthChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,${palette.background})` }} />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
           <CourtDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6 tracking-[0.3em]" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
+          <p className="font-serif text-sm mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>
             Tarush <span style={{ color: `${palette.accent}77` }}>&amp;</span> Sanjana
           </p>

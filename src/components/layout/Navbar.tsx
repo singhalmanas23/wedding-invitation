@@ -9,7 +9,6 @@ import { P } from "@/components/shared/RoyalPageLayout";
 const NAV_LINKS = [
   { href: "/itinerary", label: "Itinerary" },
   { href: "/rsvp", label: "RSVP" },
-  { href: "/travel", label: "Travel" },
 ];
 
 export default function Navbar() {

@@ -571,12 +571,12 @@ function SacredPrelude({ onComplete }: { onComplete: () => void }) {
         </div>
 
         {/* Ganesh invocation */}
-        <p className="sp-ganesh font-serif text-xs md:text-sm tracking-[0.3em] mb-2" style={{ color: `${P.gold}60` }}>
+        <p className="sp-ganesh font-serif text-xs md:text-sm mb-2" style={{ color: `${P.gold}60` }}>
           श्री गणेशाय नमः
         </p>
 
         {/* Shubh Vivah in Devanagari */}
-        <p className="sp-vivah font-serif text-sm md:text-base tracking-[0.4em] mb-6" style={{ color: `${P.gold}90` }}>
+        <p className="sp-vivah font-serif text-sm md:text-base mb-6" style={{ color: `${P.gold}90` }}>
           शुभ विवाह
         </p>
 
@@ -722,7 +722,7 @@ function Hero({ loaded }: { loaded: boolean }) {
       {/* ── Content ── */}
       <div className="hero-content relative z-10 text-center px-6 max-w-5xl mx-auto invisible">
         {/* Devanagari cultural text */}
-        <p className="hero-sanskrit text-xs md:text-sm tracking-[0.5em] mb-6 mt-16 md:mt-20" style={{ color: `${P.gold}80` }}>
+        <p className="hero-sanskrit text-xs md:text-sm mb-6 mt-16 md:mt-20" style={{ color: `${P.gold}80` }}>
           शुभ विवाह
         </p>
 
@@ -1374,7 +1374,7 @@ function FinalBlessing() {
         <p className="bl-el font-serif italic text-sm max-w-md mx-auto mb-4" style={{ color: `${P.gold}80` }}>
           Every moment means more with you there.
         </p>
-        <p className="bl-el font-serif text-xs tracking-[0.2em] mb-14" style={{ color: `${P.gold}50` }}>
+        <p className="bl-el font-serif text-xs mb-14" style={{ color: `${P.gold}50` }}>
           अतिथि देवो भव
         </p>
 

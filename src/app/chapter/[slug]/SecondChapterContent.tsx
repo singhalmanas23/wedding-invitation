@@ -299,7 +299,7 @@ function CourtyardIntro({
   );
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 5500);
+    const t = setTimeout(onComplete, 5000);
     return () => clearTimeout(t);
   }, [onComplete]);
 

@@ -274,7 +274,7 @@ function WorldIntro({
   );
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 6500);
+    const t = setTimeout(onComplete, 5000);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -295,9 +295,9 @@ function WorldIntro({
       <div className="relative z-10 flex flex-col items-center text-center px-6">
         <HaveliArchFrame accent={palette.accent} />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="font-serif text-2xl md:text-4xl mb-2 tracking-[0.05em] whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split("").map((c, i) => (
-              <span key={i} className="it-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+          <p className="font-serif font-hindi text-2xl md:text-4xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
           <p className="text-xs md:text-sm uppercase tracking-[0.35em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}dd` }}>
@@ -365,7 +365,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=280%",
+          end: "+=180%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -434,7 +434,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "380vh" }}>
+    <section ref={wrapRef} style={{ height: "280vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         <div
           className="world-bg absolute inset-0"
@@ -523,8 +523,8 @@ function WorldHero({ event }: { event: WeddingEvent }) {
           </div>
         </div>
 
-        {/* ── Decor cards — bottom ── */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
+        {/* ── Decor cards — bottom (hidden on mobile to prevent overlap) ── */}
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-wrap items-center justify-center gap-3 md:gap-4">
           {decorItems.map((d) => (
             <div
               key={d.label}
@@ -956,7 +956,7 @@ export default function FifthChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,#c8b89c,#b8a888)` }} />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
           <LotusDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6 tracking-[0.3em]" style={{ color: "#5a4530" }}>शुभ विवाह</p>
+          <p className="font-serif text-sm mb-4 mt-6" style={{ color: "#5a4530" }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}ee` }}>
             Tarush <span style={{ color: "#6b5540" }}>&amp;</span> Sanjana
           </p>

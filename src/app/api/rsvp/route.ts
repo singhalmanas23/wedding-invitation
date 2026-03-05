@@ -55,8 +55,10 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error("RSVP submission error:", error);
+    const message =
+      error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to submit RSVP. Please try again." },
+      { error: `Failed to submit RSVP: ${message}` },
       { status: 500 }
     );
   }
