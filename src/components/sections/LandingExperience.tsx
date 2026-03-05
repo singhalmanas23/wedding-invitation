@@ -22,9 +22,6 @@ const P = {
   cream: "#f5efe6",
 } as const;
 
-const GRAIN_URL =
-  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")";
-
 function rand(a: number, b: number = 0): number {
   const x = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -64,111 +61,6 @@ function MandalaOrnament({ className = "" }: { className?: string }) {
         <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: `${P.gold}40` }} />
       </div>
       <div className="h-px w-12 md:w-24" style={{ background: `linear-gradient(to left, transparent, ${P.gold}25)` }} />
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────── */
-/*  Section Transitions — animated connectors between sections    */
-/* ─────────────────────────────────────────────────────────────── */
-
-function SectionTransition({ variant = "arch", label }: { variant?: "arch" | "mandala" | "lotus" | "scroll"; label?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    gsap.fromTo(
-      ref.current!.querySelectorAll(".st-line"),
-      { scaleX: 0 },
-      { scaleX: 1, duration: 1.2, ease: "power2.inOut", stagger: 0.15,
-        scrollTrigger: { trigger: ref.current, start: "top 80%", toggleActions: "play none none none" } }
-    );
-    gsap.fromTo(
-      ref.current!.querySelectorAll(".st-fade"),
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 75%", toggleActions: "play none none none" } }
-    );
-    gsap.fromTo(
-      ref.current!.querySelectorAll(".st-scale"),
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.6, stagger: 0.08, ease: "back.out(2)",
-        scrollTrigger: { trigger: ref.current, start: "top 78%", toggleActions: "play none none none" } }
-    );
-  }, { scope: ref });
-
-  return (
-    <div ref={ref} className="relative py-8 md:py-12 overflow-hidden" style={{ backgroundColor: P.bg }} aria-hidden="true">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 40% 50% at 50% 50%, rgba(139,26,26,0.04), transparent 70%)` }} />
-
-      <div className="relative z-10 flex flex-col items-center">
-        {/* Top line */}
-        <div className="st-line h-px w-16 md:w-28 origin-center mb-6" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
-
-        {variant === "arch" && (
-          <div className="st-fade relative w-20 h-28 md:w-24 md:h-32 mb-4">
-            <svg viewBox="0 0 200 280" className="w-full h-full opacity-[0.08]" fill="none">
-              <path d="M20 280 V120 Q20 20 100 8 Q180 20 180 120 V280" stroke={P.gold} strokeWidth="0.8" />
-              <path d="M35 280 V125 Q35 35 100 22 Q165 35 165 125 V280" stroke={P.gold} strokeWidth="0.4" />
-            </svg>
-            <div className="absolute top-[18%] left-1/2 -translate-x-1/2">
-              <div className="st-scale w-1.5 h-1.5 rounded-full" style={{ backgroundColor: `${P.gold}30` }} />
-            </div>
-          </div>
-        )}
-
-        {variant === "mandala" && (
-          <div className="st-fade relative mb-4">
-            <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-              <div className="st-scale absolute inset-0 rotate-45 border" style={{ borderColor: `${P.gold}12` }} />
-              <div className="st-scale absolute inset-2.5 rotate-45 border" style={{ borderColor: `${P.gold}08` }} />
-              <div className="st-scale absolute inset-5 rotate-0 border rounded-full" style={{ borderColor: `${P.gold}10` }} />
-              <div className="st-scale w-2 h-2 rounded-full" style={{ backgroundColor: `${P.gold}30` }} />
-            </div>
-          </div>
-        )}
-
-        {variant === "lotus" && (
-          <div className="st-fade mb-4">
-            <svg viewBox="0 0 100 50" className="w-16 md:w-20 h-auto opacity-[0.12]" fill="none">
-              <path d="M50 45 Q35 30 30 15 Q35 5 50 2 Q65 5 70 15 Q65 30 50 45Z" stroke={P.gold} strokeWidth="0.6" />
-              <path d="M50 45 Q20 35 15 20 Q25 10 50 5" stroke={P.gold} strokeWidth="0.4" />
-              <path d="M50 45 Q80 35 85 20 Q75 10 50 5" stroke={P.gold} strokeWidth="0.4" />
-              <circle cx="50" cy="20" r="2" fill={`${P.gold}15`} />
-            </svg>
-          </div>
-        )}
-
-        {variant === "scroll" && (
-          <div className="st-fade flex items-center gap-4 mb-4">
-            <div className="st-scale flex flex-col items-center gap-1">
-              <div className="w-3 h-3 rounded-full border" style={{ borderColor: `${P.gold}15` }} />
-              <div className="w-px h-6" style={{ backgroundColor: `${P.gold}10` }} />
-            </div>
-            <div className="st-scale w-2 h-2 rotate-45" style={{ border: `1px solid ${P.gold}20` }} />
-            <div className="st-scale flex flex-col items-center gap-1">
-              <div className="w-px h-6" style={{ backgroundColor: `${P.gold}10` }} />
-              <div className="w-3 h-3 rounded-full border" style={{ borderColor: `${P.gold}15` }} />
-            </div>
-          </div>
-        )}
-
-        {label && (
-          <p className="st-fade text-[9px] uppercase tracking-[0.4em] font-body mt-2 mb-4" style={{ color: `${P.gold}35` }}>
-            {label}
-          </p>
-        )}
-
-        {/* Decorative dots */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="st-scale w-0.5 h-0.5 rounded-full" style={{ backgroundColor: `${P.gold}25` }} />
-          <div className="st-scale w-1 h-1 rotate-45" style={{ border: `1px solid ${P.gold}20` }} />
-          <div className="st-scale w-0.5 h-0.5 rounded-full" style={{ backgroundColor: `${P.gold}25` }} />
-        </div>
-
-        {/* Bottom line */}
-        <div className="st-line h-px w-16 md:w-28 origin-center" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
-      </div>
     </div>
   );
 }
@@ -217,6 +109,220 @@ function WeddingMandala({ className = "" }: { className?: string }) {
       ))}
       <circle cx="200" cy="200" r="8" fill={`${P.gold}0d`} />
     </svg>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────── */
+/*  V3.0 — Cultural SVG Components                                 */
+/* ─────────────────────────────────────────────────────────────── */
+
+function JharokhaArch({ className = "", children }: { className?: string; children?: React.ReactNode }) {
+  return (
+    <div className={`relative ${className}`} aria-hidden="true">
+      <svg viewBox="0 0 240 340" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Outer cusped arch — distinctly Rajasthani */}
+        <path d="M20 340 V160 Q20 100 50 72 Q65 55 85 42 Q100 33 120 26 Q140 33 155 42 Q175 55 190 72 Q220 100 220 160 V340" stroke={`${P.gold}25`} strokeWidth="1" />
+        {/* Inner cusped arch */}
+        <path d="M38 340 V168 Q38 112 62 86 Q76 70 94 58 Q108 48 120 42 Q132 48 146 58 Q164 70 178 86 Q202 112 202 168 V340" stroke={`${P.gold}15`} strokeWidth="0.6" />
+        {/* Cusps — scalloped detail at top */}
+        <path d="M62 86 Q72 78 82 82" stroke={`${P.gold}18`} strokeWidth="0.5" />
+        <path d="M82 82 Q96 68 110 72" stroke={`${P.gold}18`} strokeWidth="0.5" />
+        <path d="M110 72 Q120 66 130 72" stroke={`${P.gold}18`} strokeWidth="0.5" />
+        <path d="M130 72 Q144 68 158 82" stroke={`${P.gold}18`} strokeWidth="0.5" />
+        <path d="M158 82 Q168 78 178 86" stroke={`${P.gold}18`} strokeWidth="0.5" />
+        {/* Kalash finial at apex */}
+        <path d="M115 26 Q120 16 125 26" stroke={`${P.gold}30`} strokeWidth="0.6" fill={`${P.gold}08`} />
+        <circle cx="120" cy="14" r="3" stroke={`${P.gold}25`} strokeWidth="0.5" fill={`${P.gold}06`} />
+        <line x1="120" y1="11" x2="120" y2="6" stroke={`${P.gold}20`} strokeWidth="0.5" />
+        {/* Decorative brackets */}
+        <path d="M20 160 Q10 160 12 150 Q14 140 20 140" stroke={`${P.gold}12`} strokeWidth="0.4" />
+        <path d="M220 160 Q230 160 228 150 Q226 140 220 140" stroke={`${P.gold}12`} strokeWidth="0.4" />
+        {/* Column base detail */}
+        <rect x="14" y="310" width="12" height="3" rx="1" stroke={`${P.gold}15`} strokeWidth="0.3" />
+        <rect x="214" y="310" width="12" height="3" rx="1" stroke={`${P.gold}15`} strokeWidth="0.3" />
+        {/* Inner decorative dots */}
+        <circle cx="120" cy="55" r="2" fill={`${P.gold}15`} />
+        <line x1="90" y1="55" x2="108" y2="55" stroke={`${P.gold}0d`} strokeWidth="0.4" />
+        <line x1="132" y1="55" x2="150" y2="55" stroke={`${P.gold}0d`} strokeWidth="0.4" />
+      </svg>
+      {children && <div className="absolute inset-0 flex items-center justify-center pt-12">{children}</div>}
+    </div>
+  );
+}
+
+function DiyaFlame({ size = "md", className = "" }: { size?: "sm" | "md" | "lg"; className?: string }) {
+  const dims = { sm: "w-6 h-10", md: "w-10 h-16", lg: "w-14 h-22" }[size];
+  return (
+    <div className={`relative ${dims} ${className}`}>
+      <svg viewBox="0 0 60 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Lamp base */}
+        <ellipse cx="30" cy="88" rx="20" ry="6" fill={`${P.gold}20`} stroke={`${P.gold}30`} strokeWidth="0.8" />
+        <path d="M14 85 Q10 78 14 72 L18 68 Q22 65 30 64 Q38 65 42 68 L46 72 Q50 78 46 85" fill={`${P.gold}12`} stroke={`${P.gold}25`} strokeWidth="0.6" />
+        {/* Wick */}
+        <line x1="30" y1="64" x2="30" y2="48" stroke={`${P.gold}40`} strokeWidth="1" />
+        {/* Flame — animated */}
+        <g className="animate-diya-flicker" style={{ transformOrigin: "30px 48px" }}>
+          <path d="M30 48 Q22 34 24 22 Q26 10 30 4 Q34 10 36 22 Q38 34 30 48Z" fill="url(#flameGrad)" opacity="0.9" />
+          <path d="M30 48 Q25 38 27 28 Q29 18 30 12 Q31 18 33 28 Q35 38 30 48Z" fill="url(#flameInner)" opacity="0.7" />
+        </g>
+        {/* Glow */}
+        <circle cx="30" cy="32" r="18" fill="rgba(255,180,50,0.08)" className="animate-diya-glow" />
+        <defs>
+          <radialGradient id="flameGrad" cx="50%" cy="70%" r="50%">
+            <stop offset="0%" stopColor="#ffdd66" />
+            <stop offset="50%" stopColor="#ff9922" />
+            <stop offset="100%" stopColor="#cc4400" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="flameInner" cx="50%" cy="60%" r="40%">
+            <stop offset="0%" stopColor="#ffffee" />
+            <stop offset="100%" stopColor="#ffcc44" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function ElephantSilhouette({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 200 120" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M30 100 L30 70 Q30 55 40 48 L42 35 Q44 20 55 15 Q65 10 75 15 L80 18 Q90 14 100 16 L110 20 Q115 22 118 28 L120 35 Q122 40 125 42 L130 44 Q140 46 145 55 L148 60 Q152 55 158 52 L162 50 Q168 48 172 52 L172 70 L172 100" stroke={`${P.gold}15`} strokeWidth="1" fill={`${P.gold}06`} />
+      {/* Decorative howdah */}
+      <rect x="70" y="8" width="40" height="20" rx="4" stroke={`${P.gold}12`} strokeWidth="0.5" fill={`${P.gold}04`} />
+      <path d="M75 8 L90 0 L105 8" stroke={`${P.gold}15`} strokeWidth="0.5" />
+      {/* Trunk curl */}
+      <path d="M42 35 Q35 40 32 50 Q30 58 35 62" stroke={`${P.gold}15`} strokeWidth="1" fill="none" />
+      {/* Eye */}
+      <circle cx="52" cy="25" r="2" fill={`${P.gold}20`} />
+      {/* Tusk */}
+      <path d="M45 38 Q40 45 42 50" stroke={`${P.gold}20`} strokeWidth="0.6" />
+      {/* Foot decorations */}
+      <circle cx="30" cy="98" r="3" stroke={`${P.gold}10`} strokeWidth="0.4" />
+      <circle cx="120" cy="98" r="3" stroke={`${P.gold}10`} strokeWidth="0.4" />
+      <circle cx="148" cy="98" r="3" stroke={`${P.gold}10`} strokeWidth="0.4" />
+      <circle cx="172" cy="98" r="3" stroke={`${P.gold}10`} strokeWidth="0.4" />
+    </svg>
+  );
+}
+
+function LotusBloomSVG({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* Center petal */}
+      <path d="M60 70 Q50 50 48 35 Q46 20 60 8 Q74 20 72 35 Q70 50 60 70Z" stroke={`${P.gold}25`} strokeWidth="0.6" fill={`${P.gold}06`} />
+      {/* Left petals */}
+      <path d="M60 70 Q40 55 30 40 Q22 28 35 18 Q48 12 55 25 Q58 35 60 70Z" stroke={`${P.gold}20`} strokeWidth="0.5" fill={`${P.gold}04`} />
+      <path d="M60 70 Q30 60 18 48 Q8 38 16 26 Q28 18 38 30 Q48 42 60 70Z" stroke={`${P.gold}15`} strokeWidth="0.4" fill={`${P.gold}03`} />
+      {/* Right petals */}
+      <path d="M60 70 Q80 55 90 40 Q98 28 85 18 Q72 12 65 25 Q62 35 60 70Z" stroke={`${P.gold}20`} strokeWidth="0.5" fill={`${P.gold}04`} />
+      <path d="M60 70 Q90 60 102 48 Q112 38 104 26 Q92 18 82 30 Q72 42 60 70Z" stroke={`${P.gold}15`} strokeWidth="0.4" fill={`${P.gold}03`} />
+      {/* Stamen center */}
+      <circle cx="60" cy="38" r="3" fill={`${P.gold}15`} />
+    </svg>
+  );
+}
+
+function GoldFoilSpeckles() {
+  const speckles = useMemo(
+    () => Array.from({ length: 15 }, (_, i) => ({
+      id: i, x: rand(i, 20) * 100, y: rand(i, 21) * 100,
+      size: 1 + rand(i, 22) * 2.5, delay: rand(i, 23) * 8,
+      dur: 3 + rand(i, 24) * 5,
+    })), [],
+  );
+  return (
+    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden">
+      {speckles.map((s) => (
+        <div key={s.id} className="absolute rounded-full" style={{
+          left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size,
+          backgroundColor: P.gold, opacity: 0,
+          animation: `goldFoilSparkle ${s.dur}s ease-in-out ${s.delay}s infinite`,
+          willChange: "opacity",
+        }} />
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────── */
+/*  V3.0 — Ritual Transitions (replaces SectionTransition)        */
+/* ─────────────────────────────────────────────────────────────── */
+
+function RitualTransition({ variant = "lotus" }: { variant?: "lotus" | "elephant" | "mandala" | "silk" }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+
+  useGSAP(() => {
+    gsap.fromTo(ref.current!.querySelectorAll(".rt-fade"), { opacity: 0 }, {
+      opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+      scrollTrigger: { trigger: ref.current, start: "top 85%", toggleActions: "play none none none" },
+    });
+    gsap.fromTo(ref.current!.querySelectorAll(".rt-line"), { scaleX: 0 }, {
+      scaleX: 1, duration: 1, ease: "power2.inOut",
+      scrollTrigger: { trigger: ref.current, start: "top 85%", toggleActions: "play none none none" },
+    });
+    if (variant === "lotus") {
+      gsap.fromTo(ref.current!.querySelector(".rt-lotus"), { scale: 0, rotate: -30, opacity: 0 }, {
+        scale: 1, rotate: 0, opacity: 1, duration: 1.6, ease: "power2.out",
+        scrollTrigger: { trigger: ref.current, start: "top 82%", toggleActions: "play none none none" },
+      });
+    }
+    if (variant === "mandala") {
+      gsap.fromTo(ref.current!.querySelector(".rt-mandala"), { scale: 0, rotate: 0, opacity: 0 }, {
+        scale: 1, rotate: 180, opacity: 1, duration: 2, ease: "power2.out",
+        scrollTrigger: { trigger: ref.current, start: "top 82%", toggleActions: "play none none none" },
+      });
+    }
+    if (variant === "elephant" && !reduced) {
+      gsap.fromTo(ref.current!.querySelector(".rt-elephant"), { x: "-120%" }, {
+        x: "calc(100vw + 50%)", duration: 6, ease: "none",
+        scrollTrigger: { trigger: ref.current, start: "top 75%", toggleActions: "play none none none" },
+      });
+    }
+    if (variant === "silk") {
+      gsap.fromTo(ref.current!.querySelector(".rt-silk"), { xPercent: -120, opacity: 0 }, {
+        xPercent: 120, opacity: 0.12, duration: 1.4, ease: "power2.inOut",
+        scrollTrigger: { trigger: ref.current, start: "top 80%", toggleActions: "play none none none" },
+      });
+    }
+  }, { scope: ref });
+
+  return (
+    <div ref={ref} className="relative py-4 md:py-6 overflow-hidden" style={{ backgroundColor: P.bg }} aria-hidden="true">
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="rt-line h-px w-12 md:w-20 origin-center mb-3" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
+
+        {variant === "lotus" && (
+          <div className="rt-lotus">
+            <LotusBloomSVG className="w-10 md:w-14 h-auto" />
+          </div>
+        )}
+
+        {variant === "elephant" && (
+          <div className="relative w-full h-12 overflow-hidden">
+            <div className="rt-elephant absolute top-0 left-0">
+              <ElephantSilhouette className="w-20 md:w-24 h-auto" />
+            </div>
+          </div>
+        )}
+
+        {variant === "mandala" && (
+          <div className="rt-mandala">
+            <div className="relative w-10 h-10 md:w-14 md:h-14 flex items-center justify-center">
+              <WeddingMandala className="w-full h-full opacity-[0.12]" />
+            </div>
+          </div>
+        )}
+
+        {variant === "silk" && (
+          <div className="relative w-full h-6 overflow-hidden">
+            <div className="rt-silk absolute inset-y-0 w-1/2" style={{ background: `linear-gradient(90deg, transparent, ${P.gold}20, ${P.maroon}15, transparent)`, transform: "skewX(-8deg)" }} />
+          </div>
+        )}
+
+        <div className="rt-line h-px w-12 md:w-20 origin-center mt-3" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
+      </div>
+    </div>
   );
 }
 
@@ -289,14 +395,14 @@ function JaimalaAnimation({ className = "" }: { className?: string }) {
         ))}
 
         {/* Falling petals */}
-        {!reduced && Array.from({ length: 7 }, (_, i) => (
+        {!reduced && Array.from({ length: 3 }, (_, i) => (
           <motion.ellipse key={`jp-${i}`}
             cx={155 + rand(i, 80) * 90} cy={20 + rand(i, 81) * 30}
             rx="2.2" ry="3.5"
             fill={i % 3 === 0 ? P.maroon : i % 3 === 1 ? P.gold : P.bronze}
             initial={{ opacity: 0 }}
-            animate={{ y: [0, 160 + rand(i, 82) * 80], x: [-8 + rand(i, 83) * 16, 8 - rand(i, 84) * 16], opacity: [0, 0.35, 0], rotate: [0, 200 + rand(i, 85) * 160] }}
-            transition={{ duration: 5 + rand(i, 86) * 3, delay: 3 + rand(i, 87) * 2.5, repeat: Infinity, ease: "easeOut" }}
+            animate={{ y: [0, 160 + rand(i, 82) * 80], opacity: [0, 0.35, 0] }}
+            transition={{ duration: 6 + rand(i, 86) * 3, delay: 3 + rand(i, 87) * 2.5, repeat: Infinity, ease: "easeOut" }}
           />
         ))}
       </svg>
@@ -311,9 +417,9 @@ function JaimalaAnimation({ className = "" }: { className?: string }) {
 function Bokeh() {
   const reduced = useReducedMotion();
   const orbs = useMemo(
-    () => Array.from({ length: 14 }, (_, i) => ({
+    () => Array.from({ length: 6 }, (_, i) => ({
       id: i, x: 5 + rand(i, 1) * 90, y: 5 + rand(i, 2) * 90,
-      size: 60 + rand(i, 3) * 160, delay: rand(i, 4) * 6, dur: 12 + rand(i, 5) * 14,
+      size: 80 + rand(i, 3) * 140, delay: rand(i, 4) * 6, dur: 14 + rand(i, 5) * 14,
       color: i % 3 === 0
         ? `rgba(139,26,26,${(0.03 + rand(i, 6) * 0.05).toFixed(3)})`
         : `rgba(212,175,55,${(0.02 + rand(i, 6) * 0.04).toFixed(3)})`,
@@ -323,10 +429,13 @@ function Bokeh() {
   return (
     <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden">
       {orbs.map((o) => (
-        <motion.div key={o.id} className="absolute rounded-full"
-          style={{ left: `${o.x}%`, top: `${o.y}%`, width: o.size, height: o.size, background: `radial-gradient(circle, ${o.color}, transparent 70%)` }}
-          animate={{ y: [0, -25, 0], scale: [1, 1.12, 1] }}
-          transition={{ duration: o.dur, delay: o.delay, repeat: Infinity, ease: "easeInOut" }}
+        <div key={o.id} className="absolute rounded-full"
+          style={{
+            left: `${o.x}%`, top: `${o.y}%`, width: o.size, height: o.size,
+            background: `radial-gradient(circle, ${o.color}, transparent 70%)`,
+            animation: `float ${o.dur}s ease-in-out ${o.delay}s infinite`,
+            willChange: "transform",
+          }}
         />
       ))}
     </div>
@@ -336,46 +445,42 @@ function Bokeh() {
 function DreamParticles({ count }: { count: number }) {
   const reduced = useReducedMotion();
   const particles = useMemo(
-    () => Array.from({ length: count }, (_, i) => {
+    () => Array.from({ length: Math.min(count, 18) }, (_, i) => {
       const isPetal = i % 5 === 0;
       const s = i + 100;
       return {
         id: i, isPetal, x: rand(s, 1) * 100, y: 50 + rand(s, 2) * 50,
-        size: isPetal ? 4 + rand(s, 3) * 5 : 1 + rand(s, 3) * 3,
-        delay: rand(s, 4) * 10, dur: isPetal ? 10 + rand(s, 5) * 12 : 4 + rand(s, 5) * 8,
-        drift: -25 + rand(s, 6) * 50,
+        size: isPetal ? 4 + rand(s, 3) * 5 : 1.5 + rand(s, 3) * 3,
+        delay: rand(s, 4) * 10, dur: isPetal ? 12 + rand(s, 5) * 10 : 6 + rand(s, 5) * 8,
         opacity: isPetal ? 0.12 + rand(s, 7) * 0.18 : 0.2 + rand(s, 7) * 0.5,
-        rotation: rand(s, 8) * 360, yTravel: isPetal ? 120 + rand(s, 9) * 200 : 200 + rand(s, 9) * 300,
       };
     }), [count],
   );
   if (reduced) return null;
   return (
     <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden">
-      {particles.map((p) =>
-        p.isPetal ? (
-          <motion.div key={p.id} className="absolute"
-            style={{ left: `${p.x}%`, bottom: `${100 - p.y}%`, width: p.size, height: p.size * 1.4, borderRadius: "50% 0 50% 50%", background: `linear-gradient(135deg, rgba(160,40,40,${p.opacity}), rgba(100,18,18,${p.opacity * 0.4}))` }}
-            animate={{ y: [0, -p.yTravel], x: [0, p.drift], rotate: [p.rotation, p.rotation + 200], opacity: [0, p.opacity, 0] }}
-            transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeOut" }}
-          />
-        ) : (
-          <motion.div key={p.id} className="absolute rounded-full"
-            style={{ left: `${p.x}%`, bottom: `${100 - p.y}%`, width: p.size, height: p.size, background: `radial-gradient(circle, rgba(212,175,55,${p.opacity}), transparent 70%)`, boxShadow: `0 0 ${p.size * 3}px rgba(212,175,55,${p.opacity * 0.5})` }}
-            animate={{ y: [0, -p.yTravel], x: [0, p.drift], opacity: [0, p.opacity, 0] }}
-            transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeOut" }}
-          />
-        ),
-      )}
+      {particles.map((p) => (
+        <div key={p.id} className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`, bottom: `${100 - p.y}%`, width: p.size, height: p.size,
+            background: p.isPetal
+              ? `rgba(160,40,40,${p.opacity})`
+              : `radial-gradient(circle, rgba(212,175,55,${p.opacity}), transparent 70%)`,
+            borderRadius: p.isPetal ? "50% 0 50% 50%" : "50%",
+            animation: `fadeInUp ${p.dur}s ease-out ${p.delay}s infinite`,
+            willChange: "transform, opacity",
+          }}
+        />
+      ))}
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────────────────────── */
-/*  Cinematic Loader                                               */
+/*  V3.0 — Sacred Prelude (Ceremonial Invocation)                  */
 /* ─────────────────────────────────────────────────────────────── */
 
-function CinematicLoader({ onComplete }: { onComplete: () => void }) {
+function SacredPrelude({ onComplete }: { onComplete: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const revealedRef = useRef(false);
@@ -399,34 +504,40 @@ function CinematicLoader({ onComplete }: { onComplete: () => void }) {
           else { clearInterval(fade); audio.pause(); }
         }, 400);
       }, 14000);
-    } catch { /* no audio file — graceful */ }
+    } catch { /* no audio — graceful */ }
 
     document.body.style.overflow = "";
     const tl = gsap.timeline({ onComplete });
-    tl.to(".ld-enter", { opacity: 0, scale: 0.8, duration: 0.3, ease: "power2.in" });
-    tl.to(".ld-inner", { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, "-=0.1");
-    tl.to(ref.current, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "-=0.25");
+    tl.to(".sp-seal", { scale: 1.5, opacity: 0, duration: 0.6, ease: "power2.in" });
+    tl.to(".sp-seal-label", { opacity: 0, y: 10, duration: 0.3 }, "-=0.4");
+    tl.to(".sp-inner", { opacity: 0, y: -50, duration: 0.6, ease: "power2.in" }, "-=0.2");
+    tl.to(ref.current, { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "power4.inOut" }, "-=0.2");
   }, [onComplete]);
 
   useGSAP(() => {
     const tl = gsap.timeline();
 
-    tl.fromTo(".ld-mandala", { opacity: 0, scale: 0.7, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 2, ease: "power2.out" }, 0);
-    tl.fromTo(".ld-arch", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.1);
-    tl.fromTo(".ld-diamond", { scale: 0, rotation: 0 }, { scale: 1, rotation: 45, duration: 0.5, ease: "back.out(2)" }, 0.3);
-    tl.fromTo(".ld-line-l", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out" }, 0.4);
-    tl.fromTo(".ld-line-r", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out" }, 0.4);
-    tl.fromTo(".ld-char", { opacity: 0, y: 60, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, stagger: 0.12, ease: "power3.out" }, 0.9);
-    tl.fromTo(".ld-sub", { opacity: 0, letterSpacing: "0.6em" }, { opacity: 1, letterSpacing: "0.35em", duration: 0.8, ease: "power2.out" }, 1.7);
-    tl.fromTo(".ld-tagline", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 2.2);
+    tl.fromTo(".sp-mandala", { opacity: 0, scale: 0.6, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 2.2, ease: "power2.out" }, 0);
+    tl.fromTo(".sp-foil", { opacity: 0 }, { opacity: 1, duration: 1.5 }, 0.3);
+    tl.fromTo(".sp-diya", { opacity: 0, scale: 0, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 1, ease: "back.out(2)" }, 0.5);
+    tl.fromTo(".sp-arch", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, 0.8);
+    tl.fromTo(".sp-ganesh", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 1.2);
+    tl.fromTo(".sp-vivah", { opacity: 0, letterSpacing: "0.7em" }, { opacity: 1, letterSpacing: "0.4em", duration: 1, ease: "power2.out" }, 1.5);
+    tl.fromTo(".sp-line-l", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out" }, 1.8);
+    tl.fromTo(".sp-line-r", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out" }, 1.8);
+    tl.fromTo(".sp-diamond", { scale: 0, rotation: 0 }, { scale: 1, rotation: 45, duration: 0.5, ease: "back.out(2)" }, 2.0);
+    tl.fromTo(".sp-char", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, stagger: 0.14, ease: "power3.out" }, 2.2);
+    tl.fromTo(".sp-sub", { opacity: 0, letterSpacing: "0.6em" }, { opacity: 1, letterSpacing: "0.35em", duration: 0.8, ease: "power2.out" }, 3.0);
+    tl.fromTo(".sp-tagline", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 3.5);
 
-    tl.call(() => setReady(true), undefined, 2.6);
-    tl.fromTo(".ld-enter", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 2.6);
+    tl.call(() => setReady(true), undefined, 3.8);
+    tl.fromTo(".sp-seal", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.8)" }, 3.8);
+    tl.fromTo(".sp-seal-label", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 4.1);
   }, { scope: ref });
 
   useEffect(() => {
     if (!ready) return;
-    const timer = setTimeout(reveal, 4500);
+    const timer = setTimeout(reveal, 5000);
     return () => clearTimeout(timer);
   }, [ready, reveal]);
 
@@ -434,58 +545,78 @@ function CinematicLoader({ onComplete }: { onComplete: () => void }) {
     <div
       ref={ref}
       className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{ backgroundColor: P.bg }}
+      style={{ backgroundColor: P.bg, clipPath: "inset(0 0 0 0)" }}
       onClick={ready ? reveal : undefined}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (ready && (e.key === "Enter" || e.key === " ")) reveal(); }}
     >
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.06), transparent 70%)` }} />
-      <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay" style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "128px 128px" }} />
+      {/* Subtle background */}
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.08), transparent 70%)` }} />
 
-      {/* Rotating wedding mandala behind monogram */}
-      <div className="ld-mandala absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
-        <div className="w-[75vw] h-[75vw] max-w-lg max-h-lg" style={{ animation: "spin 80s linear infinite" }}>
-          <WeddingMandala className="w-full h-full opacity-[0.6]" />
+      {/* Gold foil speckles */}
+      <div className="sp-foil opacity-0"><GoldFoilSpeckles /></div>
+
+      {/* Static mandala */}
+      <div className="sp-mandala absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
+        <div className="w-[70vw] h-[70vw] max-w-lg max-h-lg">
+          <WeddingMandala className="w-full h-full opacity-[0.5]" />
         </div>
       </div>
 
-      <div className="ld-inner flex flex-col items-center relative z-10">
-        <div className="ld-arch w-28 h-36 md:w-36 md:h-48 mb-6">
-          <MughalArch />
+      <div className="sp-inner flex flex-col items-center relative z-10">
+        {/* Diya at center top */}
+        <div className="sp-diya mb-4">
+          <DiyaFlame size="md" />
         </div>
 
+        {/* Ganesh invocation */}
+        <p className="sp-ganesh font-serif text-xs md:text-sm tracking-[0.3em] mb-2" style={{ color: `${P.gold}60` }}>
+          श्री गणेशाय नमः
+        </p>
+
+        {/* Shubh Vivah in Devanagari */}
+        <p className="sp-vivah font-serif text-sm md:text-base tracking-[0.4em] mb-6" style={{ color: `${P.gold}90` }}>
+          शुभ विवाह
+        </p>
+
+        {/* Jharokha arch */}
+        <div className="sp-arch w-28 h-40 md:w-36 md:h-52 mb-6">
+          <JharokhaArch />
+        </div>
+
+        {/* Ornamental divider */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="ld-line-l h-px w-16 md:w-24 origin-right" style={{ backgroundColor: `${P.gold}40` }} />
-          <div className="ld-diamond w-2 h-2" style={{ backgroundColor: `${P.gold}66` }} />
-          <div className="ld-line-r h-px w-16 md:w-24 origin-left" style={{ backgroundColor: `${P.gold}40` }} />
+          <div className="sp-line-l h-px w-16 md:w-24 origin-right" style={{ backgroundColor: `${P.gold}40` }} />
+          <div className="sp-diamond w-2.5 h-2.5" style={{ backgroundColor: `${P.gold}70`, boxShadow: `0 0 12px ${P.gold}30` }} />
+          <div className="sp-line-r h-px w-16 md:w-24 origin-left" style={{ backgroundColor: `${P.gold}40` }} />
         </div>
 
+        {/* Couple initials — embossed gold feel */}
         <div className="flex items-baseline gap-3 md:gap-5">
-          <span className="ld-char font-serif text-6xl md:text-8xl lg:text-9xl" style={{ color: P.cream }}>{COUPLE.partner1.charAt(0)}</span>
-          <span className="ld-char font-serif italic text-3xl md:text-5xl" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>&amp;</span>
-          <span className="ld-char font-serif text-6xl md:text-8xl lg:text-9xl" style={{ color: P.cream }}>{COUPLE.partner2.charAt(0)}</span>
+          <span className="sp-char font-serif text-6xl md:text-8xl lg:text-9xl" style={{ color: P.cream, textShadow: `0 2px 4px rgba(0,0,0,0.5), 0 0 40px ${P.gold}15` }}>{COUPLE.partner1.charAt(0)}</span>
+          <span className="sp-char font-serif italic text-3xl md:text-5xl" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>&amp;</span>
+          <span className="sp-char font-serif text-6xl md:text-8xl lg:text-9xl" style={{ color: P.cream, textShadow: `0 2px 4px rgba(0,0,0,0.5), 0 0 40px ${P.gold}15` }}>{COUPLE.partner2.charAt(0)}</span>
         </div>
 
-        <p className="ld-sub mt-8 text-[10px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}80` }}>
-          April 2026 · Jaipur, Rajasthan
+        <p className="sp-sub mt-6 text-[10px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}80` }}>
+          April 2026 · Udaipur, Rajasthan
         </p>
-        <p className="ld-tagline mt-3 font-serif italic text-xs md:text-sm" style={{ color: `${P.gold}66` }}>
-          A Royal Celebration
+        <p className="sp-tagline mt-2 font-serif italic text-xs md:text-sm" style={{ color: `${P.gold}70` }}>
+          A Sacred Celebration
         </p>
-      </div>
 
-      {/* Begin prompt with play icon + pulsing ring */}
-      <div className="ld-enter absolute bottom-14 md:bottom-20 left-1/2 -translate-x-1/2 opacity-0 z-10">
-        <div className="flex flex-col items-center gap-3 cursor-pointer">
-          <div className="relative w-14 h-14 rounded-full flex items-center justify-center" style={{ border: `1px solid ${P.gold}30` }}>
-            <div className="absolute inset-0 rounded-full animate-ping" style={{ border: `1px solid ${P.gold}20`, opacity: 0.3 }} />
-            <svg width="12" height="14" viewBox="0 0 12 14" fill="none" className="ml-0.5">
-              <path d="M1 1L11 7L1 13V1Z" fill={`${P.gold}70`} />
-            </svg>
+        {/* Wax seal — "Begin the Royal Journey" — inside flow */}
+        <div className="mt-10 flex flex-col items-center gap-4 cursor-pointer">
+          <div className="sp-seal relative w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center opacity-0" style={{ background: `radial-gradient(circle at 40% 35%, ${P.maroon}, #5a1010, #3d0808)`, boxShadow: `0 4px 20px rgba(139,26,26,0.5), inset 0 1px 0 rgba(255,255,255,0.08), 0 0 30px rgba(139,26,26,0.3)` }}>
+            <div className="absolute inset-1 rounded-full" style={{ border: `1px solid rgba(212,175,55,0.2)` }} />
+            <span className="font-serif text-sm md:text-base font-bold tracking-wider" style={{ color: `${P.gold}cc`, textShadow: `0 1px 2px rgba(0,0,0,0.5)` }}>
+              T&amp;S
+            </span>
+            <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-2 rounded-full" style={{ backgroundColor: `${P.gold}30` }} />
           </div>
-          <span className="text-[9px] uppercase tracking-[0.35em] font-body" style={{ color: `${P.cream}70` }}>
-            Begin the Journey
+          <span className="sp-seal-label text-[9px] uppercase tracking-[0.35em] font-body opacity-0" style={{ color: `${P.cream}70` }}>
+            Begin the Royal Journey
           </span>
         </div>
       </div>
@@ -533,7 +664,7 @@ function Hero({ loaded }: { loaded: boolean }) {
 
     tl.fromTo(".hero-char", { opacity: 0, y: 80, rotateX: -90 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.9, stagger: 0.03, ease: "power3.out" }, 1.4);
 
-    tl.fromTo(".hero-amp", { opacity: 0, scale: 0.3, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "back.out(1.4)" }, 1.8);
+    tl.fromTo(".hero-amp", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.4)" }, 1.8);
 
     tl.fromTo(".hero-name-glow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, 2.0);
 
@@ -547,7 +678,7 @@ function Hero({ loaded }: { loaded: boolean }) {
       trigger: ref.current,
       start: "top top",
       end: "bottom top",
-      scrub: true,
+      scrub: 0.8,
       onUpdate: (self) => {
         const p = self.progress;
         gsap.set(".hero-bg-layer", { scale: 1 + p * 0.15 });
@@ -561,17 +692,16 @@ function Hero({ loaded }: { loaded: boolean }) {
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="hero-bg-layer absolute inset-[-10%]">
-        <Image src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80" alt="" fill priority className="object-cover" sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1759222198113-d0e2b862a3b5?w=1920&q=80" alt="" fill priority className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(26,10,10,0.5), transparent 35%, rgba(26,10,10,0.85))" }} />
       </div>
 
       {/* Atmospheric layers */}
-      <motion.div className="absolute inset-0 z-1 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 45%, rgba(139,26,26,0.1), transparent 70%)" }} animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+      <div className="absolute inset-0 z-1 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 45%, rgba(139,26,26,0.08), transparent 70%)" }} />
       <div className="absolute inset-0 z-1 pointer-events-none" style={{ background: "radial-gradient(ellipse 65% 55% at 50% 45%, transparent 30%, rgba(26,10,10,0.6) 100%)" }} />
       <Bokeh />
-      <DreamParticles count={55} />
-      <div className="absolute inset-0 pointer-events-none z-2 opacity-25 mix-blend-overlay" style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "128px 128px" }} />
+      <DreamParticles count={18} />
 
       {/* ── Royal Decorative Frame ── */}
       <div className="hero-frame absolute inset-4 md:inset-10 lg:inset-14 pointer-events-none z-10" aria-hidden="true">
@@ -592,7 +722,7 @@ function Hero({ loaded }: { loaded: boolean }) {
       {/* ── Content ── */}
       <div className="hero-content relative z-10 text-center px-6 max-w-5xl mx-auto invisible">
         {/* Devanagari cultural text */}
-        <p className="hero-sanskrit text-xs md:text-sm tracking-[0.5em] mb-6" style={{ color: `${P.gold}80` }}>
+        <p className="hero-sanskrit text-xs md:text-sm tracking-[0.5em] mb-6 mt-16 md:mt-20" style={{ color: `${P.gold}80` }}>
           शुभ विवाह
         </p>
 
@@ -621,33 +751,40 @@ function Hero({ loaded }: { loaded: boolean }) {
           </div>
 
           {/* Names with golden shimmer */}
-          <div className="relative overflow-hidden">
-            <h1 className="relative font-serif tracking-tight leading-[0.82]" style={{ perspective: "1200px" }}>
+          <div className="relative">
+            <h1 className="relative font-serif tracking-tight leading-[1] pb-2" style={{ perspective: "1200px" }}>
               <span className="block text-[clamp(3rem,10vw,9rem)]">
                 {COUPLE.partner1.split("").map((c, i) => (
                   <span key={`p1-${i}`} className="hero-char inline-block" style={{ color: P.cream, textShadow: `0 0 80px rgba(139,26,26,0.2), 0 0 40px rgba(212,175,55,0.08), 0 2px 40px rgba(0,0,0,0.4)`, transformStyle: "preserve-3d" }}>{c}</span>
                 ))}
               </span>
-              <span className="hero-amp block font-serif italic text-[clamp(2rem,5vw,4.5rem)] my-3 md:my-5" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", filter: "drop-shadow(0 0 24px rgba(212,175,55,0.3))" }}>&amp;</span>
+              <span className="hero-amp block font-serif italic text-[clamp(2rem,5vw,4.5rem)] my-2 md:my-3" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>&amp;</span>
               <span className="block text-[clamp(3rem,10vw,9rem)]">
                 {COUPLE.partner2.split("").map((c, i) => (
                   <span key={`p2-${i}`} className="hero-char inline-block" style={{ color: P.cream, textShadow: `0 0 80px rgba(139,26,26,0.2), 0 0 40px rgba(212,175,55,0.08), 0 2px 40px rgba(0,0,0,0.4)`, transformStyle: "preserve-3d" }}>{c}</span>
                 ))}
               </span>
             </h1>
-            <div className="hero-shimmer absolute inset-y-0 w-1/3 pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(212,175,55,0.12), rgba(212,175,55,0.04), transparent)" }} />
+            <div className="absolute inset-y-0 left-0 right-0 overflow-hidden pointer-events-none">
+              <div className="hero-shimmer absolute inset-y-0 w-1/3" style={{ background: "linear-gradient(90deg, transparent, rgba(212,175,55,0.12), rgba(212,175,55,0.04), transparent)" }} />
+            </div>
           </div>
         </div>
 
         {/* Jaimala animation */}
-        <div className="hero-fade mt-6">
+        <div className="hero-fade mt-2">
           <JaimalaAnimation />
         </div>
 
-        {/* Subtitle */}
-        <p className="hero-fade font-serif italic text-lg md:text-xl mt-4 tracking-wide" style={{ color: `${P.cream}cc` }}>
-          A Royal Celebration, Six Chapters
-        </p>
+        {/* Poetic subtitle */}
+        <div className="hero-fade mt-2 text-center">
+          <p className="font-serif italic text-base md:text-lg leading-relaxed tracking-wide" style={{ color: `${P.cream}bf` }}>
+            Beneath ancient arches of Udaipur,
+          </p>
+          <p className="font-serif italic text-base md:text-lg leading-relaxed tracking-wide" style={{ color: `${P.cream}99` }}>
+            two hearts unite in sacred promise.
+          </p>
+        </div>
 
         {/* Divider */}
         <div className="hero-fade flex flex-col items-center gap-1 my-5">
@@ -655,20 +792,26 @@ function Hero({ loaded }: { loaded: boolean }) {
           <div className="h-px w-10 md:w-20" style={{ background: `linear-gradient(to right, transparent, ${P.maroon}40, transparent)` }} />
         </div>
 
-        {/* Date + venue */}
-        <div className="hero-fade space-y-2">
+        {/* Date + venue — brass plate style */}
+        <div className="hero-fade space-y-2 animate-brass-pulse rounded px-8 py-4" style={{ border: `1px solid ${P.gold}18`, background: `linear-gradient(135deg, ${P.gold}06, transparent, ${P.gold}04)` }}>
           <p className="text-sm md:text-base uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}e6` }}>{formattedDate}</p>
           <p className="text-xs uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}99` }}>The Leela Palace · {COUPLE.location}</p>
         </div>
 
-        {/* CTAs */}
+        {/* CTAs — parchment & envelope styled */}
         <div className="hero-fade flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-          <Link href="/itinerary" className="group relative px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body transition-all duration-700 overflow-hidden" style={{ color: `${P.gold}e6`, border: `1px solid ${P.gold}40` }}>
-            <span className="relative z-10">View Itinerary</span>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundColor: `${P.gold}12` }} />
+          <Link href="/itinerary" className="group relative px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body transition-all duration-700 overflow-hidden" style={{ color: `${P.gold}e6`, border: `1px solid ${P.gold}30`, background: `linear-gradient(to bottom, ${P.gold}08, transparent)`, boxShadow: `inset 0 1px 0 ${P.gold}12` }}>
+            <span className="relative z-10 flex items-center gap-2">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 1h8v10H2z" stroke={`${P.gold}80`} strokeWidth="0.8" /><path d="M4 4h4M4 6h3" stroke={`${P.gold}60`} strokeWidth="0.5" /></svg>
+              View Itinerary
+            </span>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundColor: `${P.gold}0a` }} />
           </Link>
-          <Link href="/rsvp" className="px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body font-medium transition-all duration-700" style={{ color: P.bg, background: `linear-gradient(to right, ${P.gold}, #c9a030)`, boxShadow: "0 8px 24px rgba(212,175,55,0.2)" }}>
-            RSVP Now
+          <Link href="/rsvp" className="group relative px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body font-medium transition-all duration-700 overflow-hidden" style={{ color: P.bg, background: `linear-gradient(135deg, ${P.gold}, #c9a030, ${P.gold})`, boxShadow: `0 8px 24px rgba(212,175,55,0.2), inset 0 1px 0 rgba(255,255,255,0.15)` }}>
+            <span className="relative z-10 flex items-center gap-2">
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 1h12v8H1z" stroke={P.bg} strokeWidth="0.8" /><path d="M1 1l6 4 6-4" stroke={P.bg} strokeWidth="0.6" /></svg>
+              RSVP Now
+            </span>
           </Link>
         </div>
 
@@ -678,12 +821,10 @@ function Hero({ loaded }: { loaded: boolean }) {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="hero-scroll-ind absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-4 opacity-0">
-        <span className="text-[9px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.cream}40` }}>Discover</span>
-        <motion.div className="w-5 h-8 rounded-full flex justify-center pt-1.5" style={{ border: `1px solid ${P.cream}26` }} animate={{ borderColor: [`${P.cream}26`, `${P.cream}4d`, `${P.cream}26`] }} transition={{ duration: 2.5, repeat: Infinity }}>
-          <motion.div className="w-1 h-1.5 rounded-full" style={{ backgroundColor: `${P.gold}99` }} animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
-        </motion.div>
+      {/* Scroll indicator — Diya flame */}
+      <div className="hero-scroll-ind absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 opacity-0">
+        <span className="text-[9px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.cream}50` }}>Discover</span>
+        <DiyaFlame size="sm" />
       </div>
     </section>
   );
@@ -710,42 +851,49 @@ function RoyalPrologue() {
   return (
     <section ref={ref} className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0">
-        <Image src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1920&q=80" alt="" fill className="object-cover opacity-[0.05]" sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1696861679643-4f21bfba8fc3?w=1920&q=80" alt="" fill className="object-cover opacity-[0.05]" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}e6, ${P.bg})` }} />
       </div>
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.04), transparent 70%)` }} />
 
+      {/* Sandstone texture overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ background: `repeating-linear-gradient(0deg, ${P.gold}08 0px, transparent 1px, transparent 3px)` }} />
+
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <MandalaOrnament className="rp-fade mb-10" />
         <span className="rp-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-10" style={{ color: `${P.gold}80` }}>
-          The Setting
+          The Sacred Setting
         </span>
 
-        <div className="rp-arch w-40 h-56 md:w-48 md:h-64 mx-auto mb-10">
-          <MughalArch>
-            <p className="font-serif italic text-xl md:text-2xl" style={{ color: `${P.gold}40` }}>जयपुर</p>
-          </MughalArch>
+        {/* Jharokha arch framing city name */}
+        <div className="rp-arch w-36 h-52 md:w-44 md:h-60 mx-auto mb-10">
+          <JharokhaArch>
+            <p className="font-serif italic text-xl md:text-2xl" style={{ color: `${P.gold}50` }}>उदयपुर</p>
+          </JharokhaArch>
         </div>
 
-        <h2 className="rp-fade font-serif text-3xl md:text-5xl lg:text-6xl mb-8 leading-tight" style={{ color: `${P.cream}e6` }}>
-          In the Heart of the Pink City
+        <h2 className="rp-fade font-serif text-3xl md:text-5xl lg:text-6xl mb-4 leading-tight" style={{ color: `${P.cream}e6` }}>
+          In the Heart of the City of Lakes
         </h2>
+        <p className="rp-fade font-serif italic text-sm md:text-base mb-8" style={{ color: `${P.gold}60` }}>
+          झीलों की नगरी — The Venice of the East
+        </p>
 
         <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}99` }}>
-          Where sandstone palaces rise like poems carved in stone. Where Maharajas once held
-          court beneath hand-painted ceilings and the desert wind carried the fragrance of
-          jasmine and rose. Here, in this land where every arch frames a story, two souls
-          chose to write their own.
+          Where marble palaces rise from shimmering lakes and the Aravalli hills stand as
+          silent witnesses to centuries of devotion. Where Maharanas once held court beneath
+          mirrored ceilings, their kingdoms fragrant with jasmine and rose. In this city where
+          every jharokha frames a story of honour and romance, two families chose to write a new verse.
         </p>
 
         <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}80` }}>
-          Jaipur has always been a city of grand gestures — built by Maharaja Sawai Jai Singh II
-          in 1727, its geometry is celestial, its colors divine. It is a city that understands
-          ceremony, that knows how to hold space for moments that transcend the ordinary.
+          Udaipur — founded by Maharana Udai Singh II in 1559, nestled between five lakes
+          and ancient hills. A city that understands ceremony, that knows how to hold sacred
+          space for moments that transcend the ordinary. A city worthy of a Mewari celebration.
         </p>
 
         <p className="rp-fade font-serif italic text-base md:text-lg max-w-xl mx-auto" style={{ color: `${P.gold}80` }}>
-          This wedding unfolds across three days and six chapters — each one a distinct world,
+          This celebration unfolds across three days and six chapters — each a distinct rasa,
           a different mood, a new verse in a love story written against the grandeur of Rajasthan.
         </p>
 
@@ -763,8 +911,8 @@ function StoryQuote() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.fromTo(".sq-word", { opacity: 0, y: 25, filter: "blur(4px)" }, {
-      opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, stagger: 0.06, ease: "power3.out",
+    gsap.fromTo(".sq-word", { opacity: 0, y: 25 }, {
+      opacity: 1, y: 0, duration: 0.6, stagger: 0.06, ease: "power3.out",
       scrollTrigger: { trigger: ref.current, start: "top 70%", toggleActions: "play none none none" },
     });
     gsap.fromTo(".sq-fade", { opacity: 0, y: 20 }, {
@@ -778,15 +926,35 @@ function StoryQuote() {
   return (
     <section ref={ref} className="relative py-24 md:py-36 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0">
-        <Image src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=1920&q=80" alt="" fill className="object-cover opacity-[0.06]" sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1769183345247-fba7c42c991b?w=1920&q=80" alt="" fill className="object-cover opacity-[0.06]" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}cc, ${P.bg})` }} />
       </div>
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.05), transparent 70%)` }} />
 
+      {/* Subtle mehendi pattern background */}
+      <div className="sq-mehendi absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.03]">
+        <svg viewBox="0 0 400 400" className="w-[60vw] max-w-xl h-auto" fill="none">
+          <circle cx="200" cy="200" r="180" stroke={P.gold} strokeWidth="0.5" />
+          <circle cx="200" cy="200" r="150" stroke={P.gold} strokeWidth="0.3" strokeDasharray="8 4" />
+          <circle cx="200" cy="200" r="120" stroke={P.gold} strokeWidth="0.4" />
+          {Array.from({ length: 12 }, (_, i) => {
+            const angle = (i * 30 * Math.PI) / 180;
+            const x1 = 200 + Math.cos(angle) * 120;
+            const y1 = 200 + Math.sin(angle) * 120;
+            const x2 = 200 + Math.cos(angle) * 180;
+            const y2 = 200 + Math.sin(angle) * 180;
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={P.gold} strokeWidth="0.3" />;
+          })}
+          {Array.from({ length: 8 }, (_, i) => (
+            <ellipse key={`mp-${i}`} cx="200" cy="30" rx="15" ry="8" transform={`rotate(${i * 45}, 200, 200)`} stroke={P.gold} strokeWidth="0.4" />
+          ))}
+        </svg>
+      </div>
+
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="sq-fade mb-14">
           <Flourish className="mb-6" />
-          <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}99` }}>Their Story</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}99` }}>Their Story · प्रेम कथा</span>
         </div>
 
         <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15]" style={{ color: `${P.cream}e6` }}>
@@ -800,13 +968,34 @@ function StoryQuote() {
           <div className="h-px w-12 md:w-20" style={{ background: `linear-gradient(to right, transparent, ${P.maroon}40, transparent)` }} />
         </div>
 
-        <p className="sq-fade font-body text-sm md:text-base leading-loose max-w-2xl mx-auto" style={{ color: `${P.cream}99` }}>
-          They grew up in Bombay, studied and travelled across London. He proposed in
-          Cappadocia. Different cities, different journeys — but every chapter led to the
-          same page. Now, against the backdrop of Jaipur&apos;s timeless beauty, their story
-          finds its grandest verse: a three-day royal celebration woven from six
-          unforgettable chapters.
+        <p className="sq-fade font-body text-sm md:text-base leading-loose max-w-2xl mx-auto mb-10" style={{ color: `${P.cream}99` }}>
+          She grew up in Goregaon, he in Pune — both foodies, both dreamers. They first
+          met in Mumbai before heading to London for their masters. Friendship turned to
+          love, and by December 2023 both families knew. Now, against the backdrop of
+          Udaipur&apos;s timeless beauty, their story finds its grandest verse: a three-day
+          royal celebration woven from six unforgettable chapters.
         </p>
+
+        {/* Parents' blessing section */}
+        <div className="sq-fade flex flex-col items-center gap-6 py-8 px-6 mx-auto max-w-lg rounded" style={{ border: `1px solid ${P.gold}12`, background: `linear-gradient(135deg, ${P.gold}04, transparent, ${P.gold}03)` }}>
+          <p className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}60` }}>
+            With the Blessings of Our Families
+          </p>
+          <p className="font-serif italic text-xs" style={{ color: `${P.gold}40` }}>
+            सर्वे भवन्तु सुखिनः
+          </p>
+          <div className="flex items-center gap-8 md:gap-12">
+            <div className="text-center">
+              <p className="font-serif text-sm md:text-base" style={{ color: `${P.cream}cc` }}>The Goel Family</p>
+              <p className="text-[9px] uppercase tracking-[0.2em] font-body mt-1" style={{ color: `${P.cream}50` }}>Groom&apos;s Family</p>
+            </div>
+            <div className="w-px h-10" style={{ backgroundColor: `${P.gold}20` }} />
+            <div className="text-center">
+              <p className="font-serif text-sm md:text-base" style={{ color: `${P.cream}cc` }}>The Harlalka Family</p>
+              <p className="text-[9px] uppercase tracking-[0.2em] font-body mt-1" style={{ color: `${P.cream}50` }}>Bride&apos;s Family</p>
+            </div>
+          </div>
+        </div>
 
         <div className="sq-fade"><Flourish className="mt-14" /></div>
       </div>
@@ -828,40 +1017,48 @@ function VenueShowcase() {
     });
     gsap.fromTo(".vs-img", { scale: 1.15 }, {
       scale: 1, ease: "none",
-      scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: true },
+      scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: 1 },
     });
   }, { scope: ref });
 
   return (
     <section ref={ref} className="relative h-[85vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="vs-img absolute inset-[-10%]">
-        <Image src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80" alt="The Leela Palace" fill className="object-cover" sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1718797054890-e58742729f2d?w=1920&q=80" alt="The Leela Palace Udaipur" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}99, transparent 30%, transparent 60%, ${P.bg}cc 85%, ${P.bg})` }} />
       </div>
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,175,55,0.04), transparent 60%)` }} />
 
+      {/* Candlelight vignette on corners */}
+      <div className="absolute top-0 left-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 0% 0%, rgba(255,180,50,0.04), transparent 70%)` }} />
+      <div className="absolute top-0 right-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 100% 0%, rgba(255,180,50,0.04), transparent 70%)` }} />
+      <div className="absolute bottom-0 left-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 0% 100%, rgba(255,180,50,0.04), transparent 70%)` }} />
+      <div className="absolute bottom-0 right-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 100% 100%, rgba(255,180,50,0.04), transparent 70%)` }} />
+
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
         <Flourish className="vs-fade mb-8" />
         <span className="vs-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-6" style={{ color: `${P.gold}99` }}>
-          The Palace
+          The Palace · राजमहल
         </span>
         <h2 className="vs-fade font-serif text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight" style={{ color: P.cream, textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}>
           The Leela Palace
         </h2>
         <p className="vs-fade font-serif italic text-lg md:text-xl mb-2" style={{ color: `${P.gold}cc` }}>
-          Jaipur, Rajasthan
+          Where Royalty Meets Celebration
         </p>
         <p className="vs-fade font-body text-xs md:text-sm mt-6 max-w-xl mx-auto leading-loose" style={{ color: `${P.cream}99` }}>
-          Built in tribute to Rajasthan&apos;s royal legacy, the palace grounds become the
-          stage for six unforgettable chapters. From sunlit courtyards draped in jasmine to
-          gilded durbar halls lit by a thousand diyas — each space transforms to tell its
-          part of the story.
+          Overlooking the serene waters of Lake Pichola, the palace grounds become the
+          sacred stage for six unforgettable chapters. From sunlit courtyards draped in jasmine
+          to gilded durbar halls lit by a thousand diyas — each space transforms to honour
+          the story of two families becoming one.
         </p>
 
-        <div className="vs-fade flex items-center justify-center gap-8 mt-10">
+        {/* Palace spaces with diya dots */}
+        <div className="vs-fade flex items-center justify-center gap-6 md:gap-8 mt-10">
           {["The Grand Lawn", "The Haveli Courtyard", "The Durbar Hall", "The Grand Ballroom"].map((space, i) => (
-            <span key={i} className="hidden md:inline text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>
+            <span key={i} className="hidden md:flex items-center gap-2 text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}40` }}>
+              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: `${P.gold}40` }} />
               {space}
             </span>
           ))}
@@ -1074,7 +1271,8 @@ function RoyalTimeline() {
         </div>
 
         <div className="relative">
-          <div className="tl-line absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 origin-top" style={{ background: `linear-gradient(to bottom, transparent, ${P.gold}20, ${P.gold}20, transparent)` }} />
+          {/* Glowing diya line */}
+          <div className="tl-line absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 origin-top" style={{ background: `linear-gradient(to bottom, transparent, ${P.gold}30, ${P.gold}35, ${P.gold}30, transparent)`, boxShadow: `0 0 8px ${P.gold}15, 0 0 20px ${P.gold}08` }} />
 
           {DAYS.map((d, di) => (
             <div key={di} className="tl-item relative mb-20 last:mb-0">
@@ -1094,7 +1292,7 @@ function RoyalTimeline() {
                   const isLight = event.slug === "courtyard-edit" || event.slug === "world-of-our-own";
                   const accent = isLight ? "#d4a060" : event.palette.accent;
                   return (
-                    <Link key={event.slug} href={`/chapter/${event.slug}`} className="group block p-5 rounded-sm border transition-all duration-500" style={{ borderColor: `${accent}12`, backgroundColor: `${event.palette.background}15` }}>
+                    <Link key={event.slug} href={`/chapter/${event.slug}`} className="group block p-5 rounded-sm border transition-all duration-500" style={{ borderColor: `${accent}20`, backgroundColor: `${event.palette.background}15`, background: `linear-gradient(135deg, ${event.palette.background}15, ${accent}05)`, boxShadow: `0 2px 12px ${accent}08, inset 0 1px 0 ${accent}10` }}>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="text-[9px] uppercase tracking-[0.3em] font-body" style={{ color: accent }}>Ch. {String(event.chapterNumber).padStart(2, "0")}</span>
                         <div className="h-px flex-1" style={{ backgroundColor: `${accent}12` }} />
@@ -1123,11 +1321,11 @@ function RoyalTimeline() {
 /*  Final CTA                                                      */
 /* ─────────────────────────────────────────────────────────────── */
 
-function FinalCTA() {
+function FinalBlessing() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.fromTo(".cta-el", { opacity: 0, y: 35 }, {
+    gsap.fromTo(".bl-el", { opacity: 0, y: 35 }, {
       opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
       scrollTrigger: { trigger: ref.current, start: "top 65%", toggleActions: "play none none none" },
     });
@@ -1135,44 +1333,65 @@ function FinalCTA() {
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden" style={{ backgroundColor: P.bg }}>
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(139,26,26,0.05), transparent 70%)` }} />
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 40% 30% at 50% 60%, rgba(212,175,55,0.03), transparent 60%)` }} />
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(139,26,26,0.06), transparent 70%)` }} />
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 40% 30% at 50% 60%, rgba(212,175,55,0.04), transparent 60%)` }} />
+
+      {/* Diya lights on sides */}
+      <div className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 flex flex-col items-center gap-10 opacity-60">
+        <DiyaFlame size="sm" />
+        <div className="w-px h-20" style={{ background: `linear-gradient(to bottom, ${P.gold}20, transparent)` }} />
+        <DiyaFlame size="sm" />
+      </div>
+      <div className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 flex flex-col items-center gap-10 opacity-60">
+        <DiyaFlame size="sm" />
+        <div className="w-px h-20" style={{ background: `linear-gradient(to bottom, ${P.gold}20, transparent)` }} />
+        <DiyaFlame size="sm" />
+      </div>
 
       <div className="relative z-10 text-center px-6">
-        <div className="cta-el"><MandalaOrnament className="mb-12" /></div>
-        <p className="cta-el text-[10px] uppercase tracking-[0.4em] font-body mb-4" style={{ color: `${P.gold}59` }}>
-          The Invitation
+        <div className="bl-el"><MandalaOrnament className="mb-12" /></div>
+        <p className="bl-el text-[10px] uppercase tracking-[0.4em] font-body mb-4" style={{ color: `${P.gold}70` }}>
+          The Sacred Invitation · निमंत्रण
         </p>
 
-        <div className="cta-el w-20 h-28 mx-auto mb-8">
-          <MughalArch />
+        <div className="bl-el w-24 h-36 mx-auto mb-8">
+          <JharokhaArch />
         </div>
 
-        <h2 className="cta-el font-serif italic text-4xl md:text-6xl lg:text-7xl mb-4 leading-[1.1]" style={{ color: `${P.cream}e6` }}>
+        <h2 className="bl-el font-serif italic text-4xl md:text-6xl lg:text-7xl mb-4 leading-[1.1]" style={{ color: `${P.cream}e6` }}>
           Be Part of Our
         </h2>
-        <h2 className="cta-el font-serif italic text-4xl md:text-6xl lg:text-7xl mb-8 leading-[1.1]" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", filter: "drop-shadow(0 0 30px rgba(212,175,55,0.15))" }}>
-          Royal Chapter
+        <h2 className="bl-el font-serif italic text-4xl md:text-6xl lg:text-7xl mb-8 pb-1 leading-[1.2]" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+          Sacred Beginning
         </h2>
 
-        <p className="cta-el font-body text-sm md:text-base max-w-lg mx-auto mb-6 leading-loose" style={{ color: `${P.cream}8c` }}>
-          Three days in the Pink City. Six chapters of celebration — from intimate courtyards
-          to gilded ceremonies, from sun-drenched afternoons to midnight revelry.
+        <p className="bl-el font-body text-sm md:text-base max-w-lg mx-auto mb-4 leading-loose" style={{ color: `${P.cream}99` }}>
+          Kindly grace us with your presence and bless our union.
+          Three days in the City of Lakes — six chapters of celebration,
+          from intimate courtyards to gilded ceremonies, from sacred
+          rituals at dawn to midnight revelry.
         </p>
-        <p className="cta-el font-serif italic text-sm max-w-md mx-auto mb-14" style={{ color: `${P.gold}73` }}>
+        <p className="bl-el font-serif italic text-sm max-w-md mx-auto mb-4" style={{ color: `${P.gold}80` }}>
           Every moment means more with you there.
         </p>
+        <p className="bl-el font-serif text-xs tracking-[0.2em] mb-14" style={{ color: `${P.gold}50` }}>
+          अतिथि देवो भव
+        </p>
 
-        <div className="cta-el flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/rsvp" className="px-12 py-4 text-[11px] uppercase tracking-[0.25em] font-body font-medium transition-all duration-700" style={{ color: P.bg, background: `linear-gradient(to right, ${P.gold}, #c9a030)`, boxShadow: "0 12px 32px rgba(212,175,55,0.2)" }}>
-            RSVP Now
+        {/* RSVP as envelope */}
+        <div className="bl-el flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link href="/rsvp" className="group relative px-12 py-4 text-[11px] uppercase tracking-[0.25em] font-body font-medium transition-all duration-700 overflow-hidden" style={{ color: P.bg, background: `linear-gradient(135deg, ${P.gold}, #c9a030, ${P.gold})`, boxShadow: `0 12px 32px rgba(212,175,55,0.2), inset 0 1px 0 rgba(255,255,255,0.15)` }}>
+            <span className="relative z-10 flex items-center gap-2">
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 1h12v8H1z" stroke={P.bg} strokeWidth="0.8" /><path d="M1 1l6 4 6-4" stroke={P.bg} strokeWidth="0.6" /></svg>
+              RSVP — Accept with Joy
+            </span>
           </Link>
-          <Link href="/itinerary" className="px-12 py-4 text-[11px] uppercase tracking-[0.25em] font-body transition-all duration-700" style={{ color: `${P.cream}80`, border: `1px solid ${P.cream}14` }}>
+          <Link href="/itinerary" className="px-12 py-4 text-[11px] uppercase tracking-[0.25em] font-body transition-all duration-700" style={{ color: `${P.cream}80`, border: `1px solid ${P.cream}18`, background: `linear-gradient(to bottom, ${P.gold}06, transparent)` }}>
             Full Itinerary
           </Link>
         </div>
 
-        <div className="cta-el"><Flourish className="mt-16" /></div>
+        <div className="bl-el"><Flourish className="mt-16" /></div>
       </div>
     </section>
   );
@@ -1187,20 +1406,20 @@ export default function LandingExperience() {
 
   return (
     <>
-      <CinematicLoader onComplete={() => setLoaded(true)} />
+      <SacredPrelude onComplete={() => setLoaded(true)} />
       <Hero loaded={loaded} />
-      <SectionTransition variant="arch" label="The Setting" />
+      <RitualTransition variant="lotus" />
       <RoyalPrologue />
-      <SectionTransition variant="lotus" label="Their Story" />
+      <RitualTransition variant="elephant" />
       <StoryQuote />
-      <SectionTransition variant="mandala" label="The Palace" />
+      <RitualTransition variant="mandala" />
       <VenueShowcase />
-      <SectionTransition variant="scroll" label="The Chapters" />
+      <RitualTransition variant="silk" />
       <ChapterGallery />
-      <SectionTransition variant="mandala" label="The Journey" />
+      <RitualTransition variant="mandala" />
       <RoyalTimeline />
-      <SectionTransition variant="lotus" label="अतिथि देवो भव" />
-      <FinalCTA />
+      <RitualTransition variant="lotus" />
+      <FinalBlessing />
     </>
   );
 }

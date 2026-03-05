@@ -58,6 +58,25 @@ export default function Footer() {
           {COUPLE.hashtag}
         </p>
 
+        {/* Awaiting presence */}
+        <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${P.gold}12`, background: `linear-gradient(165deg,${P.gold}05,transparent 40%,${P.gold}03)` }}>
+          <p className="text-[10px] uppercase tracking-[0.35em] mb-4 font-medium" style={{ color: `${P.gold}40` }}>Your Presence Matters</p>
+          <p className="font-serif text-lg md:text-xl leading-relaxed italic" style={{ color: `${P.cream}aa` }}>
+            The celebration is incomplete without you.
+          </p>
+          <p className="font-serif text-lg md:text-xl leading-relaxed italic mt-1" style={{ color: `${P.cream}aa` }}>
+            We eagerly await your presence.
+          </p>
+          <p className="mt-5 text-sm tracking-[0.08em]" style={{ color: `${P.gold}35` }}>
+            आपकी उपस्थिति हमारा सम्मान है
+          </p>
+          <div className="flex justify-center mt-6">
+            <Link href="/rsvp" className="inline-flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 rounded-sm hover:scale-105" style={{ backgroundColor: `${P.gold}10`, color: `${P.gold}80`, border: `1px solid ${P.gold}20` }}>
+              RSVP Now
+            </Link>
+          </div>
+        </div>
+
         {/* Nav links */}
         <div className="flex items-center justify-center gap-8 mb-10">
           {FOOTER_LINKS.map((link) => (

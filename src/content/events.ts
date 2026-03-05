@@ -5,9 +5,9 @@ export const COUPLE = {
   partner2: "Sanjana",
   hashtag: "#TarushAndSanjana",
   weddingDate: "2026-04-21",
-  location: "Jaipur, Rajasthan",
-  venue: "The Leela Palace, Jaipur",
-  tagline: "Different cities, different journeys — one decision.",
+  location: "Udaipur, Rajasthan",
+  venue: "The Leela Palace, Udaipur",
+  tagline: "Mumbai, Pune, London — different cities, one love story.",
 } as const;
 
 export const EVENTS: WeddingEvent[] = [
@@ -22,9 +22,9 @@ export const EVENTS: WeddingEvent[] = [
     day: "Sunday",
     time: "7:30 PM onwards",
     location: "The Grand Lawn",
-    venue: "The Leela Palace, Jaipur",
+    venue: "The Leela Palace, Udaipur",
     description:
-      "They grew up in Bombay, studied and travelled across London. He proposed in Turkey. Different cities, different journeys. The First Chapter marks this decision — not as a grand declaration, but as a clear, confident start where two individual paths align into one.",
+      "She grew up in Goregaon, he in Pune — both foodies, both dreamers. They first met in Mumbai before heading to London for their masters. What began as friendship became something neither expected. The First Chapter marks this decision — not as a grand declaration, but as a clear, confident start where two individual paths align into one.",
     longDescription:
       "From Dusk Till Dawn becomes the visual and emotional language of this beginning. As the sun sets over the Aravalli hills, the evening unfolds in warm ambers, deep wines, and candlelit golds. This is not just a welcome dinner — it is the opening scene, the first verse, the moment the story begins to be told aloud. Every detail, from the table settings to the twilight sky, speaks of transition — from separate lives to a shared narrative.",
     dressCode: {
@@ -44,12 +44,12 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#2d1b4e",
       gradientTo: "#0d0615",
     },
-    heroImage: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1740382242941-e3e2499b42d2?w=1920&q=80",
     galleryImages: [
-      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
-      "https://images.unsplash.com/photo-1470290378698-263fa7ca60ab?w=800&q=80",
-      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80",
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+      "https://images.unsplash.com/photo-1740382242941-e3e2499b42d2?w=800&q=80",
+      "https://images.unsplash.com/photo-1655106606422-d85ebbe60aaa?w=800&q=80",
+      "https://images.unsplash.com/photo-1696861679643-4f21bfba8fc3?w=800&q=80",
+      "https://images.unsplash.com/photo-1655106606763-dc1506c6c1e7?w=800&q=80",
     ],
   },
   {
@@ -63,7 +63,7 @@ export const EVENTS: WeddingEvent[] = [
     day: "Monday",
     time: "12:30 PM – 3:30 PM",
     location: "The Haveli Courtyard",
-    venue: "The Leela Palace, Jaipur",
+    venue: "The Leela Palace, Udaipur",
     description:
       "Inspired by the fresco-lined havelis of Rajasthan, this lunch reimagines the traditional courtyard through a contemporary lens. Traditional motifs meet soft stripes and clean silhouettes, creating a space that feels regal yet fresh.",
     longDescription:
@@ -85,12 +85,12 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#f5e6d3",
       gradientTo: "#e8ddd4",
     },
-    heroImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1761472606347-bfebc5a3e546?w=1920&q=80",
     galleryImages: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
-      "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80",
-      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80",
+      "https://images.unsplash.com/photo-1761472606347-bfebc5a3e546?w=800&q=80",
+      "https://images.unsplash.com/photo-1767066853020-f899c0863883?w=800&q=80",
+      "https://images.unsplash.com/photo-1724947052687-e580b3010aad?w=800&q=80",
+      "https://images.unsplash.com/photo-1655106606416-f65f790cff66?w=800&q=80",
     ],
   },
   {
@@ -104,7 +104,7 @@ export const EVENTS: WeddingEvent[] = [
     day: "Monday",
     time: "8:00 PM onwards",
     location: "The Grand Ballroom",
-    venue: "The Leela Palace, Jaipur",
+    venue: "The Leela Palace, Udaipur",
     description:
       "Inspired by the raw, wild energy of the venue, this Sangeet is what happens when a cathedral throws a party and no one stops it. Grand arches, dramatic height, clean symmetry — but inside that structure, the wild takes over.",
     longDescription:
@@ -126,12 +126,12 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#1a3a2a",
       gradientTo: "#0d2818",
     },
-    heroImage: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1640745690745-2b5a39796809?w=1920&q=80",
     galleryImages: [
-      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80",
-      "https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800&q=80",
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+      "https://images.unsplash.com/photo-1640745690745-2b5a39796809?w=800&q=80",
+      "https://images.unsplash.com/photo-1645264090488-a019de493023?w=800&q=80",
+      "https://images.unsplash.com/photo-1640745676611-bee05627a23c?w=800&q=80",
+      "https://images.unsplash.com/photo-1603909477416-3fc943f3e4d8?w=800&q=80",
     ],
   },
   {
@@ -145,11 +145,11 @@ export const EVENTS: WeddingEvent[] = [
     day: "Tuesday",
     time: "12:00 PM – 3:00 PM",
     location: "The Terrace Garden",
-    venue: "The Leela Palace, Jaipur",
+    venue: "The Leela Palace, Udaipur",
     description:
-      "Bombay was the beginning. Pune was the spark. London was the build. Little Venice was the shift. Cappadocia was the decision. A minimalist setting with subtle details that reflect their journey — as they begin a new one together.",
+      "Mumbai was the first meeting. Pune was where he grew up. London was where friendship became love. December 2023 was when the families came together. A minimalist setting with subtle details that reflect their journey — as they begin a new one together.",
     longDescription:
-      "This is the most personal chapter — an intimate lunch that maps their journey through cities and seasons. Each table represents a city that shaped them: the warmth of Bombay, the charm of Pune, the grey elegance of London, the quiet of Little Venice, the vastness of Cappadocia. The setting is deceptively simple — clean linen, warm sunlight, olive branches, and handwritten notes — but every detail carries weight. This is not décor. This is autobiography.",
+      "This is the most personal chapter — an intimate lunch that maps their journey through cities and seasons. Each table represents a chapter that shaped them: the warmth of Mumbai where they first met, the charm of Pune where he grew up, the grey elegance of London where friendship became love, and the joy of 2024 when everything fell beautifully into place. The setting is deceptively simple — clean linen, warm sunlight, olive branches, and handwritten notes — but every detail carries weight. This is not décor. This is autobiography.",
     dressCode: {
       title: "The Linen Collective",
       description: "Sun-kissed simplicity. Effortless, natural, warm.",
@@ -167,12 +167,12 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#ede4d4",
       gradientTo: "#e0d5c4",
     },
-    heroImage: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1724947052687-e580b3010aad?w=1920&q=80",
     galleryImages: [
-      "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=800&q=80",
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
-      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80",
-      "https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=800&q=80",
+      "https://images.unsplash.com/photo-1724947052687-e580b3010aad?w=800&q=80",
+      "https://images.unsplash.com/photo-1694366454450-7979697bab21?w=800&q=80",
+      "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?w=800&q=80",
+      "https://images.unsplash.com/photo-1566138977236-8d8a94824b19?w=800&q=80",
     ],
   },
   {
@@ -186,7 +186,7 @@ export const EVENTS: WeddingEvent[] = [
     day: "Tuesday",
     time: "6:00 PM onwards",
     location: "The Durbar Hall",
-    venue: "The Leela Palace, Jaipur",
+    venue: "The Leela Palace, Udaipur",
     description:
       "Inspired by two things deeply rooted in Indian weddings: Mughal court architecture and couture craftsmanship. Instead of static décor, the architecture becomes a canvas — heritage interpreted through technology.",
     longDescription:
@@ -208,12 +208,12 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#2e1212",
       gradientTo: "#1a0808",
     },
-    heroImage: "https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1771929836785-065bb7635053?w=1920&q=80",
     galleryImages: [
-      "https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=800&q=80",
-      "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=800&q=80",
-      "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=800&q=80",
-      "https://images.unsplash.com/photo-1609151376730-f246fea07beb?w=800&q=80",
+      "https://images.unsplash.com/photo-1771929836785-065bb7635053?w=800&q=80",
+      "https://images.unsplash.com/photo-1636227597176-c554bcbee419?w=800&q=80",
+      "https://images.unsplash.com/photo-1743684821666-05b9c5046937?w=800&q=80",
+      "https://images.unsplash.com/photo-1771992230867-6478af331c26?w=800&q=80",
     ],
   },
   {
@@ -227,7 +227,7 @@ export const EVENTS: WeddingEvent[] = [
     day: "Tuesday",
     time: "11:00 PM onwards",
     location: "The Underground",
-    venue: "The Leela Palace, Jaipur",
+    venue: "The Leela Palace, Udaipur",
     description:
       "Everyone's heard stories of an abandoned amusement park — but this is not your regular one. Imagine a lost amusement park but with a dark, surreal, and psychedelic twist. There's no script here — only the thrill of rebellion, the echoes of childhood, and the madness of letting go.",
     longDescription:
@@ -249,10 +249,10 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#1a0a2e",
       gradientTo: "#0f0a1a",
     },
-    heroImage: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&q=80",
     galleryImages: [
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
-      "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80",
       "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80",
       "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80",
     ],
@@ -289,24 +289,24 @@ export const FAQ_DATA = [
     answer: "We have a dedicated photography team capturing every moment. We kindly request an unplugged ceremony — please keep phones away during the wedding rituals. All other events are open for photos!",
   },
   {
-    question: "What's the weather like in Jaipur in April?",
-    answer: "Jaipur in April is warm (30-38°C / 86-100°F). We recommend light, breathable fabrics. All events are either indoors or in climate-controlled outdoor settings.",
+    question: "What's the weather like in Udaipur in April?",
+    answer: "Udaipur in April is warm (28-36°C / 82-97°F). The lakeside location offers a pleasant breeze. We recommend light, breathable fabrics. All events are either indoors or in climate-controlled outdoor settings.",
   },
 ];
 
 export const TRAVEL_INFO = {
-  airport: "Jaipur International Airport (JAI)",
-  distance: "Approximately 25 km from the venue",
+  airport: "Maharana Pratap Airport, Udaipur (UDR)",
+  distance: "Approximately 24 km from the venue",
   pickupNote: "Airport pickups will be arranged for all guests. Please share your flight details via the guest portal.",
   contacts: [
     { name: "Event Coordination", phone: "+91 98XXX XXXXX", role: "Envelop Events" },
     { name: "Travel Desk", phone: "+91 98XXX XXXXX", role: "Guest Logistics" },
-    { name: "Hotel Concierge", phone: "+91 98XXX XXXXX", role: "The Leela Palace" },
+    { name: "Hotel Concierge", phone: "+91 98XXX XXXXX", role: "The Leela Palace Udaipur" },
   ],
 };
 
 export const STAY_INFO = {
-  hotel: "The Leela Palace, Jaipur",
+  hotel: "The Leela Palace, Udaipur",
   checkIn: "19th April, 2026 — 2:00 PM",
   checkOut: "22nd April, 2026 — 12:00 PM",
   amenities: [

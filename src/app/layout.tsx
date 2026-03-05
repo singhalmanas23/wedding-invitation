@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -53,6 +54,7 @@ export default function RootLayout({
         className={`${playfairDisplay.variable} ${dmSans.variable} font-body antialiased overflow-x-hidden`}
         style={{ backgroundColor: "#1a0a0a", color: "#f5efe6" }}
       >
+        <ScrollToTop />
         {children}
       </body>
     </html>

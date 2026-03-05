@@ -148,11 +148,10 @@ function AtmosphereQuote({ event }: { event: WeddingEvent }) {
     const words = el.querySelectorAll(".atmo-word");
     gsap.fromTo(
       words,
-      { opacity: 0, y: 20, filter: "blur(4px)" },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
         duration: 0.6,
         stagger: 0.06,
         ease: "power3.out",
@@ -242,11 +241,10 @@ function StorySection({ event }: { event: WeddingEvent }) {
     paragraphEls.forEach((para) => {
       gsap.fromTo(
         para,
-        { opacity: 0, y: 40, filter: "blur(3px)" },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
@@ -507,7 +505,7 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div
-                className="absolute inset-0 mix-blend-overlay opacity-20"
+                className="absolute inset-0 opacity-20"
                 style={{
                   background: `linear-gradient(135deg, ${palette.accent}15, transparent 60%)`,
                 }}

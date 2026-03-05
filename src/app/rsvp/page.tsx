@@ -83,6 +83,8 @@ export default function RSVPPage() {
   const [form, setForm] = useState<RSVPFormData>(INITIAL_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const updateField = <K extends keyof RSVPFormData>(
@@ -108,7 +110,7 @@ export default function RSVPPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = rsvpSchema.safeParse(form);
 
@@ -129,9 +131,30 @@ export default function RSVPPage() {
       return;
     }
 
-    localStorage.setItem("rsvp", JSON.stringify(result.data));
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.data),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Failed to submit RSVP. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -146,58 +169,127 @@ export default function RSVPPage() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-center max-w-lg"
             >
+              {/* Diya SVG */}
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.6, type: "spring", stiffness: 200 }}
-                className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center"
-                style={{
-                  backgroundColor: `${P.gold}12`,
-                  border: `1px solid ${P.gold}30`,
-                }}
+                className="mx-auto mb-6"
               >
-                <motion.svg
-                  width="40" height="40" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                  strokeLinejoin="round" style={{ color: P.gold }}
-                >
-                  <motion.path
-                    d="M20 6 9 17l-5-5"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ delay: 0.5, duration: 0.6, ease: "easeInOut" }}
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto">
+                  <ellipse cx="40" cy="58" rx="22" ry="8" fill={`${P.gold}18`} stroke={`${P.gold}40`} strokeWidth="1" />
+                  <path d="M24 55 C24 45, 56 45, 56 55" fill={`${P.gold}12`} stroke={`${P.gold}50`} strokeWidth="1" />
+                  <path d="M28 48 C28 42, 52 42, 52 48" fill={`${P.gold}08`} stroke={`${P.gold}30`} strokeWidth="0.8" />
+                  <motion.g
+                    animate={{ y: [-1, 1, -1], scale: [1, 1.05, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ellipse cx="40" cy="32" rx="5" ry="12" fill="url(#flame-grad)" opacity="0.9" />
+                    <ellipse cx="40" cy="34" rx="3" ry="7" fill="url(#flame-inner)" opacity="0.8" />
+                  </motion.g>
+                  <motion.circle
+                    cx="40" cy="30" r="18"
+                    fill="none" stroke={`${P.gold}15`} strokeWidth="0.5"
+                    animate={{ r: [18, 28, 18], opacity: [0.3, 0, 0.3] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   />
-                </motion.svg>
+                  <defs>
+                    <radialGradient id="flame-grad" cx="50%" cy="70%" r="50%">
+                      <stop offset="0%" stopColor="#fff3c4" />
+                      <stop offset="40%" stopColor={P.gold} />
+                      <stop offset="100%" stopColor="#8b4513" stopOpacity="0" />
+                    </radialGradient>
+                    <radialGradient id="flame-inner" cx="50%" cy="60%" r="50%">
+                      <stop offset="0%" stopColor="#fffbe6" />
+                      <stop offset="100%" stopColor={P.gold} stopOpacity="0.3" />
+                    </radialGradient>
+                  </defs>
+                </svg>
               </motion.div>
+
+              {/* Sanskrit blessing */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="font-serif text-lg md:text-xl mb-2 italic"
+                style={{ color: `${P.gold}cc` }}
+              >
+                शुभं भवतु
+              </motion.p>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-[11px] uppercase tracking-[0.3em] font-body mb-4"
-                style={{ color: `${P.gold}99` }}
+                className="text-[10px] uppercase tracking-[0.4em] font-body mb-8"
+                style={{ color: `${P.gold}60` }}
               >
-                RSVP Confirmed
+                May auspiciousness prevail
               </motion.p>
+
+              {/* Decorative divider */}
+              <motion.div
+                initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+                className="flex items-center justify-center gap-3 mb-8"
+              >
+                <div className="h-px w-12" style={{ background: `linear-gradient(to right, transparent, ${P.gold}40)` }} />
+                <svg width="12" height="12" viewBox="0 0 12 12" fill={`${P.gold}60`}>
+                  <path d="M6 0 L7.5 4.5 L12 6 L7.5 7.5 L6 12 L4.5 7.5 L0 6 L4.5 4.5 Z" />
+                </svg>
+                <div className="h-px w-12" style={{ background: `linear-gradient(to left, transparent, ${P.gold}40)` }} />
+              </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className="font-serif text-4xl md:text-5xl mb-4"
+                transition={{ delay: 0.8 }}
+                className="font-serif text-3xl md:text-5xl mb-3"
                 style={{ color: P.cream }}
               >
-                Thank you, {form.name}!
+                {form.name},
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="font-body text-lg mb-10 leading-relaxed"
-                style={{ color: `${P.cream}80` }}
+                transition={{ delay: 0.9 }}
+                className="font-serif italic text-xl md:text-2xl mb-3"
+                style={{ color: `${P.cream}cc` }}
               >
-                We can&apos;t wait to celebrate with you
+                आपकी उपस्थिति हमारा सौभाग्य
               </motion.p>
 
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0 }}
+                className="font-body text-sm md:text-base mb-4 leading-relaxed"
+                style={{ color: `${P.cream}70` }}
+              >
+                Your presence is our blessing
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1 }}
+                className="font-body text-xs max-w-sm mx-auto mb-10 leading-relaxed"
+                style={{ color: `${P.cream}50` }}
+              >
+                We look forward to celebrating this beautiful occasion with you in Udaipur. Your love and blessings mean everything to us.
+              </motion.p>
+
+              {/* Decorative mandala ring */}
+              <motion.div
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                transition={{ delay: 1.2, duration: 1 }}
+                className="flex items-center justify-center gap-3 mb-10"
+              >
+                <div className="h-px w-16" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25)` }} />
+                <p className="text-[10px] tracking-[0.3em] font-body" style={{ color: `${P.gold}50` }}>
+                  तरुष & संजना
+                </p>
+                <div className="h-px w-16" style={{ background: `linear-gradient(to left, transparent, ${P.gold}25)` }} />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }}>
                 <Link
                   href="/"
                   className="inline-flex items-center gap-2 px-8 py-3 font-body text-sm uppercase tracking-[0.15em] transition-all duration-300"
@@ -506,16 +598,22 @@ export default function RSVPPage() {
                 {/* Submit */}
                 <div className="text-center pt-4">
                   <RoyalDivider className="mb-8" />
+                  {submitError && (
+                    <p className="mb-4 text-sm font-body px-4 py-3 rounded-sm" style={{ color: "#e57373", backgroundColor: "rgba(229,115,115,0.08)", border: "1px solid rgba(229,115,115,0.2)" }}>
+                      {submitError}
+                    </p>
+                  )}
                   <Button
                     type="submit"
-                    className="px-12 py-6 h-auto rounded-sm text-sm uppercase tracking-[0.2em] font-body font-medium transition-all duration-700 cursor-pointer"
+                    disabled={submitting}
+                    className="px-12 py-6 h-auto rounded-sm text-sm uppercase tracking-[0.2em] font-body font-medium transition-all duration-700 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                     style={{
                       color: P.bg,
                       background: `linear-gradient(to right, ${P.gold}, #c9a030)`,
                       boxShadow: `0 12px 32px rgba(212,175,55,0.2)`,
                     }}
                   >
-                    Send RSVP
+                    {submitting ? "Sending..." : "Send RSVP"}
                   </Button>
                   <p className="mt-4 text-xs font-body" style={{ color: `${P.cream}33` }}>
                     You can update your response anytime

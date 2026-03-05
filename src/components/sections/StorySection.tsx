@@ -38,7 +38,7 @@ export function StorySection() {
           style={{ scale: prefersReducedMotion ? 1 : imgScale }}
         >
           <Image
-            src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=1920&q=80"
+            src="https://images.unsplash.com/photo-1769183345247-fba7c42c991b?w=1920&q=80"
             alt=""
             fill
             className="object-cover"
@@ -84,16 +84,15 @@ export function StorySection() {
         {/* Editorial paragraph */}
         <FadeInView delay={0.36}>
           <p className="font-body text-sm md:text-[15px] text-stone-400/90 leading-[1.8] max-w-2xl mx-auto">
-            They grew up in Bombay, studied and travelled across London. He
-            proposed in Turkey. Different cities, different journeys — but
-            every chapter led to the same page. Now, against the backdrop of
-            Jaipur&apos;s timeless beauty, their story finds its next verse: a
+            She grew up in Goregaon, he in Pune — both foodies, both
+            dreamers. They first crossed paths in Mumbai before heading to
+            London for their masters. What started as friendship turned into
+            something neither expected. Now, against the backdrop of
+            Udaipur&apos;s timeless beauty, their story finds its grandest verse: a
             three-day celebration woven from six unforgettable chapters, each
             one a world of its own.
           </p>
         </FadeInView>
-
-        {/* Bottom ornament */}
         <FadeInView delay={0.48}>
           <div className="mt-14 text-amber-400/15 text-sm tracking-[0.6em] select-none">
             ─── ◆ ───
