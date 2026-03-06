@@ -402,7 +402,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=180%",
+          end: "+=15%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -424,7 +424,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
         0.15
       );
 
-      scrollTl.fromTo(".b1-content", { opacity: 0 }, { opacity: 1, duration: 0.06 }, 0.05);
+      scrollTl.fromTo(".b1-content", { opacity: 0.8 }, { opacity: 1, duration: 0.06 }, 0);
 
       /* ── Beat 2: Wild Takes Over — baroque projections + gold dust ── */
       scrollTl.fromTo(
@@ -471,7 +471,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "280vh" }}>
+    <section ref={wrapRef} style={{ height: "105vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         {/* Background — transitions through indigo → amethyst → midnight wine */}
         <div
@@ -584,7 +584,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
         <CornerFiligree accent={palette.accent} position="bottom-0 right-0 scale-[-1]" />
 
         {/* ── BEAT 1: Title + event info ── */}
-        <div className="b1-content absolute inset-0 flex flex-col items-center justify-center z-10 px-6 opacity-0">
+        <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
           <p className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}30, 0 2px 20px ${palette.background}` }}>
             रात्रि महोत्सव
           </p>
@@ -641,7 +641,7 @@ function CathedralQuote({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-10 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div className="absolute inset-0" style={{ background: `linear-gradient(180deg,${palette.background},${palette.muted}12,${palette.background})` }} />
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <GoldDivider accent={palette.accent} />
@@ -683,7 +683,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-3xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>The Story · कथा</p>
         {paragraphs.map((t, i) => (
@@ -719,7 +719,7 @@ function CathedralDressCode({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-28 md:py-40 px-6 overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="relative py-12 md:py-16 px-6 overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 70% 50% at 50% 40%,${palette.accent}06,transparent 70%)` }} />
       <div className="relative z-10 max-w-3xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-12 font-medium text-center" style={{ color: palette.accent }}>Attire · वेश विधान</p>
@@ -782,7 +782,7 @@ function CathedralGallery({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div className="max-w-6xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>Mood · माहौल</p>
         <div className="columns-2 md:columns-3 gap-3 md:gap-4 space-y-3 md:space-y-4">
@@ -812,7 +812,7 @@ function CathedralVenue({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>Venue · स्थान</p>
         <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-3" style={{ color: palette.foreground }}>{event.location}</h3>
@@ -883,7 +883,7 @@ export default function FourthChapterContent({ event }: ChapterProps) {
 
       {/* Chapter navigation */}
       <FadeInView>
-        <section className="py-20 md:py-28 px-6 border-t" style={{ borderColor: `${palette.foreground}10`, backgroundColor: palette.background }}>
+        <section className="py-8 md:py-10 px-6 border-t" style={{ borderColor: `${palette.foreground}10`, backgroundColor: palette.background }}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <Link href="/itinerary" className="inline-flex items-center gap-2 text-sm transition-all duration-300 hover:gap-3" style={{ color: `${palette.foreground}88` }}>
@@ -927,7 +927,7 @@ export default function FourthChapterContent({ event }: ChapterProps) {
       {/* Footer */}
       <footer className="relative" style={{ backgroundColor: palette.background, borderTop: `1px solid ${palette.accent}12` }}>
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,${palette.background})` }} />
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <GoldDivider accent={palette.accent} />
           <p className="font-serif text-sm mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>

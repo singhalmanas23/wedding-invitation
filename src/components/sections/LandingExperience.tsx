@@ -28,9 +28,9 @@ function rand(a: number, b: number = 0): number {
 }
 
 const DAYS = [
-  { day: 1, label: "Day One", date: "19th April", mood: "The Arrival", events: [EVENTS[0]] },
-  { day: 2, label: "Day Two", date: "20th April", mood: "The Celebration", events: [EVENTS[1], EVENTS[2]] },
-  { day: 3, label: "Day Three", date: "21st April", mood: "The Ceremony & Finale", events: [EVENTS[3], EVENTS[4], EVENTS[5]] },
+  { day: 0, label: "Pre-Party", date: "5th April", mood: "Noor Mahal Soirée", events: [EVENTS[0]] },
+  { day: 1, label: "Day One", date: "20th April", mood: "The Celebration", events: [EVENTS[1], EVENTS[2]] },
+  { day: 2, label: "Day Two", date: "21st April", mood: "The Ceremony & Finale", events: [EVENTS[3], EVENTS[4], EVENTS[5]] },
 ];
 
 /* ─────────────────────────────────────────────────────────────── */
@@ -288,7 +288,7 @@ function RitualTransition({ variant = "lotus" }: { variant?: "lotus" | "elephant
   }, { scope: ref });
 
   return (
-    <div ref={ref} className="relative py-4 md:py-6 overflow-hidden" style={{ backgroundColor: P.bg }} aria-hidden="true">
+    <div ref={ref} className="relative py-2 md:py-4 overflow-hidden" style={{ backgroundColor: P.bg }} aria-hidden="true">
       <div className="relative z-10 flex flex-col items-center">
         <div className="rt-line h-px w-12 md:w-20 origin-center mb-3" style={{ background: `linear-gradient(to right, transparent, ${P.gold}25, transparent)` }} />
 
@@ -674,17 +674,13 @@ function Hero({ loaded }: { loaded: boolean }) {
 
     tl.fromTo(".hero-scroll-ind", { opacity: 0 }, { opacity: 1, duration: 1 }, 3.0);
 
-    ScrollTrigger.create({
-      trigger: ref.current,
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.8,
-      onUpdate: (self) => {
-        const p = self.progress;
-        gsap.set(".hero-bg-layer", { scale: 1 + p * 0.15 });
-        gsap.set(".hero-content", { y: p * 150, opacity: Math.max(0, 1 - p * 1.6) });
-        gsap.set(".hero-frame", { opacity: Math.max(0, 1 - p * 2.5) });
-      },
+    gsap.to(".hero-content", {
+      y: 60, opacity: 0, ease: "none",
+      scrollTrigger: { trigger: ref.current, start: "70% top", end: "bottom top", scrub: 1 },
+    });
+    gsap.to(".hero-frame", {
+      opacity: 0, ease: "none",
+      scrollTrigger: { trigger: ref.current, start: "60% top", end: "bottom top", scrub: 1 },
     });
   }, { scope: ref, dependencies: [loaded] });
 
@@ -795,7 +791,7 @@ function Hero({ loaded }: { loaded: boolean }) {
         {/* Date + venue — brass plate style */}
         <div className="hero-fade space-y-2 animate-brass-pulse rounded px-8 py-4" style={{ border: `1px solid ${P.gold}18`, background: `linear-gradient(135deg, ${P.gold}06, transparent, ${P.gold}04)` }}>
           <p className="text-sm md:text-base uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}e6` }}>{formattedDate}</p>
-          <p className="text-xs uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}99` }}>The Leela Palace · {COUPLE.location}</p>
+          <p className="text-xs uppercase tracking-[0.3em] font-body" style={{ color: `${P.cream}99` }}>Fairmont Udaipur · {COUPLE.location}</p>
         </div>
 
         {/* CTAs — parchment & envelope styled */}
@@ -849,7 +845,7 @@ function RoyalPrologue() {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: P.bg }}>
+    <section ref={ref} className="relative py-12 md:py-16 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0">
         <Image src="https://images.unsplash.com/photo-1696861679643-4f21bfba8fc3?w=1920&q=80" alt="" fill className="object-cover opacity-[0.05]" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}e6, ${P.bg})` }} />
@@ -924,7 +920,7 @@ function StoryQuote() {
   const words = COUPLE.tagline.split(" ");
 
   return (
-    <section ref={ref} className="relative py-24 md:py-36 overflow-hidden" style={{ backgroundColor: P.bg }}>
+    <section ref={ref} className="relative py-10 md:py-14 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0">
         <Image src="https://images.unsplash.com/photo-1769183345247-fba7c42c991b?w=1920&q=80" alt="" fill className="object-cover opacity-[0.06]" sizes="100vw" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}cc, ${P.bg})` }} />
@@ -1024,7 +1020,7 @@ function VenueShowcase() {
   return (
     <section ref={ref} className="relative h-[85vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="vs-img absolute inset-[-10%]">
-        <Image src="https://images.unsplash.com/photo-1718797054890-e58742729f2d?w=1920&q=80" alt="The Leela Palace Udaipur" fill className="object-cover" sizes="100vw" />
+        <Image src="https://images.unsplash.com/photo-1718797054890-e58742729f2d?w=1920&q=80" alt="Fairmont Udaipur" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}99, transparent 30%, transparent 60%, ${P.bg}cc 85%, ${P.bg})` }} />
       </div>
@@ -1042,7 +1038,7 @@ function VenueShowcase() {
           The Palace · राजमहल
         </span>
         <h2 className="vs-fade font-serif text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight" style={{ color: P.cream, textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}>
-          The Leela Palace
+          Fairmont Udaipur
         </h2>
         <p className="vs-fade font-serif italic text-lg md:text-xl mb-2" style={{ color: `${P.gold}cc` }}>
           Where Royalty Meets Celebration
@@ -1072,17 +1068,18 @@ function VenueShowcase() {
 /*  Day Divider (for gallery)                                      */
 /* ─────────────────────────────────────────────────────────────── */
 
-function DayDivider({ day, date, mood }: { day: number; date: string; mood: string }) {
+function DayDivider({ day, label, date, mood }: { day: number; label: string; date: string; mood: string }) {
+  const archLabel = day === 0 ? "P" : String(day).padStart(2, "0");
   return (
-    <div className="flex-shrink-0 flex items-center justify-center" style={{ width: "28vw", height: "82vh" }}>
+    <div className="flex-shrink-0 flex items-center justify-center" style={{ width: "22vw", height: "82vh" }}>
       <div className="text-center">
         <div className="w-16 h-24 mx-auto mb-6">
           <MughalArch>
-            <span className="font-serif text-lg" style={{ color: `${P.gold}33` }}>{String(day).padStart(2, "0")}</span>
+            <span className="font-serif text-lg" style={{ color: `${P.gold}33` }}>{archLabel}</span>
           </MughalArch>
         </div>
         <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${P.cream}99` }}>
-          Day {day}
+          {label}
         </p>
         <p className="text-[10px] uppercase tracking-[0.25em] font-body mb-2" style={{ color: `${P.gold}40` }}>
           {date}
@@ -1111,9 +1108,8 @@ function ChapterStoryCard({ event }: { event: (typeof EVENTS)[0] }) {
           <Image src={event.heroImage} alt={event.title} fill className="object-cover" sizes="75vw" />
         </div>
 
-        <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition-colors duration-700" />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${event.palette.background}f5 0%, ${event.palette.background}cc 30%, ${event.palette.background}40 55%, transparent 75%)` }} />
-        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 70% 50% at 50% 100%, ${event.palette.primary}50, transparent 60%)` }} />
+        <div className="absolute inset-0 bg-black/45 group-hover:bg-black/55 transition-colors duration-700" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.2) 55%, transparent 75%)" }} />
 
         <div className="absolute top-6 right-6 md:top-8 md:right-8">
           <span className="font-serif text-[clamp(4rem,8vw,7rem)] leading-none select-none" style={{ color: `${accent}10` }}>
@@ -1136,7 +1132,7 @@ function ChapterStoryCard({ event }: { event: (typeof EVENTS)[0] }) {
             {event.subtitle}
           </p>
 
-          <p className="font-body text-xs md:text-sm leading-relaxed max-w-lg mb-5 line-clamp-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <p className="font-body text-xs md:text-sm leading-relaxed max-w-lg mb-5 line-clamp-3" style={{ color: "rgba(255,255,255,0.6)" }}>
             {preview}
           </p>
 
@@ -1208,10 +1204,10 @@ function ChapterGallery() {
         </span>
       </div>
 
-      <div ref={trackRef} className="flex items-center gap-4 md:gap-6 px-[10vw] h-screen" style={{ width: "fit-content" }}>
+      <div ref={trackRef} className="flex items-center gap-3 md:gap-4 px-[10vw] h-screen" style={{ width: "fit-content" }}>
         {DAYS.map((d) => (
           <Fragment key={`day-${d.day}`}>
-            <DayDivider day={d.day} date={d.date} mood={d.mood} />
+            <DayDivider day={d.day} label={d.label} date={d.date} mood={d.mood} />
             {d.events.map((event) => (
               <ChapterStoryCard key={event.slug} event={event} />
             ))}
@@ -1221,9 +1217,9 @@ function ChapterGallery() {
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 w-32 md:w-48">
         <div className="flex justify-between mb-2">
+          <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Pre-Party</span>
           <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Day 1</span>
           <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Day 2</span>
-          <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Day 3</span>
         </div>
         <div className="h-px" style={{ backgroundColor: `${P.cream}15` }}>
           <div ref={progressRef} className="h-full origin-left" style={{ backgroundColor: P.gold, transform: "scaleX(0)" }} />
@@ -1252,21 +1248,21 @@ function RoyalTimeline() {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-20 md:py-28" style={{ backgroundColor: P.bg, borderTop: `1px solid ${P.cream}08` }}>
+    <section ref={ref} className="relative py-12 md:py-16" style={{ backgroundColor: P.bg, borderTop: `1px solid ${P.cream}08` }}>
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.03), transparent 70%)` }} />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
-        <div className="text-center mb-20 tl-item">
+        <div className="text-center mb-14 tl-item">
           <MandalaOrnament className="mb-6" />
           <span className="text-[10px] uppercase tracking-[0.4em] font-body block mb-6" style={{ color: `${P.gold}59` }}>
             The Royal Itinerary
           </span>
           <h2 className="font-serif text-3xl md:text-5xl" style={{ color: `${P.cream}cc` }}>
-            Three Days of Celebration
+            Pre-Party in Pune · Then Udaipur
           </h2>
           <p className="font-body text-xs md:text-sm mt-4 max-w-md mx-auto leading-relaxed" style={{ color: `${P.cream}40` }}>
-            From the first toast at dusk to the last dance at dawn — a journey through
-            six worlds, each crafted to honour heritage, love, and the joy of togetherness.
+            The Noor Mahal Soirée in Pune kicks off the celebration. Then, the main events
+            unfold in Udaipur — six chapters crafted to honour heritage, love, and the joy of togetherness.
           </p>
         </div>
 
@@ -1275,8 +1271,8 @@ function RoyalTimeline() {
           <div className="tl-line absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 origin-top" style={{ background: `linear-gradient(to bottom, transparent, ${P.gold}30, ${P.gold}35, ${P.gold}30, transparent)`, boxShadow: `0 0 8px ${P.gold}15, 0 0 20px ${P.gold}08` }} />
 
           {DAYS.map((d, di) => (
-            <div key={di} className="tl-item relative mb-20 last:mb-0">
-              <div className="flex items-center justify-center mb-10">
+            <div key={di} className="tl-item relative mb-14 last:mb-0">
+              <div className="flex items-center justify-center mb-6">
                 <div className="h-px flex-1" style={{ background: `linear-gradient(to right, transparent, ${P.gold}12)` }} />
                 <div className="mx-6 text-center">
                   <div className="w-3 h-3 rotate-45 mx-auto mb-3" style={{ border: `1px solid ${P.gold}35`, backgroundColor: `${P.gold}0a` }} />
@@ -1332,7 +1328,7 @@ function FinalBlessing() {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden" style={{ backgroundColor: P.bg }}>
+    <section ref={ref} className="relative py-10 md:py-14 overflow-hidden" style={{ backgroundColor: P.bg }}>
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(139,26,26,0.06), transparent 70%)` }} />
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 40% 30% at 50% 60%, rgba(212,175,55,0.04), transparent 60%)` }} />
 
@@ -1402,11 +1398,21 @@ function FinalBlessing() {
 /* ─────────────────────────────────────────────────────────────── */
 
 export default function LandingExperience() {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("prelude-seen") === "1";
+    }
+    return false;
+  });
+
+  const handlePreludeComplete = useCallback(() => {
+    sessionStorage.setItem("prelude-seen", "1");
+    setLoaded(true);
+  }, []);
 
   return (
     <>
-      <SacredPrelude onComplete={() => setLoaded(true)} />
+      {!loaded && <SacredPrelude onComplete={handlePreludeComplete} />}
       <Hero loaded={loaded} />
       <RitualTransition variant="lotus" />
       <RoyalPrologue />

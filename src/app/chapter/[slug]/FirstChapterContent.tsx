@@ -321,8 +321,9 @@ function RoyalProclamationIntro({
     return () => clearTimeout(t);
   }, [onComplete]);
 
-  const hi = "राज तिलक संध्या";
-  const en = "The Royal Proclamation";
+  const isPreParty = event.slug === "pre-party";
+  const hi = isPreParty ? "नूर महल" : "राज तिलक संध्या";
+  const en = isPreParty ? "Noor Mahal Soirée" : "The Royal Proclamation";
 
   return (
     <div
@@ -400,7 +401,7 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=180%",
+          end: "+=15%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -426,16 +427,16 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
 
       scrollTl.fromTo(
         pin.querySelectorAll(".h-line"),
-        { opacity: 0, y: 18 },
+        { opacity: 0.6, y: 8 },
         { opacity: 1, y: 0, stagger: 0.035, duration: 0.08 },
-        0.05
+        0
       );
 
       scrollTl.fromTo(
         pin.querySelectorAll(".h-dec"),
-        { opacity: 0, scale: 0.82 },
+        { opacity: 0.7, scale: 0.95 },
         { opacity: 1, scale: 1, stagger: 0.05, duration: 0.1 },
-        0.2
+        0.05
       );
 
       scrollTl.fromTo(
@@ -462,17 +463,27 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
     { scope: wrapRef }
   );
 
-  const narrative = [
-    "As the sun sets over Lake Pichola,",
-    "the evening unfolds in warm ambers,",
-    "deep wines, and candlelit golds.",
-    "This is not just a welcome dinner —",
-    "it is the opening scene, the first verse,",
-    "the moment the story begins.",
-  ];
+  const isPreParty = event.slug === "pre-party";
+  const narrative = isPreParty
+    ? [
+        "As families gather in Pune,",
+        "the Noor Mahal Soirée unfolds in",
+        "cascading florals, antique gold,",
+        "and projection-mapped grandeur.",
+        "This is the pre-party reception —",
+        "the opening act before Udaipur.",
+      ]
+    : [
+        "As the sun sets over Lake Pichola,",
+        "the evening unfolds in warm ambers,",
+        "deep wines, and candlelit golds.",
+        "This is not just a welcome dinner —",
+        "it is the opening scene, the first verse,",
+        "the moment the story begins.",
+      ];
 
   return (
-    <section ref={wrapRef} style={{ height: "280vh" }}>
+    <section ref={wrapRef} style={{ height: "105vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         {/* Dusk-to-night gradient layer */}
         <div
@@ -551,30 +562,30 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
         <PalaceFacadePattern accent={palette.accent} />
 
         {/* ── Staged content reveal ── */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
           <h1
-            className="h-hindi font-hindi font-serif text-4xl md:text-6xl lg:text-7xl mb-4"
+            className="h-hindi font-hindi font-serif text-3xl md:text-5xl lg:text-6xl mb-3"
             style={{
               color: palette.accent,
               textShadow: `0 0 40px ${palette.accent}35`,
             }}
           >
-            राज तिलक संध्या
+            {isPreParty ? "नूर महल सोइरी" : "राज तिलक संध्या"}
           </h1>
 
           <h2
-            className="h-eng font-serif text-lg md:text-2xl uppercase tracking-[0.3em] mb-10 font-light"
+            className="h-eng font-serif text-lg md:text-2xl uppercase tracking-[0.3em] mb-6 font-light"
             style={{ color: `${palette.foreground}cc` }}
           >
-            The Royal Proclamation
+            {isPreParty ? "Pre-Party Reception" : "The Royal Proclamation"}
           </h2>
 
-          <div className="max-w-xl text-center space-y-1.5 mb-12">
+          <div className="max-w-xl text-center space-y-1.5 mb-8">
             {narrative.map((line, i) => (
               <p
                 key={i}
-                className="h-line font-serif text-[15px] md:text-lg italic leading-relaxed opacity-0"
-                style={{ color: `${palette.foreground}70` }}
+                className="h-line font-serif text-[15px] md:text-lg italic leading-relaxed"
+                style={{ color: `${palette.foreground}88` }}
               >
                 {line}
               </p>
@@ -587,7 +598,7 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
               { icon: Clock, label: event.time },
               { icon: MapPin, label: event.location },
             ].map(({ icon: Icon, label }, i) => (
-              <div key={label} className="h-dec text-center opacity-0">
+              <div key={label} className="h-dec text-center">
                 <Icon size={16} style={{ color: palette.accent }} className="mx-auto mb-1.5" />
                 <p
                   className="text-[11px] uppercase tracking-[0.15em]"
@@ -653,7 +664,7 @@ function AtmosphereQuote({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 relative overflow-hidden">
+    <section ref={ref} className="py-8 md:py-10 px-6 relative overflow-hidden">
       <div
         className="absolute inset-0"
         style={{
@@ -727,7 +738,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative">
+    <section ref={ref} className="py-8 md:py-12 px-6 relative">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -799,7 +810,7 @@ function RoyalDressCode({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="relative py-28 md:py-40 px-6 overflow-hidden">
+    <section ref={ref} className="relative py-12 md:py-16 px-6 overflow-hidden">
       {/* Warm ambient glow */}
       <div
         className="absolute inset-0"
@@ -964,7 +975,9 @@ function RoyalDressCode({ event }: { event: WeddingEvent }) {
 function ImmersiveGallery({ event }: { event: WeddingEvent }) {
   const { palette, galleryImages } = event;
   const ref = useRef<HTMLDivElement>(null);
-  const heights = [380, 260, 300, 340];
+  const heights = event.slug === "pre-party"
+    ? [380, 300, 340, 280, 320, 360, 300, 340]
+    : [380, 260, 300, 340];
 
   useGSAP(
     () => {
@@ -988,7 +1001,7 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative">
+    <section ref={ref} className="py-8 md:py-12 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <p
           className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium"
@@ -1049,7 +1062,7 @@ function VenueSection({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative overflow-hidden">
+    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -1206,7 +1219,7 @@ export default function FirstChapterContent({ event }: ChapterProps) {
 
       <FadeInView>
         <section
-          className="py-20 md:py-28 px-6 border-t"
+          className="py-8 md:py-10 px-6 border-t"
           style={{ borderColor: `${palette.foreground}10` }}
         >
           <div className="max-w-5xl mx-auto">
@@ -1336,7 +1349,7 @@ export default function FirstChapterContent({ event }: ChapterProps) {
             background: `linear-gradient(to bottom, transparent, ${palette.background})`,
           }}
         />
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-10 md:py-16 text-center">
           <div className="flex justify-center mb-8">
             <svg viewBox="0 0 200 120" className="w-24 md:w-32 h-auto" fill="none" style={{ opacity: 0.1 }}>
               <path d="M20 120 V55 Q20 10 100 4 Q180 10 180 55 V120" stroke={palette.accent} strokeWidth="0.8" />

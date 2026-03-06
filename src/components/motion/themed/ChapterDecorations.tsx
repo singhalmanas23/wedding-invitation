@@ -812,6 +812,10 @@ function CeremonyStoryAccent({ palette }: DecorationProps) {
    ════════════════════════════════════════════════════════════════════ */
 
 const CULTURAL_HEADERS: Record<string, { text: string; script?: string }> = {
+  "pre-party": {
+    text: "Where Pune meets palatial grandeur",
+    script: "नूर महल",
+  },
   "first-chapter": {
     text: "Where sunset meets the start of forever",
     script: "शुभारम्भ",
@@ -892,7 +896,7 @@ function EdgeOrnaments({ slug, palette }: { slug: string; palette: ChapterPalett
     );
   }
 
-  if (slug === "first-chapter") {
+  if (slug === "first-chapter" || slug === "pre-party") {
     return (
       <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-[1]">
         <div className="absolute left-0 top-0 w-px h-full" style={{ background: `linear-gradient(to bottom, transparent 10%, ${palette.accent}08 50%, transparent 90%)` }} />
@@ -931,7 +935,7 @@ function EnvironmentFrame({ slug, palette }: { slug: string; palette: ChapterPal
   const reduced = useReducedMotion();
   if (reduced) return null;
 
-  const borderColor = slug === "royal-court" || slug === "first-chapter"
+  const borderColor = slug === "royal-court" || slug === "first-chapter" || slug === "pre-party"
     ? palette.secondary || palette.accent
     : palette.accent;
 
@@ -985,6 +989,12 @@ export interface ChapterDecorPack {
 }
 
 const DECOR_MAP: Record<string, ChapterDecorPack> = {
+  "pre-party": {
+    HeroDecoration: DuskSunsetHero,
+    SectionDivider: DuskDivider,
+    StoryAccent: DuskStoryAccent,
+    culturalHeader: CULTURAL_HEADERS["pre-party"],
+  },
   "first-chapter": {
     HeroDecoration: DuskSunsetHero,
     SectionDivider: DuskDivider,

@@ -60,6 +60,7 @@ function parseEventTime(time: string): { start: string; end: string } {
 }
 
 const DATE_MAP: Record<string, string> = {
+  "Apr 5": "20260405",
   "Apr 19": "20260419",
   "Apr 20": "20260420",
   "Apr 21": "20260421",
@@ -160,9 +161,9 @@ export default function ItineraryContent() {
       <Navbar />
 
       <RoyalPageHero
-        label="Three Days of Celebration"
+        label="Pre-Party · Pune · Then Udaipur"
         title="The Itinerary"
-        subtitle="Your guide to three days of celebration"
+        subtitle="Pre-party in Pune, then the main celebration in Udaipur"
       />
 
       {/* Main layout */}

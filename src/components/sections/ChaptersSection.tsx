@@ -27,7 +27,7 @@ export function ChaptersSection() {
         <FadeInView>
           <SectionHeading
             title="The Chapters"
-            subtitle="Six events. Six worlds. One celebration."
+            subtitle="Seven chapters. From Pune to Udaipur. One celebration."
           />
         </FadeInView>
 

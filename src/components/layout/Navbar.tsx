@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { COUPLE } from "@/content/events";
+import { ChevronDown } from "lucide-react";
+import { COUPLE, EVENTS } from "@/content/events";
 import { P } from "@/components/shared/RoyalPageLayout";
 
 const NAV_LINKS = [
@@ -14,6 +15,9 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [chaptersOpen, setChaptersOpen] = useState(false);
+  const [chaptersHover, setChaptersHover] = useState(false);
+  const chaptersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -26,6 +30,7 @@ export default function Navbar() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      setChaptersOpen(false);
     }
     return () => {
       document.body.style.overflow = "";
@@ -60,6 +65,62 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-2">
+            {/* Chapters dropdown */}
+            <div
+              ref={chaptersRef}
+              className="relative"
+              onMouseEnter={() => setChaptersHover(true)}
+              onMouseLeave={() => setChaptersHover(false)}
+            >
+              <button
+                className="text-[11px] uppercase tracking-[0.2em] font-body transition-colors duration-300 px-4 py-2 flex items-center gap-1"
+                style={{ color: chaptersHover ? `${P.gold}cc` : `${P.cream}73` }}
+              >
+                Chapters
+                <ChevronDown
+                  size={12}
+                  className={`transition-transform duration-200 ${chaptersHover ? "rotate-180" : ""}`}
+                />
+              </button>
+              <AnimatePresence>
+                {chaptersHover && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 pt-2 min-w-[220px]"
+                  >
+                    <div
+                      className="rounded-sm py-2 overflow-hidden"
+                      style={{
+                        backgroundColor: `${P.bg}f5`,
+                        border: `1px solid ${P.gold}12`,
+                        boxShadow: "0 12px 40px rgba(0,0,0,0.4)",
+                      }}
+                    >
+                      {EVENTS.map((event) => (
+                        <Link
+                          key={event.slug}
+                          href={`/chapter/${event.slug}`}
+                          className="block px-4 py-3 text-left text-sm transition-colors duration-200 hover:bg-white/5"
+                          style={{ color: `${P.cream}cc` }}
+                        >
+                          <span
+                            className="text-[10px] uppercase tracking-wider block mb-0.5"
+                            style={{ color: `${P.cream}50` }}
+                          >
+                            Ch. {String(event.chapterNumber).padStart(2, "0")} · {event.dateShort}
+                          </span>
+                          <span className="font-serif">{event.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            <span className="w-0.5 h-0.5 rounded-full" style={{ backgroundColor: `${P.gold}30` }} />
             {NAV_LINKS.map((link, i) => (
               <span key={link.href} className="flex items-center">
                 <Link
@@ -146,6 +207,56 @@ export default function Navbar() {
               </svg>
             </div>
 
+            {/* Chapters expandable */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ delay: 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-center gap-4"
+            >
+              <button
+                onClick={() => setChaptersOpen(!chaptersOpen)}
+                className="font-serif text-3xl transition-colors duration-300 flex items-center gap-2"
+                style={{ color: `${P.cream}cc` }}
+              >
+                Chapters
+                <ChevronDown
+                  size={24}
+                  className={`transition-transform duration-200 ${chaptersOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <AnimatePresence>
+                {chaptersOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col gap-2 overflow-hidden"
+                  >
+                    {EVENTS.map((event, i) => (
+                      <Link
+                        key={event.slug}
+                        href={`/chapter/${event.slug}`}
+                        onClick={() => setMobileOpen(false)}
+                        className="font-serif text-lg text-center py-2 px-6 rounded-sm transition-colors"
+                        style={{
+                          color: `${P.cream}99`,
+                          backgroundColor: `${P.gold}08`,
+                          border: `1px solid ${P.gold}12`,
+                        }}
+                      >
+                        <span className="block text-[10px] uppercase tracking-wider mb-1" style={{ color: `${P.cream}50` }}>
+                          {event.dateShort} · Ch. {event.chapterNumber}
+                        </span>
+                        {event.title}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
             {NAV_LINKS.map((link, i) => (
               <motion.div
                 key={link.href}
@@ -153,7 +264,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{
-                  delay: i * 0.08 + 0.1,
+                  delay: (i + 2) * 0.08 + 0.1,
                   duration: 0.4,
                   ease: [0.16, 1, 0.3, 1],
                 }}

@@ -365,7 +365,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=180%",
+          end: "+=15%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -381,7 +381,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
         0.02
       );
 
-      scrollTl.fromTo(".b1-content", { opacity: 0 }, { opacity: 1, duration: 0.08 }, 0.05);
+      scrollTl.fromTo(".b1-content", { opacity: 0.8 }, { opacity: 1, duration: 0.08 }, 0);
 
       scrollTl.fromTo(
         ".world-bg",
@@ -434,7 +434,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "280vh" }}>
+    <section ref={wrapRef} style={{ height: "105vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         <div
           className="world-bg absolute inset-0"
@@ -479,7 +479,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
         </div>
 
         {/* ── CONTENT: Title + narrative + journey ── */}
-        <div className="b1-content absolute inset-0 flex flex-col items-center justify-center z-10 px-6 opacity-0">
+        <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
           <div className="mb-2">
             <LinenCanopyStripes accent={palette.accent} />
           </div>
@@ -562,7 +562,7 @@ function WorldQuote({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 relative overflow-hidden" style={{ backgroundColor: "#c8b89c" }}>
+    <section ref={ref} className="py-8 md:py-10 px-6 relative overflow-hidden" style={{ backgroundColor: "#c8b89c" }}>
       <div className="absolute inset-0" style={{ background: `linear-gradient(180deg,#c8b89c,#c0b09020,#c8b89c)` }} />
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <LotusDivider accent={palette.accent} />
@@ -606,7 +606,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative" style={{ backgroundColor: "#cabb9e" }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: "#cabb9e" }}>
       <div className="relative z-10 max-w-3xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: "#5a4530" }}>The Story · कथा</p>
         {paragraphs.map((t, i) => (
@@ -689,7 +689,7 @@ function JourneySection({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative overflow-hidden" style={{ backgroundColor: "#c5b598" }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden" style={{ backgroundColor: "#c5b598" }}>
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 70% 40% at 50% 50%,${palette.accent}10,transparent 70%)` }} />
       <div className="relative z-10 max-w-4xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium text-center" style={{ color: "#5a4530" }}>
@@ -740,7 +740,7 @@ function WorldDressCode({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-28 md:py-40 px-6 overflow-hidden" style={{ backgroundColor: "#cabb9e" }}>
+    <section ref={ref} className="relative py-12 md:py-16 px-6 overflow-hidden" style={{ backgroundColor: "#cabb9e" }}>
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 50% at 50% 40%,${palette.accent}08,transparent 70%)` }} />
       <div className="relative z-10 max-w-3xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-12 font-medium text-center" style={{ color: "#5a4530" }}>Attire · वेश विधान</p>
@@ -807,7 +807,7 @@ function WorldGallery({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative" style={{ backgroundColor: "#c8b89c" }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: "#c8b89c" }}>
       <div className="max-w-6xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: "#5a4530" }}>Mood · माहौल</p>
         <div className="columns-2 md:columns-3 gap-3 md:gap-4 space-y-3 md:space-y-4">
@@ -837,7 +837,7 @@ function WorldVenue({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative overflow-hidden" style={{ backgroundColor: "#cabb9e" }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden" style={{ backgroundColor: "#cabb9e" }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: "#5a4530" }}>Venue · स्थान</p>
         <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-3" style={{ color: `${palette.foreground}ee` }}>{event.location}</h3>
@@ -910,7 +910,7 @@ export default function FifthChapterContent({ event }: ChapterProps) {
 
       {/* Chapter navigation */}
       <FadeInView>
-        <section className="py-20 md:py-28 px-6 border-t" style={{ borderColor: `${palette.foreground}12`, backgroundColor: "#c8b89c" }}>
+        <section className="py-8 md:py-10 px-6 border-t" style={{ borderColor: `${palette.foreground}12`, backgroundColor: "#c8b89c" }}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <Link href="/itinerary" className="inline-flex items-center gap-2 text-sm transition-all duration-300 hover:gap-3" style={{ color: `${palette.foreground}88` }}>
@@ -954,7 +954,7 @@ export default function FifthChapterContent({ event }: ChapterProps) {
       {/* Footer */}
       <footer className="relative" style={{ backgroundColor: "#b8a888", borderTop: `1px solid ${palette.accent}20` }}>
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,#c8b89c,#b8a888)` }} />
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <LotusDivider accent={palette.accent} />
           <p className="font-serif text-sm mb-4 mt-6" style={{ color: "#5a4530" }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}ee` }}>

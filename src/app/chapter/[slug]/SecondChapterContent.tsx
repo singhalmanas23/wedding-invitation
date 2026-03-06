@@ -393,7 +393,7 @@ function CourtyardHero({ event }: { event: WeddingEvent }) {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          end: "+=180%",
+          end: "+=15%",
           pin: pin,
           scrub: 1.2,
           anticipatePin: 1,
@@ -412,16 +412,16 @@ function CourtyardHero({ event }: { event: WeddingEvent }) {
 
       scrollTl.fromTo(
         pin.querySelectorAll(".h-line"),
-        { opacity: 0, y: 16 },
+        { opacity: 0.7, y: 8 },
         { opacity: 1, y: 0, stagger: 0.03, duration: 0.07 },
-        0.03
+        0
       );
 
       scrollTl.fromTo(
         pin.querySelectorAll(".h-dec"),
-        { opacity: 0, scale: 0.88 },
+        { opacity: 0.7, scale: 0.95 },
         { opacity: 1, scale: 1, stagger: 0.04, duration: 0.1 },
-        0.12
+        0.05
       );
 
       scrollTl.fromTo(
@@ -463,7 +463,7 @@ function CourtyardHero({ event }: { event: WeddingEvent }) {
   ];
 
   return (
-    <section ref={wrapRef} style={{ height: "280vh" }}>
+    <section ref={wrapRef} style={{ height: "105vh" }}>
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         <div
           className="hero-bg-light absolute inset-0"
@@ -505,7 +505,7 @@ function CourtyardHero({ event }: { event: WeddingEvent }) {
         </svg>
 
         {/* Hero content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
           <h1
             className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.03em] mb-3"
             style={{ color: palette.foreground }}
@@ -529,7 +529,7 @@ function CourtyardHero({ event }: { event: WeddingEvent }) {
             {narrative.map((line, i) => (
               <p
                 key={i}
-                className="h-line font-serif text-[15px] md:text-lg italic leading-relaxed opacity-0"
+                className="h-line font-serif text-[15px] md:text-lg italic leading-relaxed"
                 style={{ color: `${palette.foreground}bb` }}
               >
                 {line}
@@ -624,7 +624,7 @@ function CourtyardQuote({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-10 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div
         className="absolute inset-0"
         style={{ background: `linear-gradient(180deg,${palette.background},${palette.muted}20,${palette.background})` }}
@@ -681,7 +681,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: `radial-gradient(ellipse 80% 40% at 50% 50%,${palette.accent}04,transparent 70%)` }}
@@ -729,7 +729,7 @@ function CourtyardDressCode({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="relative py-28 md:py-40 px-6 overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="relative py-12 md:py-16 px-6 overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div
         className="absolute inset-0"
         style={{ background: `radial-gradient(ellipse 70% 50% at 50% 40%,${palette.primary}08,transparent 70%)` }}
@@ -830,7 +830,7 @@ function CourtyardGallery({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div className="max-w-6xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>
           Mood · माहौल
@@ -877,7 +877,7 @@ function CourtyardVenue({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>
           Venue · स्थान
@@ -970,7 +970,7 @@ export default function SecondChapterContent({ event }: ChapterProps) {
       {/* Chapter navigation */}
       <FadeInView>
         <section
-          className="py-20 md:py-28 px-6 border-t"
+          className="py-8 md:py-10 px-6 border-t"
           style={{ borderColor: `${palette.foreground}08`, backgroundColor: palette.background }}
         >
           <div className="max-w-5xl mx-auto">
@@ -1033,7 +1033,7 @@ export default function SecondChapterContent({ event }: ChapterProps) {
         className="relative"
         style={{ backgroundColor: "#d8d0c4", borderTop: `1px solid ${palette.accent}20` }}
       >
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <div className="flex justify-center mb-6">
             <OrnamentalDivider accent={palette.accent} />
           </div>

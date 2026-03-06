@@ -473,9 +473,9 @@ const TRANSPORT_MODES = [
     icon: "M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.7-5.4A1 1 0 0014.4 4H9.6a1 1 0 00-.9.6L6 10l-2.5 1.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2",
     extra: "M7 17a2 2 0 100-4 2 2 0 000 4zM17 17a2 2 0 100-4 2 2 0 000 4z",
     title: "Self-Drive / Private Car",
-    directions: "Take NH-48 from Maharana Pratap Airport towards the city centre. The Leela Palace is approximately a 30-minute drive along Lake Pichola. Follow signs for the lakefront — the hotel entrance will be on your left.",
+    directions: "Take NH-48 from Maharana Pratap Airport towards the city centre. Fairmont Udaipur is approximately a 30-minute drive. Follow signs for the resort — the hotel entrance will be clearly marked.",
     eta: "30–40 min",
-    mapQuery: "The+Leela+Palace+Udaipur",
+    mapQuery: "Fairmont+Udaipur",
   },
   {
     id: "pickup",
@@ -485,7 +485,7 @@ const TRANSPORT_MODES = [
     title: "Complimentary Chauffeur",
     directions: "Share your flight details via the guest portal or RSVP page. A dedicated driver with a name placard will meet you at the arrivals hall. Luxury sedans are arranged for all guests.",
     eta: "Door-to-door",
-    mapQuery: "Maharana+Pratap+Airport+Udaipur+to+The+Leela+Palace+Udaipur",
+    mapQuery: "Maharana+Pratap+Airport+Udaipur+to+Fairmont+Udaipur",
   },
   {
     id: "taxi",
@@ -493,9 +493,9 @@ const TRANSPORT_MODES = [
     icon: "M5 17H3a1 1 0 01-1-1v-3.28a1 1 0 01.684-.948l1.923-.641L7.2 5.6A1 1 0 018.1 5h7.8a1 1 0 01.9.6l2.593 5.512 1.923.641A1 1 0 0122 12.72V16a1 1 0 01-1 1h-2",
     extra: "M7 17a2 2 0 100-4 2 2 0 000 4zM17 17a2 2 0 100-4 2 2 0 000 4z",
     title: "Pre-Paid Taxi / Ride-Hail",
-    directions: "Pre-paid taxi counters are available at arrivals. Ask for The Leela Palace, Udaipur. Uber and Ola are also available — select 'Premium' or 'Sedan' for comfort.",
+    directions: "Pre-paid taxi counters are available at arrivals. Ask for Fairmont Udaipur. Uber and Ola are also available — select 'Premium' or 'Sedan' for comfort.",
     eta: "35–50 min",
-    mapQuery: "Udaipur+Airport+to+Leela+Palace+Udaipur",
+    mapQuery: "Udaipur+Airport+to+Fairmont+Udaipur",
   },
 ];
 

@@ -187,7 +187,7 @@ function AtmosphereQuote({ event }: { event: WeddingEvent }) {
   const quoteWords = decor.culturalHeader.text.split(" ");
 
   return (
-    <section ref={ref} className="py-20 md:py-32 px-6 relative overflow-hidden">
+    <section ref={ref} className="py-8 md:py-10 px-6 relative overflow-hidden">
       <div
         className="absolute inset-0"
         style={{
@@ -258,7 +258,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative">
+    <section ref={ref} className="py-8 md:py-12 px-6 relative">
       <decor.StoryAccent palette={palette} />
       <div className="relative z-10 max-w-3xl mx-auto">
         <div className="story-label">
@@ -322,7 +322,7 @@ function ImmersiveDressCode({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="relative py-24 md:py-36 px-6 overflow-hidden">
+    <section ref={ref} className="relative py-10 md:py-14 px-6 overflow-hidden">
       <div
         className="absolute inset-0"
         style={{
@@ -428,6 +428,7 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
 
   const frameStyles = useMemo(() => {
     const base: Record<string, string> = {
+      "pre-party": "rounded-xl",
       "first-chapter": "rounded-xl",
       "courtyard-edit": "rounded-[24px]",
       "midnight-cathedral": "rounded-none",
@@ -440,6 +441,7 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
 
   const heights = useMemo(() => {
     const patterns: Record<string, number[]> = {
+      "pre-party": [340, 300, 360, 280, 320, 340, 300, 360],
       "first-chapter": [380, 260, 300, 340],
       "courtyard-edit": [320, 380, 260, 300],
       "midnight-cathedral": [400, 280, 340, 260],
@@ -475,7 +477,7 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative">
+    <section ref={ref} className="py-8 md:py-12 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <p
           className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium"
@@ -551,7 +553,7 @@ function VenueSection({ event }: { event: WeddingEvent }) {
   }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-24 md:py-36 px-6 relative overflow-hidden">
+    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -721,7 +723,7 @@ export default function ChapterContent({ event }: ChapterContentProps) {
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-[85vh] flex items-center justify-center overflow-hidden"
       >
         <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
           <Image
@@ -912,7 +914,7 @@ export default function ChapterContent({ event }: ChapterContentProps) {
       {/* ───────────────────── Chapter Navigation ───────────────────── */}
       <FadeInView>
         <section
-          className="py-20 md:py-28 px-6 border-t"
+          className="py-8 md:py-10 px-6 border-t"
           style={{ borderColor: `${palette.foreground}10` }}
         >
           <div className="max-w-5xl mx-auto">

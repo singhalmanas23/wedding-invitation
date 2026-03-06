@@ -81,7 +81,7 @@ export const COUPLE = {
   hashtag: "#TanviAndSahil",
   weddingDate: "2026-04-21",
   location: "Jaipur, Rajasthan",
-  venue: "The Leela Palace, Jaipur",
+  venue: "Fairmont Udaipur",
   tagline: "Different cities, different journeys — one decision.",
 };
 

@@ -48,7 +48,7 @@ export default async function ChapterPage({
     notFound();
   }
 
-  if (slug === "first-chapter") {
+  if (slug === "pre-party") {
     return <FirstChapterContent event={event} />;
   }
 
