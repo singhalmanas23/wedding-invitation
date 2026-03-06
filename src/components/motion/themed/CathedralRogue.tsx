@@ -8,8 +8,8 @@ import { motion, useReducedMotion } from "framer-motion";
  * "Cathedral Gone Rogue" atmosphere:
  * - Confetti particles bursting from sides
  * - Sweeping spotlight beams
+ * - Stained-glass fragment shapes (colored triangles/diamonds)
  * - Glitter cascade / musical notes floating upward
- * - Stained-glass color fragments
  */
 
 const CONFETTI_COLORS = [
@@ -19,6 +19,14 @@ const CONFETTI_COLORS = [
   "#4ade80", // bright green
   "#f0ead6", // cream
   "#ff6b6b", // coral accent
+];
+
+const GLASS_COLORS = [
+  "rgba(212,175,55,0.25)",
+  "rgba(74,222,128,0.15)",
+  "rgba(201,168,76,0.2)",
+  "rgba(26,58,42,0.2)",
+  "rgba(255,107,107,0.15)",
 ];
 
 export default function CathedralRogue() {
@@ -53,11 +61,27 @@ export default function CathedralRogue() {
 
   const spotlights = useMemo(
     () =>
-      Array.from({ length: 3 }, (_, i) => ({
+      Array.from({ length: 4 }, (_, i) => ({
         id: i,
-        x: 20 + i * 30,
-        delay: i * 2,
+        x: 15 + i * 22,
+        delay: i * 1.5,
         duration: 6 + i * 2,
+      })),
+    []
+  );
+
+  const glassFragments = useMemo(
+    () =>
+      Array.from({ length: 12 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 10 + Math.random() * 20,
+        rotation: Math.random() * 360,
+        color: GLASS_COLORS[Math.floor(Math.random() * GLASS_COLORS.length)],
+        delay: Math.random() * 8,
+        duration: 3 + Math.random() * 4,
+        isDiamond: Math.random() > 0.5,
       })),
     []
   );
@@ -104,6 +128,35 @@ export default function CathedralRogue() {
         animate={{ rotate: [-8, 8, -5, 10, -8], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
+
+      {/* Stained-glass fragments */}
+      {glassFragments.map((g) => (
+        <motion.div
+          key={`glass-${g.id}`}
+          className="absolute"
+          style={{
+            left: `${g.x}%`,
+            top: `${g.y}%`,
+            width: g.size,
+            height: g.size,
+            backgroundColor: g.color,
+            clipPath: g.isDiamond
+              ? "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
+              : "polygon(50% 0%, 100% 100%, 0% 100%)",
+            transform: `rotate(${g.rotation}deg)`,
+          }}
+          animate={{
+            opacity: [0, 0.6, 0.3, 0],
+            scale: [0.5, 1, 0.8, 0.5],
+          }}
+          transition={{
+            duration: g.duration,
+            delay: g.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
 
       {/* Confetti particles */}
       {confetti.map((c) => (

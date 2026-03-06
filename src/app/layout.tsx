@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Playfair_Display, DM_Sans, Noto_Serif_Devanagari } from "next/font/google";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -12,6 +13,13 @@ const dmSans = DM_Sans({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
+});
+
+const notoSerifDevanagari = Noto_Serif_Devanagari({
+  variable: "--font-hindi",
+  subsets: ["devanagari"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -50,8 +58,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfairDisplay.variable} ${dmSans.variable} font-body antialiased bg-stone-950 text-stone-100 overflow-x-hidden`}
+        className={`${playfairDisplay.variable} ${dmSans.variable} ${notoSerifDevanagari.variable} font-body antialiased overflow-x-hidden`}
+        style={{ backgroundColor: "#1a0a0a", color: "#f5efe6" }}
       >
+        <ScrollToTop />
         {children}
       </body>
     </html>

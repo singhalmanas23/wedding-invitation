@@ -7,19 +7,20 @@ import { motion, useReducedMotion } from "framer-motion";
  * Chapter 5 — The Royal Court (Wedding Ceremony)
  * Sacred Mughal ceremony atmosphere:
  * - Sacred fire flame particles rising from center
- * - Rose petals floating down softly
- * - Golden light pulses outward from center (mandap glow)
+ * - Floating diya flames (small gold triangles)
+ * - Rose petals floating down softly — more visible
+ * - Stronger mandap golden glow pulse
  * - Sanskrit/calligraphy wisps fading in and out
  */
 
-const MANTRA_FRAGMENTS = ["ॐ", "स्वाहा", "सप्तपदी", "मंगलम्", "शुभ"];
+const MANTRA_FRAGMENTS = ["ॐ", "स्वाहा", "सप्तपदी", "मंगलम्", "शुभ", "मंत्र"];
 
 export default function SacredFire() {
   const reduced = useReducedMotion();
 
   const flames = useMemo(
     () =>
-      Array.from({ length: 25 }, (_, i) => ({
+      Array.from({ length: 30 }, (_, i) => ({
         id: i,
         xOffset: -30 + Math.random() * 60,
         delay: Math.random() * 4,
@@ -34,7 +35,7 @@ export default function SacredFire() {
 
   const petals = useMemo(
     () =>
-      Array.from({ length: 15 }, (_, i) => ({
+      Array.from({ length: 20 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         delay: Math.random() * 8,
@@ -51,10 +52,21 @@ export default function SacredFire() {
       MANTRA_FRAGMENTS.map((text, i) => ({
         id: i,
         text,
-        x: 20 + Math.random() * 60,
-        y: 40 + Math.random() * 40,
-        delay: i * 4 + Math.random() * 2,
+        x: 15 + Math.random() * 70,
+        y: 30 + Math.random() * 50,
+        delay: i * 3.5 + Math.random() * 2,
         duration: 5 + Math.random() * 3,
+      })),
+    []
+  );
+
+  const diyas = useMemo(
+    () =>
+      Array.from({ length: 10 }, (_, i) => ({
+        id: i,
+        x: 10 + Math.random() * 80,
+        delay: i * 1.5 + Math.random() * 2,
+        duration: 3 + Math.random() * 3,
       })),
     []
   );
@@ -63,17 +75,17 @@ export default function SacredFire() {
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
-      {/* Central mandap golden glow pulse */}
+      {/* Central mandap golden glow pulse — stronger */}
       <motion.div
         className="absolute left-1/2 bottom-[30%] -translate-x-1/2"
         style={{
-          width: 400,
-          height: 400,
-          background: "radial-gradient(circle, rgba(212,175,55,0.1) 0%, rgba(139,26,26,0.05) 40%, transparent 70%)",
+          width: 500,
+          height: 500,
+          background: "radial-gradient(circle, rgba(212,175,55,0.12) 0%, rgba(139,26,26,0.06) 40%, transparent 70%)",
         }}
         animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.5, 0.8, 0.5],
+          scale: [1, 1.4, 1],
+          opacity: [0.5, 0.9, 0.5],
         }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -107,7 +119,37 @@ export default function SacredFire() {
         />
       ))}
 
-      {/* Rose petals falling */}
+      {/* Floating diya flames — gold triangle shapes */}
+      {diyas.map((d) => (
+        <motion.div
+          key={`diya-${d.id}`}
+          className="absolute"
+          style={{
+            left: `${d.x}%`,
+            bottom: "15%",
+            width: 0,
+            height: 0,
+            borderLeft: "4px solid transparent",
+            borderRight: "4px solid transparent",
+            borderBottom: "10px solid rgba(212,175,55,0.4)",
+            filter: "drop-shadow(0 0 4px rgba(212,175,55,0.3))",
+          }}
+          animate={{
+            y: [0, -(40 + Math.random() * 80)],
+            x: [0, -10 + Math.random() * 20],
+            opacity: [0, 0.7, 0.5, 0],
+            scale: [0.6, 1, 0.8, 0.3],
+          }}
+          transition={{
+            duration: d.duration,
+            delay: d.delay,
+            repeat: Infinity,
+            ease: "easeOut",
+          }}
+        />
+      ))}
+
+      {/* Rose petals falling — more visible */}
       {petals.map((p) => (
         <motion.div
           key={`petal-${p.id}`}
@@ -118,14 +160,14 @@ export default function SacredFire() {
             width: p.size,
             height: p.size * 0.7,
             borderRadius: "50% 0 50% 0",
-            backgroundColor: `rgba(180,40,40,${0.3 + Math.random() * 0.3})`,
+            backgroundColor: `rgba(180,40,40,${0.35 + Math.random() * 0.3})`,
             boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
           }}
           animate={{
             y: [0, 1200],
             x: [0, p.sway, -p.sway * 0.5],
             rotate: [p.rotation, p.rotation + 360],
-            opacity: [0, 0.6, 0.5, 0],
+            opacity: [0, 0.7, 0.6, 0],
           }}
           transition={{
             duration: p.duration,

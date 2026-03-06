@@ -8,11 +8,11 @@ import { Badge } from "@/components/ui/badge";
 
 const mockGuest: GuestInfo = {
   name: "Priya Sharma",
-  room: "Royal Suite 204, The Leela Palace",
+  room: "Royal Suite 204, Fairmont Udaipur",
   pickupTime: "19th April, 1:00 PM",
-  pickupLocation: "Jaipur International Airport — Terminal 2",
+  pickupLocation: "Maharana Pratap Airport, Udaipur — Arrivals",
   events: [
-    "first-chapter",
+    "pre-party",
     "courtyard-edit",
     "midnight-cathedral",
     "world-of-our-own",
@@ -32,7 +32,7 @@ const mockGuest: GuestInfo = {
     },
     {
       message:
-        "Don't forget: Black Tie Chronicle for the Welcome Dinner!",
+        "Don't forget: Royal Evening for the Pre-Party in Pune!",
       time: "2 days ago",
       read: true,
     },

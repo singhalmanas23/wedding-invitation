@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { EVENTS } from "@/content/events";
@@ -11,15 +10,19 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeInView from "@/components/motion/FadeInView";
 import DressCodeBadge from "@/components/shared/DressCodeBadge";
+import {
+  P,
+  RoyalPageHero,
+  RoyalPageWrapper,
+  RoyalFlourish,
+} from "@/components/shared/RoyalPageLayout";
 
 /* ────────────────────────────────────────────────────────
    ICS Calendar File Generation
    ──────────────────────────────────────────────────────── */
 
 function parseEventTime(time: string): { start: string; end: string } {
-  const onwardsMatch = time.match(
-    /(\d{1,2}):(\d{2})\s*(AM|PM)\s*onwards/i
-  );
+  const onwardsMatch = time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)\s*onwards/i);
   if (onwardsMatch) {
     let hours = parseInt(onwardsMatch[1]);
     const minutes = onwardsMatch[2];
@@ -57,6 +60,7 @@ function parseEventTime(time: string): { start: string; end: string } {
 }
 
 const DATE_MAP: Record<string, string> = {
+  "Apr 5": "20260405",
   "Apr 19": "20260419",
   "Apr 20": "20260420",
   "Apr 21": "20260421",
@@ -153,50 +157,24 @@ export default function ItineraryContent() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-950">
+    <RoyalPageWrapper>
       <Navbar />
 
-      {/* ── Page Header ── */}
-      <header className="pt-36 pb-24 px-6 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="uppercase tracking-[0.3em] text-stone-500 text-sm mb-6 font-light"
-        >
-          Three Days of Celebration
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl text-stone-100 mb-6"
-        >
-          The Itinerary
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-stone-400 text-lg max-w-md mx-auto leading-relaxed"
-        >
-          Your guide to three days of celebration
-        </motion.p>
+      <RoyalPageHero
+        label="Pre-Party · Pune · Then Udaipur"
+        title="The Itinerary"
+        subtitle="Pre-party in Pune, then the main celebration in Udaipur"
+      />
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 mx-auto h-px w-24 bg-linear-to-r from-transparent via-stone-600 to-transparent"
-        />
-      </header>
-
-      {/* ── Main layout ── */}
+      {/* Main layout */}
       <div className="max-w-7xl mx-auto px-6 pb-40 lg:flex lg:gap-16">
         {/* Sticky sidebar — desktop only */}
         <aside className="hidden lg:block lg:w-60 shrink-0">
           <nav className="sticky top-32">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-stone-600 mb-5 font-medium">
+            <p
+              className="text-[11px] uppercase tracking-[0.25em] mb-5 font-medium"
+              style={{ color: `${P.gold}66` }}
+            >
               Chapters
             </p>
             <div className="space-y-1">
@@ -205,20 +183,35 @@ export default function ItineraryContent() {
                   key={event.slug}
                   onClick={() => scrollToEvent(event.slug)}
                   className={cn(
-                    "block w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 border",
+                    "block w-full text-left px-4 py-3 rounded-sm text-sm transition-all duration-300",
                     activeSlug === event.slug
-                      ? "bg-white/6 text-stone-100 border-white/8"
-                      : "text-stone-500 hover:text-stone-300 hover:bg-white/3 border-transparent"
+                      ? "font-medium"
+                      : ""
                   )}
+                  style={{
+                    backgroundColor:
+                      activeSlug === event.slug
+                        ? `${P.muted}40`
+                        : "transparent",
+                    border: `1px solid ${
+                      activeSlug === event.slug
+                        ? `${P.gold}12`
+                        : "transparent"
+                    }`,
+                    color:
+                      activeSlug === event.slug
+                        ? P.cream
+                        : `${P.cream}60`,
+                  }}
                 >
-                  <span className="block text-[10px] uppercase tracking-widest text-stone-600 mb-0.5">
+                  <span
+                    className="block text-[10px] uppercase tracking-widest mb-0.5"
+                    style={{ color: `${P.cream}40` }}
+                  >
                     {event.dateShort} ·{" "}
-                    {event.time
-                      .split(/[–\-]/)[0]
-                      .replace("onwards", "")
-                      .trim()}
+                    {event.time.split(/[–\-]/)[0].replace("onwards", "").trim()}
                   </span>
-                  <span className="block font-medium">{event.title}</span>
+                  <span className="block">{event.title}</span>
                 </button>
               ))}
             </div>
@@ -232,12 +225,19 @@ export default function ItineraryContent() {
               {/* Date heading */}
               <FadeInView>
                 <div className="mb-14 pl-10">
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-stone-600 mb-2 font-medium">
+                  <p
+                    className="text-[11px] uppercase tracking-[0.3em] mb-2 font-medium"
+                    style={{ color: `${P.gold}66` }}
+                  >
                     {group.day}
                   </p>
-                  <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-stone-200">
+                  <h2
+                    className="font-serif text-3xl md:text-4xl lg:text-5xl"
+                    style={{ color: `${P.cream}cc` }}
+                  >
                     {group.fullDate}
                   </h2>
+                  <RoyalFlourish className="mt-4 justify-start" />
                 </div>
               </FadeInView>
 
@@ -247,8 +247,7 @@ export default function ItineraryContent() {
                 <div
                   className="absolute left-[7px] top-2 bottom-0 w-[2px] rounded-full"
                   style={{
-                    background:
-                      "linear-gradient(to bottom, rgba(120,113,108,0.5), rgba(68,64,60,0.3), transparent)",
+                    background: `linear-gradient(to bottom, ${P.gold}40, ${P.gold}20, transparent)`,
                   }}
                 />
 
@@ -262,36 +261,58 @@ export default function ItineraryContent() {
                     className={cn("relative", ei > 0 ? "mt-14" : "")}
                   >
                     <FadeInView delay={ei * 0.12}>
-                      {/* Timeline dot */}
+                      {/* Timeline dot — diamond shape */}
                       <div
-                        className="absolute -left-10 top-8 w-4 h-4 rounded-full border-2 z-10 transition-all duration-500"
-                        style={{
-                          borderColor: event.palette.accent,
-                          backgroundColor:
-                            activeSlug === event.slug
-                              ? event.palette.accent
-                              : "#0c0a09",
-                          boxShadow:
-                            activeSlug === event.slug
-                              ? `0 0 12px ${event.palette.accent}60`
-                              : "none",
-                        }}
-                      />
+                        className="absolute -left-10 top-8 z-10 flex items-center justify-center"
+                        style={{ width: 16, height: 16 }}
+                      >
+                        <div
+                          className="w-3 h-3 rotate-45 transition-all duration-500"
+                          style={{
+                            border: `1.5px solid ${event.palette.accent}`,
+                            backgroundColor:
+                              activeSlug === event.slug
+                                ? `${event.palette.accent}40`
+                                : P.bg,
+                            boxShadow:
+                              activeSlug === event.slug
+                                ? `0 0 12px ${event.palette.accent}60`
+                                : "none",
+                          }}
+                        />
+                      </div>
 
                       {/* Event card */}
                       <div
-                        className="rounded-2xl p-7 md:p-9 border border-white/6 backdrop-blur-sm transition-all duration-700"
+                        className="rounded-sm p-7 md:p-9 transition-all duration-700 relative overflow-hidden"
                         style={{
                           backgroundColor: `${event.palette.primary}12`,
+                          border: `1px solid ${P.gold}0a`,
                           boxShadow:
                             activeSlug === event.slug
-                              ? `0 0 80px ${event.palette.primary}10, inset 0 1px 0 ${event.palette.accent}08`
+                              ? `0 0 80px ${event.palette.primary}10`
                               : "none",
                         }}
                       >
+                        {/* Corner ornaments */}
+                        <div
+                          className="absolute top-2 left-2 w-3 h-3"
+                          style={{
+                            borderTop: `1px solid ${P.gold}10`,
+                            borderLeft: `1px solid ${P.gold}10`,
+                          }}
+                        />
+                        <div
+                          className="absolute top-2 right-2 w-3 h-3"
+                          style={{
+                            borderTop: `1px solid ${P.gold}10`,
+                            borderRight: `1px solid ${P.gold}10`,
+                          }}
+                        />
+
                         {/* Time pill */}
                         <div
-                          className="inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-full mb-5"
+                          className="inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-sm mb-5"
                           style={{
                             color: event.palette.accent,
                             backgroundColor: `${event.palette.accent}12`,
@@ -301,8 +322,10 @@ export default function ItineraryContent() {
                           <span>{event.time}</span>
                         </div>
 
-                        {/* Title & subtitle */}
-                        <h3 className="font-serif text-2xl md:text-3xl text-stone-100 mb-1.5 leading-tight">
+                        <h3
+                          className="font-serif text-2xl md:text-3xl mb-1.5 leading-tight"
+                          style={{ color: P.cream }}
+                        >
                           {event.title}
                         </h3>
                         <p
@@ -312,20 +335,23 @@ export default function ItineraryContent() {
                           {event.subtitle}
                         </p>
 
-                        {/* Description */}
-                        <p className="text-stone-400 leading-[1.8] mb-6 max-w-2xl text-[15px]">
+                        <p
+                          className="leading-[1.8] mb-6 max-w-2xl text-[15px]"
+                          style={{ color: `${P.cream}80` }}
+                        >
                           {event.description}
                         </p>
 
-                        {/* Venue */}
-                        <div className="flex items-center gap-2 text-sm text-stone-500 mb-5">
+                        <div
+                          className="flex items-center gap-2 text-sm mb-5"
+                          style={{ color: `${P.cream}60` }}
+                        >
                           <MapPin size={14} className="shrink-0" />
                           <span>
                             {event.location}, {event.venue}
                           </span>
                         </div>
 
-                        {/* Dress code badge */}
                         <div className="mb-7">
                           <DressCodeBadge
                             title={event.dressCode.title}
@@ -334,7 +360,10 @@ export default function ItineraryContent() {
                         </div>
 
                         {/* Actions */}
-                        <div className="flex flex-wrap items-center gap-6 pt-5 border-t border-white/6">
+                        <div
+                          className="flex flex-wrap items-center gap-6 pt-5"
+                          style={{ borderTop: `1px solid ${P.gold}0a` }}
+                        >
                           <Link
                             href={`/chapter/${event.slug}`}
                             className="inline-flex items-center gap-2 text-sm font-medium transition-all duration-300 group"
@@ -349,7 +378,8 @@ export default function ItineraryContent() {
 
                           <button
                             onClick={() => downloadICS(event)}
-                            className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-stone-300 transition-colors duration-300"
+                            className="inline-flex items-center gap-2 text-sm transition-colors duration-300"
+                            style={{ color: `${P.cream}60` }}
                           >
                             <Calendar size={14} />
                             Add to Calendar
@@ -366,6 +396,6 @@ export default function ItineraryContent() {
       </div>
 
       <Footer />
-    </div>
+    </RoyalPageWrapper>
   );
 }

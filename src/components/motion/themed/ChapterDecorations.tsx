@@ -18,7 +18,7 @@ function DuskSunsetHero({ palette }: DecorationProps) {
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       <svg
         viewBox="0 0 800 400"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-[0.08]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-[0.12]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -39,8 +39,17 @@ function DuskSunsetHero({ palette }: DecorationProps) {
           animate={{ pathLength: 1 }}
           transition={{ duration: 4, delay: 1.5 }}
         />
-        {Array.from({ length: 12 }, (_, i) => {
-          const angle = (i * 15 - 82.5) * (Math.PI / 180);
+        <motion.circle
+          cx="400" cy="400" r="200"
+          stroke={palette.accent}
+          strokeWidth="0.3"
+          strokeDasharray="2 8"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 5, delay: 2 }}
+        />
+        {Array.from({ length: 16 }, (_, i) => {
+          const angle = (i * 11.25 - 82.5) * (Math.PI / 180);
           const x1 = 400 + Math.cos(angle) * 130;
           const y1 = 400 + Math.sin(angle) * 130;
           const x2 = 400 + Math.cos(angle) * 250;
@@ -53,7 +62,7 @@ function DuskSunsetHero({ palette }: DecorationProps) {
               strokeWidth="0.3"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 0.6 }}
-              transition={{ duration: 1.5, delay: 2 + i * 0.1 }}
+              transition={{ duration: 1.5, delay: 2 + i * 0.08 }}
             />
           );
         })}
@@ -65,22 +74,29 @@ function DuskSunsetHero({ palette }: DecorationProps) {
           animate={{ pathLength: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
         />
+        {/* Candelabra motif at base */}
+        {[250, 400, 550].map((x, i) => (
+          <motion.g key={`candle-${i}`} initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} transition={{ delay: 3 + i * 0.3 }}>
+            <line x1={x} y1={400} x2={x} y2={360} stroke={palette.accent} strokeWidth="0.5" />
+            <ellipse cx={x} cy={355} rx="3" ry="6" fill={palette.accent} fillOpacity={0.2} />
+          </motion.g>
+        ))}
       </svg>
       {/* Stars appearing */}
-      {Array.from({ length: 8 }, (_, i) => (
+      {Array.from({ length: 12 }, (_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full"
           style={{
             width: 2 + (i % 3),
             height: 2 + (i % 3),
-            left: `${15 + i * 10}%`,
-            top: `${10 + (i % 4) * 8}%`,
+            left: `${10 + i * 7.5}%`,
+            top: `${8 + (i % 5) * 7}%`,
             backgroundColor: palette.accent,
           }}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: [0, 0.6, 0.3, 0.6], scale: 1 }}
-          transition={{ duration: 2, delay: 3 + i * 0.3, repeat: Infinity, repeatType: "reverse" }}
+          transition={{ duration: 2, delay: 3 + i * 0.25, repeat: Infinity, repeatType: "reverse" }}
         />
       ))}
     </div>
@@ -110,7 +126,7 @@ function JharokhaHero({ palette }: DecorationProps) {
     <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
       <svg
         viewBox="0 0 400 500"
-        className="absolute w-[80%] max-w-lg h-auto opacity-[0.06]"
+        className="absolute w-[80%] max-w-lg h-auto opacity-[0.10]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -140,11 +156,28 @@ function JharokhaHero({ palette }: DecorationProps) {
           animate={{ pathLength: 1 }}
           transition={{ duration: 3.5, delay: 1.6 }}
         />
-        {/* Lattice jali pattern */}
-        {Array.from({ length: 5 }, (_, i) => (
+        {/* Extra scalloped curves */}
+        <motion.path
+          d="M130 440 Q165 430 200 425 Q235 430 270 440"
+          stroke={palette.accent}
+          strokeWidth="0.3"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, delay: 2 }}
+        />
+        <motion.path
+          d="M140 400 Q170 390 200 387 Q230 390 260 400"
+          stroke={palette.accent}
+          strokeWidth="0.25"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, delay: 2.2 }}
+        />
+        {/* Lattice jali pattern — more detail */}
+        {Array.from({ length: 7 }, (_, i) => (
           <motion.ellipse
             key={i}
-            cx={140 + i * 30}
+            cx={130 + i * 25}
             cy="440"
             rx="8"
             ry="12"
@@ -152,7 +185,21 @@ function JharokhaHero({ palette }: DecorationProps) {
             strokeWidth="0.3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
-            transition={{ delay: 2.5 + i * 0.15 }}
+            transition={{ delay: 2.5 + i * 0.12 }}
+          />
+        ))}
+        {Array.from({ length: 5 }, (_, i) => (
+          <motion.ellipse
+            key={`jali2-${i}`}
+            cx={145 + i * 28}
+            cy="465"
+            rx="6"
+            ry="9"
+            stroke={palette.accent}
+            strokeWidth="0.2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 2.8 + i * 0.1 }}
           />
         ))}
         {/* Decorative apex */}
@@ -160,9 +207,12 @@ function JharokhaHero({ palette }: DecorationProps) {
           initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.2, type: "spring" }} />
         <motion.path d="M192 35 Q200 20 208 35" stroke={palette.accent} strokeWidth="0.4"
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 2.5, duration: 1 }} />
+        {/* Apex lotus */}
+        <motion.path d="M195 25 Q200 15 205 25" stroke={palette.accent} strokeWidth="0.3"
+          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 2.7, duration: 0.8 }} />
       </svg>
       {/* Floating jasmine petals */}
-      {Array.from({ length: 6 }, (_, i) => (
+      {Array.from({ length: 8 }, (_, i) => (
         <motion.div
           key={i}
           className="absolute"
@@ -171,8 +221,8 @@ function JharokhaHero({ palette }: DecorationProps) {
             height: 4,
             borderRadius: "50% 0 50% 0",
             backgroundColor: `${palette.accent}25`,
-            left: `${20 + i * 12}%`,
-            top: `${15 + (i % 3) * 25}%`,
+            left: `${15 + i * 10}%`,
+            top: `${12 + (i % 4) * 20}%`,
           }}
           animate={{
             y: [0, 30, 0],
@@ -215,7 +265,7 @@ function CathedralHero({ palette }: DecorationProps) {
     <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
       <svg
         viewBox="0 0 400 600"
-        className="absolute w-[70%] max-w-md h-auto opacity-[0.06]"
+        className="absolute w-[70%] max-w-md h-auto opacity-[0.10]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -228,6 +278,15 @@ function CathedralHero({ palette }: DecorationProps) {
           animate={{ pathLength: 1 }}
           transition={{ duration: 2.5, delay: 0.8 }}
         />
+        {/* Inner arch */}
+        <motion.path
+          d="M95 580 V290 Q95 145 200 55 Q305 145 305 290 V580"
+          stroke={palette.accent}
+          strokeWidth="0.6"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.5, delay: 1.2 }}
+        />
         {/* Rose window */}
         <motion.circle
           cx="200" cy="200" r="70"
@@ -238,39 +297,63 @@ function CathedralHero({ palette }: DecorationProps) {
           transition={{ duration: 2, delay: 1.5 }}
         />
         {/* Rose window inner geometry */}
-        {Array.from({ length: 8 }, (_, i) => {
-          const angle = (i * 45) * (Math.PI / 180);
+        {Array.from({ length: 12 }, (_, i) => {
+          const angle = (i * 30) * (Math.PI / 180);
           return (
             <motion.line
               key={i}
-              x1={200 + Math.cos(angle) * 30}
-              y1={200 + Math.sin(angle) * 30}
+              x1={200 + Math.cos(angle) * 25}
+              y1={200 + Math.sin(angle) * 25}
               x2={200 + Math.cos(angle) * 68}
               y2={200 + Math.sin(angle) * 68}
               stroke={palette.accent}
               strokeWidth="0.4"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 1, delay: 2 + i * 0.1 }}
+              transition={{ duration: 1, delay: 2 + i * 0.08 }}
             />
           );
         })}
+        <motion.circle cx="200" cy="200" r="45" stroke={palette.accent} strokeWidth="0.3"
+          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 2 }} />
         <motion.circle cx="200" cy="200" r="35" stroke={palette.accent} strokeWidth="0.4"
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 2 }} />
         <motion.circle cx="200" cy="200" r="12" fill={palette.accent} fillOpacity={0.08}
           initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.8, type: "spring" }} />
+        {/* Small trefoils between spokes */}
+        {Array.from({ length: 6 }, (_, i) => {
+          const angle = (i * 60 + 15) * (Math.PI / 180);
+          return (
+            <motion.circle
+              key={`trefoil-${i}`}
+              cx={200 + Math.cos(angle) * 52}
+              cy={200 + Math.sin(angle) * 52}
+              r="6"
+              stroke={palette.accent}
+              strokeWidth="0.3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              transition={{ delay: 3 + i * 0.1 }}
+            />
+          );
+        })}
         {/* Vertical mullions */}
         <motion.line x1="200" y1="270" x2="200" y2="500" stroke={palette.accent} strokeWidth="0.4"
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 2 }} />
+        {/* Ribbed vault lines */}
+        <motion.path d="M70 280 Q135 400 200 500" stroke={palette.accent} strokeWidth="0.25"
+          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 2.5 }} />
+        <motion.path d="M330 280 Q265 400 200 500" stroke={palette.accent} strokeWidth="0.25"
+          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 2.7 }} />
       </svg>
       {/* Floating music notes */}
-      {["♪", "♫", "♩", "♬"].map((note, i) => (
+      {["♪", "♫", "♩", "♬", "♪"].map((note, i) => (
         <motion.span
           key={i}
           className="absolute text-xl md:text-2xl select-none"
           style={{
             color: palette.accent,
-            left: `${15 + i * 22}%`,
+            left: `${12 + i * 18}%`,
             bottom: "20%",
             opacity: 0,
           }}
@@ -279,7 +362,7 @@ function CathedralHero({ palette }: DecorationProps) {
             opacity: [0, 0.15, 0.1, 0],
             rotate: [-10, 10, -5],
           }}
-          transition={{ duration: 8 + i * 2, delay: 3 + i * 1.5, repeat: Infinity, ease: "easeOut" }}
+          transition={{ duration: 8 + i * 2, delay: 3 + i * 1.2, repeat: Infinity, ease: "easeOut" }}
         >
           {note}
         </motion.span>
@@ -315,7 +398,7 @@ function CompassHero({ palette }: DecorationProps) {
     <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
       <svg
         viewBox="0 0 400 400"
-        className="absolute w-[60%] max-w-sm h-auto opacity-[0.06]"
+        className="absolute w-[60%] max-w-sm h-auto opacity-[0.10]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -324,6 +407,8 @@ function CompassHero({ palette }: DecorationProps) {
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 0.8 }} />
         <motion.circle cx="200" cy="200" r="155" stroke={palette.accent} strokeWidth="0.3" strokeDasharray="2 4"
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 1.2 }} />
+        <motion.circle cx="200" cy="200" r="185" stroke={palette.accent} strokeWidth="0.2" strokeDasharray="1 6"
+          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 4, delay: 1.5 }} />
         {/* Cardinal points */}
         {[0, 90, 180, 270].map((angle, i) => {
           const rad = (angle - 90) * (Math.PI / 180);
@@ -373,6 +458,24 @@ function CompassHero({ palette }: DecorationProps) {
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 1.5 }} />
         <motion.circle cx="200" cy="200" r="5" fill={palette.accent} fillOpacity={0.15}
           initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 3, type: "spring" }} />
+        {/* Tick marks around outer ring */}
+        {Array.from({ length: 36 }, (_, i) => {
+          const rad = (i * 10 - 90) * (Math.PI / 180);
+          const inner = i % 9 === 0 ? 160 : 165;
+          return (
+            <motion.line key={`tick-${i}`}
+              x1={200 + Math.cos(rad) * inner}
+              y1={200 + Math.sin(rad) * inner}
+              x2={200 + Math.cos(rad) * 170}
+              y2={200 + Math.sin(rad) * 170}
+              stroke={palette.accent}
+              strokeWidth={i % 9 === 0 ? "0.4" : "0.2"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              transition={{ delay: 3 + i * 0.02 }}
+            />
+          );
+        })}
       </svg>
       {/* Sun rays from top right */}
       <motion.div
@@ -418,7 +521,7 @@ function MandapHero({ palette }: DecorationProps) {
     <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
       <svg
         viewBox="0 0 500 600"
-        className="absolute w-[85%] max-w-xl h-auto opacity-[0.07]"
+        className="absolute w-[85%] max-w-xl h-auto opacity-[0.12]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -439,18 +542,29 @@ function MandapHero({ palette }: DecorationProps) {
           animate={{ pathLength: 1 }}
           transition={{ duration: 3, delay: 1 }}
         />
+        {/* Third inner arch */}
+        <motion.path
+          d="M120 560 V290 Q120 140 250 90 Q380 140 380 290 V560"
+          stroke={palette.secondary}
+          strokeWidth="0.3"
+          strokeDasharray="3 5"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 3, delay: 1.4 }}
+        />
         {/* Lotus at apex */}
         <motion.g initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 2.5, type: "spring" }} style={{ transformOrigin: "250px 30px" }}>
-          {Array.from({ length: 8 }, (_, i) => {
-            const angle = i * 45;
+          {Array.from({ length: 12 }, (_, i) => {
+            const angle = i * 30;
             return (
               <ellipse key={i} cx="250" cy="10" rx="10" ry="5"
                 transform={`rotate(${angle}, 250, 30)`}
-                stroke={palette.secondary} strokeWidth="0.5" />
+                stroke={palette.secondary} strokeWidth="0.4" />
             );
           })}
           <circle cx="250" cy="30" r="5" fill={palette.secondary} fillOpacity={0.15} />
+          <circle cx="250" cy="30" r="8" stroke={palette.secondary} strokeWidth="0.3" />
         </motion.g>
         {/* Kalash on top */}
         <motion.path
@@ -462,19 +576,19 @@ function MandapHero({ palette }: DecorationProps) {
           transition={{ delay: 3 }}
           transform="translate(0, 15)"
         />
-        {/* Decorative inner scallops */}
-        {Array.from({ length: 3 }, (_, i) => (
+        {/* Decorative inner scallops — more detail */}
+        {Array.from({ length: 5 }, (_, i) => (
           <motion.ellipse
             key={i}
-            cx={180 + i * 35}
+            cx={170 + i * 20}
             cy="520"
-            rx="12"
-            ry="20"
+            rx="8"
+            ry="14"
             stroke={palette.secondary}
             strokeWidth="0.3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
-            transition={{ delay: 2 + i * 0.2 }}
+            transition={{ delay: 2 + i * 0.15 }}
           />
         ))}
         {/* Sacred fire at base */}
@@ -486,15 +600,24 @@ function MandapHero({ palette }: DecorationProps) {
           animate={{ pathLength: 1 }}
           transition={{ duration: 2, delay: 2.5 }}
         />
+        {/* Inner fire */}
+        <motion.path
+          d="M238 575 Q244 562 250 552 Q256 562 262 575"
+          stroke={palette.secondary}
+          strokeWidth="0.4"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.5, delay: 3 }}
+        />
       </svg>
       {/* Floating Sanskrit mantras */}
-      {["ॐ", "स्वाहा", "मंगलम्", "सप्तपदी"].map((text, i) => (
+      {["ॐ", "स्वाहा", "मंगलम्", "सप्तपदी", "शुभम्"].map((text, i) => (
         <motion.span
           key={i}
           className="absolute font-serif text-xl md:text-2xl select-none"
           style={{
             color: palette.secondary,
-            left: `${10 + i * 25}%`,
+            left: `${8 + i * 20}%`,
             top: `${20 + (i % 2) * 55}%`,
           }}
           animate={{
@@ -518,7 +641,6 @@ function SacredFireDivider({ palette }: DecorationProps) {
         <path d="M25 28 Q20 18 25 5 Q30 18 25 28Z" stroke={palette.primary} strokeWidth="0.8" fill={`${palette.primary}15`} />
         <path d="M25 28 Q22 20 25 12 Q28 20 25 28Z" stroke={palette.secondary} strokeWidth="0.5" fill={`${palette.secondary}10`} />
         <circle cx="25" cy="28" r="1.5" fill={palette.secondary} fillOpacity={0.5} />
-        {/* Small sparks */}
         <circle cx="18" cy="15" r="1" fill={palette.secondary} fillOpacity={0.3} />
         <circle cx="32" cy="12" r="0.8" fill={palette.secondary} fillOpacity={0.2} />
       </svg>
@@ -533,8 +655,8 @@ function SacredFireDivider({ palette }: DecorationProps) {
    ════════════════════════════════════════════════════════════════════ */
 
 function FerrisWheelHero({ palette }: DecorationProps) {
-  const gondolas = useMemo(() => Array.from({ length: 10 }, (_, i) => {
-    const angle = (i * 36 - 90) * (Math.PI / 180);
+  const gondolas = useMemo(() => Array.from({ length: 12 }, (_, i) => {
+    const angle = (i * 30 - 90) * (Math.PI / 180);
     return {
       cx: 200 + Math.cos(angle) * 130,
       cy: 200 + Math.sin(angle) * 130,
@@ -545,7 +667,7 @@ function FerrisWheelHero({ palette }: DecorationProps) {
     <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
       <motion.svg
         viewBox="0 0 400 420"
-        className="absolute w-[65%] max-w-sm h-auto opacity-[0.07]"
+        className="absolute w-[65%] max-w-sm h-auto opacity-[0.10]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         animate={{ rotate: [0, 360] }}
@@ -554,6 +676,7 @@ function FerrisWheelHero({ palette }: DecorationProps) {
       >
         <circle cx="200" cy="200" r="135" stroke={palette.primary} strokeWidth="1" />
         <circle cx="200" cy="200" r="130" stroke={palette.accent} strokeWidth="0.3" />
+        <circle cx="200" cy="200" r="140" stroke={palette.primary} strokeWidth="0.2" strokeDasharray="2 6" />
         {/* Spokes */}
         {gondolas.map((g, i) => (
           <line key={i} x1="200" y1="200" x2={g.cx} y2={g.cy} stroke={palette.primary} strokeWidth="0.4" />
@@ -564,11 +687,12 @@ function FerrisWheelHero({ palette }: DecorationProps) {
             fill={`${palette.primary}10`} />
         ))}
         <circle cx="200" cy="200" r="10" stroke={palette.accent} strokeWidth="0.6" fill={`${palette.accent}15`} />
+        <circle cx="200" cy="200" r="4" fill={palette.accent} fillOpacity={0.2} />
       </motion.svg>
       {/* Static support legs */}
       <svg
         viewBox="0 0 400 420"
-        className="absolute w-[65%] max-w-sm h-auto opacity-[0.05]"
+        className="absolute w-[65%] max-w-sm h-auto opacity-[0.07]"
         fill="none"
       >
         <line x1="200" y1="340" x2="120" y2="420" stroke={palette.primary} strokeWidth="1" />
@@ -576,7 +700,7 @@ function FerrisWheelHero({ palette }: DecorationProps) {
         <line x1="120" y1="420" x2="280" y2="420" stroke={palette.primary} strokeWidth="0.5" />
       </svg>
       {/* Neon flicker accents */}
-      {["#ff006e", "#8338ec", "#00f5d4", "#ffbe0b"].map((color, i) => (
+      {["#ff006e", "#8338ec", "#00f5d4", "#ffbe0b", "#3a86ff"].map((color, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full"
@@ -585,14 +709,14 @@ function FerrisWheelHero({ palette }: DecorationProps) {
             height: 3,
             backgroundColor: color,
             boxShadow: `0 0 8px ${color}`,
-            left: `${20 + i * 20}%`,
-            top: `${25 + (i % 3) * 20}%`,
+            left: `${15 + i * 16}%`,
+            top: `${22 + (i % 3) * 18}%`,
           }}
           animate={{
             opacity: [0, 0.8, 0, 0.5, 0],
             scale: [0.5, 1.5, 0.5],
           }}
-          transition={{ duration: 1.5 + i * 0.5, delay: i * 0.8, repeat: Infinity }}
+          transition={{ duration: 1.5 + i * 0.5, delay: i * 0.6, repeat: Infinity }}
         />
       ))}
     </div>
@@ -626,7 +750,6 @@ function NeonDivider({ palette }: DecorationProps) {
 
 /* ════════════════════════════════════════════════════════════════════
    CHAPTER-SPECIFIC STORY ACCENTS
-   Themed background elements for the story section
    ════════════════════════════════════════════════════════════════════ */
 
 function DuskStoryAccent({ palette }: DecorationProps) {
@@ -647,7 +770,6 @@ function CourtyardStoryAccent({ palette }: DecorationProps) {
   if (reduced) return null;
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Floating flower petals in story */}
       {Array.from({ length: 4 }, (_, i) => (
         <motion.div
           key={i}
@@ -686,11 +808,14 @@ function CeremonyStoryAccent({ palette }: DecorationProps) {
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   CHAPTER-SPECIFIC CULTURAL HEADER TEXT
-   Thematic text shown above the story section
+   CULTURAL HEADER TEXT
    ════════════════════════════════════════════════════════════════════ */
 
 const CULTURAL_HEADERS: Record<string, { text: string; script?: string }> = {
+  "pre-party": {
+    text: "Where Pune meets palatial grandeur",
+    script: "नूर महल",
+  },
   "first-chapter": {
     text: "Where sunset meets the start of forever",
     script: "शुभारम्भ",
@@ -715,8 +840,7 @@ const CULTURAL_HEADERS: Record<string, { text: string; script?: string }> = {
 };
 
 /* ════════════════════════════════════════════════════════════════════
-   EDGE ORNAMENTS — Themed side decorations
-   Appear on left/right edges of the page
+   EDGE ORNAMENTS
    ════════════════════════════════════════════════════════════════════ */
 
 function EdgeOrnaments({ slug, palette }: { slug: string; palette: ChapterPalette }) {
@@ -741,7 +865,6 @@ function EdgeOrnaments({ slug, palette }: { slug: string; palette: ChapterPalett
   if (slug === "courtyard-edit") {
     return (
       <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-[1]">
-        {/* Delicate vertical floral vines */}
         <svg className="absolute left-2 top-0 h-full w-6 md:w-10 opacity-[0.04]" viewBox="0 0 30 800" fill="none" preserveAspectRatio="none">
           <path d="M15 0 L15 800" stroke={palette.accent} strokeWidth="0.5" />
           {Array.from({ length: 8 }, (_, i) => (
@@ -757,7 +880,6 @@ function EdgeOrnaments({ slug, palette }: { slug: string; palette: ChapterPalett
   if (slug === "midnight-cathedral") {
     return (
       <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-[1]">
-        {/* Stained glass vertical strips */}
         <motion.div
           className="absolute left-0 top-0 w-1 h-full"
           style={{ background: `linear-gradient(to bottom, transparent, ${palette.accent}10, ${palette.secondary}08, transparent)` }}
@@ -774,11 +896,89 @@ function EdgeOrnaments({ slug, palette }: { slug: string; palette: ChapterPalett
     );
   }
 
+  if (slug === "first-chapter" || slug === "pre-party") {
+    return (
+      <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-[1]">
+        <div className="absolute left-0 top-0 w-px h-full" style={{ background: `linear-gradient(to bottom, transparent 10%, ${palette.accent}08 50%, transparent 90%)` }} />
+        <div className="absolute right-0 top-0 w-px h-full" style={{ background: `linear-gradient(to bottom, transparent 10%, ${palette.accent}08 50%, transparent 90%)` }} />
+      </div>
+    );
+  }
+
+  if (slug === "thrill-theory") {
+    return (
+      <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-[1]">
+        <motion.div
+          className="absolute left-0 top-0 w-0.5 h-full"
+          style={{ background: `linear-gradient(to bottom, ${palette.primary}15, ${palette.secondary}10, ${palette.accent}15)` }}
+          animate={{ opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute right-0 top-0 w-0.5 h-full"
+          style={{ background: `linear-gradient(to bottom, ${palette.accent}15, ${palette.primary}10, ${palette.secondary}15)` }}
+          animate={{ opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+        />
+      </div>
+    );
+  }
+
   return null;
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   MAIN EXPORT — getChapterDecorations
+   ENVIRONMENT FRAME — decorative border wrapping page content
+   ════════════════════════════════════════════════════════════════════ */
+
+function EnvironmentFrame({ slug, palette }: { slug: string; palette: ChapterPalette }) {
+  const reduced = useReducedMotion();
+  if (reduced) return null;
+
+  const borderColor = slug === "royal-court" || slug === "first-chapter" || slug === "pre-party"
+    ? palette.secondary || palette.accent
+    : palette.accent;
+
+  if (slug === "courtyard-edit") {
+    return (
+      <div className="fixed inset-0 pointer-events-none z-[1]">
+        {/* Floral corner ornaments */}
+        {["top-2 left-2", "top-2 right-2 scale-x-[-1]", "bottom-2 left-2 scale-y-[-1]", "bottom-2 right-2 scale-[-1]"].map((pos, i) => (
+          <svg key={i} className={`absolute ${pos} w-16 h-16 md:w-24 md:h-24 opacity-[0.06]`} viewBox="0 0 80 80" fill="none">
+            <path d="M0 80 Q0 40 20 20 Q40 0 80 0" stroke={borderColor} strokeWidth="0.5" />
+            <path d="M0 60 Q10 30 30 15 Q50 5 70 0" stroke={borderColor} strokeWidth="0.3" />
+            <ellipse cx="25" cy="25" rx="5" ry="3" transform="rotate(-40, 25, 25)" stroke={borderColor} strokeWidth="0.3" />
+            <ellipse cx="15" cy="40" rx="4" ry="2.5" transform="rotate(-55, 15, 40)" stroke={borderColor} strokeWidth="0.3" />
+          </svg>
+        ))}
+      </div>
+    );
+  }
+
+  if (slug === "midnight-cathedral") {
+    return (
+      <div className="fixed inset-0 pointer-events-none z-[1]">
+        {/* Vine-like border along edges */}
+        <svg className="absolute top-0 left-0 w-full h-4 md:h-6 opacity-[0.05]" viewBox="0 0 1200 20" fill="none" preserveAspectRatio="none">
+          <path d="M0 10 Q100 0 200 10 Q300 20 400 10 Q500 0 600 10 Q700 20 800 10 Q900 0 1000 10 Q1100 20 1200 10" stroke={borderColor} strokeWidth="0.5" />
+        </svg>
+        <svg className="absolute bottom-0 left-0 w-full h-4 md:h-6 opacity-[0.05]" viewBox="0 0 1200 20" fill="none" preserveAspectRatio="none">
+          <path d="M0 10 Q100 20 200 10 Q300 0 400 10 Q500 20 600 10 Q700 0 800 10 Q900 20 1000 10 Q1100 0 1200 10" stroke={borderColor} strokeWidth="0.5" />
+        </svg>
+      </div>
+    );
+  }
+
+  // Default: thin gold lines for Ch1, Ch5, and others
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[1]">
+      <div className="absolute inset-3 md:inset-5 border opacity-[0.04]" style={{ borderColor: borderColor, borderWidth: "0.5px" }} />
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MAIN EXPORT
    ════════════════════════════════════════════════════════════════════ */
 
 export interface ChapterDecorPack {
@@ -789,6 +989,12 @@ export interface ChapterDecorPack {
 }
 
 const DECOR_MAP: Record<string, ChapterDecorPack> = {
+  "pre-party": {
+    HeroDecoration: DuskSunsetHero,
+    SectionDivider: DuskDivider,
+    StoryAccent: DuskStoryAccent,
+    culturalHeader: CULTURAL_HEADERS["pre-party"],
+  },
   "first-chapter": {
     HeroDecoration: DuskSunsetHero,
     SectionDivider: DuskDivider,
@@ -838,4 +1044,4 @@ export function getChapterDecorations(slug: string): ChapterDecorPack {
   return DECOR_MAP[slug] || FALLBACK;
 }
 
-export { EdgeOrnaments };
+export { EdgeOrnaments, EnvironmentFrame };

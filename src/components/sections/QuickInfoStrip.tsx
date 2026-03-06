@@ -37,7 +37,7 @@ const INFO_ITEMS = [
       </svg>
     ),
     label: "Location",
-    value: "Jaipur, Rajasthan",
+    value: "Udaipur, Rajasthan",
   },
   {
     icon: (
