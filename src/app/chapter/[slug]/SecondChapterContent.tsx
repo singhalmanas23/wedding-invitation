@@ -647,38 +647,25 @@ function CourtyardQuote({ event }: { event: WeddingEvent }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   STORY SECTION
+   STORY SECTION — single vibe quote
    ═══════════════════════════════════════════════════════════════════ */
 
 function StorySection({ event }: { event: WeddingEvent }) {
   const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-
-  const paragraphs = useMemo(() => {
-    return event.longDescription
-      .split(". ")
-      .reduce<string[][]>((acc, s, i) => {
-        const g = Math.floor(i / 2);
-        if (!acc[g]) acc[g] = [];
-        acc[g].push(s);
-        return acc;
-      }, [])
-      .map((g) => g.join(". ") + (g[g.length - 1].endsWith(".") ? "" : "."));
+  const excerpt = useMemo(() => {
+    const sentences = event.longDescription.split(/(?<=[.!])\s+/);
+    return sentences.slice(0, 2).join(" ").trim() || event.longDescription.slice(0, 280);
   }, [event.longDescription]);
 
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
-      el.querySelectorAll(".sp-p").forEach((p) => {
-        gsap.fromTo(p, { opacity: 0, y: 30 }, {
-          opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: p, start: "top 85%", toggleActions: "play none none none" },
-        });
-      });
-    },
-    { scope: ref }
-  );
+  useGSAP(() => {
+    const el = ref.current;
+    if (!el) return;
+    gsap.fromTo(el.querySelector(".story-quote"), { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" },
+    });
+  }, { scope: ref });
 
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
@@ -686,19 +673,13 @@ function StorySection({ event }: { event: WeddingEvent }) {
         className="absolute inset-0 pointer-events-none"
         style={{ background: `radial-gradient(ellipse 80% 40% at 50% 50%,${palette.accent}04,transparent 70%)` }}
       />
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>
-          The Story · कहानी
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>
+          The Vibe · माहौल
         </p>
-        {paragraphs.map((t, i) => (
-          <p
-            key={i}
-            className="sp-p font-serif text-xl md:text-2xl lg:text-[28px] leading-[1.7] md:leading-[1.8] mb-8"
-            style={{ color: `${palette.foreground}cc` }}
-          >
-            {t}
-          </p>
-        ))}
+        <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed px-2" style={{ color: `${palette.foreground}cc` }}>
+          &ldquo;{excerpt}&rdquo;
+        </blockquote>
       </div>
     </section>
   );
