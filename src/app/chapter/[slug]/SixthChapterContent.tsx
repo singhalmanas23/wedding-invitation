@@ -665,37 +665,29 @@ function CourtQuote({ event }: { event: WeddingEvent }) {
 function StorySection({ event }: { event: WeddingEvent }) {
   const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-
-  const paragraphs = useMemo(() => {
-    return event.longDescription.split(". ").reduce<string[][]>((acc, s, i) => {
-      const g = Math.floor(i / 2);
-      if (!acc[g]) acc[g] = [];
-      acc[g].push(s);
-      return acc;
-    }, []).map((g) => g.join(". ") + (g[g.length - 1].endsWith(".") ? "" : "."));
+  const excerpt = useMemo(() => {
+    const sentences = event.longDescription.split(/(?<=[.!])\s+/);
+    return sentences.slice(0, 2).join(" ").trim() || event.longDescription.slice(0, 280);
   }, [event.longDescription]);
 
   useGSAP(() => {
     const el = ref.current;
     if (!el) return;
-    el.querySelectorAll(".sp-p").forEach((p) => {
-      gsap.fromTo(p, { opacity: 0, y: 30 }, {
-        opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: p, start: "top 85%", toggleActions: "play none none none" },
-      });
+    gsap.fromTo(el.querySelector(".story-quote"), { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" },
     });
   }, { scope: ref });
 
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>The Story · कथा</p>
-        {paragraphs.map((t, i) => (
-          <div key={i}>
-            <p className="sp-p font-serif text-xl md:text-2xl lg:text-[28px] leading-[1.7] md:leading-[1.8] mb-8" style={{ color: `${palette.foreground}dd` }}>{t}</p>
-            {i < paragraphs.length - 1 && <div className="mb-8"><CourtDivider accent={palette.accent} /></div>}
-          </div>
-        ))}
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · माहौल</p>
+        <CourtDivider accent={palette.accent} />
+        <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 mb-6 px-2" style={{ color: `${palette.foreground}dd` }}>
+          &ldquo;{excerpt}&rdquo;
+        </blockquote>
+        <CourtDivider accent={palette.accent} />
       </div>
     </section>
   );

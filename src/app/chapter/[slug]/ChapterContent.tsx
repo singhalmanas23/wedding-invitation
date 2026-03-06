@@ -220,67 +220,39 @@ function StorySection({ event }: { event: WeddingEvent }) {
   const { palette } = event;
   const decor = getChapterDecorations(event.slug);
   const ref = useRef<HTMLDivElement>(null);
-
-  const paragraphs = useMemo(() => {
-    return event.longDescription
-      .split(". ")
-      .reduce<string[][]>((acc, sentence, i) => {
-        const groupIndex = Math.floor(i / 2);
-        if (!acc[groupIndex]) acc[groupIndex] = [];
-        acc[groupIndex].push(sentence);
-        return acc;
-      }, [])
-      .map((group) => group.join(". ") + (group[group.length - 1].endsWith(".") ? "" : "."));
+  const excerpt = useMemo(() => {
+    const sentences = event.longDescription.split(/(?<=[.!])\s+/);
+    return sentences.slice(0, 2).join(" ").trim() || event.longDescription.slice(0, 280);
   }, [event.longDescription]);
 
   useGSAP(() => {
     const el = ref.current;
     if (!el) return;
-
-    const paragraphEls = el.querySelectorAll(".story-para");
-    paragraphEls.forEach((para) => {
-      gsap.fromTo(
-        para,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: para,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
+    gsap.fromTo(el.querySelector(".story-quote"), { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" },
     });
   }, { scope: ref });
 
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative">
       <decor.StoryAccent palette={palette} />
-      <div className="relative z-10 max-w-3xl mx-auto">
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
         <div className="story-label">
           <p
-            className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium"
+            className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium"
             style={{ color: palette.accent }}
           >
-            The Story
+            The Vibe
           </p>
         </div>
-
-        {paragraphs.map((text, i) => (
-          <p
-            key={i}
-            className="story-para font-serif text-xl md:text-2xl lg:text-[28px] leading-[1.7] md:leading-[1.8] mb-8"
-            style={{ color: `${palette.foreground}dd` }}
-          >
-            {text}
-          </p>
-        ))}
+        <blockquote
+          className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed px-2"
+          style={{ color: `${palette.foreground}dd` }}
+        >
+          &ldquo;{excerpt}&rdquo;
+        </blockquote>
       </div>
-
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

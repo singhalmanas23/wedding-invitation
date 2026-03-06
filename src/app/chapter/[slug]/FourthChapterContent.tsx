@@ -584,25 +584,25 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
         <CornerFiligree accent={palette.accent} position="bottom-0 right-0 scale-[-1]" />
 
         {/* ── BEAT 1: Title + event info ── */}
-        <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
+        <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[10vh] sm:pt-[12vh] z-10 px-4 sm:px-6 text-center">
           <p className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}30, 0 2px 20px ${palette.background}` }}>
             रात्रि महोत्सव
           </p>
-          <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.3em] font-light mb-3" style={{ color: `${palette.foreground}cc` }}>
+          <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] font-light mb-3 max-w-[90vw] mx-auto break-words" style={{ color: `${palette.foreground}cc` }}>
             The Midnight Cathedral
           </h1>
-          <p className="text-sm italic tracking-[0.15em] mb-8" style={{ color: `${palette.accent}88` }}>
+          <p className="text-xs sm:text-sm italic tracking-[0.1em] sm:tracking-[0.15em] mb-6 sm:mb-8 max-w-[85vw] mx-auto" style={{ color: `${palette.accent}88` }}>
             Cathedral Gone Rogue &mdash; Gilded After Dark
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             {[
               { icon: CalendarDays, label: event.date },
               { icon: Clock, label: event.time },
               { icon: MapPin, label: event.location },
             ].map(({ icon: Icon, label }) => (
-              <div key={label} className="text-center">
+              <div key={label} className="text-center min-w-0">
                 <Icon size={14} style={{ color: palette.accent }} className="mx-auto mb-1" />
-                <p className="text-[10px] uppercase tracking-[0.15em]" style={{ color: `${palette.foreground}66` }}>{label}</p>
+                <p className="text-[10px] uppercase tracking-[0.15em] truncate max-w-[28vw] sm:max-w-none mx-auto" style={{ color: `${palette.foreground}66` }}>{label}</p>
               </div>
             ))}
           </div>
@@ -661,37 +661,29 @@ function CathedralQuote({ event }: { event: WeddingEvent }) {
 function StorySection({ event }: { event: WeddingEvent }) {
   const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-
-  const paragraphs = useMemo(() => {
-    return event.longDescription.split(". ").reduce<string[][]>((acc, s, i) => {
-      const g = Math.floor(i / 2);
-      if (!acc[g]) acc[g] = [];
-      acc[g].push(s);
-      return acc;
-    }, []).map((g) => g.join(". ") + (g[g.length - 1].endsWith(".") ? "" : "."));
+  const excerpt = useMemo(() => {
+    const sentences = event.longDescription.split(/(?<=[.!])\s+/);
+    return sentences.slice(0, 2).join(" ").trim() || event.longDescription.slice(0, 280);
   }, [event.longDescription]);
 
   useGSAP(() => {
     const el = ref.current;
     if (!el) return;
-    el.querySelectorAll(".sp-p").forEach((p) => {
-      gsap.fromTo(p, { opacity: 0, y: 30 }, {
-        opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: p, start: "top 85%", toggleActions: "play none none none" },
-      });
+    gsap.fromTo(el.querySelector(".story-quote"), { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" },
     });
   }, { scope: ref });
 
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>The Story · कथा</p>
-        {paragraphs.map((t, i) => (
-          <div key={i}>
-            <p className="sp-p font-serif text-xl md:text-2xl lg:text-[28px] leading-[1.7] md:leading-[1.8] mb-8" style={{ color: `${palette.foreground}dd` }}>{t}</p>
-            {i < paragraphs.length - 1 && <div className="mb-8"><GoldDivider accent={palette.accent} /></div>}
-          </div>
-        ))}
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · माहौल</p>
+        <GoldDivider accent={palette.accent} />
+        <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 mb-6 px-2" style={{ color: `${palette.foreground}dd` }}>
+          &ldquo;{excerpt}&rdquo;
+        </blockquote>
+        <GoldDivider accent={palette.accent} />
       </div>
     </section>
   );
