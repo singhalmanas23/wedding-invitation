@@ -811,19 +811,19 @@ function CourtyardGallery({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
-      <div className="max-w-6xl mx-auto">
+    <section ref={ref} className="py-8 md:py-12 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
+      <div className="max-w-6xl mx-auto w-full min-w-0">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>
           Mood · माहौल
         </p>
-        <div className="columns-2 md:columns-3 gap-3 md:gap-4 space-y-3 md:space-y-4">
+        <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
           {galleryImages.map((src, i) => (
             <div
               key={i}
-              className="gi break-inside-avoid rounded-2xl relative overflow-hidden group cursor-pointer"
+              className="gi break-inside-avoid rounded-2xl relative overflow-hidden group cursor-pointer w-full min-w-0"
               style={{ height: heights[i] || 300 }}
             >
-              <Image src={src} alt={`${event.title} mood ${i + 1}`} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 50vw,33vw" />
+              <Image src={src} alt={`${event.title} mood ${i + 1}`} fill className="object-cover object-center transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 50vw,33vw" />
               <div className="absolute inset-0 opacity-15 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: palette.muted }} />
               <div
                 className="absolute inset-0 opacity-10"
@@ -868,11 +868,11 @@ function CourtyardVenue({ event }: { event: WeddingEvent }) {
         </h3>
         <p className="text-lg mb-12" style={{ color: `${palette.foreground}77` }}>{event.venue}</p>
         <div
-          className="aspect-video rounded-2xl flex items-center justify-center border overflow-hidden relative"
+          className="aspect-video rounded-2xl flex items-center justify-center border overflow-hidden relative w-full max-w-full"
           style={{ backgroundColor: `${palette.muted}60`, borderColor: `${palette.foreground}08` }}
         >
-          <div className="v-img absolute inset-[-20%] w-[140%] h-[140%]">
-            <Image src={event.heroImage} alt={`${event.venue} venue`} fill className="object-cover opacity-40" sizes="(max-width:768px) 100vw,800px" />
+          <div className="v-img absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] min-w-[140%] min-h-[140%]">
+            <Image src={event.heroImage} alt={`${event.venue} venue`} fill className="object-cover object-center opacity-40" sizes="(max-width:768px) 100vw,800px" />
           </div>
           <div className="text-center relative z-10">
             <MapPin size={32} className="mx-auto mb-3 opacity-40" style={{ color: palette.accent }} />
@@ -973,7 +973,7 @@ export default function SecondChapterContent({ event }: ChapterProps) {
                   style={{ borderColor: `${palette.foreground}08`, backgroundColor: `${palette.muted}30` }}
                 >
                   <div className="relative h-28 overflow-hidden">
-                    <Image src={prevEvent.heroImage} alt={prevEvent.title} fill className="object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
+                    <Image src={prevEvent.heroImage} alt={prevEvent.title} fill className="object-cover object-center opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom,transparent,${palette.background}ee)` }} />
                   </div>
                   <div className="p-6 md:p-8 relative">
@@ -992,7 +992,7 @@ export default function SecondChapterContent({ event }: ChapterProps) {
                   style={{ borderColor: `${palette.foreground}08`, backgroundColor: `${palette.muted}30` }}
                 >
                   <div className="relative h-28 overflow-hidden">
-                    <Image src={nextEvent.heroImage} alt={nextEvent.title} fill className="object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
+                    <Image src={nextEvent.heroImage} alt={nextEvent.title} fill className="object-cover object-center opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom,transparent,${palette.background}ee)` }} />
                   </div>
                   <div className="p-6 md:p-8 relative">
