@@ -3,14 +3,6 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-/**
- * Chapter 3 — The Midnight Cathedral (Sangeet)
- * "Cathedral Gone Rogue" atmosphere:
- * - Confetti particles bursting from sides
- * - Sweeping spotlight beams
- * - Stained-glass fragment shapes (colored triangles/diamonds)
- * - Glitter cascade / musical notes floating upward
- */
 
 const CONFETTI_COLORS = [
   "#d4af37", // gold

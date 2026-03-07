@@ -1013,27 +1013,9 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
 
 function VenueSection({ event }: { event: WeddingEvent }) {
   const { palette } = event;
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
-      gsap.fromTo(
-        el.querySelector(".v-img"),
-        { y: 40 },
-        {
-          y: -40,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-        }
-      );
-    },
-    { scope: ref }
-  );
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden">
+    <section className="py-8 md:py-12 px-6 relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -1056,36 +1038,6 @@ function VenueSection({ event }: { event: WeddingEvent }) {
         <p className="text-lg mb-12" style={{ color: `${palette.foreground}88` }}>
           {event.venue}
         </p>
-        <div
-          className="aspect-video rounded-xl flex items-center justify-center border overflow-hidden relative w-full max-w-full"
-          style={{
-            backgroundColor: `${palette.muted}40`,
-            borderColor: `${palette.foreground}10`,
-          }}
-        >
-          <div className="v-img absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] min-w-[140%] min-h-[140%]">
-            <Image
-              src={event.heroImage}
-              alt={`${event.venue} venue`}
-              fill
-              className="object-cover object-center opacity-30"
-              sizes="(max-width:768px) 100vw,800px"
-            />
-          </div>
-          <div className="text-center relative z-10">
-            <MapPin
-              size={32}
-              className="mx-auto mb-3 opacity-50"
-              style={{ color: palette.accent }}
-            />
-            <p
-              className="text-sm font-medium uppercase tracking-[0.15em] opacity-50"
-              style={{ color: palette.foreground }}
-            >
-              Map — Coming Soon
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );

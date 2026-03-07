@@ -843,22 +843,9 @@ function CourtyardGallery({ event }: { event: WeddingEvent }) {
 
 function CourtyardVenue({ event }: { event: WeddingEvent }) {
   const { palette } = event;
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
-      gsap.fromTo(el.querySelector(".v-img"), { y: 30 }, {
-        y: -30, ease: "none",
-        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-      });
-    },
-    { scope: ref }
-  );
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
+    <section className="py-8 md:py-12 px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-4xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>
           Venue · स्थान
@@ -867,18 +854,6 @@ function CourtyardVenue({ event }: { event: WeddingEvent }) {
           {event.location}
         </h3>
         <p className="text-lg mb-12" style={{ color: `${palette.foreground}77` }}>{event.venue}</p>
-        <div
-          className="aspect-video rounded-2xl flex items-center justify-center border overflow-hidden relative w-full max-w-full"
-          style={{ backgroundColor: `${palette.muted}60`, borderColor: `${palette.foreground}08` }}
-        >
-          <div className="v-img absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] min-w-[140%] min-h-[140%]">
-            <Image src={event.heroImage} alt={`${event.venue} venue`} fill className="object-cover object-center opacity-40" sizes="(max-width:768px) 100vw,800px" />
-          </div>
-          <div className="text-center relative z-10">
-            <MapPin size={32} className="mx-auto mb-3 opacity-40" style={{ color: palette.accent }} />
-            <p className="text-sm font-medium uppercase tracking-[0.15em] opacity-40" style={{ color: palette.foreground }}>Map — Coming Soon</p>
-          </div>
-        </div>
       </div>
     </section>
   );
