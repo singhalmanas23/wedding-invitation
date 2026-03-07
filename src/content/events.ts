@@ -26,7 +26,7 @@ export const EVENTS: WeddingEvent[] = [
     description:
       "Before the main celebration in Udaipur, we invite you to Pune — where he grew up — for an evening of opulent revelry. Inspired by Indian palatial architecture, royal gardens, and heritage craftsmanship, the Noor Mahal Soirée sets the tone: cascading crimson florals, antique gold accents, projection mapping that transforms the space into a living work of art.",
     longDescription:
-      "Step through the entrance foyer draped in brocade and velvet. Floral trails cascade from chandeliers. The main stage rises with carved pillars and pearl garlands. Projection mapping brings palace facades and lush gardens to life. This is opulent yet sophisticated — cinematic, transportive, and meticulously curated. Warm amber, blush, and deep jewel tones evolve throughout the evening. Lavish guest seating in emerald and gold. A coffee counter for late-night conversations. This is the opening act — where two families and their closest friends gather in Pune to begin the celebration.",
+      "An opulent opening night in Pune — brocade, florals, and projection mapping in palatial style.",
     dressCode: {
       title: "Royal Evening",
       description: "Opulent and refined. Think rich fabrics, jewel tones, and heritage elegance.",
@@ -72,7 +72,7 @@ export const EVENTS: WeddingEvent[] = [
     description:
       "Inspired by the fresco-lined havelis of Rajasthan, this lunch reimagines the traditional courtyard through a contemporary lens. Traditional motifs meet soft stripes and clean silhouettes, creating a space that feels regal yet fresh.",
     longDescription:
-      "Step through arched doorways into a courtyard dressed in pastels and heritage. Hand-painted frescoes frame every corner while fine bone china and silver service set the table. This is Rajasthan's royal hospitality reimagined — where meticulous Mughal craft meets modern editorial restraint. The afternoon unfolds slowly: courses of regional delicacies, the soft clink of tea cups, and conversations that drift through the jasmine-scented air.",
+      "Rajasthan's royal hospitality in a pastel courtyard — frescoes, fine china, and afternoon tea.",
     dressCode: {
       title: "Pastel Organza Silhouettes",
       description: "Light, airy, and refined. Let the courtyard be your canvas.",
@@ -120,7 +120,7 @@ export const EVENTS: WeddingEvent[] = [
     description:
       "Inspired by the raw, wild energy of the venue, this Sangeet is what happens when a cathedral throws a party and no one stops it. Grand arches, dramatic height, clean symmetry — but inside that structure, the wild takes over.",
     longDescription:
-      "Architecturally, the space rises like a cathedral: grand arches, dramatic height, clean symmetry. But inside that structure, chaos reigns with intention. Projection-mapped stained glass fractures across the walls. The bass reverberates off stone columns. Dancers emerge from shadow. Welcome to Cathedral Gone Rogue — where sacred geometry meets unfiltered celebration, and every corner pulses with the energy of a night that refuses to end quietly.",
+      "A cathedral Sangeet where sacred geometry meets wild celebration and projection-mapped chaos.",
     dressCode: {
       title: "Gilded After Dark",
       description: "Shimmer. Depth. Drama. This night belongs to the bold.",
@@ -166,7 +166,7 @@ export const EVENTS: WeddingEvent[] = [
     description:
       "Mumbai was the first meeting. Pune was where he grew up. London was where friendship became love. December 2023 was when the families came together. A minimalist setting with subtle details that reflect their journey — as they begin a new one together.",
     longDescription:
-      "This is the most personal chapter — an intimate lunch that maps their journey through cities and seasons. Each table represents a chapter that shaped them: the warmth of Mumbai where they first met, the charm of Pune where he grew up, the grey elegance of London where friendship became love, and the joy of 2024 when everything fell beautifully into place. The setting is deceptively simple — clean linen, warm sunlight, olive branches, and handwritten notes — but every detail carries weight. This is not décor. This is autobiography.",
+      "An intimate lunch mapping their journey — Mumbai, Pune, London — in sun-drenched simplicity.",
     dressCode: {
       title: "The Linen Collective",
       description: "Sun-kissed simplicity. Effortless, natural, warm.",
@@ -213,7 +213,7 @@ export const EVENTS: WeddingEvent[] = [
     description:
       "Inspired by two things deeply rooted in Indian weddings: Mughal court architecture and couture craftsmanship. Instead of static décor, the architecture becomes a canvas — heritage interpreted through technology.",
     longDescription:
-      "This is the ceremony. The mandap rises like a Mughal archway — not replicated, but reinterpreted through light, projection, and material innovation. Every surface tells a story: hand-carved motifs merge with laser-cut geometries, traditional phool malas are reimagined in scale and structure. The ceremony unfolds inside this architectural installation — each phera echoed by a shift in light, each mantra accompanied by a visual transformation. This is not a wedding set. This is a living, breathing court.",
+      "The ceremony as living court — Mughal archways reimagined in light, projection, and craft.",
     dressCode: {
       title: "Royal Couture",
       description: "This is the ceremony. Dress with intention. Honour the craft.",
@@ -258,7 +258,7 @@ export const EVENTS: WeddingEvent[] = [
     description:
       "Everyone's heard stories of an abandoned amusement park — but this is not your regular one. Imagine a lost amusement park but with a dark, surreal, and psychedelic twist. There's no script here — only the thrill of rebellion, the echoes of childhood, and the madness of letting go.",
     longDescription:
-      "Step inside and forget everything you know about afterparties. The space has been transformed into a surreal, neon-drenched carnival of the mind — where Ferris wheels spin in projection, funhouse mirrors distort reality, and the bass drops somewhere between childhood nostalgia and pure chaos. This is not an event. This is an experience. A place where time loses meaning, where the dance floor is both sanctuary and storm, and where the only rule is: there are no rules. Welcome to The Thrill Theory.",
+      "A neon-drenched afterparty where the only rule is: there are no rules.",
     dressCode: {
       title: "Speed & Sparkle",
       description: "Go fast, go loud, go home glittering.",
