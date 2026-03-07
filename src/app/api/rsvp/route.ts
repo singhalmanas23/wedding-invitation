@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
+import { sendRsvpNotification } from "@/lib/email";
 import Rsvp from "@/models/Rsvp";
 
 export async function POST(req: NextRequest) {
@@ -31,6 +32,19 @@ export async function POST(req: NextRequest) {
       existing.submittedAt = new Date();
       await existing.save();
 
+      sendRsvpNotification({
+        name,
+        email,
+        phone,
+        attending,
+        eventsAttending,
+        dietaryRestrictions,
+        plusOne,
+        plusOneName,
+        notes,
+        isUpdate: true,
+      }).catch(() => {});
+
       return NextResponse.json(
         { message: "RSVP updated successfully", rsvp: existing },
         { status: 200 }
@@ -48,6 +62,19 @@ export async function POST(req: NextRequest) {
       plusOneName: plusOneName || "",
       notes: notes || "",
     });
+
+    sendRsvpNotification({
+      name,
+      email,
+      phone,
+      attending,
+      eventsAttending,
+      dietaryRestrictions,
+      plusOne,
+      plusOneName,
+      notes,
+      isUpdate: false,
+    }).catch(() => {});
 
     return NextResponse.json(
       { message: "RSVP submitted successfully", rsvp },
