@@ -88,6 +88,7 @@ function JourneyMap({ accent, fg }: { accent: string; fg: string }) {
     { name: "Mumbai", x: 30, y: 65 },
     { name: "Pune", x: 100, y: 55 },
     { name: "London", x: 200, y: 30 },
+    { name: "Cappadocia", x: 275, y: 40 },
     { name: "Udaipur", x: 350, y: 48 },
   ];
 
@@ -96,7 +97,7 @@ function JourneyMap({ accent, fg }: { accent: string; fg: string }) {
       {/* Connecting journey line */}
       <path
         className="journey-line"
-        d="M30 65 C55 60 75 55 100 55 C140 55 160 32 200 30 C250 34 300 44 350 48"
+        d="M30 65 C55 60 75 55 100 55 C140 55 160 32 200 30 C230 32 260 36 275 40 C290 44 320 46 350 48"
         stroke={accent}
         strokeWidth="1"
         opacity="0.5"
@@ -624,6 +625,7 @@ function JourneySection({ event }: { event: WeddingEvent }) {
     { name: "Mumbai", sub: "The First Meeting", detail: "Where they first crossed paths" },
     { name: "Pune", sub: "His Roots", detail: "Where he grew up" },
     { name: "London", sub: "Friends to More", detail: "Where friendship became love" },
+    { name: "Cappadocia", sub: "Adventure Together", detail: "Where they explored and dreamed" },
     { name: "Udaipur", sub: "The Celebration", detail: "Where it all converges" },
   ];
 

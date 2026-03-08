@@ -8,6 +8,7 @@ import { COUPLE, EVENTS } from "@/content/events";
 import { P } from "@/components/shared/RoyalPageLayout";
 
 const NAV_LINKS = [
+  { href: "/wardrobe", label: "Wardrobe" },
   { href: "/itinerary", label: "Itinerary" },
   { href: "/rsvp", label: "RSVP" },
 ];
@@ -44,11 +45,11 @@ export default function Navbar() {
         style={
           scrolled
             ? {
-                backgroundColor: `${P.bg}e6`,
-                backdropFilter: "blur(12px)",
-                borderBottom: `1px solid ${P.gold}08`,
-                boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
-              }
+              backgroundColor: `${P.bg}e6`,
+              backdropFilter: "blur(12px)",
+              borderBottom: `1px solid ${P.gold}08`,
+              boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+            }
             : { backgroundColor: "transparent" }
         }
       >

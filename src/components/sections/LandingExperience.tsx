@@ -224,21 +224,42 @@ function LotusBloomSVG({ className = "" }: { className?: string }) {
 
 function GoldFoilSpeckles() {
   const speckles = useMemo(
-    () => Array.from({ length: 15 }, (_, i) => ({
-      id: i, x: rand(i, 20) * 100, y: rand(i, 21) * 100,
-      size: 1 + rand(i, 22) * 2.5, delay: rand(i, 23) * 8,
-      dur: 3 + rand(i, 24) * 5,
-    })), [],
+    () =>
+      Array.from({ length: 15 }, (_, i) => {
+        const x = Math.round(rand(i, 20) * 10000) / 100;
+        const y = Math.round(rand(i, 21) * 10000) / 100;
+        const size = 1 + rand(i, 22) * 2.5;
+        const delay = rand(i, 23) * 8;
+        const dur = 3 + rand(i, 24) * 5;
+        return {
+          id: i,
+          left: `${Number(x.toFixed(2))}%`,
+          top: `${Number(y.toFixed(2))}%`,
+          size: Number(size.toFixed(2)),
+          delay: Number(delay.toFixed(2)),
+          dur: Number(dur.toFixed(2)),
+        };
+      }),
+    []
   );
   return (
-    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden" suppressHydrationWarning>
       {speckles.map((s) => (
-        <div key={s.id} className="absolute rounded-full" style={{
-          left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size,
-          backgroundColor: P.gold, opacity: 0,
-          animation: `goldFoilSparkle ${s.dur}s ease-in-out ${s.delay}s infinite`,
-          willChange: "opacity",
-        }} />
+        <div
+          key={s.id}
+          className="absolute rounded-full"
+          style={{
+            left: s.left,
+            top: s.top,
+            width: s.size,
+            height: s.size,
+            backgroundColor: P.gold,
+            opacity: 0,
+            animation: `goldFoilSparkle ${String(s.dur)}s ease-in-out ${String(s.delay)}s infinite`,
+            willChange: "opacity",
+          }}
+          suppressHydrationWarning
+        />
       ))}
     </div>
   );
@@ -417,25 +438,46 @@ function JaimalaAnimation({ className = "" }: { className?: string }) {
 function Bokeh() {
   const reduced = useReducedMotion();
   const orbs = useMemo(
-    () => Array.from({ length: 6 }, (_, i) => ({
-      id: i, x: 5 + rand(i, 1) * 90, y: 5 + rand(i, 2) * 90,
-      size: 80 + rand(i, 3) * 140, delay: rand(i, 4) * 6, dur: 14 + rand(i, 5) * 14,
-      color: i % 3 === 0
-        ? `rgba(139,26,26,${(0.03 + rand(i, 6) * 0.05).toFixed(3)})`
-        : `rgba(212,175,55,${(0.02 + rand(i, 6) * 0.04).toFixed(3)})`,
-    })), [],
+    () =>
+      Array.from({ length: 6 }, (_, i) => {
+        const x = Math.round((5 + rand(i, 1) * 90) * 100) / 100;
+        const y = Math.round((5 + rand(i, 2) * 90) * 100) / 100;
+        const size = 80 + rand(i, 3) * 140;
+        const delay = rand(i, 4) * 6;
+        const dur = 14 + rand(i, 5) * 14;
+        const color =
+          i % 3 === 0
+            ? `rgba(139,26,26,${(0.03 + rand(i, 6) * 0.05).toFixed(3)})`
+            : `rgba(212,175,55,${(0.02 + rand(i, 6) * 0.04).toFixed(3)})`;
+        return {
+          id: i,
+          left: `${Number(x.toFixed(2))}%`,
+          top: `${Number(y.toFixed(2))}%`,
+          size: Number(size.toFixed(2)),
+          delay: Number(delay.toFixed(2)),
+          dur: Number(dur.toFixed(2)),
+          color,
+        };
+      }),
+    []
   );
   if (reduced) return null;
   return (
-    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden" suppressHydrationWarning>
       {orbs.map((o) => (
-        <div key={o.id} className="absolute rounded-full"
+        <div
+          key={o.id}
+          className="absolute rounded-full"
           style={{
-            left: `${o.x}%`, top: `${o.y}%`, width: o.size, height: o.size,
+            left: o.left,
+            top: o.top,
+            width: o.size,
+            height: o.size,
             background: `radial-gradient(circle, ${o.color}, transparent 70%)`,
-            animation: `float ${o.dur}s ease-in-out ${o.delay}s infinite`,
+            animation: `float ${String(o.dur)}s ease-in-out ${String(o.delay)}s infinite`,
             willChange: "transform",
           }}
+          suppressHydrationWarning
         />
       ))}
     </div>
@@ -445,31 +487,49 @@ function Bokeh() {
 function DreamParticles({ count }: { count: number }) {
   const reduced = useReducedMotion();
   const particles = useMemo(
-    () => Array.from({ length: Math.min(count, 18) }, (_, i) => {
-      const isPetal = i % 5 === 0;
-      const s = i + 100;
-      return {
-        id: i, isPetal, x: rand(s, 1) * 100, y: 50 + rand(s, 2) * 50,
-        size: isPetal ? 4 + rand(s, 3) * 5 : 1.5 + rand(s, 3) * 3,
-        delay: rand(s, 4) * 10, dur: isPetal ? 12 + rand(s, 5) * 10 : 6 + rand(s, 5) * 8,
-        opacity: isPetal ? 0.12 + rand(s, 7) * 0.18 : 0.2 + rand(s, 7) * 0.5,
-      };
-    }), [count],
+    () =>
+      Array.from({ length: Math.min(count, 18) }, (_, i) => {
+        const isPetal = i % 5 === 0;
+        const s = i + 100;
+        const x = Math.round(rand(s, 1) * 10000) / 100;
+        const y = Math.round((50 + rand(s, 2) * 50) * 100) / 100;
+        const size = isPetal ? 4 + rand(s, 3) * 5 : 1.5 + rand(s, 3) * 3;
+        const delay = rand(s, 4) * 10;
+        const dur = isPetal ? 12 + rand(s, 5) * 10 : 6 + rand(s, 5) * 8;
+        const opacity = isPetal ? 0.12 + rand(s, 7) * 0.18 : 0.2 + rand(s, 7) * 0.5;
+        return {
+          id: i,
+          isPetal,
+          left: `${Number(x.toFixed(2))}%`,
+          bottom: `${Number((100 - y).toFixed(2))}%`,
+          size: Number(size.toFixed(2)),
+          delay: Number(delay.toFixed(2)),
+          dur: Number(dur.toFixed(2)),
+          opacity: Number(opacity.toFixed(3)),
+        };
+      }),
+    [count]
   );
   if (reduced) return null;
   return (
-    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none z-1 overflow-hidden" suppressHydrationWarning>
       {particles.map((p) => (
-        <div key={p.id} className="absolute rounded-full"
+        <div
+          key={p.id}
+          className="absolute rounded-full"
           style={{
-            left: `${p.x}%`, bottom: `${100 - p.y}%`, width: p.size, height: p.size,
+            left: p.left,
+            bottom: p.bottom,
+            width: p.size,
+            height: p.size,
             background: p.isPetal
               ? `rgba(160,40,40,${p.opacity})`
               : `radial-gradient(circle, rgba(212,175,55,${p.opacity}), transparent 70%)`,
             borderRadius: p.isPetal ? "50% 0 50% 50%" : "50%",
-            animation: `fadeInUp ${p.dur}s ease-out ${p.delay}s infinite`,
+            animation: `fadeInUp ${String(p.dur)}s ease-out ${String(p.delay)}s infinite`,
             willChange: "transform, opacity",
           }}
+          suppressHydrationWarning
         />
       ))}
     </div>
@@ -1065,96 +1125,77 @@ function VenueShowcase() {
 }
 
 /* ─────────────────────────────────────────────────────────────── */
-/*  Day Divider (for gallery)                                      */
+/*  Chapter story row — image + content, alternating left/right     */
 /* ─────────────────────────────────────────────────────────────── */
 
-function DayDivider({ day, label, date, mood }: { day: number; label: string; date: string; mood: string }) {
-  const archLabel = day === 0 ? "P" : String(day).padStart(2, "0");
-  return (
-    <div className="flex-shrink-0 flex items-center justify-center" style={{ width: "22vw", height: "82vh" }}>
-      <div className="text-center">
-        <div className="w-16 h-24 mx-auto mb-6">
-          <MughalArch>
-            <span className="font-serif text-lg" style={{ color: `${P.gold}33` }}>{archLabel}</span>
-          </MughalArch>
-        </div>
-        <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${P.cream}99` }}>
-          {label}
-        </p>
-        <p className="text-[10px] uppercase tracking-[0.25em] font-body mb-2" style={{ color: `${P.gold}40` }}>
-          {date}
-        </p>
-        <p className="font-serif italic text-xs" style={{ color: `${P.cream}2e` }}>
-          {mood}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────── */
-/*  Chapter Story Card (immersive moodboard)                       */
-/* ─────────────────────────────────────────────────────────────── */
-
-function ChapterStoryCard({ event }: { event: (typeof EVENTS)[0] }) {
-  const isLight = event.slug === "courtyard-edit" || event.slug === "world-of-our-own";
-  const accent = isLight ? "#d4a060" : event.palette.accent;
-  const preview = event.longDescription.split(". ").slice(0, 2).join(". ") + ".";
+function ChapterStoryRow({
+  event,
+  contentOn,
+}: {
+  event: (typeof EVENTS)[0];
+  contentOn: "left" | "right";
+}) {
+  const { palette } = event;
+  const isContentRight = contentOn === "right";
 
   return (
-    <Link href={`/chapter/${event.slug}`} className="chapter-card group relative flex-shrink-0 block" style={{ width: "75vw", height: "82vh" }}>
-      <div className="relative w-full h-full rounded-lg overflow-hidden">
-        <div className="absolute inset-0 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]">
-          <Image src={event.heroImage} alt={event.title} fill className="object-cover" sizes="75vw" />
-        </div>
-
-        <div className="absolute inset-0 bg-black/45 group-hover:bg-black/55 transition-colors duration-700" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.2) 55%, transparent 75%)" }} />
-
-        <div className="absolute top-6 right-6 md:top-8 md:right-8">
-          <span className="font-serif text-[clamp(4rem,8vw,7rem)] leading-none select-none" style={{ color: `${accent}10` }}>
-            {String(event.chapterNumber).padStart(2, "0")}
-          </span>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-12">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-6 md:w-10" style={{ backgroundColor: `${accent}60` }} />
-            <span className="text-[9px] uppercase tracking-[0.4em] font-body" style={{ color: accent }}>
-              Chapter {String(event.chapterNumber).padStart(2, "0")}
+    <Link
+      href={`/chapter/${event.slug}`}
+      className="chapter-story-row group block overflow-hidden rounded-lg transition-all duration-500 hover:opacity-95"
+      style={{
+        border: `1px solid ${P.gold}0a`,
+        backgroundColor: `${P.muted}15`,
+      }}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-0 min-h-[280px] md:min-h-[320px]">
+        {/* Image half — order-2 on md when content is left (so image appears right) */}
+        <div
+          className={`relative h-56 md:h-full md:min-h-[320px] overflow-hidden ${!isContentRight ? "md:order-2" : ""}`}
+        >
+          <Image
+            src={event.heroImage}
+            alt={event.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to bottom, ${palette.primary}80 0%, ${palette.background}dd 50%, ${palette.background} 100%)`,
+            }}
+          />
+          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors duration-500" />
+          <div className="absolute top-4 right-4 z-10">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-body" style={{ color: `${palette.foreground}80` }}>
+              {String(event.chapterNumber).padStart(2, "0")}
             </span>
           </div>
+        </div>
 
-          <h3 className="font-serif text-3xl md:text-5xl lg:text-6xl mb-2" style={{ color: "#fff", textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}>
+        {/* Content half — order-1 on md when content is left */}
+        <div
+          className={`flex flex-col justify-center p-6 md:p-8 lg:p-10 text-left ${!isContentRight ? "md:order-1" : ""}`}
+        >
+          <p className="text-[10px] uppercase tracking-[0.2em] font-body mb-3" style={{ color: `${P.cream}50` }}>
+            {event.date} · {event.time}
+          </p>
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-2 leading-tight" style={{ color: `${P.cream}dd` }}>
             {event.title}
           </h3>
-          <p className="font-serif italic text-base md:text-xl mb-4" style={{ color: accent, textShadow: `0 0 20px ${accent}20` }}>
+          <p className="font-serif text-sm md:text-base italic mb-4" style={{ color: `${palette.accent}cc` }}>
             {event.subtitle}
           </p>
-
-          <p className="font-body text-xs md:text-sm leading-relaxed max-w-lg mb-5 line-clamp-3" style={{ color: "rgba(255,255,255,0.6)" }}>
-            {preview}
+          <p className="text-[13px] md:text-sm font-body line-clamp-2 md:line-clamp-3 leading-relaxed mb-5" style={{ color: `${P.cream}60` }}>
+            {event.tagline}
           </p>
-
-          <div className="flex items-center gap-3 flex-wrap mb-4">
-            <span className="text-[9px] uppercase tracking-[0.2em] font-body" style={{ color: "rgba(255,255,255,0.4)" }}>
-              {event.date} · {event.time}
-            </span>
-            <span className="text-[9px] font-body" style={{ color: "rgba(255,255,255,0.12)" }}>|</span>
-            <span className="text-[9px] uppercase tracking-[0.2em] font-body" style={{ color: "rgba(255,255,255,0.35)" }}>
+          <div className="flex items-center justify-between pt-4" style={{ borderTop: `1px solid ${P.gold}12` }}>
+            <span className="text-[10px] uppercase tracking-[0.15em] font-body" style={{ color: `${P.cream}40` }}>
               {event.location}
             </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-[9px] uppercase tracking-[0.15em] font-body px-3 py-1.5 rounded-full" style={{ color: `${accent}cc`, border: `1px solid ${accent}20`, backgroundColor: `${accent}08` }}>
-              ✦ {event.dressCode.title}
+            <span className="text-sm group-hover:translate-x-1 transition-transform duration-300" style={{ color: P.gold }}>
+              →
             </span>
-            <div className="overflow-hidden h-5 ml-auto">
-              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-body translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" style={{ color: "rgba(255,255,255,0.6)" }}>
-                Step Inside <span style={{ color: accent }}>→</span>
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -1163,67 +1204,60 @@ function ChapterStoryCard({ event }: { event: (typeof EVENTS)[0] }) {
 }
 
 /* ─────────────────────────────────────────────────────────────── */
-/*  Chapter Gallery (GSAP horizontal scroll with day dividers)     */
+/*  The Chapters — alternating story rows with day groupings       */
 /* ─────────────────────────────────────────────────────────────── */
 
-function ChapterGallery() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
+function ChapterJourneySection() {
+  const ref = useRef<HTMLElement>(null);
+  let rowIndex = 0;
 
   useGSAP(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const totalScroll = track.scrollWidth - window.innerWidth;
-
-    gsap.to(track, {
-      x: -totalScroll,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        pin: true,
-        scrub: 1,
-        end: () => `+=${totalScroll}`,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (progressRef.current) {
-            progressRef.current.style.transform = `scaleX(${self.progress})`;
-          }
-        },
-      },
+    const el = ref.current;
+    if (!el) return;
+    gsap.fromTo(el.querySelectorAll(".chapter-day-label"), { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 82%", toggleActions: "play none none none" },
     });
-  }, { scope: sectionRef });
+    gsap.fromTo(el.querySelectorAll(".chapter-story-row"), { opacity: 0, y: 28 }, {
+      opacity: 1, y: 0, duration: 0.65, stagger: 0.1, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" },
+    });
+  }, { scope: ref });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ backgroundColor: P.bg }}>
-      <div className="absolute top-0 left-0 right-0 z-20 pt-8 pb-4 text-center pointer-events-none" style={{ background: `linear-gradient(to bottom, ${P.bg}, transparent)` }}>
+    <section ref={ref} className="relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: P.bg }}>
+      <div className="absolute top-0 left-0 right-0 z-10 pt-8 pb-6 text-center pointer-events-none" style={{ background: `linear-gradient(to bottom, ${P.bg}, transparent)` }}>
         <Flourish className="mb-3" />
-        <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}59` }}>
+        <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}99` }}>
           The Chapters
         </span>
       </div>
 
-      <div ref={trackRef} className="flex items-center gap-3 md:gap-4 px-[10vw] h-screen" style={{ width: "fit-content" }}>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-20 space-y-10 md:space-y-14">
         {DAYS.map((d) => (
           <Fragment key={`day-${d.day}`}>
-            <DayDivider day={d.day} label={d.label} date={d.date} mood={d.mood} />
-            {d.events.map((event) => (
-              <ChapterStoryCard key={event.slug} event={event} />
-            ))}
+            <div className="chapter-day-label flex flex-col items-center text-center">
+              <p className="font-serif text-2xl md:text-3xl mb-1" style={{ color: P.cream }}>
+                {d.day === 0 ? "Pre Party" : `Day ${d.day}`}
+              </p>
+              <p className="text-[10px] uppercase tracking-[0.25em] font-body mb-2" style={{ color: `${P.gold}66` }}>
+                {d.date}
+              </p>
+              <p className="font-serif italic text-sm md:text-base" style={{ color: `${P.cream}55` }}>
+                {d.mood}
+              </p>
+            </div>
+
+            <div className="space-y-6 md:space-y-8">
+              {d.events.map((event) => {
+                const contentOn = rowIndex++ % 2 === 0 ? "right" : "left";
+                return (
+                  <ChapterStoryRow key={event.slug} event={event} contentOn={contentOn} />
+                );
+              })}
+            </div>
           </Fragment>
         ))}
-      </div>
-
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 w-32 md:w-48">
-        <div className="flex justify-between mb-2">
-          <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Pre-Party</span>
-          <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Day 1</span>
-          <span className="text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}33` }}>Day 2</span>
-        </div>
-        <div className="h-px" style={{ backgroundColor: `${P.cream}15` }}>
-          <div ref={progressRef} className="h-full origin-left" style={{ backgroundColor: P.gold, transform: "scaleX(0)" }} />
-        </div>
       </div>
     </section>
   );
@@ -1421,7 +1455,7 @@ export default function LandingExperience() {
       <RitualTransition variant="mandala" />
       <VenueShowcase />
       <RitualTransition variant="silk" />
-      <ChapterGallery />
+      <ChapterJourneySection />
       <RitualTransition variant="mandala" />
       <RoyalTimeline />
       <RitualTransition variant="lotus" />
