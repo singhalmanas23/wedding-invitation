@@ -1162,12 +1162,12 @@ function ChapterStoryRow({
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(to bottom, ${palette.primary}80 0%, ${palette.background}dd 50%, ${palette.background} 100%)`,
+              background: `linear-gradient(to bottom, ${palette.primary}25 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.45) 100%)`,
             }}
           />
-          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
           <div className="absolute top-4 right-4 z-10">
-            <span className="text-[10px] uppercase tracking-[0.3em] font-body" style={{ color: `${palette.foreground}80` }}>
+            <span className="text-[10px] uppercase tracking-[0.3em] font-body" style={{ color: "rgba(255,255,255,0.7)" }}>
               {String(event.chapterNumber).padStart(2, "0")}
             </span>
           </div>

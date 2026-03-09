@@ -44,7 +44,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#4a1a1a",
       gradientTo: "#1a0a0a",
     },
-    heroImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1637477782555-4f161ea61fd5?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1920&q=80",
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80",
@@ -84,7 +84,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#f5dde0",
       gradientTo: "#f0d8dc",
     },
-    heroImage: "https://images.unsplash.com/photo-1759387758817-1a1861261963?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1744698277059-e6fcda5c88ea?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1759387758817-1a1861261963?w=1920&q=80",
       "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80",
@@ -124,7 +124,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#1a3a2a",
       gradientTo: "#0d2818",
     },
-    heroImage: "https://images.unsplash.com/photo-1548013146-72479768bada?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1621313414874-ebdd09ebe4ce?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80",
       "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&q=80",
@@ -163,7 +163,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#f0e4c8",
       gradientTo: "#e8dab0",
     },
-    heroImage: "https://images.unsplash.com/photo-1744731057799-be86ef10be54?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1764397576344-d273f4835f83?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1744731057799-be86ef10be54?w=1920&q=80",
       "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80",
@@ -203,7 +203,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#2e1212",
       gradientTo: "#1a0808",
     },
-    heroImage: "https://images.unsplash.com/photo-1529634801-5a2006b904d2?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1587271636175-90d58cdad458?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80",
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80",
@@ -243,7 +243,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#1a0a2e",
       gradientTo: "#0f0a1a",
     },
-    heroImage: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1763634708237-83b58f11b69e?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&q=80",
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80",
