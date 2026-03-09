@@ -1,4 +1,4 @@
-import { EVENTS } from "@/content/events";
+import { EVENTS_FOR_CHAPTER_NAV } from "@/content/events";
 
 export const W = {
   // Generated Unique Looks
@@ -33,7 +33,7 @@ export const W = {
   haldiIllustration: "/images/wardrobe/illustrations/haldi.png",
 } as const;
 
-export const WARDROBE_CHAPTER_IDS = EVENTS.map((e) => e.slug);
+export const WARDROBE_CHAPTER_IDS = EVENTS_FOR_CHAPTER_NAV.map((e) => e.slug);
 
 /* ─── Interfaces ────────────────────────────────────────────────────── */
 

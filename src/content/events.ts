@@ -269,6 +269,9 @@ export const EVENTS: WeddingEvent[] = [
   },
 ];
 
+/** Chapters to show in nav/menus (Farewell only on itinerary page) */
+export const EVENTS_FOR_CHAPTER_NAV = EVENTS.filter((e) => e.slug !== "farewell");
+
 export const FAQ_DATA = [
   {
     question: "What is the dress code?",

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { EVENTS } from "@/content/events";
+import { EVENTS_FOR_CHAPTER_NAV } from "@/content/events";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ChapterCard } from "@/components/shared/ChapterCard";
 import FadeInView from "@/components/motion/FadeInView";
@@ -27,12 +27,12 @@ export function ChaptersSection() {
         <FadeInView>
           <SectionHeading
             title="The Chapters"
-            subtitle="Seven chapters. From Pune to Udaipur. One celebration."
+            subtitle="Six chapters. From Pune to Udaipur. One celebration."
           />
         </FadeInView>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mt-16 md:mt-20">
-          {EVENTS.map((event, i) => (
+          {EVENTS_FOR_CHAPTER_NAV.map((event, i) => (
             <FadeInView key={event.slug} delay={i * 0.08}>
               <ChapterCard event={event} />
             </FadeInView>

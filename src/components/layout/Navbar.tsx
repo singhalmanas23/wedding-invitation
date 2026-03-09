@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { COUPLE, EVENTS } from "@/content/events";
+import { COUPLE, EVENTS_FOR_CHAPTER_NAV } from "@/content/events";
 import { P } from "@/components/shared/RoyalPageLayout";
 
 const NAV_LINKS = [
@@ -100,7 +100,7 @@ export default function Navbar() {
                         boxShadow: "0 12px 40px rgba(0,0,0,0.4)",
                       }}
                     >
-                      {EVENTS.map((event) => (
+                      {EVENTS_FOR_CHAPTER_NAV.map((event) => (
                         <Link
                           key={event.slug}
                           href={`/chapter/${event.slug}`}
@@ -236,7 +236,7 @@ export default function Navbar() {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col gap-2 overflow-hidden"
                   >
-                    {EVENTS.map((event, i) => (
+                    {EVENTS_FOR_CHAPTER_NAV.map((event, i) => (
                       <Link
                         key={event.slug}
                         href={`/chapter/${event.slug}`}
