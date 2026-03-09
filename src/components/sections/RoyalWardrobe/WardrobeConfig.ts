@@ -8,6 +8,9 @@ const W = {
   womenMetallicFusion: "/images/wardrobe/women_concept_saree_metallic_corset_fusion_1772910192380.png",
   menSherwani: "/images/wardrobe/men_royal_sherwani_maroon_gold_1772910208836.png",
   womenLehenga: "/images/wardrobe/women_heritage_red_lehanga_gold_1772910224600.png",
+  /** The Pre-Party — man in blazer/suit (men), model in elegant saree (women). */
+  prePartyMen: "https://images.unsplash.com/photo-1700940994953-45a022ccd8bf?w=800&q=80",
+  prePartyWomen: "https://images.unsplash.com/photo-1756483510803-eb23dedd21ab?w=800&q=80",
   /** The Courtyard Edit — pastel floral suits (men), ornate lehengas in garden setting (women). */
   courtyardEditMen: "/images/wardrobe/courtyard_edit_men.png",
   courtyardEditWomen: "/images/wardrobe/courtyard_edit_women.png",
@@ -86,18 +89,18 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
         },
         mood: "Formal, cinematic evening",
         men: [
-            { id: "pp-m-1", name: "Velvet Dinner Jacket / Bandhgala", description: "Rich velvet or brocade jacket for the soirée.", image: W.menSherwani, tags: ["Formal", "Evening"] },
-            { id: "pp-m-2", name: "Formal Sherwani", description: "Embellished sherwani or bandhgala, jewel tones.", image: W.menAsymmetricAchkan, tags: ["Royal", "Evening"] },
-            { id: "pp-m-3", name: "Statement Jacket", description: "Black tie or Indian formal with bow tie / pocket square.", image: W.menPastelBandi, tags: ["Velvet", "Luxury"] },
+            { id: "pp-m-1", name: "Velvet Dinner Jacket / Bandhgala", description: "Rich velvet or brocade jacket for the soirée.", image: W.prePartyMen, tags: ["Formal", "Evening"] },
+            { id: "pp-m-2", name: "Formal Sherwani", description: "Embellished sherwani or bandhgala, jewel tones.", image: W.prePartyMen, tags: ["Royal", "Evening"] },
+            { id: "pp-m-3", name: "Statement Jacket", description: "Black tie or Indian formal with bow tie / pocket square.", image: W.prePartyMen, tags: ["Velvet", "Luxury"] },
         ],
         women: [
-            { id: "pp-w-1", name: "Evening Lehanga / Gown", description: "Satin or silk, maroon, gold, emerald, or blush.", image: W.womenLehenga, tags: ["Evening", "Elegant"] },
-            { id: "pp-w-2", name: "Statement Saree or Gown", description: "Off-shoulder or column, minimal luxury jewelry.", image: W.womenMetallicFusion, tags: ["Satin", "Formal"] },
-            { id: "pp-w-3", name: "Metallic Accents", description: "Metallic heels, statement jewellery.", image: W.womenOrganzaSaree, tags: ["Luxury", "Formal"] },
+            { id: "pp-w-1", name: "Evening Lehanga / Gown", description: "Satin or silk, maroon, gold, emerald, or blush.", image: W.prePartyWomen, tags: ["Evening", "Elegant"] },
+            { id: "pp-w-2", name: "Statement Saree or Gown", description: "Off-shoulder or column, minimal luxury jewelry.", image: W.prePartyWomen, tags: ["Satin", "Formal"] },
+            { id: "pp-w-3", name: "Metallic Accents", description: "Metallic heels, statement jewellery.", image: W.prePartyWomen, tags: ["Luxury", "Formal"] },
         ],
         realisticImages: {
-            men: W.menSherwani,
-            women: W.womenLehenga,
+            men: W.prePartyMen,
+            women: W.prePartyWomen,
         },
         palette: { primary: "#1a0a0a", accents: ["#c9a84c", "#d4af37"], bestColors: ["Black", "Ivory", "Gold"], avoidColors: ["Neon", "Denim", "Casual"] },
         silhouettes: ["Tuxedo", "Column Gown", "Floor-Length"],

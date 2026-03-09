@@ -44,7 +44,7 @@ export const EVENTS: WeddingEvent[] = [
       gradientVia: "#4a1a1a",
       gradientTo: "#1a0a0a",
     },
-    heroImage: "https://images.unsplash.com/photo-1637477782555-4f161ea61fd5?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1746549855902-0028190ed877?w=1920&q=80",
     galleryImages: [
       "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1920&q=80",
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80",
