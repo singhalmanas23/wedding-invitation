@@ -624,29 +624,29 @@ function SacredPrelude({ onComplete }: { onComplete: () => void }) {
         </div>
       </div>
 
-      <div className="sp-inner flex flex-col items-center relative z-10">
+      <div className="sp-inner flex flex-col items-center relative z-10 w-full px-4">
         {/* Diya at center top */}
-        <div className="sp-diya mb-4">
+        <div className="sp-diya mb-2 md:mb-4">
           <DiyaFlame size="md" />
         </div>
 
         {/* Ganesh invocation */}
-        <p className="sp-ganesh font-serif text-xs md:text-sm mb-2" style={{ color: `${P.gold}60` }}>
+        <p className="sp-ganesh font-serif text-xs md:text-sm mb-1 md:mb-2" style={{ color: `${P.gold}60` }}>
           श्री गणेशाय नमः
         </p>
 
         {/* Shubh Vivah in Devanagari */}
-        <p className="sp-vivah font-serif text-sm md:text-base mb-6" style={{ color: `${P.gold}90` }}>
+        <p className="sp-vivah font-serif text-sm md:text-base mb-4 md:mb-6" style={{ color: `${P.gold}90` }}>
           शुभ विवाह
         </p>
 
         {/* Jharokha arch */}
-        <div className="sp-arch w-28 h-40 md:w-36 md:h-52 mb-6">
+        <div className="sp-arch w-24 h-32 md:w-36 md:h-52 mb-4 md:mb-6">
           <JharokhaArch />
         </div>
 
         {/* Ornamental divider */}
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center justify-center gap-3 mb-5 md:mb-8">
           <div className="sp-line-l h-px w-16 md:w-24 origin-right" style={{ backgroundColor: `${P.gold}40` }} />
           <div className="sp-diamond w-2.5 h-2.5" style={{ backgroundColor: `${P.gold}70`, boxShadow: `0 0 12px ${P.gold}30` }} />
           <div className="sp-line-r h-px w-16 md:w-24 origin-left" style={{ backgroundColor: `${P.gold}40` }} />
@@ -776,14 +776,14 @@ function Hero({ loaded }: { loaded: boolean }) {
       </div>
 
       {/* ── Content ── */}
-      <div className="hero-content relative z-10 text-center px-6 max-w-5xl mx-auto invisible">
+      <div className="hero-content relative z-10 w-full text-center px-4 sm:px-6 max-w-5xl mx-auto invisible">
         {/* Devanagari cultural text */}
-        <p className="hero-sanskrit text-xs md:text-sm mb-6 mt-16 md:mt-20" style={{ color: `${P.gold}80` }}>
+        <p className="hero-sanskrit text-xs md:text-sm mb-4 md:mb-6 mt-10 sm:mt-14 md:mt-20" style={{ color: `${P.gold}80` }}>
           शुभ विवाह
         </p>
 
         {/* Mughal arch framing names */}
-        <div className="relative mx-auto" style={{ maxWidth: "34rem" }}>
+        <div className="relative mx-auto w-full" style={{ maxWidth: "34rem" }}>
           <svg viewBox="0 0 400 420" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[42%] w-[92%] md:w-[88%] h-auto pointer-events-none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path ref={archOuterRef} d="M20 420 V155 Q20 15 200 5 Q380 15 380 155 V420" stroke={`${P.gold}22`} strokeWidth="0.8" />
             <path ref={archInnerRef} d="M38 420 V162 Q38 32 200 20 Q362 32 362 162 V420" stroke={`${P.gold}10`} strokeWidth="0.5" />
@@ -796,7 +796,7 @@ function Hero({ loaded }: { loaded: boolean }) {
           <div className="hero-name-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 45%, rgba(212,175,55,0.07), transparent 60%)` }} />
 
           {/* Ornamental line */}
-          <div className="hero-orn flex items-center justify-center gap-3 mb-8 origin-center relative z-10">
+          <div className="hero-orn flex items-center justify-center gap-3 mb-5 md:mb-8 origin-center relative z-10">
             <div className="h-px w-10 md:w-20" style={{ background: `linear-gradient(to right, transparent, ${P.gold}26 50%, ${P.gold}4d)` }} />
             <div className="flex items-center gap-2">
               <div className="w-1 h-1 rounded-full" style={{ backgroundColor: `${P.gold}4d` }} />
@@ -814,7 +814,7 @@ function Hero({ loaded }: { loaded: boolean }) {
                   <span key={`p1-${i}`} className="hero-char inline-block" style={{ color: P.cream, textShadow: `0 0 80px rgba(139,26,26,0.2), 0 0 40px rgba(212,175,55,0.08), 0 2px 40px rgba(0,0,0,0.4)`, transformStyle: "preserve-3d" }}>{c}</span>
                 ))}
               </span>
-              <span className="hero-amp block font-serif italic text-[clamp(2rem,5vw,4.5rem)] my-2 md:my-3" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>&amp;</span>
+              <span className="hero-amp block font-serif italic text-[clamp(2rem,5vw,4.5rem)] my-1.5 md:my-3" style={{ background: `linear-gradient(180deg, ${P.gold}, ${P.bronze})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>&amp;</span>
               <span className="block text-[clamp(3rem,10vw,9rem)]">
                 {COUPLE.partner2.split("").map((c, i) => (
                   <span key={`p2-${i}`} className="hero-char inline-block" style={{ color: P.cream, textShadow: `0 0 80px rgba(139,26,26,0.2), 0 0 40px rgba(212,175,55,0.08), 0 2px 40px rgba(0,0,0,0.4)`, transformStyle: "preserve-3d" }}>{c}</span>
@@ -828,7 +828,7 @@ function Hero({ loaded }: { loaded: boolean }) {
         </div>
 
         {/* Jaimala animation */}
-        <div className="hero-fade mt-2">
+        <div className="hero-fade mt-1 md:mt-2">
           <JaimalaAnimation />
         </div>
 

@@ -786,31 +786,81 @@ function WorldDressCode({ event }: { event: WeddingEvent }) {
    GALLERY + VENUE
    ═══════════════════════════════════════════════════════════════════ */
 
-function WorldGallery({ event }: { event: WeddingEvent }) {
-  const { palette, galleryImages } = event;
+function WorldMoodSection({ event }: { event: WeddingEvent }) {
+  const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-  const heights = [360, 260, 320, 240];
-
-  useGSAP(() => {
-    const el = ref.current;
-    if (!el) return;
-    gsap.fromTo(el.querySelectorAll(".gi"), { opacity: 0, scale: 0.9, y: 35 }, {
-      opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" },
-    });
-  }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: "#c8b89c" }}>
-      <div className="max-w-6xl mx-auto w-full min-w-0">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: "#5a4530" }}>Mood · माहौल</p>
-        <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
-          {galleryImages.map((src, i) => (
-            <div key={i} className="gi break-inside-avoid rounded-none relative overflow-hidden group cursor-pointer w-full min-w-0" style={{ height: heights[i] || 280 }}>
-              <Image src={src} alt={`mood ${i + 1}`} fill className="object-cover object-center transition-transform duration-700 group-hover:scale-110" sizes="(max-width:768px) 50vw,33vw" />
-              <div className="absolute inset-0 opacity-20 group-hover:opacity-5 transition-opacity duration-500" style={{ backgroundColor: palette.primary }} />
-            </div>
-          ))}
+    <section
+      ref={ref}
+      className="py-24 md:py-36 relative overflow-hidden"
+      style={{ backgroundColor: "#c8b89c" }}
+    >
+      {/* Continuity texture & sun-glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage: `radial-gradient(circle at 60% 40%, #fff7e6 0%, transparent 60%), url("https://www.transparenttextures.com/patterns/parchment.png")`,
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Magazine-style Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-4 mb-6">
+            <div className="h-px w-8 bg-[#5a4530] opacity-20" />
+            <p
+              className="text-[10px] uppercase tracking-[0.5em] font-medium"
+              style={{ color: "#5a4530" }}
+            >
+              The Collective Narrative · संचय
+            </p>
+            <div className="h-px w-8 bg-[#5a4530] opacity-20" />
+          </div>
+
+          <h3
+            className="font-serif text-5xl md:text-7xl mb-10 tracking-tight text-[#4a3520]"
+          >
+            Sun-Drenched <span className="opacity-40 italic">&amp;</span> Simple
+          </h3>
+
+          <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed text-[#5a4530] opacity-70">
+            A minimalist sanctuary where every texture tells a story of the cities that brought us together.
+          </p>
+        </div>
+
+        {/* Featured Gallery Piece */}
+        <div className="relative max-w-5xl mx-auto">
+          <div className="absolute -inset-1 border border-[#5a4530]/10 pointer-events-none z-20" />
+          <div className="absolute inset-0 bg-[#4a3520]/20 blur-3xl opacity-10 -z-10" />
+
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#e8dab0]">
+            <div className="absolute inset-0 bg-[#4a3520]/5 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
+            <Image
+              src={event.heroImage}
+              alt={`${event.title} Mood`}
+              fill
+              className="object-cover transition-transform duration-[4s] hover:scale-105"
+              priority
+            />
+
+            {/* Mood Vignette - Sun-kissed */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `linear-gradient(to bottom, #c8b89cdd 0%, transparent 12%, transparent 88%, #c8b89cee 100%)`,
+              }}
+            />
+          </div>
+
+          {/* Decorative Label */}
+          <div className="absolute -bottom-6 right-12 z-20">
+            <p
+              className="font-serif italic text-sm opacity-40 text-[#5a4530]"
+            >
+              Archive Ref. 04 — The Linen Journey
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -879,7 +929,7 @@ export default function FifthChapterContent({ event }: ChapterProps) {
       <div className="flex justify-center py-2" style={{ backgroundColor: "#c8b89c" }}><LotusDivider accent={palette.accent} /></div>
       <WorldDressCode event={event} />
       <div className="flex justify-center py-2" style={{ backgroundColor: "#c8b89c" }}><LotusDivider accent={palette.accent} /></div>
-      <WorldGallery event={event} />
+      <WorldMoodSection event={event} />
       <div className="flex justify-center py-2" style={{ backgroundColor: "#c8b89c" }}><LotusDivider accent={palette.accent} /></div>
       <WorldVenue event={event} />
 
@@ -894,7 +944,7 @@ export default function FifthChapterContent({ event }: ChapterProps) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {prevEvent && (
-                <Link href={`/chapter/${prevEvent.slug}`} className="group rounded-xl overflow-hidden border transition-all duration-500 relative"               style={{ borderColor: `${palette.foreground}10`, backgroundColor: `${palette.foreground}08` }}>
+                <Link href={`/chapter/${prevEvent.slug}`} className="group rounded-xl overflow-hidden border transition-all duration-500 relative" style={{ borderColor: `${palette.foreground}10`, backgroundColor: `${palette.foreground}08` }}>
                   <div className="relative h-28 overflow-hidden">
                     <Image src={prevEvent.heroImage} alt={prevEvent.title} fill className="object-cover object-center opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom,transparent,#c8b89cee)` }} />
@@ -908,7 +958,7 @@ export default function FifthChapterContent({ event }: ChapterProps) {
               )}
               {!prevEvent && <div />}
               {nextEvent && (
-                <Link href={`/chapter/${nextEvent.slug}`} className="group rounded-xl overflow-hidden border text-right transition-all duration-500 relative"               style={{ borderColor: `${palette.foreground}10`, backgroundColor: `${palette.foreground}08` }}>
+                <Link href={`/chapter/${nextEvent.slug}`} className="group rounded-xl overflow-hidden border text-right transition-all duration-500 relative" style={{ borderColor: `${palette.foreground}10`, backgroundColor: `${palette.foreground}08` }}>
                   <div className="relative h-28 overflow-hidden">
                     <Image src={nextEvent.heroImage} alt={nextEvent.title} fill className="object-cover object-center opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom,transparent,#c8b89cee)` }} />

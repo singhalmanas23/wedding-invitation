@@ -466,21 +466,21 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
   const isPreParty = event.slug === "pre-party";
   const narrative = isPreParty
     ? [
-        "As families gather in Pune,",
-        "the Noor Mahal Soirée unfolds in",
-        "cascading florals, antique gold,",
-        "and projection-mapped grandeur.",
-        "This is the pre-party reception —",
-        "the opening act before Udaipur.",
-      ]
+      "As families gather in Pune,",
+      "the Noor Mahal Soirée unfolds in",
+      "cascading florals, antique gold,",
+      "and projection-mapped grandeur.",
+      "This is the pre-party reception —",
+      "the opening act before Udaipur.",
+    ]
     : [
-        "As the sun sets over Lake Pichola,",
-        "the evening unfolds in warm ambers,",
-        "deep wines, and candlelit golds.",
-        "This is not just a welcome dinner —",
-        "it is the opening scene, the first verse,",
-        "the moment the story begins.",
-      ];
+      "As the sun sets over Lake Pichola,",
+      "the evening unfolds in warm ambers,",
+      "deep wines, and candlelit golds.",
+      "This is not just a welcome dinner —",
+      "it is the opening scene, the first verse,",
+      "the moment the story begins.",
+    ];
 
   return (
     <section ref={wrapRef} style={{ height: "105vh" }}>
@@ -1073,8 +1073,7 @@ export default function FirstChapterContent({ event }: ChapterProps) {
       <Navbar />
 
       <ProclamationHero event={event} />
-
-      <AtmosphereQuote event={event} />
+      {!event.heroImage && <AtmosphereQuote event={event} />}
 
       <FadeInView>
         <section
@@ -1086,7 +1085,7 @@ export default function FirstChapterContent({ event }: ChapterProps) {
               className="flex items-center gap-3 text-sm"
               style={{ color: `${palette.foreground}99` }}
             >
-              <CalendarDays size={16} style={{ color: palette.accent }} />
+              <CalendarDays size={16} className="shrink-0" style={{ color: palette.accent }} />
               <span>
                 {event.date} · {event.day}
               </span>
@@ -1095,14 +1094,14 @@ export default function FirstChapterContent({ event }: ChapterProps) {
               className="flex items-center gap-3 text-sm"
               style={{ color: `${palette.foreground}99` }}
             >
-              <Clock size={16} style={{ color: palette.accent }} />
+              <Clock size={16} className="shrink-0" style={{ color: palette.accent }} />
               <span>{event.time}</span>
             </div>
             <div
               className="flex items-center gap-3 text-sm"
               style={{ color: `${palette.foreground}99` }}
             >
-              <MapPin size={16} style={{ color: palette.accent }} />
+              <MapPin size={16} className="shrink-0" style={{ color: palette.accent }} />
               <span>
                 {event.location}, {event.venue}
               </span>
@@ -1122,14 +1121,89 @@ export default function FirstChapterContent({ event }: ChapterProps) {
 
       <RoyalDressCode event={event} />
 
-      <div className="flex justify-center">
-        <div
-          className="w-16 h-px"
-          style={{ backgroundColor: `${palette.accent}30` }}
-        />
-      </div>
+      {event.heroImage ? (
+        <section className="py-24 md:py-36 relative overflow-hidden">
+          {/* Continuity texture & glow */}
+          <div className="absolute inset-0 pointer-events-none opacity-20"
+            style={{
+              backgroundImage: `radial-gradient(circle at 50% 50%, ${palette.accent}15, transparent), url("https://www.transparenttextures.com/patterns/parchment.png")`
+            }}
+          />
 
-      <ImmersiveGallery event={event} />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
+            {/* Magazine-style Header */}
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-4 mb-6">
+                <div className="h-px w-8 bg-current opacity-20" />
+                <p className="text-[10px] uppercase tracking-[0.5em] font-medium" style={{ color: palette.accent }}>
+                  {event.slug === 'pre-party' ? 'Visual Curation · विजन' : 'Aesthetic Narrative · विजन'}
+                </p>
+                <div className="h-px w-8 bg-current opacity-20" />
+              </div>
+
+              <h3 className="font-serif text-5xl md:text-7xl mb-10 tracking-tight" style={{ color: palette.foreground }}>
+                {event.slug === 'pre-party' ? (
+                  <>Artifacts <span className="opacity-40 italic">&amp;</span> Alcoves</>
+                ) : (
+                  <>Motifs <span className="opacity-40 italic">&amp;</span> Modernity</>
+                )}
+              </h3>
+
+              <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed opacity-60">
+                {event.slug === 'pre-party'
+                  ? "A meticulous collection of heritage swatches, antique golds, and architectural vistas that define the soul of Noor Mahal."
+                  : "A contemporary lens on Rajasthan's royal hospitality—where traditional frescoes meet refined, modern silhouettes."}
+              </p>
+            </div>
+
+            {/* Featured Gallery Piece */}
+            <div className="relative max-w-5xl mx-auto">
+              <div className="absolute -inset-1 border border-white/5 pointer-events-none z-20" />
+              <div className="absolute inset-0 bg-black/40 blur-3xl opacity-20 -z-10" />
+
+              <div
+                className="relative aspect-[16/10] overflow-hidden bg-[#1a1512]"
+                style={{
+                  clipPath: event.slug === 'pre-party' ? 'inset(0 0 5% 0)' : 'none',
+                }}
+              >
+                <div className="absolute inset-0 bg-black/10 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
+                <Image
+                  src={event.heroImage}
+                  alt={`${event.title} Mood`}
+                  fill
+                  className="object-cover transition-transform duration-[4s] hover:scale-105"
+                  priority
+                />
+
+                {/* Mood Vignette */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`
+                  }}
+                />
+              </div>
+
+              {/* Decorative Label */}
+              <div className="absolute -bottom-6 left-12 z-20">
+                <p className="font-serif italic text-sm opacity-40" style={{ color: palette.accent }}>
+                  Fig. {event.chapterNumber.toString().padStart(2, '0')} — Aesthetic Narrative
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <>
+          <div className="flex justify-center">
+            <div
+              className="w-16 h-px"
+              style={{ backgroundColor: `${palette.accent}30` }}
+            />
+          </div>
+          <ImmersiveGallery event={event} />
+        </>
+      )}
 
       <div className="flex justify-center">
         <div

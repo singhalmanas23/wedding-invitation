@@ -755,31 +755,86 @@ function ThrillDressCode({ event }: { event: WeddingEvent }) {
   );
 }
 
-function ThrillGallery({ event }: { event: WeddingEvent }) {
-  const { palette, galleryImages } = event;
+function ThrillMoodSection({ event }: { event: WeddingEvent }) {
+  const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-  const heights = [380, 280, 340, 260];
-
-  useGSAP(() => {
-    const el = ref.current;
-    if (!el) return;
-    gsap.fromTo(el.querySelectorAll(".gi"), { opacity: 0, scale: 0.88, y: 40 }, {
-      opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" },
-    });
-  }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
-      <div className="max-w-6xl mx-auto w-full min-w-0">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-bold" style={{ color: "#00f5d4" }}>Mood · माहौल</p>
-        <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
-          {galleryImages.map((src, i) => (
-            <div key={i} className="gi break-inside-avoid rounded-none relative overflow-hidden group cursor-pointer w-full min-w-0" style={{ height: heights[i] || 300 }}>
-              <Image src={src} alt={`mood ${i + 1}`} fill className="object-cover object-center transition-transform duration-700 group-hover:scale-110" sizes="(max-width:768px) 50vw,33vw" />
-              <div className="absolute inset-0 opacity-35 group-hover:opacity-10 transition-opacity duration-500" style={{ background: `linear-gradient(135deg,#ff006e30,#8338ec25,#00f5d415)` }} />
-            </div>
-          ))}
+    <section
+      ref={ref}
+      className="py-24 md:py-36 relative overflow-hidden"
+      style={{ backgroundColor: palette.background }}
+    >
+      {/* Continuity texture & neon-pulse */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(circle at 30% 70%, #ff006e20, transparent 50%), radial-gradient(circle at 70% 30%, #00f5d415, transparent 50%), url("https://www.transparenttextures.com/patterns/asfalt-dark.png")`,
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Magazine-style Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-4 mb-6">
+            <div className="h-px w-8 bg-[#ff006e] opacity-30" />
+            <p
+              className="text-[10px] uppercase tracking-[0.5em] font-bold"
+              style={{ color: "#00f5d4" }}
+            >
+              The Aftermath Narrative · उन्मुक्त
+            </p>
+            <div className="h-px w-8 bg-[#8338ec] opacity-30" />
+          </div>
+
+          <h3
+            className="text-5xl md:text-7xl mb-10 tracking-tight font-black"
+            style={{ color: "#f0f0f5", textShadow: "0 0 40px #ff006e20" }}
+          >
+            Neon <span className="opacity-40 italic font-serif">&amp;</span> Rebellion
+          </h3>
+
+          <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed opacity-70">
+            A psychedelic sanctuary where the echoes of childhood meet the high-speed madness of letting go.
+          </p>
+        </div>
+
+        {/* Featured Gallery Piece */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Chromatic border effect */}
+          <div className="absolute -inset-[2px] bg-gradient-to-r from-[#ff006e] via-[#00f5d4] to-[#8338ec] opacity-20 blur-sm pointer-events-none z-0" />
+          <div className="absolute -inset-1 border border-white/10 pointer-events-none z-20" />
+          <div className="absolute inset-0 bg-[#ff006e]/10 blur-3xl opacity-20 -z-10" />
+
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0f]">
+            {/* Subtle psychedelic overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff006e]/5 to-[#00f5d4]/5 z-10 pointer-events-none" />
+
+            <Image
+              src={event.heroImage}
+              alt={`${event.title} Mood`}
+              fill
+              className="object-cover transition-transform duration-[6s] hover:scale-110"
+              priority
+            />
+
+            {/* Mood Vignette - Neon Dark */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `linear-gradient(to bottom, #0a0a0fdd 0%, transparent 15%, transparent 85%, #0a0a0fee 100%)`,
+              }}
+            />
+          </div>
+
+          {/* Decorative Label */}
+          <div className="absolute -bottom-6 right-12 z-20">
+            <p
+              className="font-serif italic text-sm opacity-40 text-[#00f5d4]"
+            >
+              Archive Ref. 06 — The Psychedelic Aftermath
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -846,7 +901,7 @@ export default function SeventhChapterContent({ event }: ChapterProps) {
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}><NeonDivider accent={palette.accent} primary={palette.primary} /></div>
       <ThrillDressCode event={event} />
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}><NeonDivider accent={palette.accent} primary={palette.primary} /></div>
-      <ThrillGallery event={event} />
+      <ThrillMoodSection event={event} />
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}><NeonDivider accent={palette.accent} primary={palette.primary} /></div>
       <ThrillVenue event={event} />
 

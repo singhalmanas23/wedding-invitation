@@ -793,44 +793,82 @@ function CourtyardDressCode({ event }: { event: WeddingEvent }) {
    GALLERY — soft masonry
    ═══════════════════════════════════════════════════════════════════ */
 
-function CourtyardGallery({ event }: { event: WeddingEvent }) {
-  const { palette, galleryImages } = event;
+function CourtyardMoodSection({ event }: { event: WeddingEvent }) {
+  const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-  const heights = [320, 380, 260, 300];
-
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
-      gsap.fromTo(el.querySelectorAll(".gi"), { opacity: 0, scale: 0.9, y: 35 }, {
-        opacity: 1, scale: 1, y: 0, duration: 0.65, stagger: 0.1, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" },
-      });
-    },
-    { scope: ref }
-  );
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
-      <div className="max-w-6xl mx-auto w-full min-w-0">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>
-          Mood · माहौल
-        </p>
-        <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
-          {galleryImages.map((src, i) => (
-            <div
-              key={i}
-              className="gi break-inside-avoid rounded-2xl relative overflow-hidden group cursor-pointer w-full min-w-0"
-              style={{ height: heights[i] || 300 }}
+    <section
+      ref={ref}
+      className="py-24 md:py-36 relative overflow-hidden"
+      style={{ backgroundColor: palette.background }}
+    >
+      {/* Continuity texture & glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(circle at 50% 50%, ${palette.accent}15, transparent), url("https://www.transparenttextures.com/patterns/parchment.png")`,
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Magazine-style Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-4 mb-6">
+            <div className="h-px w-8 bg-current opacity-20" />
+            <p
+              className="text-[10px] uppercase tracking-[0.5em] font-medium"
+              style={{ color: palette.accent }}
             >
-              <Image src={src} alt={`${event.title} mood ${i + 1}`} fill className="object-cover object-center transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 50vw,33vw" />
-              <div className="absolute inset-0 opacity-15 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: palette.muted }} />
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{ background: `linear-gradient(135deg,${palette.primary}20,transparent 60%)` }}
-              />
-            </div>
-          ))}
+              Aesthetic Narrative · विजन
+            </p>
+            <div className="h-px w-8 bg-current opacity-20" />
+          </div>
+
+          <h3
+            className="font-serif text-5xl md:text-7xl mb-10 tracking-tight"
+            style={{ color: palette.foreground }}
+          >
+            Motifs <span className="opacity-40 italic">&amp;</span> Modernity
+          </h3>
+
+          <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed opacity-60">
+            A contemporary lens on Rajasthan&apos;s royal hospitality—where traditional frescoes meet refined, modern silhouettes.
+          </p>
+        </div>
+
+        {/* Featured Gallery Piece */}
+        <div className="relative max-w-5xl mx-auto">
+          <div className="absolute -inset-1 border border-white/5 pointer-events-none z-20" />
+          <div className="absolute inset-0 bg-black/40 blur-3xl opacity-20 -z-10" />
+
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#1a1512]">
+            <div className="absolute inset-0 bg-black/10 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
+            <Image
+              src={event.heroImage}
+              alt={`${event.title} Mood`}
+              fill
+              className="object-cover transition-transform duration-[4s] hover:scale-105"
+              priority
+            />
+
+            {/* Mood Vignette */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`,
+              }}
+            />
+          </div>
+
+          <div className="absolute -bottom-6 left-12 z-20">
+            <p
+              className="font-serif italic text-sm opacity-40"
+              style={{ color: palette.accent }}
+            >
+              Fig. 02 — Aesthetic Narrative
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -915,7 +953,7 @@ export default function SecondChapterContent({ event }: ChapterProps) {
         <OrnamentalDivider accent={palette.accent} />
       </div>
 
-      <CourtyardGallery event={event} />
+      <CourtyardMoodSection event={event} />
 
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}>
         <OrnamentalDivider accent={palette.accent} />

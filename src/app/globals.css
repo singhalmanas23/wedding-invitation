@@ -123,16 +123,25 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
-/* Prevent horizontal scroll */
+/* Prevent horizontal scroll while maintaining sticky compatibility */
 html,
 body {
-  overflow-x: hidden;
   max-width: 100vw;
+}
+
+html {
+  overflow-x: visible;
+}
+
+body {
+  overflow-x: clip;
+  min-height: 100vh;
 }
 
 /* Smooth scrolling */
@@ -232,9 +241,12 @@ textarea:-webkit-autofill:active {
 
 /* Keyframes */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-12px);
   }
@@ -244,39 +256,51 @@ textarea:-webkit-autofill:active {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
 }
 
 @keyframes grain {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0);
   }
+
   10% {
     transform: translate(-5%, -10%);
   }
+
   20% {
     transform: translate(-15%, 5%);
   }
+
   30% {
     transform: translate(7%, -15%);
   }
+
   40% {
     transform: translate(-5%, 15%);
   }
+
   50% {
     transform: translate(-15%, 10%);
   }
+
   60% {
     transform: translate(15%, 0%);
   }
+
   70% {
     transform: translate(0%, 10%);
   }
+
   80% {
     transform: translate(3%, -15%);
   }
+
   90% {
     transform: translate(-10%, 10%);
   }
@@ -287,6 +311,7 @@ textarea:-webkit-autofill:active {
     opacity: 0;
     transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -298,6 +323,7 @@ textarea:-webkit-autofill:active {
     opacity: 0;
     transform: scale(0.92);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -328,62 +354,157 @@ textarea:-webkit-autofill:active {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* V3.0 — Cultural Edition Keyframes */
 
 @keyframes diyaFlicker {
-  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 1; }
-  15% { transform: scaleY(1.12) scaleX(0.92); opacity: 0.92; }
-  30% { transform: scaleY(0.95) scaleX(1.05); opacity: 1; }
-  50% { transform: scaleY(1.08) scaleX(0.96); opacity: 0.88; }
-  70% { transform: scaleY(1.02) scaleX(1.02); opacity: 0.96; }
-  85% { transform: scaleY(0.97) scaleX(1.04); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+
+  15% {
+    transform: scaleY(1.12) scaleX(0.92);
+    opacity: 0.92;
+  }
+
+  30% {
+    transform: scaleY(0.95) scaleX(1.05);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scaleY(1.08) scaleX(0.96);
+    opacity: 0.88;
+  }
+
+  70% {
+    transform: scaleY(1.02) scaleX(1.02);
+    opacity: 0.96;
+  }
+
+  85% {
+    transform: scaleY(0.97) scaleX(1.04);
+    opacity: 1;
+  }
 }
 
 @keyframes diyaGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.8; }
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes waxMelt {
-  0% { transform: scale(1); border-radius: 50%; }
-  40% { transform: scale(1.15); border-radius: 45% 55% 50% 50%; }
-  100% { transform: scale(1.5); border-radius: 40% 60% 55% 45%; opacity: 0; }
+  0% {
+    transform: scale(1);
+    border-radius: 50%;
+  }
+
+  40% {
+    transform: scale(1.15);
+    border-radius: 45% 55% 50% 50%;
+  }
+
+  100% {
+    transform: scale(1.5);
+    border-radius: 40% 60% 55% 45%;
+    opacity: 0;
+  }
 }
 
 @keyframes silkSweep {
-  0% { transform: translateX(-100%) skewX(-8deg); }
-  100% { transform: translateX(100%) skewX(-8deg); }
+  0% {
+    transform: translateX(-100%) skewX(-8deg);
+  }
+
+  100% {
+    transform: translateX(100%) skewX(-8deg);
+  }
 }
 
 @keyframes lotusBloom {
-  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
-  60% { transform: scale(1.1) rotate(5deg); opacity: 0.6; }
-  100% { transform: scale(1) rotate(0deg); opacity: 0.15; }
+  0% {
+    transform: scale(0) rotate(-30deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.15;
+  }
 }
 
 @keyframes elephantWalk {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(calc(100vw + 100%)); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 100%));
+  }
 }
 
 @keyframes mandalaExpand {
-  0% { transform: scale(0) rotate(0deg); opacity: 0; }
-  50% { transform: scale(1) rotate(90deg); opacity: 0.15; }
-  100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1) rotate(90deg);
+    opacity: 0.15;
+  }
+
+  100% {
+    transform: scale(1.5) rotate(180deg);
+    opacity: 0;
+  }
 }
 
 @keyframes goldFoilSparkle {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 0.8; }
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes brassPulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.08); }
-  50% { box-shadow: 0 0 25px rgba(212,175,55,0.15); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.08);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+  }
 }
 
 .animate-diya-flicker {

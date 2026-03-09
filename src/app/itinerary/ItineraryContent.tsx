@@ -64,6 +64,7 @@ const DATE_MAP: Record<string, string> = {
   "Apr 19": "20260419",
   "Apr 20": "20260420",
   "Apr 21": "20260421",
+  "Apr 22": "20260422",
 };
 
 function downloadICS(event: WeddingEvent) {
@@ -169,8 +170,8 @@ export default function ItineraryContent() {
       {/* Main layout */}
       <div className="max-w-7xl mx-auto px-6 pb-40 lg:flex lg:gap-16">
         {/* Sticky sidebar — desktop only */}
-        <aside className="hidden lg:block lg:w-60 shrink-0">
-          <nav className="sticky top-32">
+        <aside className="hidden lg:block lg:w-60 shrink-0 sticky top-32 h-fit self-start">
+          <nav>
             <p
               className="text-[11px] uppercase tracking-[0.25em] mb-5 font-medium"
               style={{ color: `${P.gold}66` }}
@@ -193,11 +194,10 @@ export default function ItineraryContent() {
                       activeSlug === event.slug
                         ? `${P.muted}40`
                         : "transparent",
-                    border: `1px solid ${
-                      activeSlug === event.slug
-                        ? `${P.gold}12`
-                        : "transparent"
-                    }`,
+                    border: `1px solid ${activeSlug === event.slug
+                      ? `${P.gold}12`
+                      : "transparent"
+                      }`,
                     color:
                       activeSlug === event.slug
                         ? P.cream
@@ -364,17 +364,19 @@ export default function ItineraryContent() {
                           className="flex flex-wrap items-center gap-6 pt-5"
                           style={{ borderTop: `1px solid ${P.gold}0a` }}
                         >
-                          <Link
-                            href={`/chapter/${event.slug}`}
-                            className="inline-flex items-center gap-2 text-sm font-medium transition-all duration-300 group"
-                            style={{ color: event.palette.accent }}
-                          >
-                            Explore Chapter
-                            <ArrowRight
-                              size={14}
-                              className="transition-transform duration-300 group-hover:translate-x-1"
-                            />
-                          </Link>
+                          {event.slug !== "farewell" && (
+                            <Link
+                              href={`/chapter/${event.slug}`}
+                              className="inline-flex items-center gap-2 text-sm font-medium transition-all duration-300 group"
+                              style={{ color: event.palette.accent }}
+                            >
+                              Explore Chapter
+                              <ArrowRight
+                                size={14}
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                              />
+                            </Link>
+                          )}
 
                           <button
                             onClick={() => downloadICS(event)}

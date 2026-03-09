@@ -759,31 +759,83 @@ function CathedralDressCode({ event }: { event: WeddingEvent }) {
    GALLERY + VENUE
    ═══════════════════════════════════════════════════════════════════ */
 
-function CathedralGallery({ event }: { event: WeddingEvent }) {
-  const { palette, galleryImages } = event;
+function CathedralMoodSection({ event }: { event: WeddingEvent }) {
+  const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-  const heights = [400, 280, 340, 260];
-
-  useGSAP(() => {
-    const el = ref.current;
-    if (!el) return;
-    gsap.fromTo(el.querySelectorAll(".gi"), { opacity: 0, scale: 0.88, y: 40 }, {
-      opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" },
-    });
-  }, { scope: ref });
 
   return (
-    <section ref={ref} className="py-8 md:py-12 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
-      <div className="max-w-6xl mx-auto w-full min-w-0">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>Mood · माहौल</p>
-        <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
-          {galleryImages.map((src, i) => (
-            <div key={i} className="gi break-inside-avoid rounded-none relative overflow-hidden group cursor-pointer w-full min-w-0" style={{ height: heights[i] || 300 }}>
-              <Image src={src} alt={`mood ${i + 1}`} fill className="object-cover object-center transition-transform duration-700 group-hover:scale-110" sizes="(max-width:768px) 50vw,33vw" />
-              <div className="absolute inset-0 opacity-30 group-hover:opacity-10 transition-opacity duration-500" style={{ backgroundColor: palette.primary }} />
-            </div>
-          ))}
+    <section
+      ref={ref}
+      className="py-24 md:py-36 relative overflow-hidden"
+      style={{ backgroundColor: palette.background }}
+    >
+      {/* Continuity texture & glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(circle at 50% 50%, ${palette.accent}15, transparent), url("https://www.transparenttextures.com/patterns/parchment.png")`,
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Magazine-style Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-4 mb-6">
+            <div className="h-px w-8 bg-current opacity-20" />
+            <p
+              className="text-[10px] uppercase tracking-[0.5em] font-medium"
+              style={{ color: palette.accent }}
+            >
+              Aesthetic Narrative · विजन
+            </p>
+            <div className="h-px w-8 bg-current opacity-20" />
+          </div>
+
+          <h3
+            className="font-serif text-5xl md:text-7xl mb-10 tracking-tight"
+            style={{ color: palette.foreground }}
+          >
+            Sanctuary <span className="opacity-40 italic">&amp;</span> Symphony
+          </h3>
+
+          <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed opacity-60">
+            A grand architectural narrative where sacred geometry meets the untamed elegance of the wild.
+          </p>
+        </div>
+
+        {/* Featured Gallery Piece */}
+        <div className="relative max-w-5xl mx-auto">
+          <div className="absolute -inset-1 border border-white/5 pointer-events-none z-20" />
+          <div className="absolute inset-0 bg-black/40 blur-3xl opacity-20 -z-10" />
+
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#0d1a12]">
+            <div className="absolute inset-0 bg-black/10 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
+            <Image
+              src={event.heroImage}
+              alt={`${event.title} Mood`}
+              fill
+              className="object-cover transition-transform duration-[4s] hover:scale-105"
+              priority
+            />
+
+            {/* Mood Vignette */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`,
+              }}
+            />
+          </div>
+
+          {/* Decorative Label */}
+          <div className="absolute -bottom-6 left-12 z-20">
+            <p
+              className="font-serif italic text-sm opacity-40"
+              style={{ color: palette.accent }}
+            >
+              Fig. 03 — Aesthetic Narrative
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -850,7 +902,7 @@ export default function FourthChapterContent({ event }: ChapterProps) {
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}><GoldDivider accent={palette.accent} /></div>
       <CathedralDressCode event={event} />
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}><GoldDivider accent={palette.accent} /></div>
-      <CathedralGallery event={event} />
+      <CathedralMoodSection event={event} />
       <div className="flex justify-center" style={{ backgroundColor: palette.background }}><GoldDivider accent={palette.accent} /></div>
       <CathedralVenue event={event} />
 

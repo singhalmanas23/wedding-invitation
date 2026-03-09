@@ -11,9 +11,9 @@ const FOOTER_LINKS = [
 export default function Footer() {
   return (
     <footer style={{ backgroundColor: P.bgDeep, borderTop: `1px solid ${P.gold}08` }}>
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-16 lg:py-24 text-center">
         {/* Mughal arch motif */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-5 md:mb-8">
           <svg
             viewBox="0 0 200 120"
             className="w-24 md:w-32 h-auto"
@@ -38,28 +38,28 @@ export default function Footer() {
 
         {/* Devanagari accent */}
         <p
-          className="font-serif text-sm mb-4"
+          className="font-serif text-sm mb-3 md:mb-4"
           style={{ color: `${P.gold}25` }}
         >
           शुभ विवाह
         </p>
 
         {/* Couple names */}
-        <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${P.cream}cc` }}>
+        <p className="font-serif text-xl sm:text-2xl md:text-3xl mb-1.5 md:mb-2" style={{ color: `${P.cream}cc` }}>
           {COUPLE.partner1}{" "}
           <span style={{ color: `${P.gold}66` }}>&amp;</span>{" "}
           {COUPLE.partner2}
         </p>
 
         <p
-          className="text-[10px] uppercase tracking-[0.3em] font-body mb-10"
+          className="text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-body mb-6 md:mb-10"
           style={{ color: `${P.gold}30` }}
         >
           {COUPLE.hashtag}
         </p>
 
         {/* Awaiting presence */}
-        <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${P.gold}12`, background: `linear-gradient(165deg,${P.gold}05,transparent 40%,${P.gold}03)` }}>
+        <div className="relative my-8 md:my-12 py-6 md:py-10 px-4 sm:px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${P.gold}12`, background: `linear-gradient(165deg,${P.gold}05,transparent 40%,${P.gold}03)` }}>
           <p className="text-[10px] uppercase tracking-[0.35em] mb-4 font-medium" style={{ color: `${P.gold}40` }}>Your Presence Matters</p>
           <p className="font-serif text-lg md:text-xl leading-relaxed italic" style={{ color: `${P.cream}aa` }}>
             The celebration is incomplete without you.
@@ -78,7 +78,7 @@ export default function Footer() {
         </div>
 
         {/* Nav links */}
-        <div className="flex items-center justify-center gap-8 mb-10">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mb-6 md:mb-10">
           {FOOTER_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -92,7 +92,7 @@ export default function Footer() {
         </div>
 
         {/* Gold flourish divider */}
-        <div className="flex items-center justify-center gap-2 mb-10">
+        <div className="flex items-center justify-center gap-2 mb-6 md:mb-10">
           <div
             className="h-px w-10 md:w-20"
             style={{
