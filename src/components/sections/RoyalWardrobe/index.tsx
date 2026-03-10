@@ -616,10 +616,12 @@ function ShowcaseStage({ selectors, theme }: { selectors: WPState["selectors"]; 
   const activeImage = campaignImage;
 
   const isExternalImage = typeof activeImage === "string" && (activeImage.startsWith("https://") || activeImage.startsWith("//"));
-  const imageClassName = "object-cover object-center transition-transform duration-[1.5s] group-hover:scale-105 animate-in fade-in zoom-in-95 duration-1000";
+  // Mobile: object-contain so full image is visible (no cropping); md+: object-cover for cinematic fill
+  const imageClassName =
+    "object-center transition-transform duration-[1.5s] group-hover:scale-105 animate-in fade-in zoom-in-95 duration-1000 object-contain md:object-cover";
 
   const renderCampaignImage = () => (
-    <div className="stage-img relative flex-1 overflow-hidden group cursor-crosshair min-h-[60vh] w-full">
+    <div className="stage-img relative flex-1 overflow-hidden group cursor-crosshair min-h-[50vh] md:min-h-[60vh] w-full flex items-center justify-center bg-[#0a0505]">
       {isExternalImage ? (
         // Native img for external URLs so Campaign image always displays (avoids Next Image optimization issues)
         // eslint-disable-next-line @next/next/no-img-element
