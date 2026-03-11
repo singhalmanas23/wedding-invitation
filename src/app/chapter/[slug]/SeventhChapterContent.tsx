@@ -500,7 +500,7 @@ function ThrillHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "105vh" }}>
+    <section ref={wrapRef} className="h-[85vh] sm:h-[105vh]">
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         <div
           className="thrill-bg absolute inset-0"
@@ -590,8 +590,8 @@ function ThrillHero({ event }: { event: WeddingEvent }) {
           <DistortedArch accent={palette.accent} primary={palette.primary} />
         </div>
 
-        {/* ── BEAT 1: Title ── */}
-        <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
+        {/* ── BEAT 1: Title (centered on mobile to avoid empty gap) ── */}
+        <div className="b1-content absolute inset-0 flex flex-col items-center justify-center sm:justify-start sm:pt-[12vh] z-10 px-6">
           <p className="text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-5 font-bold" style={{ color: "#ff006e", textShadow: "0 0 30px #ff006e50, 0 0 60px #ff006e20, 0 0 100px #ff006e10" }}>
             The Thrill Theory
           </p>
@@ -929,7 +929,7 @@ export default function SeventhChapterContent({ event }: ChapterProps) {
                 </Link>
               )}
               {!prevEvent && <div />}
-              {nextEvent && (
+              {nextEvent && nextEvent.chapterNumber !== 0 && nextEvent.slug !== "gratitude" && (
                 <Link href={`/chapter/${nextEvent.slug}`} className="group rounded-xl overflow-hidden border text-right transition-all duration-500 relative" style={{ borderColor: `${palette.foreground}08`, backgroundColor: `${palette.muted}20` }}>
                   <div className="relative h-28 overflow-hidden">
                     <Image src={nextEvent.heroImage} alt={nextEvent.title} fill className="object-cover object-center opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
@@ -942,7 +942,7 @@ export default function SeventhChapterContent({ event }: ChapterProps) {
                   </div>
                 </Link>
               )}
-              {!nextEvent && <div />}
+              {(!nextEvent || nextEvent.chapterNumber === 0 || nextEvent.slug === "gratitude") && <div />}
             </div>
           </div>
         </section>
@@ -982,7 +982,15 @@ export default function SeventhChapterContent({ event }: ChapterProps) {
               <Link key={link.href} href={link.href} className="text-[11px] uppercase tracking-[0.2em] font-body transition-colors duration-300 hover:opacity-80" style={{ color: `${palette.foreground}66` }}>{link.label}</Link>
             ))}
           </div>
-          <p className="text-[11px] font-body tracking-wide" style={{ color: `${palette.foreground}40` }}>April 19–21, 2026 · Udaipur, Rajasthan</p>
+          <p className="text-[11px] font-body tracking-wide mb-6" style={{ color: `${palette.foreground}40` }}>April 19–21, 2026 · Udaipur, Rajasthan</p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs font-body tracking-wide" style={{ color: `${palette.foreground}25` }}>
+            <span>© 2026 All Rights Reserved</span>
+            <span style={{ color: `${palette.foreground}15` }}>|</span>
+            <a href="https://blessingsofttech.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-opacity hover:opacity-80" style={{ color: `${palette.foreground}35` }} aria-label="Blessing Softtech">
+              <Image src="/images/blessing-softtech.svg" alt="" width={26} height={26} className="shrink-0" />
+              <span>Blessing Softtech</span>
+            </a>
+          </div>
         </div>
       </footer>
     </div>

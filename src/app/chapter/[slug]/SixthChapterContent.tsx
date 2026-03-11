@@ -991,7 +991,15 @@ export default function SixthChapterContent({ event }: ChapterProps) {
               <Link key={link.href} href={link.href} className="text-[11px] uppercase tracking-[0.2em] font-body transition-colors duration-300 hover:opacity-80" style={{ color: `${palette.foreground}66` }}>{link.label}</Link>
             ))}
           </div>
-          <p className="text-[11px] font-body tracking-wide" style={{ color: `${palette.foreground}40` }}>April 19–21, 2026 · Udaipur, Rajasthan</p>
+          <p className="text-[11px] font-body tracking-wide mb-6" style={{ color: `${palette.foreground}40` }}>April 19–21, 2026 · Udaipur, Rajasthan</p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs font-body tracking-wide" style={{ color: `${palette.foreground}25` }}>
+            <span>© 2026 All Rights Reserved</span>
+            <span style={{ color: `${palette.foreground}15` }}>|</span>
+            <a href="https://blessingsofttech.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-opacity hover:opacity-80" style={{ color: `${palette.foreground}35` }} aria-label="Blessing Softtech">
+              <Image src="/images/blessing-softtech.svg" alt="" width={26} height={26} className="shrink-0" />
+              <span>Blessing Softtech</span>
+            </a>
+          </div>
         </div>
       </footer>
     </div>

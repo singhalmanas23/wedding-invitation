@@ -1080,9 +1080,17 @@ export default function SecondChapterContent({ event }: ChapterProps) {
             <div className="w-1.5 h-1.5 rotate-45" style={{ border: `1px solid ${palette.accent}50` }} />
             <div className="h-px w-10 md:w-20" style={{ background: `linear-gradient(to left,transparent,${palette.accent}50)` }} />
           </div>
-          <p className="text-[11px] font-body tracking-wide" style={{ color: `${palette.foreground}77` }}>
+          <p className="text-[11px] font-body tracking-wide mb-6" style={{ color: `${palette.foreground}77` }}>
             April 19–21, 2026 · Udaipur, Rajasthan
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs font-body tracking-wide" style={{ color: `${palette.foreground}25` }}>
+            <span>© 2026 All Rights Reserved</span>
+            <span style={{ color: `${palette.foreground}15` }}>|</span>
+            <a href="https://blessingsofttech.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-opacity hover:opacity-80" style={{ color: `${palette.foreground}35` }} aria-label="Blessing Softtech">
+              <Image src="/images/blessing-softtech.svg" alt="" width={26} height={26} className="shrink-0" />
+              <span>Blessing Softtech</span>
+            </a>
+          </div>
         </div>
       </footer>
     </div>
