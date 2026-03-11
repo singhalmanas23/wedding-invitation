@@ -323,14 +323,14 @@ function MidnightCathedralIntro({
             <ChandelierCluster accent={palette.accent} id="l" />
             <ChandelierCluster accent={palette.accent} id="r" />
           </div>
-          <p className="font-serif font-hindi text-2xl md:text-4xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split(" ").map((word, i) => (
-              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
-            ))}
-          </p>
-          <p className="font-serif text-sm md:text-lg uppercase tracking-[0.35em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}bb` }}>
+          <p className="font-serif text-sm md:text-lg uppercase tracking-[0.35em] font-light whitespace-nowrap mb-5" style={{ color: `${palette.foreground}bb` }}>
             {en.split("").map((c, i) => (
               <span key={i} className="is-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+            ))}
+          </p>
+          <p className="font-serif font-hindi text-2xl md:text-4xl whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
           <p className="sub-tag mt-4 text-xs md:text-sm italic tracking-[0.2em] opacity-0" style={{ color: `${palette.accent}88` }}>
@@ -585,12 +585,12 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
 
         {/* ── BEAT 1: Title + event info ── */}
         <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[10vh] sm:pt-[12vh] z-10 px-4 sm:px-6 text-center">
-          <p className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}30, 0 2px 20px ${palette.background}` }}>
-            रात्रि महोत्सव
-          </p>
-          <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] font-light mb-3 max-w-[90vw] mx-auto break-words" style={{ color: `${palette.foreground}cc` }}>
+          <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] font-light mb-5 max-w-[90vw] mx-auto break-words" style={{ color: `${palette.foreground}cc` }}>
             The Midnight Cathedral
           </h1>
+          <p className="font-serif font-hindi text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-3" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}30, 0 2px 20px ${palette.background}` }}>
+            रात्रि महोत्सव
+          </p>
           <p className="text-xs sm:text-sm italic tracking-[0.1em] sm:tracking-[0.15em] mb-6 sm:mb-8 max-w-[85vw] mx-auto" style={{ color: `${palette.accent}88` }}>
             Cathedral Gone Rogue &mdash; Gilded After Dark
           </p>
@@ -825,16 +825,6 @@ function CathedralMoodSection({ event }: { event: WeddingEvent }) {
                 background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`,
               }}
             />
-          </div>
-
-          {/* Decorative Label */}
-          <div className="absolute -bottom-6 left-12 z-20">
-            <p
-              className="font-serif italic text-sm opacity-40"
-              style={{ color: palette.accent }}
-            >
-              Fig. 03 — Aesthetic Narrative
-            </p>
           </div>
         </div>
       </div>

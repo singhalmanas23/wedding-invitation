@@ -507,7 +507,7 @@ function CourtyardHero({ event }: { event: WeddingEvent }) {
         {/* Hero content */}
         <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
           <h1
-            className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.03em] mb-3"
+            className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.03em] mb-5"
             style={{ color: palette.foreground }}
           >
             The Courtyard Edit

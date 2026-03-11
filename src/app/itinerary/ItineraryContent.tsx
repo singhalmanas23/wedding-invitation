@@ -162,9 +162,9 @@ export default function ItineraryContent() {
       <Navbar />
 
       <RoyalPageHero
-        label="Pre-Party · Pune · Then Udaipur"
+        label="Udaipur"
         title="The Itinerary"
-        subtitle="Pre-party in Pune, then the main celebration in Udaipur"
+        subtitle="The celebration in Udaipur"
       />
 
       {/* Main layout */}
@@ -322,18 +322,30 @@ export default function ItineraryContent() {
                           <span>{event.time}</span>
                         </div>
 
+                        <p
+                          className="text-[10px] uppercase tracking-[0.3em] font-body mb-2"
+                          style={{ color: `${event.palette.accent}99` }}
+                        >
+                          {event.chapterNumber >= 1
+                            ? `Chapter ${event.chapterNumber}`
+                            : "The Finale"}
+                        </p>
                         <h3
                           className="font-serif text-2xl md:text-3xl mb-1.5 leading-tight"
                           style={{ color: P.cream }}
                         >
                           {event.title}
                         </h3>
-                        <p
-                          className="text-sm italic mb-5"
-                          style={{ color: `${event.palette.accent}cc` }}
-                        >
-                          {event.subtitle}
-                        </p>
+                        {event.subtitle ? (
+                          <p
+                            className="text-sm italic mb-5"
+                            style={{ color: `${event.palette.accent}cc` }}
+                          >
+                            {event.subtitle}
+                          </p>
+                        ) : (
+                          <div className="mb-5" />
+                        )}
 
                         <p
                           className="leading-[1.8] mb-6 max-w-2xl text-[15px]"
@@ -364,7 +376,7 @@ export default function ItineraryContent() {
                           className="flex flex-wrap items-center gap-6 pt-5"
                           style={{ borderTop: `1px solid ${P.gold}0a` }}
                         >
-                          {event.slug !== "farewell" && (
+                          {event.slug !== "gratitude" && event.slug !== "finale" && (
                             <Link
                               href={`/chapter/${event.slug}`}
                               className="inline-flex items-center gap-2 text-sm font-medium transition-all duration-300 group"

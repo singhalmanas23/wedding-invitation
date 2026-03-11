@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
- * Chapter 5 — The Royal Court (Wedding Ceremony)
+ * Chapter 4 — The Royal Court (Wedding Ceremony)
  * Sacred Mughal ceremony atmosphere:
  * - Sacred fire flame particles rising from center
  * - Floating diya flames (small gold triangles)

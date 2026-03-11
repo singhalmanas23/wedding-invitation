@@ -28,9 +28,8 @@ function rand(a: number, b: number = 0): number {
 }
 
 const DAYS = [
-  { day: 0, label: "Pre-Party", date: "5th April", mood: "Noor Mahal Soirée", events: [EVENTS[0]] },
-  { day: 1, label: "Day One", date: "20th April", mood: "The Celebration", events: [EVENTS[1], EVENTS[2]] },
-  { day: 2, label: "Day Two", date: "21st April", mood: "The Ceremony & Finale", events: [EVENTS[3], EVENTS[4], EVENTS[5]] },
+  { day: 1, label: "Day One", date: "20th April", mood: "The Celebration", events: [EVENTS[0], EVENTS[1]] },
+  { day: 2, label: "Day Two", date: "21st April", mood: "The Ceremony & Finale", events: [EVENTS[2], EVENTS[3], EVENTS[4]] },
 ];
 
 /* ─────────────────────────────────────────────────────────────── */
@@ -863,10 +862,10 @@ function Hero({ loaded }: { loaded: boolean }) {
             </span>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ backgroundColor: `${P.gold}0a` }} />
           </Link>
-          <Link href="/rsvp" className="group relative px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body font-medium transition-all duration-700 overflow-hidden" style={{ color: P.bg, background: `linear-gradient(135deg, ${P.gold}, #c9a030, ${P.gold})`, boxShadow: `0 8px 24px rgba(212,175,55,0.2), inset 0 1px 0 rgba(255,255,255,0.15)` }}>
+          <Link href="/wardrobe" className="group relative px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-body font-medium transition-all duration-700 overflow-hidden" style={{ color: P.bg, background: `linear-gradient(135deg, ${P.gold}, #c9a030, ${P.gold})`, boxShadow: `0 8px 24px rgba(212,175,55,0.2), inset 0 1px 0 rgba(255,255,255,0.15)` }}>
             <span className="relative z-10 flex items-center gap-2">
               <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 1h12v8H1z" stroke={P.bg} strokeWidth="0.8" /><path d="M1 1l6 4 6-4" stroke={P.bg} strokeWidth="0.6" /></svg>
-              RSVP Now
+              Check out the Wardrobe
             </span>
           </Link>
         </div>
@@ -1292,11 +1291,10 @@ function RoyalTimeline() {
             The Royal Itinerary
           </span>
           <h2 className="font-serif text-3xl md:text-5xl" style={{ color: `${P.cream}cc` }}>
-            Pre-Party in Pune · Then Udaipur
+            Udaipur
           </h2>
           <p className="font-body text-xs md:text-sm mt-4 max-w-md mx-auto leading-relaxed" style={{ color: `${P.cream}40` }}>
-            The Noor Mahal Soirée in Pune kicks off the celebration. Then, the main events
-            unfold in Udaipur — six chapters crafted to honour heritage, love, and the joy of togetherness.
+            The main events unfold in Udaipur — chapters crafted to honour heritage, love, and the joy of togetherness.
           </p>
         </div>
 

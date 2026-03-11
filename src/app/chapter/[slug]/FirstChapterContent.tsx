@@ -338,17 +338,7 @@ function RoyalProclamationIntro({
         <JharokhaArchOutline accent={palette.accent} />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <p
-            className="font-hindi font-serif text-2xl md:text-4xl mb-3 whitespace-nowrap"
-            style={{ color: palette.accent }}
-          >
-            {hi.split(" ").map((word, i) => (
-              <span key={i} className="ih-char inline-block opacity-0 mr-[0.3em]">
-                {word}
-              </span>
-            ))}
-          </p>
-          <p
-            className="text-xs md:text-sm uppercase tracking-[0.45em] font-light whitespace-nowrap"
+            className="text-xs md:text-sm uppercase tracking-[0.45em] font-light whitespace-nowrap mb-5"
             style={{ color: `${palette.foreground}88` }}
           >
             {en.split("").map((c, i) => (
@@ -358,6 +348,16 @@ function RoyalProclamationIntro({
                 style={c === " " ? { whiteSpace: "pre" } : undefined}
               >
                 {c}
+              </span>
+            ))}
+          </p>
+          <p
+            className="font-hindi font-serif text-2xl md:text-4xl whitespace-nowrap"
+            style={{ color: palette.accent }}
+          >
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="ih-char inline-block opacity-0 mr-[0.3em]">
+                {word}
               </span>
             ))}
           </p>
@@ -564,20 +564,20 @@ function ProclamationHero({ event }: { event: WeddingEvent }) {
         {/* ── Staged content reveal ── */}
         <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
           <h1
-            className="h-hindi font-hindi font-serif text-3xl md:text-5xl lg:text-6xl mb-3"
+            className="h-eng font-serif text-lg md:text-2xl uppercase tracking-[0.3em] mb-5 font-light"
+            style={{ color: `${palette.foreground}cc` }}
+          >
+            {isPreParty ? "Pre-Party Reception" : "The Royal Proclamation"}
+          </h1>
+
+          <h2
+            className="h-hindi font-hindi font-serif text-3xl md:text-5xl lg:text-6xl mb-6"
             style={{
               color: palette.accent,
               textShadow: `0 0 40px ${palette.accent}35`,
             }}
           >
             {isPreParty ? "नूर महल सोइरी" : "राज तिलक संध्या"}
-          </h1>
-
-          <h2
-            className="h-eng font-serif text-lg md:text-2xl uppercase tracking-[0.3em] mb-6 font-light"
-            style={{ color: `${palette.foreground}cc` }}
-          >
-            {isPreParty ? "Pre-Party Reception" : "The Royal Proclamation"}
           </h2>
 
           <div className="max-w-xl text-center space-y-1.5 mb-8">
@@ -1182,13 +1182,6 @@ export default function FirstChapterContent({ event }: ChapterProps) {
                     background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`
                   }}
                 />
-              </div>
-
-              {/* Decorative Label */}
-              <div className="absolute -bottom-6 left-12 z-20">
-                <p className="font-serif italic text-sm opacity-40" style={{ color: palette.accent }}>
-                  Fig. {event.chapterNumber.toString().padStart(2, '0')} — Aesthetic Narrative
-                </p>
               </div>
             </div>
           </div>

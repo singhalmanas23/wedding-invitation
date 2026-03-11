@@ -296,14 +296,14 @@ function WorldIntro({
       <div className="relative z-10 flex flex-col items-center text-center px-6">
         <HaveliArchFrame accent={palette.accent} />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="font-serif font-hindi text-2xl md:text-4xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split(" ").map((word, i) => (
-              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
-            ))}
-          </p>
-          <p className="text-xs md:text-sm uppercase tracking-[0.35em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}dd` }}>
+          <p className="text-xs md:text-sm uppercase tracking-[0.35em] font-light whitespace-nowrap mb-5" style={{ color: `${palette.foreground}dd` }}>
             {en.split("").map((c, i) => (
               <span key={i} className="is-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+            ))}
+          </p>
+          <p className="font-serif font-hindi text-2xl md:text-4xl whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
           <div className="mt-8 w-full max-w-xs md:max-w-sm">
@@ -485,12 +485,12 @@ function WorldHero({ event }: { event: WeddingEvent }) {
             <LinenCanopyStripes accent={palette.accent} />
           </div>
 
-          <p className="font-serif text-3xl md:text-5xl lg:text-6xl tracking-[0.04em] mb-1" style={{ color: "#4a3520", textShadow: `0 0 30px ${palette.accent}30` }}>
-            हमारी दुनिया
-          </p>
-          <h1 className="font-serif text-base md:text-xl uppercase tracking-[0.3em] font-light mb-3" style={{ color: `${palette.foreground}ee` }}>
+          <h1 className="font-serif text-base md:text-xl uppercase tracking-[0.3em] font-light mb-5" style={{ color: `${palette.foreground}ee` }}>
             A World of Our Own
           </h1>
+          <p className="font-serif font-hindi text-3xl md:text-5xl lg:text-6xl tracking-[0.04em] mb-3" style={{ color: "#4a3520", textShadow: `0 0 30px ${palette.accent}30` }}>
+            हमारी दुनिया
+          </p>
           <p className="text-xs italic tracking-[0.12em] mb-6" style={{ color: `${palette.foreground}aa` }}>
             Where every city they've lived in meets in one afternoon
           </p>

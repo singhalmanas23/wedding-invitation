@@ -560,14 +560,14 @@ function MehndiDarbarIntro({
           <div className="mb-4">
             <MehndiMandala accent={palette.accent} />
           </div>
-          <p className="font-serif font-hindi text-2xl md:text-4xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split(" ").map((word, i) => (
-              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
-            ))}
-          </p>
-          <p className="text-xs md:text-sm uppercase tracking-[0.4em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}aa` }}>
+          <p className="text-xs md:text-sm uppercase tracking-[0.4em] font-light whitespace-nowrap mb-5" style={{ color: `${palette.foreground}aa` }}>
             {en.split("").map((c, i) => (
               <span key={i} className="is-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+            ))}
+          </p>
+          <p className="font-serif font-hindi text-2xl md:text-4xl whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
         </div>

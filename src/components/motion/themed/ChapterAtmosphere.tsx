@@ -10,7 +10,6 @@ const SacredFire = dynamic(() => import("./SacredFire"), { ssr: false });
 const NeonCarnival = dynamic(() => import("./NeonCarnival"), { ssr: false });
 
 const ATMOSPHERE_MAP: Record<string, React.ComponentType> = {
-  "pre-party": DuskParticles,
   "first-chapter": DuskParticles,
   "courtyard-edit": FloralHenna,
   "midnight-cathedral": CathedralRogue,

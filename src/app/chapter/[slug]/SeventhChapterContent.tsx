@@ -354,7 +354,7 @@ function ThrillIntro({
 
       {/* Title content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6">
-        <p className="text-3xl md:text-5xl lg:text-6xl mb-3 tracking-[0.04em] font-bold whitespace-nowrap" style={{ color: "#ff006e", textShadow: "0 0 40px #ff006e50, 0 0 80px #ff006e20" }}>
+        <p className="text-3xl md:text-5xl lg:text-6xl mb-5 tracking-[0.04em] font-bold whitespace-nowrap" style={{ color: "#ff006e", textShadow: "0 0 40px #ff006e50, 0 0 80px #ff006e20" }}>
           {"The Thrill Theory".split("").map((c, i) => (
             <span key={i} className="it-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
           ))}
@@ -592,7 +592,7 @@ function ThrillHero({ event }: { event: WeddingEvent }) {
 
         {/* ── BEAT 1: Title ── */}
         <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
-          <p className="text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2 font-bold" style={{ color: "#ff006e", textShadow: "0 0 30px #ff006e50, 0 0 60px #ff006e20, 0 0 100px #ff006e10" }}>
+          <p className="text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-5 font-bold" style={{ color: "#ff006e", textShadow: "0 0 30px #ff006e50, 0 0 60px #ff006e20, 0 0 100px #ff006e10" }}>
             The Thrill Theory
           </p>
           <h1 className="text-base md:text-xl uppercase tracking-[0.35em] font-medium mb-2" style={{ color: "#00f5d4", textShadow: "0 0 20px #00f5d430" }}>

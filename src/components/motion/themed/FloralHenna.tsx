@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
- * Chapter 2 — The Courtyard Edit (Lunch)
+ * Chapter 1 — The Courtyard Edit (Lunch)
  * "Victorian Hi-Tea / Jaipur Haveli" atmosphere:
  * - Falling flower petals (pastel blush, lavender, sage)
  * - Wisteria-like cascading petal chains

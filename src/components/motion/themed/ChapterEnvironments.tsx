@@ -486,7 +486,6 @@ function NeonCarnivalEnv({ palette }: EnvProps) {
    ════════════════════════════════════════════════════════════════ */
 
 const ENV_MAP: Record<string, React.FC<EnvProps>> = {
-  "pre-party": TentDrapeEnv,
   "first-chapter": TentDrapeEnv,
   "courtyard-edit": PinkArchEnv,
   "midnight-cathedral": GothicCathedralEnv,

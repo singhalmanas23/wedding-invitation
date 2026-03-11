@@ -12,50 +12,10 @@ export const COUPLE = {
 
 export const EVENTS: WeddingEvent[] = [
   {
-    slug: "pre-party",
-    chapterNumber: 1,
-    title: "The Pre-Party",
-    subtitle: "Noor Mahal Soirée",
-    tagline: "Where Pune meets palatial grandeur.",
-    date: "5th April, 2026",
-    dateShort: "Apr 5",
-    day: "Sunday",
-    time: "7:00 PM onwards",
-    location: "Pune",
-    venue: "TBD — Pune",
-    description:
-      "Before the main celebration in Udaipur, we invite you to Pune — where he grew up — for an evening of opulent revelry. Inspired by Indian palatial architecture, royal gardens, and heritage craftsmanship, the Noor Mahal Soirée sets the tone: cascading crimson florals, antique gold accents, projection mapping that transforms the space into a living work of art.",
-    longDescription:
-      "An opulent opening night in Pune — brocade, florals, and projection mapping in palatial style.",
-    dressCode: {
-      title: "Royal Evening",
-      description: "Opulent and refined. Think rich fabrics, jewel tones, and heritage elegance.",
-      dos: ["Formal Indian or Western evening wear", "Maroon, gold, emerald, blush", "Velvet, silk, brocade", "Statement jewellery"],
-      donts: ["Casual / semi-casual", "Bright neons", "Denim or sneakers"],
-    },
-    palette: {
-      primary: "#4a1a1a",
-      secondary: "#c9a84c",
-      accent: "#d4af37",
-      background: "#1a0a0a",
-      foreground: "#f5efe6",
-      muted: "#3e2020",
-      gradientFrom: "#2e1212",
-      gradientVia: "#4a1a1a",
-      gradientTo: "#1a0a0a",
-    },
-    heroImage: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773085005/first_rthnjb.jpg",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1920&q=80",
-      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80",
-      "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1920&q=80",
-    ],
-  },
-  {
     slug: "courtyard-edit",
-    chapterNumber: 2,
+    chapterNumber: 1,
     title: "The Courtyard Edit",
-    subtitle: "A Victorian Hi-Tea at a Royal Palace",
+    subtitle: "",
     tagline: "Rajasthan reimagined inside a refined, modern hangar.",
     date: "20th April, 2026",
     dateShort: "Apr 20",
@@ -89,9 +49,9 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     slug: "midnight-cathedral",
-    chapterNumber: 3,
+    chapterNumber: 2,
     title: "The Midnight Cathedral",
-    subtitle: "Cathedral Gone Rogue",
+    subtitle: "Sangeet",
     tagline: "The night the wild took over.",
     date: "20th April, 2026",
     dateShort: "Apr 20",
@@ -125,9 +85,9 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     slug: "world-of-our-own",
-    chapterNumber: 4,
+    chapterNumber: 3,
     title: "A World of Our Own",
-    subtitle: "A Sun-Drenched Courtyard Experience",
+    subtitle: "Lunch",
     tagline: "Where every city they've lived in meets in one afternoon.",
     date: "21st April, 2026",
     dateShort: "Apr 21",
@@ -161,9 +121,9 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     slug: "royal-court",
-    chapterNumber: 5,
+    chapterNumber: 4,
     title: "The Royal Court",
-    subtitle: "Architecture in Stone. Couture in Detail.",
+    subtitle: "Wedding",
     tagline: "Heritage interpreted through technology.",
     date: "21st April, 2026",
     dateShort: "Apr 21",
@@ -197,9 +157,9 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     slug: "thrill-theory",
-    chapterNumber: 6,
+    chapterNumber: 5,
     title: "The Thrill Theory",
-    subtitle: "Press Play on the Chaos",
+    subtitle: "Afterparty",
     tagline: "Step inside. Get lost. Don't expect to come back the same.",
     date: "21st April, 2026",
     dateShort: "Apr 21",
@@ -232,11 +192,11 @@ export const EVENTS: WeddingEvent[] = [
     galleryImages: [],
   },
   {
-    slug: "farewell",
-    chapterNumber: 7,
-    title: "The Farewell",
-    subtitle: "Farewell Puuja & Departures",
-    tagline: "Safe travels and lasting memories.",
+    slug: "gratitude",
+    chapterNumber: 6,
+    title: "A New Beginning",
+    subtitle: "Gratitude Puja",
+    tagline: "The celebration comes to an end, but a beautiful life begins.",
     date: "22nd April, 2026",
     dateShort: "Apr 22",
     day: "Wednesday",
@@ -244,9 +204,45 @@ export const EVENTS: WeddingEvent[] = [
     location: "The Palace Courtyard",
     venue: "Fairmont Udaipur",
     description:
-      "A gentle morning bidding you adieu. We begin with a Farewell Puuja in the courtyard, followed by a relaxed brunch. Chauffeurs will be on standby for airport transfers following the ceremony.",
+      "A gentle morning expressing our heartfelt gratitude. We begin with a morning Puja in the courtyard, followed by a relaxed brunch.",
     longDescription:
-      "A traditional farewell ceremony followed by airport departures and guest check-outs.",
+      "A meaningful ceremony of gratitude followed by a relaxed brunch.",
+    dressCode: {
+      title: "Morning Comfort",
+      description: "Relaxed and ready for travel. Light fabrics recommended.",
+      dos: ["Travel casual", "Linen", "Comfortable fits"],
+      donts: ["Heavy formal wear"],
+    },
+    palette: {
+      primary: "#ffffff",
+      secondary: "#f0f0f0",
+      accent: "#b8860b",
+      background: "#fafafa",
+      foreground: "#1a1a1a",
+      muted: "#f5f5f5",
+      gradientFrom: "#ffffff",
+      gradientVia: "#f5f5f5",
+      gradientTo: "#fafafa",
+    },
+    heroImage: "https://images.unsplash.com/photo-1544644181-1407834571d7?w=1920&q=80",
+    galleryImages: [],
+  },
+  {
+    slug: "finale",
+    chapterNumber: 0,
+    title: "The Finale",
+    subtitle: "Sufi Night & Breakout Lounges",
+    tagline: "Melodies and memories as the celebration winds down.",
+    date: "22nd April, 2026",
+    dateShort: "Apr 22",
+    day: "Wednesday",
+    time: "6:00 PM onwards",
+    location: "The Palace Courtyard",
+    venue: "Fairmont Udaipur",
+    description:
+      "As we transition into a new chapter, we've curated breakout lounges across the palace — tranquil spaces for you to unwind and reconnect. The evening transitions into a soul-stirring Sufi Night, our official post-party celebration of melodies and memories.",
+    longDescription:
+      "Curated breakout lounges and an evening Sufi Night — melodies and memories.",
     dressCode: {
       title: "Morning Comfort",
       description: "Relaxed and ready for travel. Light fabrics recommended.",
@@ -269,8 +265,8 @@ export const EVENTS: WeddingEvent[] = [
   },
 ];
 
-/** Chapters to show in nav/menus (Farewell only on itinerary page) */
-export const EVENTS_FOR_CHAPTER_NAV = EVENTS.filter((e) => e.slug !== "farewell");
+/** Chapters to show in nav/menus (Gratitude only on itinerary page) */
+export const EVENTS_FOR_CHAPTER_NAV = EVENTS.filter((e) => e.slug !== "gratitude");
 
 export const FAQ_DATA = [
   {

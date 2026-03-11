@@ -15,7 +15,6 @@ export const W = {
   menSherwani: "/images/wardrobe/men_royal_sherwani_maroon_gold_1772910208836.png",
   womenLehenga: "/images/wardrobe/women_heritage_red_lehanga_gold_1772910224600.png",
   // Single campaign image per chapter (no separate men/women)
-  prePartyCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773095170/Gemini_Generated_Image_fy20sxfy20sxfy20_gra8by.png",
   courtyardEditCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076606/Gemini_Generated_Image_k9el2ek9el2ek9el_lsblyv.png",
   midnightCathedralCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076578/Gemini_Generated_Image_hst5mphst5mphst5_qprb5w.png",
   worldOfOurOwnCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076589/Gemini_Generated_Image_wp4zihwp4zihwp4z_gn7oyt.png",
@@ -23,13 +22,12 @@ export const W = {
   thrillTheoryCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076588/Gemini_Generated_Image_a7enbca7enbca7en_lyjtou.png",
   coutureHim: "/images/wardrobe/couture_him.png",
   coutureHer: "/images/wardrobe/couture_her.png",
-  // Illustrations (use same asset when we only have one image for the chapter)
-  prePartyIllustration: "/images/wardrobe/illustrations/pre-party.png",
-  courtyardIllustration: "/images/wardrobe/illustrations/courtyard-edit.png",
-  midnightIllustration: "/images/wardrobe/illustrations/midnight-cathedral.png",
-  worldIllustration: "/images/wardrobe/illustrations/world-of-our-own.png",
-  royalIllustration: "/images/wardrobe/illustrations/royal-ceremony.png",
-  thrillIllustration: "/images/wardrobe/illustrations/thrill-theory.png",
+  // Lookbook images (per chapter — "The Lookbook" view)
+  courtyardIllustration: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773253847/Screenshot_2026-03-11_at_11.57.48_PM_x5cn0k.png",
+  midnightIllustration: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773253898/Screenshot_2026-03-12_at_12.01.29_AM_wkbszv.png",
+  worldIllustration: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773253926/Screenshot_2026-03-12_at_12.01.51_AM_pnjomb.png",
+  royalIllustration: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773253940/Screenshot_2026-03-12_at_12.02.09_AM_tqmsa8.png",
+  thrillIllustration: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773253957/Screenshot_2026-03-12_at_12.02.27_AM_wspr39.png",
   haldiIllustration: "/images/wardrobe/illustrations/haldi.png",
 } as const;
 
@@ -80,53 +78,6 @@ export interface ChapterWardrobe {
 /* ─── Chapter Data ──────────────────────────────────────────────────── */
 
 export const wardrobeConfig: Record<string, ChapterWardrobe> = {
-
-  "pre-party": {
-    id: "pre-party",
-    title: "The Pre-Party",
-    moodLine: "An evening of palatial grandeur where opulence speaks in whispers.",
-    dressCode: {
-      title: "The Noor Mahal Chronicle",
-      description: "Cinematic black-tie glamour against palatial architecture, cascading florals, and antique gold light. Dress to be remembered under chandeliers.",
-    },
-    mood: "Formal, cinematic evening",
-    men: [
-      { id: "pp-m-1", name: "Velvet Dinner Jacket", description: "Rich velvet in deep jewel tones with silk lapels and antique buttons.", image: W.pp_m_jacket, tags: ["Formal", "Evening"] },
-      { id: "pp-m-2", name: "Embroidered Sherwani", description: "Antique gold zardosi threadwork on midnight fabric.", image: W.pp_m_sherwani, tags: ["Royal", "Heritage"] },
-      { id: "pp-m-3", name: "Black-Tie Bandhgala", description: "Structured Indian elegance with satin lapels.", image: "https://images.unsplash.com/photo-1617130863154-8250122e8f5a?w=800&q=80", tags: ["Bandhgala", "Luxe"] },
-    ],
-    women: [
-      { id: "pp-w-1", name: "Couture Evening Gown", description: "Satin column gown in maroon or antique gold with architectural draping.", image: W.pp_w_gown, tags: ["Evening", "Couture"] },
-      { id: "pp-w-2", name: "Designer Silk Saree", description: "Silk saree with statement blouse and single piece of fine jewellery.", image: W.pp_w_saree, tags: ["Saree", "Formal"] },
-      { id: "pp-w-3", name: "Embellished Lehanga", description: "Champagne and gold with restrained embroidery, no heavy dupatta.", image: W.pp_w_lehenga, tags: ["Lehanga", "Elegant"] },
-    ],
-    campaignImage: W.prePartyCampaign,
-    illustrationImage: W.prePartyIllustration,
-    palette: {
-      primary: "#1a0a0a",
-      accents: ["#c9a84c", "#d4af37"],
-      recommended: [
-        { name: "Onyx Black", hex: "#1c1c1c" },
-        { name: "Antique Gold", hex: "#d4af37" },
-        { name: "Deep Burgundy", hex: "#6b1a2a" },
-        { name: "Champagne Ivory", hex: "#f5efe6" },
-        { name: "Midnight Navy", hex: "#0c1445" },
-      ],
-      avoid: ["Neon", "Bright prints", "Pastels"],
-    },
-    silhouettes: ["Sherwani", "Lehenga", "Floor-Length Saree"],
-    fabrics: ["Velvet", "Silk Taffeta", "Brocade", "Satin Crepe"],
-    accessories: {
-      men: ["Silk bow tie or cravat", "Heritage cufflinks", "Silk pocket square", "Lapel brooch"],
-      women: ["Chandelier earrings", "Embellished minaudière", "Minimal choker or pendant", "Cocktail ring"],
-    },
-    footwear: {
-      men: ["Patent leather Oxfords", "Polished velvet mojaris"],
-      women: ["Metallic or embellished stilettos", "Satin heels with ankle strap"],
-    },
-    etiquetteNote: "This is the inaugural soirée. Arrive dressed as though the palace itself has expectations — first impressions at a Noor Mahal evening are meant to linger.",
-    animationPreset: "elegant",
-  },
 
   "courtyard-edit": {
     id: "courtyard-edit",
@@ -356,7 +307,7 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
   },
 };
 
-export const DEFAULT_CHAPTER = WARDROBE_CHAPTER_IDS[0] ?? "pre-party";
+export const DEFAULT_CHAPTER = WARDROBE_CHAPTER_IDS[0] ?? "courtyard-edit";
 
 /* ─── Chapter Visual Themes ─────────────────────────────────────────── */
 
@@ -372,16 +323,6 @@ export interface ChapterTheme {
 }
 
 export const CHAPTER_THEMES: Record<string, ChapterTheme> = {
-  "pre-party": {
-    accent: "#d4af37",
-    accentGlow: "rgba(212,175,55,0.12)",
-    accentRgb: "212,175,55",
-    bgOverlay: "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(139,26,26,0.10), transparent 60%)",
-    moodLabel: "Black-Tie Soirée",
-    ornamentOpacity: 0.08,
-    cardGlow: "rgba(212,175,55,0.08)",
-    separatorColor: "rgba(212,175,55,0.18)",
-  },
   "courtyard-edit": {
     accent: "#d4a060",
     accentGlow: "rgba(212,160,96,0.10)",

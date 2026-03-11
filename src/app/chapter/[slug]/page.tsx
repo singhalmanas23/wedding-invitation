@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EVENTS, getEventBySlug } from "@/content/events";
 import ChapterContent from "./ChapterContent";
-import FirstChapterContent from "./FirstChapterContent";
 import SecondChapterContent from "./SecondChapterContent";
 import ThirdChapterContent from "./ThirdChapterContent";
 import FourthChapterContent from "./FourthChapterContent";
@@ -46,10 +45,6 @@ export default async function ChapterPage({
 
   if (!event) {
     notFound();
-  }
-
-  if (slug === "pre-party") {
-    return <FirstChapterContent event={event} />;
   }
 
   if (slug === "courtyard-edit") {

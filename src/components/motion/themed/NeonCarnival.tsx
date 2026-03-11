@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
- * Chapter 6 — The Thrill Theory (Afterparty)
+ * Chapter 5 — The Thrill Theory (Afterparty)
  * "Psychedelic abandoned amusement park" atmosphere:
  * - Neon color flickers and glitches
  * - Roller coaster "whoosh" trails (curved neon lines)

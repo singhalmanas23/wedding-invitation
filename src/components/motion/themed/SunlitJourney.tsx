@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
- * Chapter 4 — A World of Our Own (Lunch)
+ * Chapter 3 — A World of Our Own (Lunch)
  * "Sun-drenched courtyard" atmosphere:
  * - Warm dust motes floating in sunlight
  * - Drifting olive/eucalyptus leaves

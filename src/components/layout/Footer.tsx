@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { COUPLE } from "@/content/events";
 import { P } from "@/components/shared/RoyalPageLayout";
 
@@ -112,11 +113,34 @@ export default function Footer() {
         </div>
 
         <p
-          className="text-[11px] font-body tracking-wide"
+          className="text-[11px] font-body tracking-wide mb-6 md:mb-8"
           style={{ color: `${P.cream}25` }}
         >
           April 19–21, 2026 · {COUPLE.location}
         </p>
+
+        {/* Copyright + Blessing Softtech */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm font-body tracking-wide" style={{ color: `${P.cream}20` }}>
+          <span>© 2026 All Rights Reserved</span>
+          <span style={{ color: `${P.gold}15` }}>|</span>
+          <a
+            href="https://blessingsofttech.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 transition-opacity hover:opacity-80"
+            style={{ color: `${P.cream}30` }}
+            aria-label="Blessing Softtech"
+          >
+            <Image
+              src="/images/blessing-softtech.svg"
+              alt=""
+              width={26}
+              height={26}
+              className="shrink-0"
+            />
+            <span>Blessing Softtech</span>
+          </a>
+        </div>
       </div>
     </footer>
   );

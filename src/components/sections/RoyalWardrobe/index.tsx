@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useMemo, useCallback, Fragment } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -520,20 +521,35 @@ function IllustrationCard({ wardrobe, theme, audience }: { wardrobe: ChapterWard
     >
       <GoldDustParticles count={60} />
 
-      {/* Background Illustration with parallax */}
+      {/* Background Illustration with parallax — native img so exact Cloudinary URL is used (no Next Image cache) */}
       <div ref={layerRef} className="absolute inset-0 z-0 transition-all duration-1000 ease-out">
         <div className="illustration-bg absolute inset-0 transition-all duration-1000">
-          <Image
-            src={wardrobe.illustrationImage}
-            alt={wardrobe.title}
-            fill
-            className="object-cover transition-all duration-1000"
-            style={{
-              objectPosition: getObjectPosition(),
-              scale: audience === "all" ? 1.0 : 1.2 // Zoom in slightly when focusing on one person
-            }}
-            priority
-          />
+          {wardrobe.illustrationImage.startsWith("http") ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={wardrobe.illustrationImage}
+              src={wardrobe.illustrationImage}
+              alt={wardrobe.title}
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-1000"
+              style={{
+                objectPosition: getObjectPosition(),
+                transform: `scale(${audience === "all" ? 1.0 : 1.2})`,
+              }}
+              fetchPriority="high"
+            />
+          ) : (
+            <Image
+              src={wardrobe.illustrationImage}
+              alt={wardrobe.title}
+              fill
+              className="object-cover transition-all duration-1000"
+              style={{
+                objectPosition: getObjectPosition(),
+                scale: audience === "all" ? 1.0 : 1.2,
+              }}
+              priority
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
         </div>
       </div>
@@ -829,7 +845,7 @@ function GuidancePanel({ selectors, actions, theme }: { selectors: WPState["sele
 
 function WardrobeShowcase({ selectors, actions }: { selectors: WPState["selectors"]; actions: WPState["actions"] }) {
   const { selectedChapter, viewMode } = selectors;
-  const theme = CHAPTER_THEMES[selectedChapter] ?? CHAPTER_THEMES["pre-party"];
+  const theme = CHAPTER_THEMES[selectedChapter] ?? CHAPTER_THEMES["courtyard-edit"];
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
@@ -894,11 +910,25 @@ function ChapterEtiquetteNote({ chapter, theme }: { chapter: ChapterWardrobe; th
 /* ═══════════════════════════════════════════════════════════════════ */
 
 export default function RoyalWardrobePage() {
-  const { selectors, actions } = useWardrobePlanner();
+  const searchParams = useSearchParams();
+  const initialChapter = searchParams.get("chapter") ?? undefined;
+  const { selectors, actions } = useWardrobePlanner(initialChapter);
   const reduced = useReducedMotion();
   const contentRef = useRef<HTMLDivElement>(null);
+  const lookbookSectionRef = useRef<HTMLDivElement>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const theme = CHAPTER_THEMES[selectors.selectedChapter] ?? CHAPTER_THEMES["pre-party"];
+  const theme = CHAPTER_THEMES[selectors.selectedChapter] ?? CHAPTER_THEMES["courtyard-edit"];
+
+  // When landing from navbar with ?chapter=, scroll to the lookbook (chapter rail + content)
+  useEffect(() => {
+    if (!initialChapter) return;
+    const el = lookbookSectionRef.current;
+    if (!el) return;
+    const id = requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [initialChapter]);
 
   const handleChapterChange = useCallback((newChapter: string) => {
     if (newChapter === selectors.selectedChapter || isTransitioning) return;
@@ -940,10 +970,12 @@ export default function RoyalWardrobePage() {
         </div>
       </div>
 
-      <ChapterRail
-        selectedChapter={selectors.selectedChapter}
-        onSelect={handleChapterChange}
-      />
+      <div ref={lookbookSectionRef}>
+        <ChapterRail
+          selectedChapter={selectors.selectedChapter}
+          onSelect={handleChapterChange}
+        />
+      </div>
 
       <div ref={contentRef} className="pb-32 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto mb-10 mt-12">

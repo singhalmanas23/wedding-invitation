@@ -352,14 +352,14 @@ function RoyalCourtIntro({
           <div className="mb-4 opacity-0">
             <MandapCanopy accent={palette.accent} />
           </div>
-          <p className="font-serif font-hindi text-3xl md:text-5xl mb-2 whitespace-nowrap" style={{ color: palette.accent }}>
-            {hi.split(" ").map((word, i) => (
-              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
-            ))}
-          </p>
-          <p className="font-serif text-sm md:text-lg uppercase tracking-[0.35em] font-light whitespace-nowrap" style={{ color: `${palette.foreground}cc` }}>
+          <p className="font-serif text-sm md:text-lg uppercase tracking-[0.35em] font-light whitespace-nowrap mb-5" style={{ color: `${palette.foreground}cc` }}>
             {en.split("").map((c, i) => (
               <span key={i} className="is-c inline-block opacity-0" style={c === " " ? { whiteSpace: "pre" } : undefined}>{c}</span>
+            ))}
+          </p>
+          <p className="font-serif font-hindi text-3xl md:text-5xl whitespace-nowrap" style={{ color: palette.accent }}>
+            {hi.split(" ").map((word, i) => (
+              <span key={i} className="it-c inline-block opacity-0 mr-[0.3em]">{word}</span>
             ))}
           </p>
           <p className="sub-tag mt-3 text-xs italic tracking-[0.15em] opacity-0" style={{ color: `${palette.accent}88` }}>
@@ -578,12 +578,12 @@ function CourtHero({ event }: { event: WeddingEvent }) {
 
         {/* ── BEAT 1: Title ── */}
         <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
-          <p className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}25, 0 2px 15px #0005` }}>
-            राज दरबार
-          </p>
-          <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.3em] font-light mb-2" style={{ color: `${palette.foreground}cc` }}>
+          <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.3em] font-light mb-5" style={{ color: `${palette.foreground}cc` }}>
             The Royal Court
           </h1>
+          <p className="font-serif font-hindi text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}25, 0 2px 15px #0005` }}>
+            राज दरबार
+          </p>
           <p className="text-xs italic tracking-[0.12em] mb-6" style={{ color: `${palette.accent}88` }}>
             Architecture in stone &middot; Couture in detail
           </p>

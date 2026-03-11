@@ -3,9 +3,21 @@ import { wardrobeConfig, DEFAULT_CHAPTER, Look } from "./WardrobeConfig";
 
 export type Audience = "men" | "women" | "all";
 
-export function useWardrobePlanner() {
-    const [selectedChapter, setSelectedChapter] = useState(DEFAULT_CHAPTER);
+function resolveInitialChapter(initial?: string): string {
+    if (!initial) return DEFAULT_CHAPTER;
+    return wardrobeConfig[initial] ? initial : DEFAULT_CHAPTER;
+}
+
+export function useWardrobePlanner(initialChapter?: string) {
+    const [selectedChapter, setSelectedChapter] = useState(() =>
+        resolveInitialChapter(initialChapter)
+    );
     const [selectedAudience, setSelectedAudience] = useState<Audience>("all");
+
+    // Sync selected chapter when URL ?chapter= changes (e.g. nav dropdown)
+    useEffect(() => {
+        setSelectedChapter(resolveInitialChapter(initialChapter));
+    }, [initialChapter]);
 
     // Interactive styling state
     const [selectedColor, setSelectedColor] = useState("");

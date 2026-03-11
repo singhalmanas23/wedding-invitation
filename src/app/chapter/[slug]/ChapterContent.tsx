@@ -399,7 +399,6 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
 
   const frameStyles = useMemo(() => {
     const base: Record<string, string> = {
-      "pre-party": "rounded-xl",
       "first-chapter": "rounded-xl",
       "courtyard-edit": "rounded-[24px]",
       "midnight-cathedral": "rounded-none",
@@ -412,7 +411,6 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
 
   const heights = useMemo(() => {
     const patterns: Record<string, number[]> = {
-      "pre-party": [340, 300, 360, 280, 320, 340, 300, 360],
       "first-chapter": [380, 260, 300, 340],
       "courtyard-edit": [320, 380, 260, 300],
       "midnight-cathedral": [400, 280, 340, 260],

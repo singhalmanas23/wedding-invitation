@@ -12,7 +12,6 @@ const mockGuest: GuestInfo = {
   pickupTime: "19th April, 1:00 PM",
   pickupLocation: "Maharana Pratap Airport, Udaipur — Arrivals",
   events: [
-    "pre-party",
     "courtyard-edit",
     "midnight-cathedral",
     "world-of-our-own",
@@ -32,7 +31,7 @@ const mockGuest: GuestInfo = {
     },
     {
       message:
-        "Don't forget: Royal Evening for the Pre-Party in Pune!",
+        "Airport pickup and check-in details are in your portal.",
       time: "2 days ago",
       read: true,
     },
