@@ -471,7 +471,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
   );
 
   return (
-    <section ref={wrapRef} style={{ height: "105vh" }}>
+    <section ref={wrapRef} className="h-[85vh] sm:h-[105vh]">
       <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         {/* Background — transitions through indigo → amethyst → midnight wine */}
         <div
@@ -583,8 +583,8 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
         <CornerFiligree accent={palette.accent} position="bottom-0 left-0 scale-y-[-1]" />
         <CornerFiligree accent={palette.accent} position="bottom-0 right-0 scale-[-1]" />
 
-        {/* ── BEAT 1: Title + event info ── */}
-        <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[10vh] sm:pt-[12vh] z-10 px-4 sm:px-6 text-center">
+        {/* ── BEAT 1: Title + event info (centered on mobile to avoid empty gap) ── */}
+        <div className="b1-content absolute inset-0 flex flex-col items-center justify-center sm:justify-start sm:pt-[12vh] z-10 px-4 sm:px-6 text-center">
           <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] font-light mb-5 max-w-[90vw] mx-auto break-words" style={{ color: `${palette.foreground}cc` }}>
             The Midnight Cathedral
           </h1>
