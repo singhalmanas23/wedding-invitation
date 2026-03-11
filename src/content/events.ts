@@ -266,7 +266,7 @@ export const EVENTS: WeddingEvent[] = [
 ];
 
 /** Chapters to show in nav/menus (Gratitude only on itinerary page) */
-export const EVENTS_FOR_CHAPTER_NAV = EVENTS.filter((e) => e.slug !== "gratitude");
+export const EVENTS_FOR_CHAPTER_NAV = EVENTS.filter((e) => e.slug !== "gratitude" && e.chapterNumber !== 0);
 
 export const FAQ_DATA = [
   {
