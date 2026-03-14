@@ -649,7 +649,7 @@ function CourtOfAssistance() {
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-12">
           <p className="scroll-heading text-[10px] uppercase tracking-[0.35em] font-bold mb-4 opacity-0" style={{ color: `${P.gold}66` }}>
-            The Court of Assistance · सहायता दरबार
+            The Court of Assistance · <span className="text-[0.78em] font-normal">सहायता दरबार</span>
           </p>
           <h2 className="scroll-heading font-serif text-3xl md:text-4xl opacity-0" style={{ color: P.cream }}>
             Your Dedicated Team

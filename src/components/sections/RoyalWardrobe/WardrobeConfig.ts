@@ -14,12 +14,6 @@ export const W = {
   womenMetallicFusion: "/images/wardrobe/women_concept_saree_metallic_corset_fusion_1772910192380.png",
   menSherwani: "/images/wardrobe/men_royal_sherwani_maroon_gold_1772910208836.png",
   womenLehenga: "/images/wardrobe/women_heritage_red_lehanga_gold_1772910224600.png",
-  // Single campaign image per chapter (no separate men/women)
-  courtyardEditCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076606/Gemini_Generated_Image_k9el2ek9el2ek9el_lsblyv.png",
-  midnightCathedralCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076578/Gemini_Generated_Image_hst5mphst5mphst5_qprb5w.png",
-  worldOfOurOwnCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076589/Gemini_Generated_Image_wp4zihwp4zihwp4z_gn7oyt.png",
-  royalCourtCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076592/Gemini_Generated_Image_n2zpfcn2zpfcn2zp_t4u7zb.png",
-  thrillTheoryCampaign: "https://res.cloudinary.com/dctn3ike2/image/upload/v1773076588/Gemini_Generated_Image_a7enbca7enbca7en_lyjtou.png",
   coutureHim: "/images/wardrobe/couture_him.png",
   coutureHer: "/images/wardrobe/couture_her.png",
   // Lookbook images (per chapter — "The Lookbook" view)
@@ -59,7 +53,6 @@ export interface ChapterWardrobe {
   mood: string;
   men: Look[];
   women: Look[];
-  campaignImage: string;
   illustrationImage: string;
   palette: {
     primary: string;
@@ -90,7 +83,6 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
     mood: "Royal haveli high-tea",
     men: [],
     women: [],
-    campaignImage: W.courtyardEditCampaign,
     illustrationImage: W.courtyardIllustration,
     palette: {
       primary: "#f5efe6",
@@ -128,16 +120,15 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
     },
     mood: "Drama, shimmer, bold luxury",
     men: [
-      { id: "mc-m-1", name: "Black Zardosi Sherwani", description: "Gold floral zardosi on midnight — high collar, commanding presence.", image: W.midnightCathedralCampaign, tags: ["Sherwani", "Embroidered"] },
-      { id: "mc-m-2", name: "Velvet Metallic Achkan", description: "Dark velvet base with gold embroidery and structural shoulders.", image: W.midnightCathedralCampaign, tags: ["Velvet", "Bold"] },
-      { id: "mc-m-3", name: "Gold Statement Jacket", description: "Metallic gold blazer with antique buttons — unapologetic glamour.", image: W.midnightCathedralCampaign, tags: ["Metallic", "Statement"] },
+      { id: "mc-m-1", name: "Black Zardosi Sherwani", description: "Gold floral zardosi on midnight — high collar, commanding presence.", image: W.midnightIllustration, tags: ["Sherwani", "Embroidered"] },
+      { id: "mc-m-2", name: "Velvet Metallic Achkan", description: "Dark velvet base with gold embroidery and structural shoulders.", image: W.midnightIllustration, tags: ["Velvet", "Bold"] },
+      { id: "mc-m-3", name: "Gold Statement Jacket", description: "Metallic gold blazer with antique buttons — unapologetic glamour.", image: W.midnightIllustration, tags: ["Metallic", "Statement"] },
     ],
     women: [
-      { id: "mc-w-1", name: "Sculpted Gold Gown", description: "Off-shoulder metallic gold with architectural draping and train.", image: W.midnightCathedralCampaign, tags: ["Metallic", "Glamour"] },
-      { id: "mc-w-2", name: "Sequined Lehanga", description: "Full-volume sequined skirt with corset blouse in bronze.", image: W.midnightCathedralCampaign, tags: ["Sequin", "Bold"] },
-      { id: "mc-w-3", name: "Emerald Shimmer Drape", description: "Deep emerald saree gown with crystal embellishment — opulent.", image: W.midnightCathedralCampaign, tags: ["Shimmer", "Evening"] },
+      { id: "mc-w-1", name: "Sculpted Gold Gown", description: "Off-shoulder metallic gold with architectural draping and train.", image: W.midnightIllustration, tags: ["Metallic", "Glamour"] },
+      { id: "mc-w-2", name: "Sequined Lehanga", description: "Full-volume sequined skirt with corset blouse in bronze.", image: W.midnightIllustration, tags: ["Sequin", "Bold"] },
+      { id: "mc-w-3", name: "Emerald Shimmer Drape", description: "Deep emerald saree gown with crystal embellishment — opulent.", image: W.midnightIllustration, tags: ["Shimmer", "Evening"] },
     ],
-    campaignImage: W.midnightCathedralCampaign,
     illustrationImage: W.midnightIllustration,
     palette: {
       primary: "#1a3a2a",
@@ -184,7 +175,6 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
       { id: "woo-w-2", name: "Draped Kaftan", description: "Champagne or beige with elegant layering — effortless.", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80", tags: ["Kaftan", "Light"] },
       { id: "woo-w-3", name: "Resort Midi Dress", description: "Terracotta linen with gold accessories — warm and easy.", image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=80", tags: ["Resort", "Minimal"] },
     ],
-    campaignImage: W.worldOfOurOwnCampaign,
     illustrationImage: W.worldIllustration,
     palette: {
       primary: "#faf6ee",
@@ -231,7 +221,6 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
       { id: "rc-w-2", name: "Banarasi Saree", description: "Heritage Banarasi in gold or maroon with maang tikka.", image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&q=80", tags: ["Banarasi", "Heritage"] },
       { id: "rc-w-3", name: "Couture Anarkali", description: "Royal silhouette, full grandeur, ceremonial jewellery.", image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80", tags: ["Anarkali", "Couture"] },
     ],
-    campaignImage: W.royalCourtCampaign,
     illustrationImage: W.royalIllustration,
     palette: {
       primary: "#8b1a1a",
@@ -278,7 +267,6 @@ export const wardrobeConfig: Record<string, ChapterWardrobe> = {
       { id: "tt-w-2", name: "Metallic Co-ords", description: "Chrome or gold co-ord set with platform boots.", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80", tags: ["Fringe", "Bold"] },
       { id: "tt-w-3", name: "Futuristic Sculptural", description: "Asymmetric cut, neon accent, experimental glamour.", image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=80", tags: ["Futuristic", "Avant-Garde"] },
     ],
-    campaignImage: W.thrillTheoryCampaign,
     illustrationImage: W.thrillIllustration,
     palette: {
       primary: "#ff006e",

@@ -833,6 +833,14 @@ const CULTURAL_HEADERS: Record<string, { text: string; script?: string }> = {
   "thrill-theory": {
     text: "Step inside. Get lost. Don't look back.",
   },
+  gratitude: {
+    text: "A new beginning, blessed with gratitude",
+    script: "भात",
+  },
+  departure: {
+    text: "Safe travels, until we meet again",
+    script: "भात",
+  },
 };
 
 /* ════════════════════════════════════════════════════════════════════
@@ -1020,6 +1028,18 @@ const DECOR_MAP: Record<string, ChapterDecorPack> = {
     SectionDivider: NeonDivider,
     StoryAccent: DuskStoryAccent,
     culturalHeader: CULTURAL_HEADERS["thrill-theory"],
+  },
+  gratitude: {
+    HeroDecoration: DuskSunsetHero,
+    SectionDivider: DuskDivider,
+    StoryAccent: DuskStoryAccent,
+    culturalHeader: CULTURAL_HEADERS["gratitude"],
+  },
+  departure: {
+    HeroDecoration: DuskSunsetHero,
+    SectionDivider: DuskDivider,
+    StoryAccent: DuskStoryAccent,
+    culturalHeader: CULTURAL_HEADERS["departure"],
   },
 };
 

@@ -489,6 +489,46 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
   );
 }
 
+/* ─────────────────────── Bhaat Section ─────────────────────── */
+
+function BhaatSection({ event }: { event: WeddingEvent }) {
+  const { palette } = event;
+  const decor = getChapterDecorations(event.slug);
+
+  return (
+    <section className="py-8 md:py-12 px-6 relative overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${palette.accent}08, transparent 70%)`,
+        }}
+      />
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
+        <decor.SectionDivider palette={palette} />
+        <p
+          className="font-serif text-2xl md:text-4xl mt-8 mb-3"
+          style={{ color: palette.accent }}
+        >
+          भात
+        </p>
+        <p
+          className="text-[11px] uppercase tracking-[0.3em] mb-2 font-medium"
+          style={{ color: `${palette.accent}99` }}
+        >
+          Bhaat
+        </p>
+        <p
+          className="font-body text-sm md:text-base leading-relaxed max-w-xl mx-auto"
+          style={{ color: `${palette.foreground}99` }}
+        >
+          This chapter includes the Bhaat (Mayra) ceremony — a pre-wedding ritual where the maternal uncle (Mama) brings gifts, clothes, and sweets, honouring his role in the family.
+        </p>
+        <decor.SectionDivider palette={palette} />
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────────── Venue Section ─────────────────────── */
 
 function VenueSection({ event }: { event: WeddingEvent }) {
@@ -817,6 +857,9 @@ export default function ChapterContent({ event }: ChapterContentProps) {
 
       {/* ───────────────────── Venue ───────────────────── */}
       <VenueSection event={event} />
+
+      {/* ───────────────────── Bhaat ───────────────────── */}
+      <BhaatSection event={event} />
 
       {/* ───────────────────── Chapter Navigation ───────────────────── */}
       <FadeInView>

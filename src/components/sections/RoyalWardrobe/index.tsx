@@ -423,43 +423,6 @@ function ChapterRail({ selectedChapter, onSelect }: { selectedChapter: string; o
 }
 
 /* ═══════════════════════════════════════════════════════════════════ */
-/*  VIEW MODE TOGGLE                                                   */
-/* ═══════════════════════════════════════════════════════════════════ */
-
-function ViewModeToggle({ selected, onChange }: { selected: WPState["selectors"]["viewMode"]; onChange: (v: WPState["selectors"]["viewMode"]) => void }) {
-  const opts: { key: WPState["selectors"]["viewMode"]; label: string; desc: string }[] = [
-    { key: "illustration", label: "The Lookbook", desc: "Style Guide" },
-    { key: "realistic", label: "The Campaign", desc: "Cinematic Showcase" },
-  ];
-
-  return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 mb-12">
-      {opts.map(({ key, label, desc }) => {
-        const isSelected = selected === key;
-        return (
-          <button
-            key={key}
-            onClick={() => onChange(key)}
-            className="group relative flex flex-col items-center transition-all duration-700"
-          >
-            <span className={`text-[11px] uppercase tracking-[0.5em] mb-3 transition-colors duration-500 ${isSelected ? "text-amber-500/80" : "text-white/20 group-hover:text-white/40"}`}>
-              {desc}
-            </span>
-            <div className="relative flex flex-col items-center">
-              <h3 className={`font-serif text-4xl md:text-6xl lg:text-7xl transition-all duration-700 ${isSelected ? "text-white scale-105" : "text-white/20 group-hover:text-white/40"}`}>
-                {label}
-              </h3>
-              <div className={`mt-6 h-[2px] w-2/3 bg-amber-500 transition-all duration-1000 origin-center ${isSelected ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-50 group-hover:opacity-30"}`}
-                style={{ boxShadow: isSelected ? "0 0 30px #d4af37" : "none" }} />
-            </div>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════ */
 /*  SHOWCASE STAGE (Left — couture stage with layered depth)           */
 /* ═══════════════════════════════════════════════════════════════════ */
 
@@ -506,13 +469,6 @@ function IllustrationCard({ wardrobe, theme, audience }: { wardrobe: ChapterWard
     });
   };
 
-  // Strategic positions for illustrations based on persona
-  const getObjectPosition = () => {
-    if (audience === "men") return "35% center";
-    if (audience === "women") return "65% center";
-    return "center";
-  };
-
   return (
     <div
       ref={cardRef}
@@ -521,20 +477,16 @@ function IllustrationCard({ wardrobe, theme, audience }: { wardrobe: ChapterWard
     >
       <GoldDustParticles count={60} />
 
-      {/* Background Illustration with parallax — native img so exact Cloudinary URL is used (no Next Image cache) */}
+      {/* Background Illustration — full image visible, no crop (contain within frame) */}
       <div ref={layerRef} className="absolute inset-0 z-0 transition-all duration-1000 ease-out">
-        <div className="illustration-bg absolute inset-0 transition-all duration-1000">
+        <div className="illustration-bg absolute inset-0 w-full h-full transition-all duration-1000">
           {wardrobe.illustrationImage.startsWith("http") ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={wardrobe.illustrationImage}
               src={wardrobe.illustrationImage}
               alt={wardrobe.title}
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-1000"
-              style={{
-                objectPosition: getObjectPosition(),
-                transform: `scale(${audience === "all" ? 1.0 : 1.2})`,
-              }}
+              className="w-full h-full object-cover object-top transition-all duration-1000"
               fetchPriority="high"
             />
           ) : (
@@ -542,15 +494,11 @@ function IllustrationCard({ wardrobe, theme, audience }: { wardrobe: ChapterWard
               src={wardrobe.illustrationImage}
               alt={wardrobe.title}
               fill
-              className="object-cover transition-all duration-1000"
-              style={{
-                objectPosition: getObjectPosition(),
-                scale: audience === "all" ? 1.0 : 1.2,
-              }}
+              className="object-cover object-top transition-all duration-1000"
               priority
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 pointer-events-none" />
         </div>
       </div>
 
@@ -614,113 +562,28 @@ function IllustrationCard({ wardrobe, theme, audience }: { wardrobe: ChapterWard
 function ShowcaseStage({ selectors, theme }: { selectors: WPState["selectors"]; theme: ChapterTheme }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const { currentWardrobe: wardrobe, selectedAudience: audience, viewMode } = selectors;
+  const { currentWardrobe: wardrobe, selectedAudience: audience } = selectors;
 
   useGSAP(() => {
     if (!stageRef.current || reduced) return;
     const el = stageRef.current;
-
-    if (viewMode === "illustration") return;
-
-    gsap.fromTo(el.querySelectorAll(".stage-img, .stage-svg"), { opacity: 0, scale: 1.05 }, { opacity: 1, scale: 1, duration: 1.4, stagger: 0.2, ease: "power2.out" });
-    gsap.fromTo(el.querySelector(".stage-mood"), { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 1.0, delay: 0.5, ease: "power3.out" });
-    gsap.fromTo(el.querySelector(".stage-arch"), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 2.5, ease: "power2.out" });
-    gsap.fromTo(el.querySelector(".stage-jaali"), { opacity: 0 }, { opacity: 1, duration: 2.0, delay: 0.3, ease: "power2.out" });
-  }, { scope: stageRef, dependencies: [wardrobe.id, audience, viewMode] });
-
-  const campaignImage = wardrobe.campaignImage;
-  const activeImage = campaignImage;
-
-  const isExternalImage = typeof activeImage === "string" && (activeImage.startsWith("https://") || activeImage.startsWith("//"));
-  // Mobile: object-contain so full image is visible (no cropping); md+: object-cover for cinematic fill
-  const imageClassName =
-    "object-center transition-transform duration-[1.5s] group-hover:scale-105 animate-in fade-in zoom-in-95 duration-1000 object-contain md:object-cover";
-
-  const renderCampaignImage = () => (
-    <div className="stage-img relative flex-1 overflow-hidden group cursor-crosshair min-h-[50vh] md:min-h-[60vh] w-full flex items-center justify-center bg-[#0a0505]">
-      {isExternalImage ? (
-        // Native img for external URLs so Campaign image always displays (avoids Next Image optimization issues)
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={activeImage}
-          src={activeImage}
-          alt={`${wardrobe.title} — Campaign`}
-          className={`absolute inset-0 w-full h-full ${imageClassName}`}
-        />
-      ) : (
-        <Image
-          key={activeImage}
-          src={activeImage}
-          alt={`${wardrobe.title} — Campaign`}
-          fill
-          className={imageClassName}
-          sizes="(max-width: 768px) 100vw, 100vw"
-          priority
-        />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/15 pointer-events-none" />
-    </div>
-  );
+    gsap.fromTo(el.querySelectorAll(".card-text-el"), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" });
+  }, { scope: stageRef, dependencies: [wardrobe.id, audience] });
 
   return (
     <div
       ref={stageRef}
-      className={`relative min-h-[60vh] md:min-h-[75vh] overflow-hidden transition-all duration-700 ${viewMode === "illustration"
-        ? "rounded-xl border border-white/5 bg-bgDeep shadow-2xl"
-        : "rounded-none bg-transparent"
-        }`}
-      style={{
-        boxShadow: viewMode === "illustration" ? `0 8px 60px rgba(0,0,0,0.5), inset 0 1px 0 ${P.cream}06` : "none"
-      }}
-      key={`${wardrobe.id}-${audience}-${viewMode}`}
+      className="relative min-h-[60vh] md:min-h-[75vh] overflow-hidden rounded-xl border border-white/5 bg-bgDeep shadow-2xl"
+      style={{ boxShadow: `0 8px 60px rgba(0,0,0,0.5), inset 0 1px 0 ${P.cream}06` }}
+      key={`${wardrobe.id}-${audience}`}
     >
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
 
-      {/* Luxury Watermark (Simplified for Campaign) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none select-none z-0">
-        <span className="text-[25vw] font-serif italic whitespace-nowrap tracking-tighter">
-          {viewMode === "illustration" ? "Royal Couture" : "Udaipur 2026"}
-        </span>
+        <span className="text-[25vw] font-serif italic whitespace-nowrap tracking-tighter">Royal Couture</span>
       </div>
 
-      {viewMode === "illustration" ? (
-        <IllustrationCard wardrobe={wardrobe} theme={theme} audience={audience} />
-      ) : (
-        /* Campaign View — Cinematic & Immersive */
-        <div className="relative h-full flex items-center justify-center bg-[#0a0505]">
-          <GoldDustParticles count={50} />
-          <div className="absolute inset-0 opacity-20 mix-blend-soft-light pointer-events-none" style={{ background: theme.bgOverlay }} />
-
-          <div className="relative z-10 w-full h-full flex items-stretch min-h-[60vh] md:min-h-[80vh]">
-            {renderCampaignImage()}
-          </div>
-
-          {/* Cinematic Bloom/Glow */}
-          <div className="absolute inset-0 pointer-events-none z-20" style={{ background: "radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.4) 100%)" }} />
-
-          {/* Campaign Metadata Overlay */}
-          <div className="stage-mood absolute top-10 left-10 z-30 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-1.5 h-1.5 rotate-45 bg-amber-500 shadow-[0_0_8px_#d4af37]" />
-              <h4 className="text-[10px] uppercase tracking-[0.5em] text-white/90 font-medium">Campaign Editorial</h4>
-            </div>
-            <div>
-              <span className="block text-[8px] uppercase tracking-[0.3em] text-amber-500/60 mb-1">Film Grade</span>
-              <span className="font-serif text-2xl text-white/40 tracking-widest">{theme.moodLabel.toUpperCase()}</span>
-            </div>
-          </div>
-
-          <div className="absolute bottom-10 right-10 z-30 text-right">
-            <span className="text-[9px] uppercase tracking-[0.4em] text-white/30 block mb-2">Perspective</span>
-            <div className="flex items-center gap-3 justify-end text-amber-500/80">
-              <span className="text-[11px] uppercase tracking-[0.3em] font-body">Discover Campaign</span>
-              <svg width="24" height="1" viewBox="0 0 24 1" fill="none" className="opacity-40">
-                <line y1="0.5" x2="24" y2="0.5" stroke="currentColor" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      )}
+      <IllustrationCard wardrobe={wardrobe} theme={theme} audience={audience} />
     </div>
   );
 }
@@ -824,43 +687,18 @@ function ChapterLookbookGuide({ wardrobe, theme }: { wardrobe: ChapterWardrobe; 
 
 function GuidancePanel({ selectors, actions, theme }: { selectors: WPState["selectors"]; actions: WPState["actions"]; theme: ChapterTheme }) {
   const panelRef = useRef<HTMLDivElement>(null);
-  const { currentWardrobe: wardrobe, viewMode } = selectors;
+  const { currentWardrobe: wardrobe } = selectors;
 
   useGSAP(() => {
     if (!panelRef.current) return;
     const el = panelRef.current;
     staggerIn(el.querySelectorAll(".gp-el"), 0, 28, 0.1);
-  }, { scope: panelRef, dependencies: [wardrobe.id, viewMode] });
+  }, { scope: panelRef, dependencies: [wardrobe.id] });
 
   return (
-    <div ref={panelRef} className="space-y-8" key={`${wardrobe.id}-${viewMode}`}>
+    <div ref={panelRef} className="space-y-8" key={wardrobe.id}>
       <ChapterLookbookGuide wardrobe={wardrobe} theme={theme} />
     </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════ */
-/*  WARDROBE SHOWCASE (Stage + Panel orchestrator)                     */
-/* ═══════════════════════════════════════════════════════════════════ */
-
-function WardrobeShowcase({ selectors, actions }: { selectors: WPState["selectors"]; actions: WPState["actions"] }) {
-  const { selectedChapter, viewMode } = selectors;
-  const theme = CHAPTER_THEMES[selectedChapter] ?? CHAPTER_THEMES["courtyard-edit"];
-
-  return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-      <div className="mb-10 text-center">
-        <ViewModeToggle selected={viewMode} onChange={actions.setViewMode} />
-      </div>
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 lg:gap-16 items-start">
-        <div className="xl:col-span-7 xl:sticky xl:top-24">
-          <ShowcaseStage selectors={selectors} theme={theme} />
-        </div>
-        <div className="xl:col-span-5">
-          <GuidancePanel selectors={selectors} actions={actions} theme={theme} />
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -978,49 +816,19 @@ export default function RoyalWardrobePage() {
       </div>
 
       <div ref={contentRef} className="pb-32 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto mb-10 mt-12">
-          <ViewModeToggle selected={selectors.viewMode} onChange={actions.setViewMode} />
-        </div>
-
-        {selectors.viewMode === "illustration" ? (
-          /* LOOKBOOK EXPERIENCE: Editorial & Grid */
-          <div className="space-y-24">
-            <section className="grid grid-cols-1 xl:grid-cols-12 gap-10 lg:gap-16 items-start">
-              <div className="xl:col-span-8">
-                <ShowcaseStage selectors={selectors} theme={theme} />
-              </div>
-              <div className="xl:col-span-4">
-                <GuidancePanel selectors={selectors} actions={actions} theme={theme} />
-              </div>
-            </section>
-
-          </div>
-        ) : (
-          /* CAMPAIGN EXPERIENCE: Cinematic & Interactive */
-          <section className="grid grid-cols-1 xl:grid-cols-12 gap-10 lg:gap-16 items-start mt-8">
-            <div className="xl:col-span-7 xl:sticky xl:top-24">
+        <div className="max-w-7xl mx-auto mt-12 space-y-24">
+          <section className="grid grid-cols-1 xl:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="xl:col-span-8 xl:sticky xl:top-24 xl:self-start">
               <ShowcaseStage selectors={selectors} theme={theme} />
-            </div>
-            <div className="xl:col-span-1 hidden xl:flex flex-col items-center justify-center h-[75vh] opacity-20">
-              <div className="w-px flex-1 bg-gradient-to-b from-transparent via-amber-500/40 to-transparent" />
-              <div className="w-1.5 h-1.5 rotate-45 border border-amber-500/40 my-8" />
-              <div className="w-px flex-1 bg-gradient-to-b from-transparent via-amber-500/40 to-transparent" />
             </div>
             <div className="xl:col-span-4">
               <GuidancePanel selectors={selectors} actions={actions} theme={theme} />
-
-              <div className="mt-12 p-8 rounded-2xl border border-white/5 bg-gradient-to-br from-white/[0.02] to-transparent">
-                <span className="text-[9px] uppercase tracking-[0.4em] text-amber-500/60 block mb-6">Stylist's Note</span>
-                <p className="font-serif italic text-lg text-white/50 leading-relaxed">
-                  "{selectors.currentWardrobe.etiquetteNote}"
-                </p>
-              </div>
             </div>
           </section>
-        )}
 
-        <Flourish className="mt-40 mb-20" accent={theme.accent} />
-        {selectors.viewMode === "illustration" && <ChapterEtiquetteNote chapter={selectors.currentWardrobe} theme={theme} />}
+          <Flourish className="mt-40 mb-20" accent={theme.accent} />
+          <ChapterEtiquetteNote chapter={selectors.currentWardrobe} theme={theme} />
+        </div>
       </div>
 
       <FloralVineSVG className="fixed bottom-0 right-0 h-[50vh] w-12 pointer-events-none opacity-[0.03] hidden lg:block" side="right" />

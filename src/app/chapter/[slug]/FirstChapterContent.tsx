@@ -8,7 +8,7 @@ import { ArrowLeft, MapPin, Clock, CalendarDays } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { EVENTS } from "@/content/events";
+import { EVENTS, COUPLE } from "@/content/events";
 import { WeddingEvent } from "@/types";
 import Navbar from "@/components/layout/Navbar";
 
@@ -727,7 +727,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
       />
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>
-          The Vibe · माहौल
+          The Vibe · <span className="text-[0.78em] font-normal">माहौल</span>
         </p>
         <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed px-2" style={{ color: `${palette.foreground}dd` }}>
           &ldquo;{excerpt}&rdquo;
@@ -978,7 +978,7 @@ function ImmersiveGallery({ event }: { event: WeddingEvent }) {
           className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium"
           style={{ color: palette.accent }}
         >
-          Mood · माहौल
+          Mood · <span className="text-[0.78em] font-normal">माहौल</span>
         </p>
         <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
           {galleryImages.map((src, i) => (
@@ -1155,35 +1155,6 @@ export default function FirstChapterContent({ event }: ChapterProps) {
                   : "A contemporary lens on Rajasthan's royal hospitality—where traditional frescoes meet refined, modern silhouettes."}
               </p>
             </div>
-
-            {/* Featured Gallery Piece */}
-            <div className="relative max-w-5xl mx-auto">
-              <div className="absolute -inset-1 border border-white/5 pointer-events-none z-20" />
-              <div className="absolute inset-0 bg-black/40 blur-3xl opacity-20 -z-10" />
-
-              <div
-                className="relative aspect-[16/10] overflow-hidden bg-[#1a1512]"
-                style={{
-                  clipPath: event.slug === 'pre-party' ? 'inset(0 0 5% 0)' : 'none',
-                }}
-              >
-                <div className="absolute inset-0 bg-black/10 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
-                <Image
-                  src={event.heroImage}
-                  alt={`${event.title} Mood`}
-                  fill
-                  className="object-cover transition-transform duration-[4s] hover:scale-105"
-                  priority
-                />
-
-                {/* Mood Vignette */}
-                <div className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`
-                  }}
-                />
-              </div>
-            </div>
           </div>
         </section>
       ) : (
@@ -1347,17 +1318,17 @@ export default function FirstChapterContent({ event }: ChapterProps) {
               <circle cx="100" cy="28" r="2.5" fill={`${palette.accent}18`} />
             </svg>
           </div>
-          <p className="font-serif text-sm mb-4 tracking-[0.3em]" style={{ color: `${palette.accent}30` }}>
+          <p className="font-serif text-xs mb-4 tracking-[0.3em]" style={{ color: `${palette.accent}30` }}>
             शुभ विवाह
           </p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>
             Tarush <span style={{ color: `${palette.accent}66` }}>&amp;</span> Sanjana
           </p>
           <p
-            className="text-[10px] uppercase tracking-[0.3em] font-body mb-10"
+            className="text-[10px] tracking-[0.3em] font-body mb-10"
             style={{ color: `${palette.accent}35` }}
           >
-            #TarushAndSanjana
+            {COUPLE.hashtag}
           </p>
 
           <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${palette.accent}18`, background: `linear-gradient(165deg,${palette.accent}06,transparent 40%,${palette.primary}04)` }}>

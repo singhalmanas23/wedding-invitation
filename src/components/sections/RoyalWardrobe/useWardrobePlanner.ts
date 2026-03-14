@@ -23,7 +23,6 @@ export function useWardrobePlanner(initialChapter?: string) {
     const [selectedColor, setSelectedColor] = useState("");
     const [selectedFabric, setSelectedFabric] = useState("");
     const [activeAccessories, setActiveAccessories] = useState<string[]>([]);
-    const [viewMode, setViewMode] = useState<"realistic" | "illustration">("illustration");
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
 
     // Garment selection — the core of the dress-up engine
@@ -61,11 +60,10 @@ export function useWardrobePlanner(initialChapter?: string) {
         selectedColor,
         selectedFabric,
         activeAccessories,
-        viewMode,
         userAvatar,
         selectedLookMen,
         selectedLookWomen,
-    }), [selectedChapter, selectedAudience, currentWardrobe, selectedColor, selectedFabric, activeAccessories, viewMode, userAvatar, selectedLookMen, selectedLookWomen]);
+    }), [selectedChapter, selectedAudience, currentWardrobe, selectedColor, selectedFabric, activeAccessories, userAvatar, selectedLookMen, selectedLookWomen]);
 
     const actions = useMemo(() => ({
         setSelectedChapter: handleChapterChange,
@@ -74,7 +72,6 @@ export function useWardrobePlanner(initialChapter?: string) {
         setSelectedFabric,
         setActiveAccessories,
         toggleAccessory,
-        setViewMode,
         setUserAvatar,
         setSelectedLookMen,
         setSelectedLookWomen,

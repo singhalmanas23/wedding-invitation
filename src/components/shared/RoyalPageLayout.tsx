@@ -97,7 +97,7 @@ export function RoyalPageHero({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[11px] uppercase tracking-[0.3em] font-body mb-6"
+            className="text-[11px] tracking-[0.3em] font-body mb-6"
             style={{ color: `${P.gold}99` }}
           >
             {label}

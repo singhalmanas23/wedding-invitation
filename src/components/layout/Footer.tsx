@@ -39,7 +39,7 @@ export default function Footer() {
 
         {/* Devanagari accent */}
         <p
-          className="font-serif text-sm mb-3 md:mb-4"
+          className="font-serif text-xs mb-3 md:mb-4"
           style={{ color: `${P.gold}25` }}
         >
           शुभ विवाह
@@ -53,7 +53,7 @@ export default function Footer() {
         </p>
 
         <p
-          className="text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-body mb-6 md:mb-10"
+          className="text-[10px] tracking-[0.2em] sm:tracking-[0.3em] font-body mb-6 md:mb-10"
           style={{ color: `${P.gold}30` }}
         >
           {COUPLE.hashtag}

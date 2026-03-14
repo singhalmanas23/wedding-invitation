@@ -8,7 +8,7 @@ import { ArrowLeft, MapPin, Clock, CalendarDays } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { EVENTS } from "@/content/events";
+import { EVENTS, COUPLE } from "@/content/events";
 import { WeddingEvent } from "@/types";
 import Navbar from "@/components/layout/Navbar";
 import FadeInView from "@/components/motion/FadeInView";
@@ -551,7 +551,7 @@ function WorldHero({ event }: { event: WeddingEvent }) {
 function WorldQuote({ event }: { event: WeddingEvent }) {
   const { palette } = event;
   const ref = useRef<HTMLDivElement>(null);
-  const quote = "This is not décor. This is autobiography.";
+  const quote = "This is not décor. This is an autobiography.";
 
   useGSAP(() => {
     const el = ref.current;
@@ -602,7 +602,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: "#cabb9e" }}>
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: "#5a4530" }}>The Vibe · माहौल</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: "#5a4530" }}>The Vibe · <span className="text-[0.78em] font-normal">माहौल</span></p>
         <LotusDivider accent={palette.accent} />
         <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 mb-6 px-2" style={{ color: `${palette.foreground}ee` }}>
           &ldquo;{excerpt}&rdquo;
@@ -793,7 +793,7 @@ function WorldMoodSection({ event }: { event: WeddingEvent }) {
   return (
     <section
       ref={ref}
-      className="py-24 md:py-36 relative overflow-hidden"
+      className="pt-24 md:pt-36 pb-12 md:pb-16 relative overflow-hidden"
       style={{ backgroundColor: "#c8b89c" }}
     >
       {/* Continuity texture & sun-glow */}
@@ -806,7 +806,7 @@ function WorldMoodSection({ event }: { event: WeddingEvent }) {
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Magazine-style Header */}
-        <div className="text-center mb-20">
+        <div className="text-center">
           <div className="inline-flex items-center gap-4 mb-6">
             <div className="h-px w-8 bg-[#5a4530] opacity-20" />
             <p
@@ -827,40 +827,6 @@ function WorldMoodSection({ event }: { event: WeddingEvent }) {
           <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed text-[#5a4530] opacity-70">
             A minimalist sanctuary where every texture tells a story of the cities that brought us together.
           </p>
-        </div>
-
-        {/* Featured Gallery Piece */}
-        <div className="relative max-w-5xl mx-auto">
-          <div className="absolute -inset-1 border border-[#5a4530]/10 pointer-events-none z-20" />
-          <div className="absolute inset-0 bg-[#4a3520]/20 blur-3xl opacity-10 -z-10" />
-
-          <div className="relative aspect-[16/10] overflow-hidden bg-[#e8dab0]">
-            <div className="absolute inset-0 bg-[#4a3520]/5 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
-            <Image
-              src={event.heroImage}
-              alt={`${event.title} Mood`}
-              fill
-              className="object-cover transition-transform duration-[4s] hover:scale-105"
-              priority
-            />
-
-            {/* Mood Vignette - Sun-kissed */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: `linear-gradient(to bottom, #c8b89cdd 0%, transparent 12%, transparent 88%, #c8b89cee 100%)`,
-              }}
-            />
-          </div>
-
-          {/* Decorative Label */}
-          <div className="absolute -bottom-6 right-12 z-20">
-            <p
-              className="font-serif italic text-sm opacity-40 text-[#5a4530]"
-            >
-              Archive Ref. 04 — The Linen Journey
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -981,11 +947,11 @@ export default function FifthChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,#c8b89c,#b8a888)` }} />
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <LotusDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6" style={{ color: "#5a4530" }}>शुभ विवाह</p>
+          <p className="font-serif text-xs mb-4 mt-6" style={{ color: "#5a4530" }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}ee` }}>
             Tarush <span style={{ color: "#6b5540" }}>&amp;</span> Sanjana
           </p>
-          <p className="text-[10px] uppercase tracking-[0.3em] font-body mb-10" style={{ color: "#5a4530" }}>#TarushAndSanjana</p>
+          <p className="text-[10px] tracking-[0.3em] font-body mb-10" style={{ color: "#5a4530" }}>{COUPLE.hashtag}</p>
 
           <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: "1px solid #8a754818", background: "linear-gradient(165deg,#8a754808,transparent 40%,#6b554005)" }}>
             <p className="text-[10px] uppercase tracking-[0.35em] mb-4 font-medium" style={{ color: "#6b5540" }}>Your Presence Matters</p>

@@ -8,7 +8,7 @@ import { ArrowLeft, MapPin, Clock, CalendarDays } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { EVENTS } from "@/content/events";
+import { EVENTS, COUPLE } from "@/content/events";
 import { WeddingEvent } from "@/types";
 import Navbar from "@/components/layout/Navbar";
 import FadeInView from "@/components/motion/FadeInView";
@@ -581,7 +581,7 @@ function CourtHero({ event }: { event: WeddingEvent }) {
           <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.3em] font-light mb-5" style={{ color: `${palette.foreground}cc` }}>
             The Royal Court
           </h1>
-          <p className="font-serif font-hindi text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}25, 0 2px 15px #0005` }}>
+          <p className="font-serif font-hindi text-2xl md:text-4xl lg:text-5xl tracking-[0.04em] mb-2" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}25, 0 2px 15px #0005` }}>
             राज दरबार
           </p>
           <p className="text-xs italic tracking-[0.12em] mb-6" style={{ color: `${palette.accent}88` }}>
@@ -652,7 +652,7 @@ function CourtQuote({ event }: { event: WeddingEvent }) {
         <p className="font-serif italic text-xl md:text-2xl mt-8 leading-relaxed" style={{ color: `${palette.foreground}77` }}>
           &ldquo;{quote.split(" ").map((w, i) => (<span key={i} className="aq-w inline-block mr-[0.3em]">{w}</span>))}&rdquo;
         </p>
-        <p className="font-serif text-3xl md:text-5xl mt-6" style={{ color: `${palette.accent}12` }}>दरबार</p>
+        <p className="font-serif text-2xl md:text-4xl mt-6" style={{ color: `${palette.accent}12` }}>दरबार</p>
       </div>
     </section>
   );
@@ -682,7 +682,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · माहौल</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · <span className="text-[0.78em] font-normal">माहौल</span></p>
         <CourtDivider accent={palette.accent} />
         <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 mb-6 px-2" style={{ color: `${palette.foreground}dd` }}>
           &ldquo;{excerpt}&rdquo;
@@ -773,7 +773,7 @@ function CourtMoodSection({ event }: { event: WeddingEvent }) {
   return (
     <section
       ref={ref}
-      className="py-24 md:py-36 relative overflow-hidden"
+      className="pt-24 md:pt-36 pb-12 md:pb-16 relative overflow-hidden"
       style={{ backgroundColor: palette.background }}
     >
       {/* Continuity texture & ceremonial glow */}
@@ -786,7 +786,7 @@ function CourtMoodSection({ event }: { event: WeddingEvent }) {
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Magazine-style Header */}
-        <div className="text-center mb-20">
+        <div className="text-center">
           <div className="inline-flex items-center gap-4 mb-6">
             <div className="h-px w-8 bg-current opacity-20" />
             <p
@@ -808,42 +808,6 @@ function CourtMoodSection({ event }: { event: WeddingEvent }) {
           <p className="max-w-2xl mx-auto font-serif italic text-xl md:text-2xl leading-relaxed opacity-60">
             A celebration of heritage where monumental symmetry meets the intimate detail of royal craftsmanship.
           </p>
-        </div>
-
-        {/* Featured Gallery Piece */}
-        <div className="relative max-w-5xl mx-auto">
-          <div className="absolute -inset-1 border border-white/5 pointer-events-none z-20" />
-          <div className="absolute inset-0 bg-black/40 blur-3xl opacity-20 -z-10" />
-
-          <div className="relative aspect-[16/10] overflow-hidden bg-[#1a0a0a]">
-            {/* Subtle overlay to blend */}
-            <div className="absolute inset-0 bg-black/15 z-10" />
-            <Image
-              src={event.heroImage}
-              alt={`${event.title} Mood`}
-              fill
-              className="object-cover transition-transform duration-[5s] hover:scale-105"
-              priority
-            />
-
-            {/* Mood Vignette - Ceremonial Red */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`,
-              }}
-            />
-          </div>
-
-          {/* Decorative Label */}
-          <div className="absolute -bottom-6 left-12 z-20">
-            <p
-              className="font-serif italic text-sm opacity-40"
-              style={{ color: palette.accent }}
-            >
-              Archive Ref. 05 — Ceremonial Aesthetic
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -962,11 +926,11 @@ export default function SixthChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,${palette.background})` }} />
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <CourtDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
+          <p className="font-serif text-xs mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>
             Tarush <span style={{ color: `${palette.accent}77` }}>&amp;</span> Sanjana
           </p>
-          <p className="text-[10px] uppercase tracking-[0.3em] font-body mb-10" style={{ color: `${palette.accent}55` }}>#TarushAndSanjana</p>
+          <p className="text-[10px] tracking-[0.3em] font-body mb-10" style={{ color: `${palette.accent}55` }}>{COUPLE.hashtag}</p>
 
           <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${palette.accent}18`, background: `linear-gradient(165deg,${palette.accent}06,transparent 40%,${palette.primary}04)` }}>
             <p className="text-[10px] uppercase tracking-[0.35em] mb-4 font-medium" style={{ color: `${palette.accent}55` }}>Your Presence Matters</p>

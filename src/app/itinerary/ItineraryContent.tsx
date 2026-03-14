@@ -376,7 +376,7 @@ export default function ItineraryContent() {
                           className="flex flex-wrap items-center gap-6 pt-5"
                           style={{ borderTop: `1px solid ${P.gold}0a` }}
                         >
-                          {event.slug !== "gratitude" && event.slug !== "finale" && (
+                          {event.slug !== "gratitude" && event.slug !== "departure" && (
                             <Link
                               href={`/chapter/${event.slug}`}
                               className="inline-flex items-center gap-2 text-sm font-medium transition-all duration-300 group"

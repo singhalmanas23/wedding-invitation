@@ -8,7 +8,7 @@ import { ArrowLeft, MapPin, Clock, CalendarDays } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { EVENTS } from "@/content/events";
+import { EVENTS, COUPLE } from "@/content/events";
 import { WeddingEvent } from "@/types";
 import Navbar from "@/components/layout/Navbar";
 import FadeInView from "@/components/motion/FadeInView";
@@ -719,7 +719,7 @@ function DarbarHero({ event }: { event: WeddingEvent }) {
 
         {/* ── BEAT 1: Invitation ── */}
         <div className="b1-content absolute inset-0 flex flex-col items-center justify-start pt-[12vh] z-10 px-6">
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[0.05em] mb-2" style={{ color: palette.accent, textShadow: `0 0 30px ${palette.accent}30` }}>
+          <h1 className="font-serif text-2xl md:text-4xl lg:text-5xl tracking-[0.05em] mb-2" style={{ color: palette.accent, textShadow: `0 0 30px ${palette.accent}30` }}>
             मेहंदी दरबार
           </h1>
           <h2 className="font-serif text-lg md:text-2xl uppercase tracking-[0.25em] font-light mb-6" style={{ color: `${palette.foreground}cc` }}>
@@ -802,7 +802,7 @@ function DarbarQuote({ event }: { event: WeddingEvent }) {
         <p className="font-serif italic text-xl md:text-2xl mt-8 leading-relaxed" style={{ color: `${palette.foreground}77` }}>
           &ldquo;{quote.split(" ").map((w, i) => (<span key={i} className="aq-w inline-block mr-[0.3em]">{w}</span>))}&rdquo;
         </p>
-        <p className="font-serif text-3xl md:text-5xl mt-6" style={{ color: `${palette.accent}14` }}>हस्तकला</p>
+        <p className="font-serif text-2xl md:text-4xl mt-6" style={{ color: `${palette.accent}14` }}>हस्तकला</p>
       </div>
     </section>
   );
@@ -832,7 +832,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · माहौल</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · <span className="text-[0.78em] font-normal">माहौल</span></p>
         <PaisleyDivider accent={palette.accent} />
         <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 mb-6 px-2" style={{ color: `${palette.foreground}dd` }}>
           &ldquo;{excerpt}&rdquo;
@@ -933,7 +933,7 @@ function DarbarGallery({ event }: { event: WeddingEvent }) {
   return (
     <section ref={ref} className="py-8 md:py-12 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: palette.background }}>
       <div className="max-w-6xl mx-auto w-full min-w-0">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>Mood · माहौल</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-10 font-medium" style={{ color: palette.accent }}>Mood · <span className="text-[0.78em] font-normal">माहौल</span></p>
         <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-2 md:space-y-4 w-full">
           {galleryImages.map((src, i) => (
             <div key={i} className="gi break-inside-avoid rounded-none relative overflow-hidden group cursor-pointer w-full min-w-0" style={{ height: heights[i] || 300 }}>
@@ -1059,11 +1059,11 @@ export default function ThirdChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,${palette.background})` }} />
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <PaisleyDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6" style={{ color: `${palette.accent}40` }}>शुभ विवाह</p>
+          <p className="font-serif text-xs mb-4 mt-6" style={{ color: `${palette.accent}40` }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>
             Tarush <span style={{ color: `${palette.accent}77` }}>&amp;</span> Sanjana
           </p>
-          <p className="text-[10px] uppercase tracking-[0.3em] font-body mb-10" style={{ color: `${palette.accent}44` }}>#TarushAndSanjana</p>
+          <p className="text-[10px] tracking-[0.3em] font-body mb-10" style={{ color: `${palette.accent}44` }}>{COUPLE.hashtag}</p>
 
           <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${palette.accent}18`, background: `linear-gradient(165deg,${palette.accent}06,transparent 40%,${palette.primary}04)` }}>
             <p className="text-[10px] uppercase tracking-[0.35em] mb-4 font-medium" style={{ color: `${palette.accent}55` }}>Your Presence Matters</p>

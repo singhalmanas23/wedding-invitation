@@ -635,7 +635,7 @@ function SacredPrelude({ onComplete }: { onComplete: () => void }) {
         </p>
 
         {/* Shubh Vivah in Devanagari */}
-        <p className="sp-vivah font-serif text-sm md:text-base mb-4 md:mb-6" style={{ color: `${P.gold}90` }}>
+        <p className="sp-vivah font-serif text-xs md:text-sm mb-4 md:mb-6" style={{ color: `${P.gold}90` }}>
           शुभ विवाह
         </p>
 
@@ -745,12 +745,8 @@ function Hero({ loaded }: { loaded: boolean }) {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
-      <div className="hero-bg-layer absolute inset-[-10%]">
-        <Image src="https://images.unsplash.com/photo-1759222198113-d0e2b862a3b5?w=1920&q=80" alt="" fill priority className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(26,10,10,0.5), transparent 35%, rgba(26,10,10,0.85))" }} />
-      </div>
+      {/* Background */}
+      <div className="hero-bg-layer absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}ee 0%, ${P.bg}99 40%, ${P.bg} 100%)` }} />
 
       {/* Atmospheric layers */}
       <div className="absolute inset-0 z-1 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 45%, rgba(139,26,26,0.08), transparent 70%)" }} />
@@ -777,7 +773,7 @@ function Hero({ loaded }: { loaded: boolean }) {
       {/* ── Content ── */}
       <div className="hero-content relative z-10 w-full text-center px-4 sm:px-6 max-w-5xl mx-auto invisible">
         {/* Devanagari cultural text */}
-        <p className="hero-sanskrit text-xs md:text-sm mb-4 md:mb-6 mt-10 sm:mt-14 md:mt-20" style={{ color: `${P.gold}80` }}>
+        <p className="hero-sanskrit text-[10px] md:text-xs mb-4 md:mb-6 mt-10 sm:mt-14 md:mt-20" style={{ color: `${P.gold}80` }}>
           शुभ विवाह
         </p>
 
@@ -905,10 +901,7 @@ function RoyalPrologue() {
 
   return (
     <section ref={ref} className="relative py-12 md:py-16 overflow-hidden" style={{ backgroundColor: P.bg }}>
-      <div className="absolute inset-0">
-        <Image src="https://images.unsplash.com/photo-1696861679643-4f21bfba8fc3?w=1920&q=80" alt="" fill className="object-cover opacity-[0.05]" sizes="100vw" />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}e6, ${P.bg})` }} />
-      </div>
+      <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}e6, ${P.bg})` }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.04), transparent 70%)` }} />
 
       {/* Sandstone texture overlay */}
@@ -923,7 +916,7 @@ function RoyalPrologue() {
         {/* Jharokha arch framing city name */}
         <div className="rp-arch w-36 h-52 md:w-44 md:h-60 mx-auto mb-10">
           <JharokhaArch>
-            <p className="font-serif italic text-xl md:text-2xl" style={{ color: `${P.gold}50` }}>उदयपुर</p>
+            <p className="font-serif italic text-base md:text-lg" style={{ color: `${P.gold}50` }}>उदयपुर</p>
           </JharokhaArch>
         </div>
 
@@ -931,7 +924,7 @@ function RoyalPrologue() {
           In the Heart of the City of Lakes
         </h2>
         <p className="rp-fade font-serif italic text-sm md:text-base mb-8" style={{ color: `${P.gold}60` }}>
-          झीलों की नगरी — The Venice of the East
+          <span className="text-[0.85em]">झीलों की नगरी</span> — The Venice of the East
         </p>
 
         <p className="rp-fade font-body text-sm md:text-base leading-[2] max-w-2xl mx-auto mb-8" style={{ color: `${P.cream}99` }}>
@@ -980,10 +973,7 @@ function StoryQuote() {
 
   return (
     <section ref={ref} className="relative py-10 md:py-14 overflow-hidden" style={{ backgroundColor: P.bg }}>
-      <div className="absolute inset-0">
-        <Image src="https://images.unsplash.com/photo-1769183345247-fba7c42c991b?w=1920&q=80" alt="" fill className="object-cover opacity-[0.06]" sizes="100vw" />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}cc, ${P.bg})` }} />
-      </div>
+      <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}, ${P.bg}cc, ${P.bg})` }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,26,26,0.05), transparent 70%)` }} />
 
       {/* Subtle mehendi pattern background */}
@@ -1009,7 +999,7 @@ function StoryQuote() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="sq-fade mb-14">
           <Flourish className="mb-6" />
-          <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}99` }}>Their Story · प्रेम कथा</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-body" style={{ color: `${P.gold}99` }}>Their Story · <span className="text-[0.78em] font-normal">प्रेम कथा</span></span>
         </div>
 
         <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15]" style={{ color: `${P.cream}e6` }}>
@@ -1023,12 +1013,26 @@ function StoryQuote() {
           <div className="h-px w-12 md:w-20" style={{ background: `linear-gradient(to right, transparent, ${P.maroon}40, transparent)` }} />
         </div>
 
-        <p className="sq-fade font-body text-sm md:text-base leading-loose max-w-2xl mx-auto mb-10" style={{ color: `${P.cream}99` }}>
-          She grew up in Goregaon, he in Pune — both foodies, both dreamers. They first
-          met in Mumbai before heading to London for their masters. Friendship turned to
-          love, and by December 2023 both families knew. Now, against the backdrop of
-          Udaipur&apos;s timeless beauty, their story finds its grandest verse: a three-day
-          royal celebration woven from six unforgettable chapters.
+        <p className="sq-fade font-body text-sm md:text-base leading-loose max-w-3xl mx-auto mb-10" style={{ color: `${P.cream}99` }}>
+        She grew up in Mumbai, he in Pune, one realists - one dreamer, both
+            chasing big-city dreams. Their story began in what can only be
+            described as a true Bollywood meet-cute in Mumbai, before life
+            carried them to London for their Masters. Somewhere between new
+            cities, late-night conversations and shared adventures, friendship
+            quietly turned into love — the kind that feels like right time,
+            right person.
+            <br />
+            <br />
+            By December 2023, with their families’ blessings,
+            everything seemed to fall beautifully into place, as though every
+            piece of their story had been quietly waiting to complete the
+            puzzle.
+            <br />
+            <br />
+            And now, against the timeless romance of Udaipur, their
+            story arrives at its most magical chapter: a three-day royal
+            celebration told through six unforgettable moments — each one a
+            verse in a love story that was always meant to be. ✨
         </p>
 
         {/* Parents' blessing section */}
@@ -1078,54 +1082,61 @@ function VenueShowcase() {
 
   return (
     <section ref={ref} className="relative h-[85vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: P.bg }}>
-      <div className="vs-img absolute inset-[-10%]">
-        <Image src="https://images.unsplash.com/photo-1718797054890-e58742729f2d?w=1920&q=80" alt="Fairmont Udaipur" fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${P.bg}99, transparent 30%, transparent 60%, ${P.bg}cc 85%, ${P.bg})` }} />
+      <div className="vs-img absolute inset-0">
+        <Image
+          src="https://res.cloudinary.com/dctn3ike2/image/upload/v1773415146/fairmont_rbltfh.jpg"
+          alt="Fairmont Udaipur"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(to bottom, ${P.bg}dd 0%, ${P.bg}99 30%, ${P.bg}88 70%, ${P.bg} 100%)` }}
+          aria-hidden="true"
+        />
       </div>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,175,55,0.04), transparent 60%)` }} />
-
-      {/* Candlelight vignette on corners */}
-      <div className="absolute top-0 left-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 0% 0%, rgba(255,180,50,0.04), transparent 70%)` }} />
-      <div className="absolute top-0 right-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 100% 0%, rgba(255,180,50,0.04), transparent 70%)` }} />
-      <div className="absolute bottom-0 left-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 0% 100%, rgba(255,180,50,0.04), transparent 70%)` }} />
-      <div className="absolute bottom-0 right-0 w-40 h-40 pointer-events-none" style={{ background: `radial-gradient(circle at 100% 100%, rgba(255,180,50,0.04), transparent 70%)` }} />
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        <Flourish className="vs-fade mb-8" />
-        <span className="vs-fade block text-[10px] uppercase tracking-[0.4em] font-body mb-6" style={{ color: `${P.gold}99` }}>
-          The Palace · राजमहल
-        </span>
-        <h2 className="vs-fade font-serif text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight" style={{ color: P.cream, textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}>
-          Fairmont Udaipur
-        </h2>
-        <p className="vs-fade font-serif italic text-lg md:text-xl mb-2" style={{ color: `${P.gold}cc` }}>
-          Where Royalty Meets Celebration
-        </p>
-        <p className="vs-fade font-body text-xs md:text-sm mt-6 max-w-xl mx-auto leading-loose" style={{ color: `${P.cream}99` }}>
-          Overlooking the serene waters of Lake Pichola, the palace grounds become the
-          sacred stage for six unforgettable chapters. From sunlit courtyards draped in jasmine
-          to gilded durbar halls lit by a thousand diyas — each space transforms to honour
-          the story of two families becoming one.
-        </p>
+        {/* Very subtle glass hint */}
+        <div
+          className="vs-fade rounded-2xl px-8 py-10 md:px-12 md:py-14 backdrop-blur-[2px]"
+          style={{
+            backgroundColor: "rgba(255, 250, 245, 0.02)",
+            border: "1px solid rgba(212, 175, 55, 0.06)",
+            boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
+          }}
+        >
+          <Flourish className="mb-6 opacity-90" />
+          <span className="block text-[10px] uppercase tracking-[0.4em] font-body mb-4" style={{ color: P.gold, textShadow: "0 2px 16px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.6)" }}>
+            The Palace · राजमहल
+          </span>
+          <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-3 leading-tight" style={{ color: P.cream, textShadow: "0 3px 24px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.6)" }}>
+            Fairmont Udaipur
+          </h2>
+          <p className="font-serif italic text-lg md:text-xl mb-6" style={{ color: `${P.gold}ee`, textShadow: "0 2px 20px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5)" }}>
+            Where Royalty Meets Celebration
+          </p>
+          <p className="font-body text-sm md:text-base max-w-xl mx-auto leading-relaxed" style={{ color: `${P.cream}f5`, textShadow: "0 2px 14px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.5)" }}>
+            Overlooking the serene waters of Lake Pichola, the palace grounds become the sacred stage for six unforgettable chapters. A palace-inspired retreat surrounded by the Aravalli hills, it sets the most breathtaking stage for a celebration as rare as this one. Every corner tells a story. We couldn’t imagine writing ours anywhere else.
+          </p>
 
-        {/* Palace spaces with diya dots */}
-        <div className="vs-fade flex items-center justify-center gap-6 md:gap-8 mt-10">
-          {["The Grand Lawn", "The Haveli Courtyard", "The Durbar Hall", "The Grand Ballroom"].map((space, i) => (
-            <span key={i} className="hidden md:flex items-center gap-2 text-[8px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}40` }}>
-              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: `${P.gold}40` }} />
-              {space}
-            </span>
-          ))}
+          {/* Palace spaces with diya dots */}
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-8 pt-6" style={{ borderTop: "1px solid rgba(212, 175, 55, 0.05)" }}>
+            {["The Grand Lawn", "The Haveli Courtyard", "The Durbar Hall", "The Grand Ballroom"].map((space, i) => (
+              <span key={i} className="flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-body" style={{ color: `${P.cream}dd`, textShadow: "0 1px 10px rgba(0,0,0,0.6)" }}>
+                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: P.gold, boxShadow: "0 0 8px rgba(212,175,55,0.6)" }} />
+                {space}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────── */
-/*  Chapter story row — image + content, alternating left/right     */
-/* ─────────────────────────────────────────────────────────────── */
 
 function ChapterStoryRow({
   event,

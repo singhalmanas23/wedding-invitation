@@ -8,7 +8,7 @@ import { ArrowLeft, MapPin, Clock, CalendarDays } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { EVENTS } from "@/content/events";
+import { EVENTS, COUPLE } from "@/content/events";
 import { WeddingEvent } from "@/types";
 import Navbar from "@/components/layout/Navbar";
 import FadeInView from "@/components/motion/FadeInView";
@@ -588,7 +588,7 @@ function CathedralHero({ event }: { event: WeddingEvent }) {
           <h1 className="font-serif text-lg md:text-2xl uppercase tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] font-light mb-5 max-w-[90vw] mx-auto break-words" style={{ color: `${palette.foreground}cc` }}>
             The Midnight Cathedral
           </h1>
-          <p className="font-serif font-hindi text-4xl md:text-6xl lg:text-7xl tracking-[0.04em] mb-3" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}30, 0 2px 20px ${palette.background}` }}>
+          <p className="font-serif font-hindi text-2xl md:text-4xl lg:text-5xl tracking-[0.04em] mb-3" style={{ color: palette.accent, textShadow: `0 0 40px ${palette.accent}30, 0 2px 20px ${palette.background}` }}>
             रात्रि महोत्सव
           </p>
           <p className="text-xs sm:text-sm italic tracking-[0.1em] sm:tracking-[0.15em] mb-6 sm:mb-8 max-w-[85vw] mx-auto" style={{ color: `${palette.accent}88` }}>
@@ -648,7 +648,7 @@ function CathedralQuote({ event }: { event: WeddingEvent }) {
         <p className="font-serif italic text-xl md:text-2xl mt-8 leading-relaxed" style={{ color: `${palette.foreground}77` }}>
           &ldquo;{quote.split(" ").map((w, i) => (<span key={i} className="aq-w inline-block mr-[0.3em]">{w}</span>))}&rdquo;
         </p>
-        <p className="font-serif text-3xl md:text-5xl mt-6" style={{ color: `${palette.accent}12` }}>महोत्सव</p>
+        <p className="font-serif text-2xl md:text-4xl mt-6" style={{ color: `${palette.accent}12` }}>महोत्सव</p>
       </div>
     </section>
   );
@@ -678,7 +678,7 @@ function StorySection({ event }: { event: WeddingEvent }) {
   return (
     <section ref={ref} className="py-8 md:py-12 px-6 relative" style={{ backgroundColor: palette.background }}>
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · माहौल</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] mb-8 font-medium" style={{ color: palette.accent }}>The Vibe · <span className="text-[0.78em] font-normal">माहौल</span></p>
         <GoldDivider accent={palette.accent} />
         <blockquote className="story-quote font-serif italic text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 mb-6 px-2" style={{ color: `${palette.foreground}dd` }}>
           &ldquo;{excerpt}&rdquo;
@@ -807,25 +807,6 @@ function CathedralMoodSection({ event }: { event: WeddingEvent }) {
         <div className="relative max-w-5xl mx-auto">
           <div className="absolute -inset-1 border border-white/5 pointer-events-none z-20" />
           <div className="absolute inset-0 bg-black/40 blur-3xl opacity-20 -z-10" />
-
-          <div className="relative aspect-[16/10] overflow-hidden bg-[#0d1a12]">
-            <div className="absolute inset-0 bg-black/10 z-10 transition-opacity duration-[1.5s] hover:opacity-0" />
-            <Image
-              src={event.heroImage}
-              alt={`${event.title} Mood`}
-              fill
-              className="object-cover transition-transform duration-[4s] hover:scale-105"
-              priority
-            />
-
-            {/* Mood Vignette */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: `linear-gradient(to bottom, ${palette.background}dd 0%, transparent 15%, transparent 85%, ${palette.background}ee 100%)`,
-              }}
-            />
-          </div>
         </div>
       </div>
     </section>
@@ -944,11 +925,11 @@ export default function FourthChapterContent({ event }: ChapterProps) {
         <div className="absolute -top-20 left-0 right-0 h-20 pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,${palette.background})` }} />
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <GoldDivider accent={palette.accent} />
-          <p className="font-serif text-sm mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
+          <p className="font-serif text-xs mb-4 mt-6" style={{ color: `${palette.accent}55` }}>शुभ विवाह</p>
           <p className="font-serif text-2xl md:text-3xl mb-2" style={{ color: `${palette.foreground}cc` }}>
             Tarush <span style={{ color: `${palette.accent}77` }}>&amp;</span> Sanjana
           </p>
-          <p className="text-[10px] uppercase tracking-[0.3em] font-body mb-10" style={{ color: `${palette.accent}55` }}>#TarushAndSanjana</p>
+          <p className="text-[10px] tracking-[0.3em] font-body mb-10" style={{ color: `${palette.accent}55` }}>{COUPLE.hashtag}</p>
 
           <div className="relative my-12 py-10 px-8 rounded-sm mx-auto max-w-lg" style={{ border: `1px solid ${palette.accent}18`, background: `linear-gradient(165deg,${palette.accent}06,transparent 40%,${palette.primary}04)` }}>
             <p className="text-[10px] uppercase tracking-[0.35em] mb-4 font-medium" style={{ color: `${palette.accent}55` }}>Your Presence Matters</p>

@@ -414,7 +414,7 @@ export default function Navbar() {
                 />
               </div>
               <span
-                className="text-[10px] uppercase tracking-[0.3em] font-body"
+                className="text-[10px] tracking-[0.3em] font-body"
                 style={{ color: `${P.gold}30` }}
               >
                 {COUPLE.hashtag}
